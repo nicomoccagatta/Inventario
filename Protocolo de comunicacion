@@ -25,60 +25,60 @@ ok|\n ó error|\n
 
 
 Modificacion Producto
-4|ID|NOMBRE|DESCRIPCION|ICONO|[IMAGEN1|IMAGEN2|...IMAGENn|]\n
+5|ID|NOMBRE|DESCRIPCION|ICONO|[IMAGEN1|IMAGEN2|...IMAGENn|]\n
 ok|\n ó error|\n
 
 
 Baja Producto
-5|ID|\n
+6|ID|\n
 ok|\n ó error|\n
 
 
 Alta Area de vision
-6|UBICACION|TIPO|\n
+7|UBICACION|TIPO|\n
 ok|\n ó error|\n
 
 
 Modificacion Area de vision
-7|ID|UBICACION|TIPO|\n
+8|ID|UBICACION|TIPO|\n
 ok|\n ó error|\n
 
 
 Baja Area de vision
-8|ID|\n
+9|ID|\n
 ok|\n ó error|\n
 
 
 Stock general
-9|\n
+10|\n
 ID1|STOCK1|ID2|STOCK2|...IDn|STOCKn|\n
 
 
 Stock Area de vision
-10|ID|\n
+11|ID|\n
 ID1|STOCK1|ID2|STOCK2|...IDn|STOCKn|\n
 
 
 Stock historico Producto
-11|ID|\n
+12|ID|\n
 FECHA1|STOCK1|FECHA2|STOCK2|...FECHAn|STOCKn|\n
 
 
 Template Matching foto
-12|ID|FECHA|IMAGEN\n
-ok|\n ó error|\n
-
-
-Feature Matching foto
 13|ID|FECHA|IMAGEN\n
 ok|\n ó error|\n
 
 
+Feature Matching foto
+14|ID|FECHA|IMAGEN\n
+ok|\n ó error|\n
+
+
 Template Matching video
-14|ID|FECHA|VIDEO\n
+15|ID|FECHA|VIDEO\n
 ok|\n ó error|\n
 
 
 Feature Matching video
-15|ID|FECHA|VIDEO\n
+16|ID|FECHA|VIDEO\n
 ok|\n ó error|\n

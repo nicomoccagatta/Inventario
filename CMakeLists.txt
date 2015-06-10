@@ -16,8 +16,8 @@ include_directories("${PROJECT_SOURCE_DIR}/Common")
 #			Administrador/
 #			Common/
 #		)
-#TARGET_LINK_LIBRARIES(Admin m)
 #TARGET_LINK_LIBRARIES(Admin pthread)
+#PKG_CHECK_MODULES([Admin], [gtkmm-3.0 >= 3.0.0])
 #INSTALL(FILES Admin DESTINATION ${PROJECT_SOURCE_DIR})
 #-------------------------------------------------------------------------------
 #ADD_SUBDIRECTORY("${PROJECT_SOURCE_DIR}/Cliente")
@@ -26,8 +26,8 @@ include_directories("${PROJECT_SOURCE_DIR}/Common")
 #			Cliente/main.c
 #			Common/
 #		)
-#TARGET_LINK_LIBRARIES(Client m)
 #TARGET_LINK_LIBRARIES(Client pthread)
+#PKG_CHECK_MODULES([Client], [gtkmm-3.0 >= 3.0.0])
 #INSTALL(FILES Client DESTINATION ${PROJECT_SOURCE_DIR})
 #-------------------------------------------------------------------------------
 ADD_SUBDIRECTORY("${PROJECT_SOURCE_DIR}/Servidor")

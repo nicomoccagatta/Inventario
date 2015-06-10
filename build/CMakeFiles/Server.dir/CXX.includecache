@@ -13,6 +13,12 @@ string
 -
 common_Producto.h
 ../Common/common_Producto.h
+common_Mutex.h
+../Common/common_Mutex.h
+
+../Common/common_Mutex.h
+pthread.h
+../Common/pthread.h
 
 ../Common/common_Producto.h
 list
@@ -23,6 +29,8 @@ time.h
 -
 common_Stock.h
 ../Common/common_Stock.h
+common_Mutex.h
+../Common/common_Mutex.h
 
 ../Common/common_Protocolo.h
 string
@@ -105,6 +113,8 @@ string
 -
 common_Producto.h
 /home/nicomoccagatta/Inventario/Common/common_Producto.h
+common_Mutex.h
+/home/nicomoccagatta/Inventario/Common/common_Mutex.h
 
 /home/nicomoccagatta/Inventario/Common/common_Mutex.cpp
 common_Mutex.h
@@ -127,6 +137,8 @@ time.h
 -
 common_Stock.h
 /home/nicomoccagatta/Inventario/Common/common_Stock.h
+common_Mutex.h
+/home/nicomoccagatta/Inventario/Common/common_Mutex.h
 
 /home/nicomoccagatta/Inventario/Common/common_Protocolo.cpp
 common_Protocolo.h
@@ -241,8 +253,8 @@ common_Socket.h
 /home/nicomoccagatta/Inventario/Servidor/common_Socket.h
 common_Protocolo.h
 /home/nicomoccagatta/Inventario/Servidor/common_Protocolo.h
-server_Turno.h
-/home/nicomoccagatta/Inventario/Servidor/server_Turno.h
+server_BaseDeDatos.h
+/home/nicomoccagatta/Inventario/Servidor/server_BaseDeDatos.h
 
 /home/nicomoccagatta/Inventario/Servidor/server_Servidor.cpp
 string
@@ -263,8 +275,6 @@ common_Thread.h
 /home/nicomoccagatta/Inventario/Servidor/common_Thread.h
 server_Operador.h
 /home/nicomoccagatta/Inventario/Servidor/server_Operador.h
-server_Parser.h
-/home/nicomoccagatta/Inventario/Servidor/server_Parser.h
 server_SocketServidor.h
 /home/nicomoccagatta/Inventario/Servidor/server_SocketServidor.h
 server_BaseDeDatos.h

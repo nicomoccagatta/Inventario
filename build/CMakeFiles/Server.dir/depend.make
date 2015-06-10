@@ -13,12 +13,14 @@ CMakeFiles/Server.dir/Common/client_SocketCliente.cpp.o: ../Common/common_Socket
 
 CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.o: ../Common/common_AreaDeVision.cpp
 CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.o: ../Common/common_AreaDeVision.h
+CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.o: ../Common/common_Mutex.h
 CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.o: ../Common/common_Producto.h
 CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.o: ../Common/common_Stock.h
 
 CMakeFiles/Server.dir/Common/common_Mutex.cpp.o: ../Common/common_Mutex.cpp
 CMakeFiles/Server.dir/Common/common_Mutex.cpp.o: ../Common/common_Mutex.h
 
+CMakeFiles/Server.dir/Common/common_Producto.cpp.o: ../Common/common_Mutex.h
 CMakeFiles/Server.dir/Common/common_Producto.cpp.o: ../Common/common_Producto.cpp
 CMakeFiles/Server.dir/Common/common_Producto.cpp.o: ../Common/common_Producto.h
 CMakeFiles/Server.dir/Common/common_Producto.cpp.o: ../Common/common_Stock.h
@@ -37,6 +39,7 @@ CMakeFiles/Server.dir/Common/common_Thread.cpp.o: ../Common/common_Thread.cpp
 CMakeFiles/Server.dir/Common/common_Thread.cpp.o: ../Common/common_Thread.h
 
 CMakeFiles/Server.dir/Servidor/Servidor.cpp.o: ../Common/common_AreaDeVision.h
+CMakeFiles/Server.dir/Servidor/Servidor.cpp.o: ../Common/common_Mutex.h
 CMakeFiles/Server.dir/Servidor/Servidor.cpp.o: ../Common/common_Producto.h
 CMakeFiles/Server.dir/Servidor/Servidor.cpp.o: ../Common/common_Protocolo.h
 CMakeFiles/Server.dir/Servidor/Servidor.cpp.o: ../Common/common_Socket.h
@@ -49,18 +52,25 @@ CMakeFiles/Server.dir/Servidor/Servidor.cpp.o: ../Servidor/server_Servidor.h
 CMakeFiles/Server.dir/Servidor/Servidor.cpp.o: ../Servidor/server_SocketServidor.h
 
 CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.o: ../Common/common_AreaDeVision.h
+CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.o: ../Common/common_Mutex.h
 CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.o: ../Common/common_Producto.h
 CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.o: ../Common/common_Stock.h
 CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.o: ../Servidor/server_BaseDeDatos.cpp
 CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.o: ../Servidor/server_BaseDeDatos.h
 
+CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o: ../Common/common_AreaDeVision.h
+CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o: ../Common/common_Mutex.h
+CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o: ../Common/common_Producto.h
 CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o: ../Common/common_Protocolo.h
 CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o: ../Common/common_Socket.h
+CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o: ../Common/common_Stock.h
 CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o: ../Common/common_Thread.h
+CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o: ../Servidor/server_BaseDeDatos.h
 CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o: ../Servidor/server_Operador.cpp
 CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o: ../Servidor/server_Operador.h
 
 CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.o: ../Common/common_AreaDeVision.h
+CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.o: ../Common/common_Mutex.h
 CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.o: ../Common/common_Producto.h
 CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.o: ../Common/common_Protocolo.h
 CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.o: ../Common/common_Socket.h

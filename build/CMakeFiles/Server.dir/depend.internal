@@ -14,12 +14,14 @@ CMakeFiles/Server.dir/Common/client_SocketCliente.cpp.o
 CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.o
  /home/nicomoccagatta/Inventario/Common/common_AreaDeVision.cpp
  /home/nicomoccagatta/Inventario/Common/common_AreaDeVision.h
+ /home/nicomoccagatta/Inventario/Common/common_Mutex.h
  /home/nicomoccagatta/Inventario/Common/common_Producto.h
  /home/nicomoccagatta/Inventario/Common/common_Stock.h
 CMakeFiles/Server.dir/Common/common_Mutex.cpp.o
  /home/nicomoccagatta/Inventario/Common/common_Mutex.cpp
  /home/nicomoccagatta/Inventario/Common/common_Mutex.h
 CMakeFiles/Server.dir/Common/common_Producto.cpp.o
+ /home/nicomoccagatta/Inventario/Common/common_Mutex.h
  /home/nicomoccagatta/Inventario/Common/common_Producto.cpp
  /home/nicomoccagatta/Inventario/Common/common_Producto.h
  /home/nicomoccagatta/Inventario/Common/common_Stock.h
@@ -38,6 +40,7 @@ CMakeFiles/Server.dir/Common/common_Thread.cpp.o
  /home/nicomoccagatta/Inventario/Common/common_Thread.h
 CMakeFiles/Server.dir/Servidor/Servidor.cpp.o
  ../Common/common_AreaDeVision.h
+ ../Common/common_Mutex.h
  ../Common/common_Producto.h
  ../Common/common_Protocolo.h
  ../Common/common_Socket.h
@@ -50,18 +53,25 @@ CMakeFiles/Server.dir/Servidor/Servidor.cpp.o
  /home/nicomoccagatta/Inventario/Servidor/server_SocketServidor.h
 CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.o
  ../Common/common_AreaDeVision.h
+ ../Common/common_Mutex.h
  ../Common/common_Producto.h
  ../Common/common_Stock.h
  /home/nicomoccagatta/Inventario/Servidor/server_BaseDeDatos.cpp
  /home/nicomoccagatta/Inventario/Servidor/server_BaseDeDatos.h
 CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o
+ ../Common/common_AreaDeVision.h
+ ../Common/common_Mutex.h
+ ../Common/common_Producto.h
  ../Common/common_Protocolo.h
  ../Common/common_Socket.h
+ ../Common/common_Stock.h
  ../Common/common_Thread.h
+ /home/nicomoccagatta/Inventario/Servidor/server_BaseDeDatos.h
  /home/nicomoccagatta/Inventario/Servidor/server_Operador.cpp
  /home/nicomoccagatta/Inventario/Servidor/server_Operador.h
 CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.o
  ../Common/common_AreaDeVision.h
+ ../Common/common_Mutex.h
  ../Common/common_Producto.h
  ../Common/common_Protocolo.h
  ../Common/common_Socket.h

@@ -1,0 +1,1 @@
+/home/nicomoccagatta/Inventario/build/CMakeFiles/Server.dir

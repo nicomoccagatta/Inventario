@@ -5,7 +5,6 @@
 #include "common_Protocolo.h"
 #include "common_Thread.h"
 #include "server_Operador.h"
-#include "server_Parser.h"
 #include "server_SocketServidor.h"
 #include "server_BaseDeDatos.h"
 #define kNumeroMaximoDeClientes 20

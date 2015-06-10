@@ -38,6 +38,7 @@ void Protocolo::enviarMensaje(common::Socket& skt, std::string mensaje) const {
 
 const std::string Protocolo::protocolizarMensaje(std::string mensaje) const {
   if (mensaje == "") return kFinalizadorPorDefecto;
+  /*
   unsigned int i;
   for (i = 0; i < mensaje.length() - 1; i++) {
     // si encuentro uno de los caracateres a remplazar, lo reemplazo.
@@ -52,8 +53,10 @@ const std::string Protocolo::protocolizarMensaje(std::string mensaje) const {
       }
     }
   }
+  ya no necesitamos este for
+  */
   // si el mensaje no termina con el finalizador correspondiente lo agrego.
-  if (mensaje[i] != this->getFinalizadorDeMensaje()[0]) {
+  if (mensaje[mensaje.length() - 1] != this->getFinalizadorDeMensaje()[0]) {
     return mensaje.append(this->getFinalizadorDeMensaje());
   }
   return mensaje;

@@ -6,26 +6,15 @@
 #include "common_Thread.h"
 #include "common_Socket.h"
 #include "common_Protocolo.h"
-#include "server_Turno.h"
-#define kMensajeOK "ok"
-#define kMensajeError "error"
-#define kMensajeListarReservasDisponibles "L\n"
-#define kMensajeRegistrarReserva 'R'
-#define kMensajeConsultarReserva 'C'
-#define kMensajeBorrarReserva 'B'
-#define kLargoMensajeOpcion 2
-#define kMensajeDelimitadorCampos '\t'
-#define kLargoRepresentacionIdTurno 4
-#define kNroArgumentoIDCliente 1
-#define kNroArgumentoIDTurno 2
-#define kNroArgumentoCantComensales 3
+#include "server_BaseDeDatos.h"
+
 
 namespace server {
 
 class Operador : public Thread {
  public:
   Operador(const common::Socket& cliente, const common::Protocolo& protocolo,
-           std::list<Turno*>& turnos);
+		  BaseDeDatos& datos);
   virtual ~Operador();
   void run();
   void atenderOperaciones();
@@ -35,24 +24,17 @@ class Operador : public Thread {
  private:
   common::Socket cliente;
   const common::Protocolo& protocolo;
-  std::list<Turno*>& turnos;
+  BaseDeDatos& datos;
   bool realizarOperaciones;
   const std::string realizarOperacion(std::string& comandoDeOperacion);
-  const std::string listarReservasDisponibles() const;
-  const std::string registrarReserva(const unsigned long int idCliente,
-                                     const unsigned int idTurno,
-                                     const unsigned int cantComensales);
-  const std::string consultarReserva(const unsigned long int idCliente) const;
-  const std::string borrarReserva(const unsigned long int idCliente,
-                                  const unsigned int idTurno);
-  static unsigned long int extraerArgumentoDeComando(
-      const std::string& comandoDeOperacion, const size_t numeroArgumento);
-  static unsigned long int extraerIdCliente(
-      const std::string& comandoDeOperacion);
-  static unsigned int extraerIdTurno(const std::string& comandoDeOperacion);
-  static unsigned int extraerCantComensales(
-      const std::string& comandoDeOperacion);
-  static const std::string idTurnoFormateado(const unsigned int idTurno);
+  static const std::string extraerArgumentoDeComando(
+        const std::string& comandoDeOperacion, const size_t numeroArgumento);
+  const unsigned long int extraerArgumentoNumericoDeComando(
+	        const std::string& comandoDeOperacion, const size_t numeroArgumento);
+  const std::string listarProductos()const;
+  const std::string listarAreasDeVision()const;
+  const std::string detallarProducto(const std::string& comandoDeOperacion);
+
 };
 }
 

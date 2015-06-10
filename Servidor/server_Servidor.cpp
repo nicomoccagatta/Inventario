@@ -62,13 +62,13 @@ void Servidor::atenderUsuarios() {
     if (this->skt.estaConectado() && this->atenderClientes) {
       // si se esta en conedicioens de atender al cliente le asigno un operador
       // que lo atienda en otro hilo.
- /*     Operador* operadorDeCliente =
-          new Operador(clienteAceptado, this->protocolo, *(this->turnos));
-      operadorDeCliente->start();*/
+      Operador* operadorDeCliente =
+          new Operador(clienteAceptado, this->protocolo, datos);
+      operadorDeCliente->start();
       this->operadoresActivos++;
       // me guardo una referencia al operador para poder conocer el resultado y
       // unir los hilos.
-      /*operadores.push_back(operadorDeCliente);*/
+      operadores.push_back(operadorDeCliente);
       // reviso y libero a los operadores a los que tengo referencia que estan
       // inactivos.
       this->limpiarOperadoresInactivos(operadores);

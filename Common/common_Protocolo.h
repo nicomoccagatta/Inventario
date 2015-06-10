@@ -5,6 +5,26 @@
 #include "common_Socket.h"
 #define kFinalizadorPorDefecto "\n"
 #define kRemplazoFinalizadorPorDefecto "\3"
+#define kMensajeOK "ok|"
+#define kMensajeError "error|"
+#define kMensajeDelimitadorCampos '|'
+#define kIndicadorComandoListarProductos 'A'
+#define kIndicadorComandoListarAreasDeVision 'B'
+#define kIndicadorComandoDetalleProducto 'C'
+#define kIndicadorComandoAltaProducto 'D'
+#define kIndicadorComandoModificacionProducto 'E'
+#define kIndicadorComandoBajaProducto 'F'
+#define kIndicadorComandoAltaAreaDeVision 'G'
+#define kIndicadorComandoModificacionAreaDeVision 'H'
+#define kIndicadorComandoBajaAreaDeVision 'I'
+#define kIndicadorComandoStockGeneral 'J'
+#define kIndicadorComandoStockAreaDeVision 'K'
+#define kIndicadorComandoStockHistoricoProducto 'L'
+#define kIndicadorComandoFotoTemplateMatching 'M'
+#define kIndicadorComandoFotoFeatureMatching 'N'
+#define kIndicadorComandoVideoTemplateMatching 'O'
+#define kIndicadorComandoVideoFeatureMatching 'P'
+
 
 namespace common {
 

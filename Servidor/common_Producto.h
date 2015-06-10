@@ -13,12 +13,15 @@ public:
 	Producto(std::string nombre, std::string descripcion,std::list<Stock*>* stockHistorico,unsigned long int id);
 	Producto(std::string nombre, std::string descripcion);
 	virtual ~Producto();
+
 	const std::string getNombre() const;
 	const std::string getDescripcion() const;
 	const unsigned long int getId() const;
 	const unsigned long int getStock() const;
 	const std::list<Stock*>* const getStockHistorico() const;
+
 	void actualizarStock(long int cantidad, std::string fecha);
+
 	static void inicializarCuentaId();
 
 private:

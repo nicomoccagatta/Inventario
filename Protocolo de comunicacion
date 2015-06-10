@@ -5,80 +5,80 @@ Mensaje que se le envia al servidor
 Respuesta del servidor
 
 Listar Productos
-1|\n
+A|\n
 ID1|NOMBRE1|DESCRIPCION1|ICONO1|ID2|NOMBRE2|DESCRIPCION2|ICONO2|...IDn|NOMBREn|DESCRIPCIONn|ICONOn|\n ó error|\n
 
 
 Listar Areas de vision
-2|\n
+B|\n
 ID1|UBICACION1|TIPO1|ID2|UBICACION2|TIPO2|...IDn|UBICACIONn|TIPOn|\n ó error|\n
 
 
 Detalle Producto
-3|ID|\n
+C|ID|\n
 NOMBRE|DESCRIPCION|ICONO|[IMAGEN1|IMAGEN2|...IMAGENn|]\n ó error|\n	
 
 
 Alta Producto
-4|NOMBRE|DESCRIPCION|ICONO|[IMAGEN1|IMAGEN2|...IMAGENn|]\n
+D|NOMBRE|DESCRIPCION|ICONO|[IMAGEN1|IMAGEN2|...IMAGENn|]\n
 ok|\n ó error|\n
 
 
 Modificacion Producto
-5|ID|NOMBRE|DESCRIPCION|ICONO|[IMAGEN1|IMAGEN2|...IMAGENn|]\n
+E|ID|NOMBRE|DESCRIPCION|ICONO|[IMAGEN1|IMAGEN2|...IMAGENn|]\n
 ok|\n ó error|\n
 
 
 Baja Producto
-6|ID|\n
+F|ID|\n
 ok|\n ó error|\n
 
 
 Alta Area de vision
-7|UBICACION|TIPO|\n
+G|UBICACION|TIPO|\n
 ok|\n ó error|\n
 
 
 Modificacion Area de vision
-8|ID|UBICACION|TIPO|\n
+H|ID|UBICACION|TIPO|\n
 ok|\n ó error|\n
 
 
 Baja Area de vision
-9|ID|\n
+I|ID|\n
 ok|\n ó error|\n
 
 
 Stock general
-10|\n
+J|\n
 ID1|STOCK1|ID2|STOCK2|...IDn|STOCKn|\n
 
 
 Stock Area de vision
-11|ID|\n
+K|ID|\n
 ID1|STOCK1|ID2|STOCK2|...IDn|STOCKn|\n
 
 
 Stock historico Producto
-12|ID|\n
+L|ID|\n
 FECHA1|STOCK1|FECHA2|STOCK2|...FECHAn|STOCKn|\n
 
 
 Template Matching foto
-13|ID|FECHA|IMAGEN\n
+M|ID|FECHA|IMAGEN\n
 ok|\n ó error|\n
 
 
 Feature Matching foto
-14|ID|FECHA|IMAGEN\n
+N|ID|FECHA|IMAGEN\n
 ok|\n ó error|\n
 
 
 Template Matching video
-15|ID|FECHA|VIDEO\n
+O|ID|FECHAINICIO|FECHAFIN|VIDEO\n
 ok|\n ó error|\n
 
 
 Feature Matching video
-16|ID|FECHA|VIDEO\n
+P|ID|FECHAINICIO|FECHAFIN|VIDEO\n
 ok|\n ó error|\n

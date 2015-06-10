@@ -1,0 +1,84 @@
+Siempre se manda la accion y se espera la respuesta del servidor antes de enviar otra accion.
+
+Accion
+Mensaje que se le envia al servidor
+Respuesta del servidor
+
+Listar Productos
+1|\n
+ID1|NOMBRE1|DESCRIPCION1|ICONO1|ID2|NOMBRE2|DESCRIPCION2|ICONO2|...IDn|NOMBREn|DESCRIPCIONn|ICONOn|\n ó error|\n
+
+
+Listar Areas de vision
+2|\n
+ID1|UBICACION1|TIPO1|ID2|UBICACION2|TIPO2|...IDn|UBICACIONn|TIPOn|\n ó error|\n
+
+
+Detalle Producto
+3|ID|\n
+NOMBRE|DESCRIPCION|ICONO|[IMAGEN1|IMAGEN2|...IMAGENn|]\n ó error|\n	
+
+
+Alta Producto
+4|NOMBRE|DESCRIPCION|ICONO|[IMAGEN1|IMAGEN2|...IMAGENn|]\n
+ok|\n ó error|\n
+
+
+Modificacion Producto
+4|ID|NOMBRE|DESCRIPCION|ICONO|[IMAGEN1|IMAGEN2|...IMAGENn|]\n
+ok|\n ó error|\n
+
+
+Baja Producto
+5|ID|\n
+ok|\n ó error|\n
+
+
+Alta Area de vision
+6|UBICACION|TIPO|\n
+ok|\n ó error|\n
+
+
+Modificacion Area de vision
+7|ID|UBICACION|TIPO|\n
+ok|\n ó error|\n
+
+
+Baja Area de vision
+8|ID|\n
+ok|\n ó error|\n
+
+
+Stock general
+9|\n
+ID1|STOCK1|ID2|STOCK2|...IDn|STOCKn|\n
+
+
+Stock Area de vision
+10|ID|\n
+ID1|STOCK1|ID2|STOCK2|...IDn|STOCKn|\n
+
+
+Stock historico Producto
+11|ID|\n
+FECHA1|STOCK1|FECHA2|STOCK2|...FECHAn|STOCKn|\n
+
+
+Template Matching foto
+12|ID|FECHA|IMAGEN\n
+ok|\n ó error|\n
+
+
+Feature Matching foto
+13|ID|FECHA|IMAGEN\n
+ok|\n ó error|\n
+
+
+Template Matching video
+14|ID|FECHA|VIDEO\n
+ok|\n ó error|\n
+
+
+Feature Matching video
+15|ID|FECHA|VIDEO\n
+ok|\n ó error|\n

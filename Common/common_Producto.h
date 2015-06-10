@@ -5,6 +5,7 @@
 #include <string>
 #include <time.h>
 #include "common_Stock.h"
+#include "common_Mutex.h"
 
 namespace common {
 
@@ -15,6 +16,8 @@ public:
 	virtual ~Producto();
 	const std::string getNombre() const;
 	const std::string getDescripcion() const;
+	void setNombre(const std::string& nombre);
+	void setDescripcion(const std::string& descripcion);
 	const unsigned long int getId() const;
 	const unsigned long int getStock() const;
 	const std::list<Stock*>* const getStockHistorico() const;
@@ -26,7 +29,7 @@ private:
 	std::string descripcion;
 	std::list<Stock*>* stockHistorico;
 	unsigned long int id;
-
+	Mutex mutex;
 	static unsigned long int proximoID;
 };
 

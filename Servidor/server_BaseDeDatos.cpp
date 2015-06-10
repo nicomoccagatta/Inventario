@@ -123,7 +123,7 @@ void BaseDeDatos::eliminarProducto(const unsigned long int idProductoBuscado){
 }
 
 void BaseDeDatos::cargarAreasDeVision(std::string rutaAreasDeVision){
-	Producto::inicializarCuentaId();
+	AreaDeVision::inicializarCuentaId();
 	TiXmlDocument archAreasDeVision(rutaAreasDeVision);
 	if (archAreasDeVision.LoadFile()){
 		TiXmlElement* nodoAreaDeVision=archAreasDeVision.FirstChildElement(kTagXMLAreaDeVision);

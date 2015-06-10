@@ -41,6 +41,17 @@ const std::string AreaDeVision::getTipoDeCapturador() const{
 	return tipoDeCapturador;
 }
 
+void AreaDeVision::setUbicacion(const std::string& ubicacion){
+	mutex.bloquear();
+	this->ubicacion=ubicacion;
+	mutex.desbloquear();
+}
+void AreaDeVision::setTipoDeCapturador(const std::string& tipoDeCapturador){
+	mutex.bloquear();
+	this->tipoDeCapturador=tipoDeCapturador;
+	mutex.desbloquear();
+}
+
 const unsigned long int AreaDeVision::getId() const{
 	return id;
 }
@@ -50,8 +61,10 @@ const std::list<Producto*>* const AreaDeVision::getProductosDetectados() const{
 }
 
 void AreaDeVision::actualizarDeteccion(std::list<Producto*>* productosDetectados) {
+	mutex.bloquear();
 	liberarRecursosProductos();
 	this->productosDetectados=productosDetectados;
+	mutex.desbloquear();
 }
 
 void AreaDeVision::inicializarCuentaId(){

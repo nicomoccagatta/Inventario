@@ -29,12 +29,20 @@ class Operador : public Thread {
   const std::string realizarOperacion(std::string& comandoDeOperacion);
   static const std::string extraerArgumentoDeComando(
         const std::string& comandoDeOperacion, const size_t numeroArgumento);
-  const unsigned long int extraerArgumentoNumericoDeComando(
+  static const unsigned long int extraerArgumentoNumericoDeComando(
 	        const std::string& comandoDeOperacion, const size_t numeroArgumento);
   const std::string listarProductos()const;
   const std::string listarAreasDeVision()const;
-  const std::string detallarProducto(const std::string& comandoDeOperacion);
-
+  const std::string detallarProducto(const std::string& comandoDeOperacion)const;
+  const std::string altaProducto(const std::string& comandoDeOperacion);
+  const std::string modificacionProducto(const std::string& comandoDeOperacion);
+  const std::string bajaProducto(const std::string& comandoDeOperacion);
+  const std::string altaAreaDeVision(const std::string& comandoDeOperacion);
+  const std::string modificacionAreaDeVision(const std::string& comandoDeOperacion);
+  const std::string bajaAreaDeVision(const std::string& comandoDeOperacion);
+  const std::string stockGeneral()const;
+  const std::string stockAreaDeVision(const std::string& comandoDeOperacion)const;
+  const std::string stockHistoricoProducto(const std::string& comandoDeOperacion)const;
 };
 }
 

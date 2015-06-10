@@ -4,6 +4,7 @@
 #include <list>
 #include <string>
 #include "common_Producto.h"
+#include "common_Mutex.h"
 
 using common::Producto;
 
@@ -16,6 +17,8 @@ public:
 	virtual ~AreaDeVision();
 	const std::string getUbicacion() const;
 	const std::string getTipoDeCapturador() const;
+	void setUbicacion(const std::string& ubicacion);
+	void setTipoDeCapturador(const std::string& tipoDeCapturador);
 	const unsigned long int getId() const;
 	const std::list<Producto*>* const getProductosDetectados() const;
 	void actualizarDeteccion(std::list<Producto*>* productosDetectados);
@@ -26,6 +29,7 @@ private:
 	std::string tipoDeCapturador;
 	const std::list<Producto*>* productosDetectados;
 	unsigned long int id;
+	Mutex mutex;
 	void liberarRecursosProductos();
 	static unsigned long int proximoID;
 };

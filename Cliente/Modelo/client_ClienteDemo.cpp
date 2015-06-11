@@ -20,6 +20,10 @@ ClienteDemo::~ClienteDemo() {
 	// TODO Auto-generated destructor stub
 }
 
+void ClienteDemo::cerrarConeccion(){
+	this->client.cerrarConeccion();
+}
+
 bool ClienteDemo::actualizarProductos(){
 	if (this->client.estaConectado()){
 		//protocolo.enviarMensaje(this->client,"D|COCA|La mas rica|");
@@ -120,5 +124,6 @@ bool ClienteDemo::actualizarAreasDeVision(){
 		//std::cout << e.what();
 	}
 	this->data.eliminarAreasDeVision();
+	this->data.eliminarProductos();
 	return true;
 }

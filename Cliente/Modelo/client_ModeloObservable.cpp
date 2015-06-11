@@ -13,7 +13,7 @@ ModeloObservable::ModeloObservable() {
 }
 
 ModeloObservable::~ModeloObservable() {
-	// TODO Auto-generated destructor stub
+	this->cliente.cerrarConeccion();
 }
 
 bool ModeloObservable::actualizarProductos(){

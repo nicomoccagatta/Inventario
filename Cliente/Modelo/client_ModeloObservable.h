@@ -21,6 +21,11 @@ public:
 
 	bool actualizarProductos();
 	bool actualizarAreasDeVision();
+
+	//void enviarFotoTemplateMatching(std::string id, std::string fecha, ALGO imagen/rutaDeImagen);
+	//void enviarFotoFeatureMatching(std::string id, std::string fecha, ALGO imagen/rutaDeImagen);
+
+
 };
 
 #endif /* CLIENTE_MODELO_CLIENT_MODELOOBSERVABLE_H_ */

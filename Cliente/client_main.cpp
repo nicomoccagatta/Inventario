@@ -5,6 +5,7 @@
  *      Author: ale
  */
 #include <string>
+#include <list>
 #include "Modelo/client_ModeloObservable.h"
 
 int main(int argc, char* argv[]) {

@@ -4,12 +4,14 @@
  *  Created on: Jun 10, 2015
  *      Author: ale
  */
+#include <iostream>
 #include <vector>
 
 #include "client_Data.h"
 
 using common::Producto;
 using common::AreaDeVision;
+using common::Stock;
 using std::vector;
 
 Data::Data() {
@@ -22,24 +24,27 @@ Data::~Data() {
 
 void Data::agregarProducto(std::string nombre, std::string descripcion,
 					unsigned long int id){
-	Producto* nuevo = new Producto(nombre, descripcion, NULL, id);
+	Producto* nuevo = new Producto(nombre, descripcion, new std::list<Stock*>, id);
 	this->productos.push_back(nuevo);
 }
 
 void Data::agregarAreaDeVision(std::string ubicacion, std::string tipoDeCapturador,
 							   unsigned long int id){
-	AreaDeVision* nueva = new AreaDeVision(ubicacion,tipoDeCapturador,NULL,id);
+	AreaDeVision* nueva = new AreaDeVision(ubicacion,tipoDeCapturador,new std::list<Producto*>(),id);
 	this->areasDeVision.push_back(nueva);
 }
 
 void Data::eliminarProductos(){
-	for (unsigned int i=0; i < this->productos.size();++i){
-		delete this->productos[i];
+	std::vector<Producto*>::iterator it;
+	for (it = this->productos.begin(); it != this->productos.end();++it){
+		delete *(it);
 	}
 }
 
 void Data::eliminarAreasDeVision(){
-	for (unsigned int i=0; i < this->areasDeVision.size();++i){
-		delete this->areasDeVision[0];
+	std::vector<AreaDeVision*>::iterator it;
+	for (it = this->areasDeVision.begin(); it != this->areasDeVision.end();++it){
+		std::cout << (*it)->getId() << (*it)->getTipoDeCapturador() << (*it)->getUbicacion();
+		delete *(it);
 	}
 }

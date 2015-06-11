@@ -28,11 +28,7 @@ public:
 	bool actualizarProductos();
 	bool actualizarAreasDeVision();
 
-private:
-	static const std::string extraerArgumentoDeComando(
-			const std::string& comandoDeOperacion, const size_t numeroArgumento);
-	static const unsigned long int extraerArgumentoNumericoDeComando(
-			const std::string& comandoDeOperacion, const size_t numeroArgumento);
+	void cerrarConeccion();
 };
 
 #endif /* CLIENTE_MODELO_CLIENT_CLIENTEDEMO_H_ */

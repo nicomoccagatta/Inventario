@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 2.8)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
-set(CMAKE_CXX_FLAGS "-std=gnu++98 -Wall -Werror -pedantic -pedantic-errors")
+set(CMAKE_CXX_FLAGS "-std=gnu++98 -Wall -Werror -pedantic -pedantic-errors -g -O3 -DNDEBUG -ggdb -DDEBUG -fno-inline")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG -ggdb -DDEBUG -fno-inline")
 SET(CMAKE_C_FLAGS "-std=c99 -Wall -Werror -pedantic -pedantic-errors") 
 
@@ -31,6 +31,7 @@ add_executable(Client
 			Cliente/Modelo/client_ClienteDemo.cpp
 			Cliente/Modelo/client_Data.cpp
 			Cliente/Modelo/client_ModeloObservable.cpp
+			Cliente/Vista/client_VistaEnviar.cpp
 			#Common/common_Cliente.cpp
 			Common/common_SocketCliente.cpp
 			Common/common_AreaDeVision.cpp
@@ -43,7 +44,8 @@ add_executable(Client
 			Common/common_CommandParser.cpp
 		)
 TARGET_LINK_LIBRARIES(Client pthread)
-#PKG_CHECK_MODULES([Client], [gtkmm-3.0 >= 3.0.0])
+link_directories(${GTKMM_LIBRARY_DIRS})  
+target_link_libraries(Client ${GTKMM_LIBRARIES}) 
 INSTALL(FILES Client DESTINATION ${PROJECT_SOURCE_DIR})
 #-------------------------------------------------------------------------------
 ADD_SUBDIRECTORY("${PROJECT_SOURCE_DIR}/Servidor")

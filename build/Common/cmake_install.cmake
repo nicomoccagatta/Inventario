@@ -1,4 +1,4 @@
-# Install script for directory: /home/nicomoccagatta/Inventario/Common
+# Install script for directory: /home/nicomoccagatta/git/Inventario/Common
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

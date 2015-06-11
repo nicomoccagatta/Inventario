@@ -42,10 +42,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/nicomoccagatta/Inventario
+CMAKE_SOURCE_DIR = /home/nicomoccagatta/git/Inventario
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/nicomoccagatta/Inventario/build
+CMAKE_BINARY_DIR = /home/nicomoccagatta/git/Inventario/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -113,9 +113,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nicomoccagatta/Inventario/build/CMakeFiles /home/nicomoccagatta/Inventario/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nicomoccagatta/git/Inventario/build/CMakeFiles /home/nicomoccagatta/git/Inventario/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nicomoccagatta/Inventario/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nicomoccagatta/git/Inventario/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -143,6 +143,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named Admin
+
+# Build rule for target.
+Admin: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Admin
+.PHONY : Admin
+
+# fast build rule for target.
+Admin/fast:
+	$(MAKE) -f CMakeFiles/Admin.dir/build.make CMakeFiles/Admin.dir/build
+.PHONY : Admin/fast
+
+#=============================================================================
 # Target rules for targets named Server
 
 # Build rule for target.
@@ -154,6 +167,30 @@ Server: cmake_check_build_system
 Server/fast:
 	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/build
 .PHONY : Server/fast
+
+Administrador/Administrador.o: Administrador/Administrador.cpp.o
+.PHONY : Administrador/Administrador.o
+
+# target to build an object file
+Administrador/Administrador.cpp.o:
+	$(MAKE) -f CMakeFiles/Admin.dir/build.make CMakeFiles/Admin.dir/Administrador/Administrador.cpp.o
+.PHONY : Administrador/Administrador.cpp.o
+
+Administrador/Administrador.i: Administrador/Administrador.cpp.i
+.PHONY : Administrador/Administrador.i
+
+# target to preprocess a source file
+Administrador/Administrador.cpp.i:
+	$(MAKE) -f CMakeFiles/Admin.dir/build.make CMakeFiles/Admin.dir/Administrador/Administrador.cpp.i
+.PHONY : Administrador/Administrador.cpp.i
+
+Administrador/Administrador.s: Administrador/Administrador.cpp.s
+.PHONY : Administrador/Administrador.s
+
+# target to generate assembly for a file
+Administrador/Administrador.cpp.s:
+	$(MAKE) -f CMakeFiles/Admin.dir/build.make CMakeFiles/Admin.dir/Administrador/Administrador.cpp.s
+.PHONY : Administrador/Administrador.cpp.s
 
 Common/client_Cliente.o: Common/client_Cliente.cpp.o
 .PHONY : Common/client_Cliente.o
@@ -497,6 +534,7 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... Admin"
 	@echo "... Server"
 	@echo "... edit_cache"
 	@echo "... install"
@@ -504,6 +542,9 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... Administrador/Administrador.o"
+	@echo "... Administrador/Administrador.i"
+	@echo "... Administrador/Administrador.s"
 	@echo "... Common/client_Cliente.o"
 	@echo "... Common/client_Cliente.i"
 	@echo "... Common/client_Cliente.s"

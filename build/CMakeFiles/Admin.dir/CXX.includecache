@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/nicomoccagatta/git/Inventario/Administrador/Administrador.cpp
+gtkmm-3.0/gtkmm.h
+-
+glibmm-2.4/glibmm.h
+-
+iostream
+-
+

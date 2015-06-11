@@ -72,13 +72,13 @@ pthread.h
 stdlib.h
 -
 
-/home/nicomoccagatta/Inventario/Common/client_Cliente.cpp
+/home/nicomoccagatta/git/Inventario/Common/client_Cliente.cpp
 string
 -
 client_Cliente.h
-/home/nicomoccagatta/Inventario/Common/client_Cliente.h
+/home/nicomoccagatta/git/Inventario/Common/client_Cliente.h
 
-/home/nicomoccagatta/Inventario/Common/client_Cliente.h
+/home/nicomoccagatta/git/Inventario/Common/client_Cliente.h
 iostream
 -
 string.h
@@ -86,49 +86,49 @@ string.h
 string
 -
 client_SocketCliente.h
-/home/nicomoccagatta/Inventario/Common/client_SocketCliente.h
+/home/nicomoccagatta/git/Inventario/Common/client_SocketCliente.h
 common_Protocolo.h
-/home/nicomoccagatta/Inventario/Common/common_Protocolo.h
+/home/nicomoccagatta/git/Inventario/Common/common_Protocolo.h
 
-/home/nicomoccagatta/Inventario/Common/client_SocketCliente.cpp
+/home/nicomoccagatta/git/Inventario/Common/client_SocketCliente.cpp
 string
 -
 client_SocketCliente.h
-/home/nicomoccagatta/Inventario/Common/client_SocketCliente.h
+/home/nicomoccagatta/git/Inventario/Common/client_SocketCliente.h
 
-/home/nicomoccagatta/Inventario/Common/client_SocketCliente.h
+/home/nicomoccagatta/git/Inventario/Common/client_SocketCliente.h
 string
 -
 common_Socket.h
-/home/nicomoccagatta/Inventario/Common/common_Socket.h
+/home/nicomoccagatta/git/Inventario/Common/common_Socket.h
 
-/home/nicomoccagatta/Inventario/Common/common_AreaDeVision.cpp
+/home/nicomoccagatta/git/Inventario/Common/common_AreaDeVision.cpp
 common_AreaDeVision.h
-/home/nicomoccagatta/Inventario/Common/common_AreaDeVision.h
+/home/nicomoccagatta/git/Inventario/Common/common_AreaDeVision.h
 
-/home/nicomoccagatta/Inventario/Common/common_AreaDeVision.h
+/home/nicomoccagatta/git/Inventario/Common/common_AreaDeVision.h
 list
 -
 string
 -
 common_Producto.h
-/home/nicomoccagatta/Inventario/Common/common_Producto.h
+/home/nicomoccagatta/git/Inventario/Common/common_Producto.h
 common_Mutex.h
-/home/nicomoccagatta/Inventario/Common/common_Mutex.h
+/home/nicomoccagatta/git/Inventario/Common/common_Mutex.h
 
-/home/nicomoccagatta/Inventario/Common/common_Mutex.cpp
+/home/nicomoccagatta/git/Inventario/Common/common_Mutex.cpp
 common_Mutex.h
-/home/nicomoccagatta/Inventario/Common/common_Mutex.h
+/home/nicomoccagatta/git/Inventario/Common/common_Mutex.h
 
-/home/nicomoccagatta/Inventario/Common/common_Mutex.h
+/home/nicomoccagatta/git/Inventario/Common/common_Mutex.h
 pthread.h
-/home/nicomoccagatta/Inventario/Common/pthread.h
+/home/nicomoccagatta/git/Inventario/Common/pthread.h
 
-/home/nicomoccagatta/Inventario/Common/common_Producto.cpp
+/home/nicomoccagatta/git/Inventario/Common/common_Producto.cpp
 common_Producto.h
-/home/nicomoccagatta/Inventario/Common/common_Producto.h
+/home/nicomoccagatta/git/Inventario/Common/common_Producto.h
 
-/home/nicomoccagatta/Inventario/Common/common_Producto.h
+/home/nicomoccagatta/git/Inventario/Common/common_Producto.h
 list
 -
 string
@@ -136,31 +136,31 @@ string
 time.h
 -
 common_Stock.h
-/home/nicomoccagatta/Inventario/Common/common_Stock.h
+/home/nicomoccagatta/git/Inventario/Common/common_Stock.h
 common_Mutex.h
-/home/nicomoccagatta/Inventario/Common/common_Mutex.h
+/home/nicomoccagatta/git/Inventario/Common/common_Mutex.h
 
-/home/nicomoccagatta/Inventario/Common/common_Protocolo.cpp
+/home/nicomoccagatta/git/Inventario/Common/common_Protocolo.cpp
 common_Protocolo.h
-/home/nicomoccagatta/Inventario/Common/common_Protocolo.h
+/home/nicomoccagatta/git/Inventario/Common/common_Protocolo.h
 string
 -
 
-/home/nicomoccagatta/Inventario/Common/common_Protocolo.h
+/home/nicomoccagatta/git/Inventario/Common/common_Protocolo.h
 string
 -
 string.h
 -
 common_Socket.h
-/home/nicomoccagatta/Inventario/Common/common_Socket.h
+/home/nicomoccagatta/git/Inventario/Common/common_Socket.h
 
-/home/nicomoccagatta/Inventario/Common/common_Socket.cpp
+/home/nicomoccagatta/git/Inventario/Common/common_Socket.cpp
 string
 -
 common_Socket.h
-/home/nicomoccagatta/Inventario/Common/common_Socket.h
+/home/nicomoccagatta/git/Inventario/Common/common_Socket.h
 
-/home/nicomoccagatta/Inventario/Common/common_Socket.h
+/home/nicomoccagatta/git/Inventario/Common/common_Socket.h
 pthread.h
 -
 sys/types.h
@@ -182,31 +182,31 @@ string.h
 sstream
 -
 
-/home/nicomoccagatta/Inventario/Common/common_Stock.cpp
+/home/nicomoccagatta/git/Inventario/Common/common_Stock.cpp
 common_Stock.h
-/home/nicomoccagatta/Inventario/Common/common_Stock.h
+/home/nicomoccagatta/git/Inventario/Common/common_Stock.h
 
-/home/nicomoccagatta/Inventario/Common/common_Stock.h
+/home/nicomoccagatta/git/Inventario/Common/common_Stock.h
 string
 -
 
-/home/nicomoccagatta/Inventario/Common/common_Thread.cpp
+/home/nicomoccagatta/git/Inventario/Common/common_Thread.cpp
 common_Thread.h
-/home/nicomoccagatta/Inventario/Common/common_Thread.h
+/home/nicomoccagatta/git/Inventario/Common/common_Thread.h
 
-/home/nicomoccagatta/Inventario/Common/common_Thread.h
+/home/nicomoccagatta/git/Inventario/Common/common_Thread.h
 pthread.h
-/home/nicomoccagatta/Inventario/Common/pthread.h
+/home/nicomoccagatta/git/Inventario/Common/pthread.h
 stdlib.h
 -
 
-/home/nicomoccagatta/Inventario/Servidor/Servidor.cpp
+/home/nicomoccagatta/git/Inventario/Servidor/Servidor.cpp
 time.h
 -
 server_Servidor.h
-/home/nicomoccagatta/Inventario/Servidor/server_Servidor.h
+/home/nicomoccagatta/git/Inventario/Servidor/server_Servidor.h
 server_BaseDeDatos.h
-/home/nicomoccagatta/Inventario/Servidor/server_BaseDeDatos.h
+/home/nicomoccagatta/git/Inventario/Servidor/server_BaseDeDatos.h
 iostream
 -
 list
@@ -214,33 +214,33 @@ list
 string
 -
 
-/home/nicomoccagatta/Inventario/Servidor/server_BaseDeDatos.cpp
+/home/nicomoccagatta/git/Inventario/Servidor/server_BaseDeDatos.cpp
 server_BaseDeDatos.h
-/home/nicomoccagatta/Inventario/Servidor/server_BaseDeDatos.h
+/home/nicomoccagatta/git/Inventario/Servidor/server_BaseDeDatos.h
 
-/home/nicomoccagatta/Inventario/Servidor/server_BaseDeDatos.h
+/home/nicomoccagatta/git/Inventario/Servidor/server_BaseDeDatos.h
 iostream
 -
 fstream
 -
 common_Producto.h
-/home/nicomoccagatta/Inventario/Servidor/common_Producto.h
+/home/nicomoccagatta/git/Inventario/Servidor/common_Producto.h
 common_AreaDeVision.h
-/home/nicomoccagatta/Inventario/Servidor/common_AreaDeVision.h
+/home/nicomoccagatta/git/Inventario/Servidor/common_AreaDeVision.h
 common_Stock.h
-/home/nicomoccagatta/Inventario/Servidor/common_Stock.h
+/home/nicomoccagatta/git/Inventario/Servidor/common_Stock.h
 tinyxml.h
-/home/nicomoccagatta/Inventario/Servidor/tinyxml.h
+/home/nicomoccagatta/git/Inventario/Servidor/tinyxml.h
 
-/home/nicomoccagatta/Inventario/Servidor/server_Operador.cpp
+/home/nicomoccagatta/git/Inventario/Servidor/server_Operador.cpp
 server_Operador.h
-/home/nicomoccagatta/Inventario/Servidor/server_Operador.h
+/home/nicomoccagatta/git/Inventario/Servidor/server_Operador.h
 list
 -
 string
 -
 
-/home/nicomoccagatta/Inventario/Servidor/server_Operador.h
+/home/nicomoccagatta/git/Inventario/Servidor/server_Operador.h
 iostream
 -
 string
@@ -248,47 +248,47 @@ string
 list
 -
 common_Thread.h
-/home/nicomoccagatta/Inventario/Servidor/common_Thread.h
+/home/nicomoccagatta/git/Inventario/Servidor/common_Thread.h
 common_Socket.h
-/home/nicomoccagatta/Inventario/Servidor/common_Socket.h
+/home/nicomoccagatta/git/Inventario/Servidor/common_Socket.h
 common_Protocolo.h
-/home/nicomoccagatta/Inventario/Servidor/common_Protocolo.h
+/home/nicomoccagatta/git/Inventario/Servidor/common_Protocolo.h
 server_BaseDeDatos.h
-/home/nicomoccagatta/Inventario/Servidor/server_BaseDeDatos.h
+/home/nicomoccagatta/git/Inventario/Servidor/server_BaseDeDatos.h
 
-/home/nicomoccagatta/Inventario/Servidor/server_Servidor.cpp
+/home/nicomoccagatta/git/Inventario/Servidor/server_Servidor.cpp
 string
 -
 list
 -
 server_Servidor.h
-/home/nicomoccagatta/Inventario/Servidor/server_Servidor.h
+/home/nicomoccagatta/git/Inventario/Servidor/server_Servidor.h
 
-/home/nicomoccagatta/Inventario/Servidor/server_Servidor.h
+/home/nicomoccagatta/git/Inventario/Servidor/server_Servidor.h
 list
 -
 string
 -
 common_Protocolo.h
-/home/nicomoccagatta/Inventario/Servidor/common_Protocolo.h
+/home/nicomoccagatta/git/Inventario/Servidor/common_Protocolo.h
 common_Thread.h
-/home/nicomoccagatta/Inventario/Servidor/common_Thread.h
+/home/nicomoccagatta/git/Inventario/Servidor/common_Thread.h
 server_Operador.h
-/home/nicomoccagatta/Inventario/Servidor/server_Operador.h
+/home/nicomoccagatta/git/Inventario/Servidor/server_Operador.h
 server_SocketServidor.h
-/home/nicomoccagatta/Inventario/Servidor/server_SocketServidor.h
+/home/nicomoccagatta/git/Inventario/Servidor/server_SocketServidor.h
 server_BaseDeDatos.h
-/home/nicomoccagatta/Inventario/Servidor/server_BaseDeDatos.h
+/home/nicomoccagatta/git/Inventario/Servidor/server_BaseDeDatos.h
 
-/home/nicomoccagatta/Inventario/Servidor/server_SocketServidor.cpp
+/home/nicomoccagatta/git/Inventario/Servidor/server_SocketServidor.cpp
 server_SocketServidor.h
-/home/nicomoccagatta/Inventario/Servidor/server_SocketServidor.h
+/home/nicomoccagatta/git/Inventario/Servidor/server_SocketServidor.h
 string
 -
 
-/home/nicomoccagatta/Inventario/Servidor/server_SocketServidor.h
+/home/nicomoccagatta/git/Inventario/Servidor/server_SocketServidor.h
 string
 -
 common_Socket.h
-/home/nicomoccagatta/Inventario/Servidor/common_Socket.h
+/home/nicomoccagatta/git/Inventario/Servidor/common_Socket.h
 

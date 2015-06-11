@@ -50,10 +50,45 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/nicomoccagatta/Inventario
+CMAKE_SOURCE_DIR = /home/nicomoccagatta/git/Inventario
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/nicomoccagatta/Inventario/build
+CMAKE_BINARY_DIR = /home/nicomoccagatta/git/Inventario/build
+
+#=============================================================================
+# Target rules for target CMakeFiles/Admin.dir
+
+# All Build rule for target.
+CMakeFiles/Admin.dir/all:
+	$(MAKE) -f CMakeFiles/Admin.dir/build.make CMakeFiles/Admin.dir/depend
+	$(MAKE) -f CMakeFiles/Admin.dir/build.make CMakeFiles/Admin.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/git/Inventario/build/CMakeFiles  1
+	@echo "Built target Admin"
+.PHONY : CMakeFiles/Admin.dir/all
+
+# Include target in all.
+all: CMakeFiles/Admin.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/Admin.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nicomoccagatta/git/Inventario/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Admin.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nicomoccagatta/git/Inventario/build/CMakeFiles 0
+.PHONY : CMakeFiles/Admin.dir/rule
+
+# Convenience name for target.
+Admin: CMakeFiles/Admin.dir/rule
+.PHONY : Admin
+
+# clean rule for target.
+CMakeFiles/Admin.dir/clean:
+	$(MAKE) -f CMakeFiles/Admin.dir/build.make CMakeFiles/Admin.dir/clean
+.PHONY : CMakeFiles/Admin.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/Admin.dir/clean
+.PHONY : clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/Server.dir
@@ -62,7 +97,7 @@ CMAKE_BINARY_DIR = /home/nicomoccagatta/Inventario/build
 CMakeFiles/Server.dir/all:
 	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/depend
 	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/Inventario/build/CMakeFiles  1 2 3 4 5 6 7 8 9 10 11 12 13 14
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/git/Inventario/build/CMakeFiles  2 3 4 5 6 7 8 9 10 11 12 13 14 15
 	@echo "Built target Server"
 .PHONY : CMakeFiles/Server.dir/all
 
@@ -72,9 +107,9 @@ all: CMakeFiles/Server.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Server.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nicomoccagatta/Inventario/build/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nicomoccagatta/git/Inventario/build/CMakeFiles 14
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Server.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nicomoccagatta/Inventario/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nicomoccagatta/git/Inventario/build/CMakeFiles 0
 .PHONY : CMakeFiles/Server.dir/rule
 
 # Convenience name for target.
@@ -104,6 +139,21 @@ Common/clean:
 # Convenience name for "preinstall" pass in the directory.
 Common/preinstall:
 .PHONY : Common/preinstall
+
+#=============================================================================
+# Directory level rules for directory Administrador
+
+# Convenience name for "all" pass in the directory.
+Administrador/all:
+.PHONY : Administrador/all
+
+# Convenience name for "clean" pass in the directory.
+Administrador/clean:
+.PHONY : Administrador/clean
+
+# Convenience name for "preinstall" pass in the directory.
+Administrador/preinstall:
+.PHONY : Administrador/preinstall
 
 #=============================================================================
 # Directory level rules for directory Servidor

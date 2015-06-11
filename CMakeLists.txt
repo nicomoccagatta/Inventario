@@ -10,15 +10,19 @@ project("Control de Inventario")
 ADD_SUBDIRECTORY("${PROJECT_SOURCE_DIR}/Common")
 include_directories("${PROJECT_SOURCE_DIR}/Common")
 #-------------------------------------------------------------------------------
-#ADD_SUBDIRECTORY("${PROJECT_SOURCE_DIR}/Administrador")
-#include_directories("${PROJECT_SOURCE_DIR}/Administrador")
-#add_executable(Admin
-#			Administrador/
-#			Common/
-#		)
-#TARGET_LINK_LIBRARIES(Admin pthread)
-#PKG_CHECK_MODULES([Admin], [gtkmm-3.0 >= 3.0.0])
-#INSTALL(FILES Admin DESTINATION ${PROJECT_SOURCE_DIR})
+ADD_SUBDIRECTORY("${PROJECT_SOURCE_DIR}/Administrador")
+include_directories("${PROJECT_SOURCE_DIR}/Administrador")
+INCLUDE(FindPkgConfig)
+pkg_check_modules(GTKMM REQUIRED gtkmm-3.0)
+include_directories(${GTKMM_INCLUDE_DIRS})  
+include_directories(${GTKMM_INCLUDE_DIRS} ${GSTMM_INCLUDE_DIRS})
+add_executable(Admin
+			Administrador/Administrador.cpp
+		)
+TARGET_LINK_LIBRARIES(Admin pthread)
+link_directories(${GTKMM_LIBRARY_DIRS})  
+target_link_libraries(Admin ${GTKMM_LIBRARIES}) 
+INSTALL(FILES Admin DESTINATION ${PROJECT_SOURCE_DIR})
 #-------------------------------------------------------------------------------
 #ADD_SUBDIRECTORY("${PROJECT_SOURCE_DIR}/Cliente")
 #include_directories("${PROJECT_SOURCE_DIR}/Cliente")

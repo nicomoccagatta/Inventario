@@ -113,14 +113,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/nicomoccagatta/git/Inventario/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/nicomoccagatta/git/Inventario/build/CMakeFiles /home/nicomoccagatta/git/Inventario/build/Servidor/CMakeFiles/progress.marks
-	cd /home/nicomoccagatta/git/Inventario/build && $(MAKE) -f CMakeFiles/Makefile2 Servidor/all
+	cd /home/nicomoccagatta/git/Inventario/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/nicomoccagatta/git/Inventario/build/CMakeFiles /home/nicomoccagatta/git/Inventario/build/Administrador/CMakeFiles/progress.marks
+	cd /home/nicomoccagatta/git/Inventario/build && $(MAKE) -f CMakeFiles/Makefile2 Administrador/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nicomoccagatta/git/Inventario/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/nicomoccagatta/git/Inventario/build && $(MAKE) -f CMakeFiles/Makefile2 Servidor/clean
+	cd /home/nicomoccagatta/git/Inventario/build && $(MAKE) -f CMakeFiles/Makefile2 Administrador/clean
 .PHONY : clean
 
 # The main clean target
@@ -129,12 +129,12 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/nicomoccagatta/git/Inventario/build && $(MAKE) -f CMakeFiles/Makefile2 Servidor/preinstall
+	cd /home/nicomoccagatta/git/Inventario/build && $(MAKE) -f CMakeFiles/Makefile2 Administrador/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/nicomoccagatta/git/Inventario/build && $(MAKE) -f CMakeFiles/Makefile2 Servidor/preinstall
+	cd /home/nicomoccagatta/git/Inventario/build && $(MAKE) -f CMakeFiles/Makefile2 Administrador/preinstall
 .PHONY : preinstall/fast
 
 # clear depends

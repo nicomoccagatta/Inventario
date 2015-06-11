@@ -1,0 +1,33 @@
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/c++ 
+Build flags: -std=gnu++98;-Wall;-Werror;-pedantic;-pedantic-errors;`pkg-config;--cflags;--libs;gtkmm-3.0`
+Id flags: 
+
+The output was:
+1
+c++: error: `pkg-config: No existe el archivo o el directorio
+c++: error: gtkmm-3.0`: No existe el archivo o el directorio
+c++: error: unrecognized command line option ‘--cflags’
+c++: error: unrecognized command line option ‘--libs’
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/c++ 
+Build flags: -std=gnu++98;-Wall;-Werror;-pedantic;-pedantic-errors;`pkg-config;--cflags;--libs;gtkmm-3.0`
+Id flags: -c
+
+The output was:
+1
+c++: error: `pkg-config: No existe el archivo o el directorio
+c++: error: gtkmm-3.0`: No existe el archivo o el directorio
+c++: error: unrecognized command line option ‘--cflags’
+c++: error: unrecognized command line option ‘--libs’
+
+
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+c++: error: `pkg-config: No existe el archivo o el directorio
+c++: error: gtkmm-3.0`: No existe el archivo o el directorio
+c++: error: unrecognized command line option ‘--cflags’
+c++: error: unrecognized command line option ‘--libs’
+c++: fatal error: no input files
+compilation terminated.

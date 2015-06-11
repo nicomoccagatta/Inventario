@@ -1,1 +1,2 @@
-/home/nicomoccagatta/Inventario/build/CMakeFiles/Server.dir
+/home/nicomoccagatta/git/Inventario/build/CMakeFiles/Admin.dir
+/home/nicomoccagatta/git/Inventario/build/CMakeFiles/Server.dir

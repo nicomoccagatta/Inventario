@@ -38,10 +38,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/nicomoccagatta/Inventario
+CMAKE_SOURCE_DIR = /home/nicomoccagatta/git/Inventario
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/nicomoccagatta/Inventario/build
+CMAKE_BINARY_DIR = /home/nicomoccagatta/git/Inventario/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Server.dir/depend.make
@@ -54,17 +54,17 @@ include CMakeFiles/Server.dir/flags.make
 
 CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.o: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.o: ../Servidor/server_BaseDeDatos.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/git/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.o -c /home/nicomoccagatta/Inventario/Servidor/server_BaseDeDatos.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.o -c /home/nicomoccagatta/git/Inventario/Servidor/server_BaseDeDatos.cpp
 
 CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/nicomoccagatta/Inventario/Servidor/server_BaseDeDatos.cpp > CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.i
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
 
 CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/nicomoccagatta/Inventario/Servidor/server_BaseDeDatos.cpp -o CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.s
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
 
 CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.o.requires:
 .PHONY : CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.o.requires
@@ -77,17 +77,17 @@ CMakeFiles/Server.dir/Servidor/server_BaseDeDatos.cpp.o.provides.build: CMakeFil
 
 CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o: ../Servidor/server_Operador.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/git/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o -c /home/nicomoccagatta/Inventario/Servidor/server_Operador.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o -c /home/nicomoccagatta/git/Inventario/Servidor/server_Operador.cpp
 
 CMakeFiles/Server.dir/Servidor/server_Operador.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/Servidor/server_Operador.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/nicomoccagatta/Inventario/Servidor/server_Operador.cpp > CMakeFiles/Server.dir/Servidor/server_Operador.cpp.i
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
 
 CMakeFiles/Server.dir/Servidor/server_Operador.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/Servidor/server_Operador.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/nicomoccagatta/Inventario/Servidor/server_Operador.cpp -o CMakeFiles/Server.dir/Servidor/server_Operador.cpp.s
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
 
 CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o.requires:
 .PHONY : CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o.requires
@@ -100,17 +100,17 @@ CMakeFiles/Server.dir/Servidor/server_Operador.cpp.o.provides.build: CMakeFiles/
 
 CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.o: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.o: ../Servidor/server_Servidor.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/git/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.o -c /home/nicomoccagatta/Inventario/Servidor/server_Servidor.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.o -c /home/nicomoccagatta/git/Inventario/Servidor/server_Servidor.cpp
 
 CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/nicomoccagatta/Inventario/Servidor/server_Servidor.cpp > CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.i
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
 
 CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/nicomoccagatta/Inventario/Servidor/server_Servidor.cpp -o CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.s
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
 
 CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.o.requires:
 .PHONY : CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.o.requires
@@ -123,17 +123,17 @@ CMakeFiles/Server.dir/Servidor/server_Servidor.cpp.o.provides.build: CMakeFiles/
 
 CMakeFiles/Server.dir/Servidor/server_SocketServidor.cpp.o: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/Servidor/server_SocketServidor.cpp.o: ../Servidor/server_SocketServidor.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/git/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Server.dir/Servidor/server_SocketServidor.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Servidor/server_SocketServidor.cpp.o -c /home/nicomoccagatta/Inventario/Servidor/server_SocketServidor.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Servidor/server_SocketServidor.cpp.o -c /home/nicomoccagatta/git/Inventario/Servidor/server_SocketServidor.cpp
 
 CMakeFiles/Server.dir/Servidor/server_SocketServidor.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/Servidor/server_SocketServidor.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/nicomoccagatta/Inventario/Servidor/server_SocketServidor.cpp > CMakeFiles/Server.dir/Servidor/server_SocketServidor.cpp.i
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
 
 CMakeFiles/Server.dir/Servidor/server_SocketServidor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/Servidor/server_SocketServidor.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/nicomoccagatta/Inventario/Servidor/server_SocketServidor.cpp -o CMakeFiles/Server.dir/Servidor/server_SocketServidor.cpp.s
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
 
 CMakeFiles/Server.dir/Servidor/server_SocketServidor.cpp.o.requires:
 .PHONY : CMakeFiles/Server.dir/Servidor/server_SocketServidor.cpp.o.requires
@@ -146,17 +146,17 @@ CMakeFiles/Server.dir/Servidor/server_SocketServidor.cpp.o.provides.build: CMake
 
 CMakeFiles/Server.dir/Servidor/Servidor.cpp.o: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/Servidor/Servidor.cpp.o: ../Servidor/Servidor.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/git/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Server.dir/Servidor/Servidor.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Servidor/Servidor.cpp.o -c /home/nicomoccagatta/Inventario/Servidor/Servidor.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Servidor/Servidor.cpp.o -c /home/nicomoccagatta/git/Inventario/Servidor/Servidor.cpp
 
 CMakeFiles/Server.dir/Servidor/Servidor.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/Servidor/Servidor.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/nicomoccagatta/Inventario/Servidor/Servidor.cpp > CMakeFiles/Server.dir/Servidor/Servidor.cpp.i
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
 
 CMakeFiles/Server.dir/Servidor/Servidor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/Servidor/Servidor.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/nicomoccagatta/Inventario/Servidor/Servidor.cpp -o CMakeFiles/Server.dir/Servidor/Servidor.cpp.s
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
 
 CMakeFiles/Server.dir/Servidor/Servidor.cpp.o.requires:
 .PHONY : CMakeFiles/Server.dir/Servidor/Servidor.cpp.o.requires
@@ -169,17 +169,17 @@ CMakeFiles/Server.dir/Servidor/Servidor.cpp.o.provides.build: CMakeFiles/Server.
 
 CMakeFiles/Server.dir/Common/client_Cliente.cpp.o: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/Common/client_Cliente.cpp.o: ../Common/client_Cliente.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/git/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Server.dir/Common/client_Cliente.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Common/client_Cliente.cpp.o -c /home/nicomoccagatta/Inventario/Common/client_Cliente.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Common/client_Cliente.cpp.o -c /home/nicomoccagatta/git/Inventario/Common/client_Cliente.cpp
 
 CMakeFiles/Server.dir/Common/client_Cliente.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/Common/client_Cliente.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/nicomoccagatta/Inventario/Common/client_Cliente.cpp > CMakeFiles/Server.dir/Common/client_Cliente.cpp.i
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
 
 CMakeFiles/Server.dir/Common/client_Cliente.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/Common/client_Cliente.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/nicomoccagatta/Inventario/Common/client_Cliente.cpp -o CMakeFiles/Server.dir/Common/client_Cliente.cpp.s
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
 
 CMakeFiles/Server.dir/Common/client_Cliente.cpp.o.requires:
 .PHONY : CMakeFiles/Server.dir/Common/client_Cliente.cpp.o.requires
@@ -192,17 +192,17 @@ CMakeFiles/Server.dir/Common/client_Cliente.cpp.o.provides.build: CMakeFiles/Ser
 
 CMakeFiles/Server.dir/Common/client_SocketCliente.cpp.o: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/Common/client_SocketCliente.cpp.o: ../Common/client_SocketCliente.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/git/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Server.dir/Common/client_SocketCliente.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Common/client_SocketCliente.cpp.o -c /home/nicomoccagatta/Inventario/Common/client_SocketCliente.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Common/client_SocketCliente.cpp.o -c /home/nicomoccagatta/git/Inventario/Common/client_SocketCliente.cpp
 
 CMakeFiles/Server.dir/Common/client_SocketCliente.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/Common/client_SocketCliente.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/nicomoccagatta/Inventario/Common/client_SocketCliente.cpp > CMakeFiles/Server.dir/Common/client_SocketCliente.cpp.i
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
 
 CMakeFiles/Server.dir/Common/client_SocketCliente.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/Common/client_SocketCliente.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/nicomoccagatta/Inventario/Common/client_SocketCliente.cpp -o CMakeFiles/Server.dir/Common/client_SocketCliente.cpp.s
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
 
 CMakeFiles/Server.dir/Common/client_SocketCliente.cpp.o.requires:
 .PHONY : CMakeFiles/Server.dir/Common/client_SocketCliente.cpp.o.requires
@@ -215,17 +215,17 @@ CMakeFiles/Server.dir/Common/client_SocketCliente.cpp.o.provides.build: CMakeFil
 
 CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.o: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.o: ../Common/common_AreaDeVision.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/git/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.o -c /home/nicomoccagatta/Inventario/Common/common_AreaDeVision.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.o -c /home/nicomoccagatta/git/Inventario/Common/common_AreaDeVision.cpp
 
 CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/nicomoccagatta/Inventario/Common/common_AreaDeVision.cpp > CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.i
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
 
 CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/nicomoccagatta/Inventario/Common/common_AreaDeVision.cpp -o CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.s
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
 
 CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.o.requires:
 .PHONY : CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.o.requires
@@ -238,17 +238,17 @@ CMakeFiles/Server.dir/Common/common_AreaDeVision.cpp.o.provides.build: CMakeFile
 
 CMakeFiles/Server.dir/Common/common_Mutex.cpp.o: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/Common/common_Mutex.cpp.o: ../Common/common_Mutex.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/git/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Server.dir/Common/common_Mutex.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Common/common_Mutex.cpp.o -c /home/nicomoccagatta/Inventario/Common/common_Mutex.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Common/common_Mutex.cpp.o -c /home/nicomoccagatta/git/Inventario/Common/common_Mutex.cpp
 
 CMakeFiles/Server.dir/Common/common_Mutex.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/Common/common_Mutex.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/nicomoccagatta/Inventario/Common/common_Mutex.cpp > CMakeFiles/Server.dir/Common/common_Mutex.cpp.i
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
 
 CMakeFiles/Server.dir/Common/common_Mutex.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/Common/common_Mutex.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/nicomoccagatta/Inventario/Common/common_Mutex.cpp -o CMakeFiles/Server.dir/Common/common_Mutex.cpp.s
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
 
 CMakeFiles/Server.dir/Common/common_Mutex.cpp.o.requires:
 .PHONY : CMakeFiles/Server.dir/Common/common_Mutex.cpp.o.requires
@@ -261,17 +261,17 @@ CMakeFiles/Server.dir/Common/common_Mutex.cpp.o.provides.build: CMakeFiles/Serve
 
 CMakeFiles/Server.dir/Common/common_Producto.cpp.o: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/Common/common_Producto.cpp.o: ../Common/common_Producto.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/git/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Server.dir/Common/common_Producto.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Common/common_Producto.cpp.o -c /home/nicomoccagatta/Inventario/Common/common_Producto.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Common/common_Producto.cpp.o -c /home/nicomoccagatta/git/Inventario/Common/common_Producto.cpp
 
 CMakeFiles/Server.dir/Common/common_Producto.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/Common/common_Producto.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/nicomoccagatta/Inventario/Common/common_Producto.cpp > CMakeFiles/Server.dir/Common/common_Producto.cpp.i
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
 
 CMakeFiles/Server.dir/Common/common_Producto.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/Common/common_Producto.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/nicomoccagatta/Inventario/Common/common_Producto.cpp -o CMakeFiles/Server.dir/Common/common_Producto.cpp.s
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
 
 CMakeFiles/Server.dir/Common/common_Producto.cpp.o.requires:
 .PHONY : CMakeFiles/Server.dir/Common/common_Producto.cpp.o.requires
@@ -284,17 +284,17 @@ CMakeFiles/Server.dir/Common/common_Producto.cpp.o.provides.build: CMakeFiles/Se
 
 CMakeFiles/Server.dir/Common/common_Protocolo.cpp.o: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/Common/common_Protocolo.cpp.o: ../Common/common_Protocolo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/git/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Server.dir/Common/common_Protocolo.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Common/common_Protocolo.cpp.o -c /home/nicomoccagatta/Inventario/Common/common_Protocolo.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Common/common_Protocolo.cpp.o -c /home/nicomoccagatta/git/Inventario/Common/common_Protocolo.cpp
 
 CMakeFiles/Server.dir/Common/common_Protocolo.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/Common/common_Protocolo.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/nicomoccagatta/Inventario/Common/common_Protocolo.cpp > CMakeFiles/Server.dir/Common/common_Protocolo.cpp.i
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
 
 CMakeFiles/Server.dir/Common/common_Protocolo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/Common/common_Protocolo.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/nicomoccagatta/Inventario/Common/common_Protocolo.cpp -o CMakeFiles/Server.dir/Common/common_Protocolo.cpp.s
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
 
 CMakeFiles/Server.dir/Common/common_Protocolo.cpp.o.requires:
 .PHONY : CMakeFiles/Server.dir/Common/common_Protocolo.cpp.o.requires
@@ -307,17 +307,17 @@ CMakeFiles/Server.dir/Common/common_Protocolo.cpp.o.provides.build: CMakeFiles/S
 
 CMakeFiles/Server.dir/Common/common_Socket.cpp.o: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/Common/common_Socket.cpp.o: ../Common/common_Socket.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/git/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Server.dir/Common/common_Socket.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Common/common_Socket.cpp.o -c /home/nicomoccagatta/Inventario/Common/common_Socket.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Common/common_Socket.cpp.o -c /home/nicomoccagatta/git/Inventario/Common/common_Socket.cpp
 
 CMakeFiles/Server.dir/Common/common_Socket.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/Common/common_Socket.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/nicomoccagatta/Inventario/Common/common_Socket.cpp > CMakeFiles/Server.dir/Common/common_Socket.cpp.i
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
 
 CMakeFiles/Server.dir/Common/common_Socket.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/Common/common_Socket.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/nicomoccagatta/Inventario/Common/common_Socket.cpp -o CMakeFiles/Server.dir/Common/common_Socket.cpp.s
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
 
 CMakeFiles/Server.dir/Common/common_Socket.cpp.o.requires:
 .PHONY : CMakeFiles/Server.dir/Common/common_Socket.cpp.o.requires
@@ -330,17 +330,17 @@ CMakeFiles/Server.dir/Common/common_Socket.cpp.o.provides.build: CMakeFiles/Serv
 
 CMakeFiles/Server.dir/Common/common_Stock.cpp.o: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/Common/common_Stock.cpp.o: ../Common/common_Stock.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_13)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/git/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Server.dir/Common/common_Stock.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Common/common_Stock.cpp.o -c /home/nicomoccagatta/Inventario/Common/common_Stock.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Common/common_Stock.cpp.o -c /home/nicomoccagatta/git/Inventario/Common/common_Stock.cpp
 
 CMakeFiles/Server.dir/Common/common_Stock.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/Common/common_Stock.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/nicomoccagatta/Inventario/Common/common_Stock.cpp > CMakeFiles/Server.dir/Common/common_Stock.cpp.i
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
 
 CMakeFiles/Server.dir/Common/common_Stock.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/Common/common_Stock.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/nicomoccagatta/Inventario/Common/common_Stock.cpp -o CMakeFiles/Server.dir/Common/common_Stock.cpp.s
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
 
 CMakeFiles/Server.dir/Common/common_Stock.cpp.o.requires:
 .PHONY : CMakeFiles/Server.dir/Common/common_Stock.cpp.o.requires
@@ -353,17 +353,17 @@ CMakeFiles/Server.dir/Common/common_Stock.cpp.o.provides.build: CMakeFiles/Serve
 
 CMakeFiles/Server.dir/Common/common_Thread.cpp.o: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/Common/common_Thread.cpp.o: ../Common/common_Thread.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_14)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/nicomoccagatta/git/Inventario/build/CMakeFiles $(CMAKE_PROGRESS_14)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Server.dir/Common/common_Thread.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Common/common_Thread.cpp.o -c /home/nicomoccagatta/Inventario/Common/common_Thread.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Common/common_Thread.cpp.o -c /home/nicomoccagatta/git/Inventario/Common/common_Thread.cpp
 
 CMakeFiles/Server.dir/Common/common_Thread.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/Common/common_Thread.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/nicomoccagatta/Inventario/Common/common_Thread.cpp > CMakeFiles/Server.dir/Common/common_Thread.cpp.i
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
 
 CMakeFiles/Server.dir/Common/common_Thread.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/Common/common_Thread.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/nicomoccagatta/Inventario/Common/common_Thread.cpp -o CMakeFiles/Server.dir/Common/common_Thread.cpp.s
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
 
 CMakeFiles/Server.dir/Common/common_Thread.cpp.o.requires:
 .PHONY : CMakeFiles/Server.dir/Common/common_Thread.cpp.o.requires
@@ -438,6 +438,6 @@ CMakeFiles/Server.dir/clean:
 .PHONY : CMakeFiles/Server.dir/clean
 
 CMakeFiles/Server.dir/depend:
-	cd /home/nicomoccagatta/Inventario/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/nicomoccagatta/Inventario /home/nicomoccagatta/Inventario /home/nicomoccagatta/Inventario/build /home/nicomoccagatta/Inventario/build /home/nicomoccagatta/Inventario/build/CMakeFiles/Server.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/nicomoccagatta/git/Inventario/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/nicomoccagatta/git/Inventario /home/nicomoccagatta/git/Inventario /home/nicomoccagatta/git/Inventario/build /home/nicomoccagatta/git/Inventario/build /home/nicomoccagatta/git/Inventario/build/CMakeFiles/Server.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Server.dir/depend
 

@@ -24,15 +24,27 @@ link_directories(${GTKMM_LIBRARY_DIRS})
 target_link_libraries(Admin ${GTKMM_LIBRARIES}) 
 INSTALL(FILES Admin DESTINATION ${PROJECT_SOURCE_DIR})
 #-------------------------------------------------------------------------------
-#ADD_SUBDIRECTORY("${PROJECT_SOURCE_DIR}/Cliente")
-#include_directories("${PROJECT_SOURCE_DIR}/Cliente")
-#add_executable(Client
-#			Cliente/main.c
-#			Common/
-#		)
-#TARGET_LINK_LIBRARIES(Client pthread)
+ADD_SUBDIRECTORY("${PROJECT_SOURCE_DIR}/Cliente")
+include_directories("${PROJECT_SOURCE_DIR}/Cliente")
+add_executable(Client
+			Cliente/client_main.cpp
+			Cliente/Modelo/client_ClienteDemo.cpp
+			Cliente/Modelo/client_Data.cpp
+			Cliente/Modelo/client_ModeloObservable.cpp
+			#Common/common_Cliente.cpp
+			Common/common_SocketCliente.cpp
+			Common/common_AreaDeVision.cpp
+			Common/common_Mutex.cpp
+			Common/common_Producto.cpp
+			Common/common_Stock.cpp
+			Common/common_Protocolo.cpp
+			Common/common_Socket.cpp
+			Common/common_Thread.cpp
+			Common/common_CommandParser.cpp
+		)
+TARGET_LINK_LIBRARIES(Client pthread)
 #PKG_CHECK_MODULES([Client], [gtkmm-3.0 >= 3.0.0])
-#INSTALL(FILES Client DESTINATION ${PROJECT_SOURCE_DIR})
+INSTALL(FILES Client DESTINATION ${PROJECT_SOURCE_DIR})
 #-------------------------------------------------------------------------------
 ADD_SUBDIRECTORY("${PROJECT_SOURCE_DIR}/Servidor")
 include_directories("${PROJECT_SOURCE_DIR}/Servidor")
@@ -43,7 +55,7 @@ add_executable(Server
 			Servidor/server_SocketServidor.cpp
 			Servidor/Servidor.cpp
 			Common/client_Cliente.cpp
-			Common/client_SocketCliente.cpp
+			Common/common_SocketCliente.cpp
 			Common/common_AreaDeVision.cpp
 			Common/common_Mutex.cpp
 			Common/common_Producto.cpp

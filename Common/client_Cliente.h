@@ -4,8 +4,8 @@
 #include <iostream>
 #include <string.h>
 #include <string>
-#include "client_SocketCliente.h"
 #include "common_Protocolo.h"
+#include "common_SocketCliente.h"
 #define kSeparadorDireccion ':'
 #define kMensajeFinDeSesion "S"
 #define kRetornoOK 0

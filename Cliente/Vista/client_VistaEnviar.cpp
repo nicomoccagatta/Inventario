@@ -7,6 +7,9 @@
 
 #include "client_VistaEnviar.h"
 
+#define FEATURE_MATCHING 1
+#define TEMPLATE_MATCHING 2
+
 VistaEnviar::VistaEnviar(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade)
 						//,ModeloObservable* modelo)
 : Gtk::Dialog(cobject),
@@ -77,7 +80,17 @@ void VistaEnviar::on_button_ENVIAR(){
 
 	std::cerr << "Ruta archivo: " << rutaArchivo << "\n";
 
+	int matching;
+	if (m_featureMatching->get_active()){
+		matching = FEATURE_MATCHING;
+		std::cerr << "Feature Matching\n";
+	}else{
+		matching = TEMPLATE_MATCHING;
+		std::cerr << "Template Matching\n";
+	}
 
+
+	//controlador->buttonENVIARClicked(rutaArchivo,fecha,horas,minutos,segundos,matching,
 }
 
 void VistaEnviar::on_button_VistaPrevia(){

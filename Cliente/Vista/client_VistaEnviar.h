@@ -27,9 +27,24 @@ public:
 protected:
 	//signal handlers:
 	void on_button_quit();
+	void on_button_ENVIAR();
+	void on_button_VistaPrevia();
+	void on_file_set();
 
 	Glib::RefPtr<Gtk::Builder> m_refGlade;
 	Gtk::Button* m_quitButton;
+	Gtk::Button* m_ENVIARButton;
+	Gtk::Button* m_vistaPrevia;
+	Gtk::FileChooserButton* m_fileChooser;
+	Gtk::Calendar* m_calendar;
+	Gtk::Entry* m_entryHora;
+	Gtk::Entry* m_entryMinutos;
+	Gtk::Entry* m_entrySegundos;
+	Gtk::RadioButton* m_templateMatching;
+	Gtk::RadioButton* m_featureMatching;
+	Gtk::ComboBoxText* m_AreasDeVision;
+
+
 };
 
 #endif /* CLIENTE_VISTA_CLIENT_VISTAENVIAR_H_ */

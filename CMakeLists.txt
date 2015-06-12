@@ -26,6 +26,8 @@ INSTALL(FILES Admin DESTINATION ${PROJECT_SOURCE_DIR})
 #-------------------------------------------------------------------------------
 ADD_SUBDIRECTORY("${PROJECT_SOURCE_DIR}/Cliente")
 include_directories("${PROJECT_SOURCE_DIR}/Cliente")
+pkg_check_modules(OpenCV REQUIRED opencv)
+include_directories(${OpenCV_INCLUDE_DIRS}) 
 add_executable(Client
 			Cliente/client_main.cpp
 			Cliente/Modelo/client_ClienteDemo.cpp
@@ -42,10 +44,15 @@ add_executable(Client
 			Common/common_Socket.cpp
 			Common/common_Thread.cpp
 			Common/common_CommandParser.cpp
+			Common/common_Imagen.cpp
 		)
+
+FIND_PACKAGE(OpenCV REQUIRED)
+TARGET_LINK_LIBRARIES(Client ${OpenCV_LIBS})
 TARGET_LINK_LIBRARIES(Client pthread)
 link_directories(${GTKMM_LIBRARY_DIRS})  
-target_link_libraries(Client ${GTKMM_LIBRARIES}) 
+target_link_libraries(Client ${GTKMM_LIBRARIES})
+target_link_libraries(Client ${OpenCV_LIBS})
 INSTALL(FILES Client DESTINATION ${PROJECT_SOURCE_DIR})
 #-------------------------------------------------------------------------------
 ADD_SUBDIRECTORY("${PROJECT_SOURCE_DIR}/Servidor")
@@ -65,9 +72,11 @@ add_executable(Server
 			Common/common_Socket.cpp
 			Common/common_Stock.cpp
 			Common/common_Thread.cpp
+			Common/common_Imagen.cpp
 			)
 TARGET_LINK_LIBRARIES(Server tinyxml)
 TARGET_LINK_LIBRARIES(Server pthread)
+target_link_libraries(Server ${OpenCV_LIBS})
 INSTALL(FILES Server DESTINATION ${PROJECT_SOURCE_DIR})
 #-------------------------------------------------------------------------------
 

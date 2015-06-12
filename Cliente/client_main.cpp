@@ -12,6 +12,8 @@
 
 #define VISTA_ENVIAR "Enviar_Imagen.glade"
 
+int crearAPartirDeGlade(Glib::RefPtr<Gtk::Builder>* refBuilder);
+
 int main(int argc, char* argv[]) {
   ModeloObservable modelo;
 
@@ -22,37 +24,44 @@ int main(int argc, char* argv[]) {
 
   //Load the Glade file and instiate its widgets:
   Glib::RefPtr<Gtk::Builder> refBuilder = Gtk::Builder::create();
-  try
-  {
-	  refBuilder->add_from_file(VISTA_ENVIAR);
-  }
-  catch(const Glib::FileError& ex)
-  {
-	  std::cerr << "FileError: " << ex.what() << std::endl;
-	  return 1;
-  }
-  catch(const Glib::MarkupError& ex)
-  {
-	  std::cerr << "MarkupError: " << ex.what() << std::endl;
-	  return 1;
-  }
-  catch(const Gtk::BuilderError& ex)
-  {
-	  std::cerr << "BuilderError: " << ex.what() << std::endl;
-	  return 1;
-  }
+
+  crearAPartirDeGlade(&refBuilder);
 
   //Get the GtkBuilder-instantiated dialog::
-  VistaEnviar* pDialog = 0;
-  refBuilder->get_widget_derived("DialogoEnviar", pDialog);
-  if(pDialog){
+  VistaEnviar* pDialogoEnviar = 0;
+  refBuilder->get_widget_derived("DialogoEnviar", pDialogoEnviar);
+  if(pDialogoEnviar){
+	  //Asignar Modelo y Controlador
+
 	  //Start:
-	  app->run(*pDialog);
+	  app->run(*pDialogoEnviar);
   }
 
-  delete pDialog;
+  delete pDialogoEnviar;
   return 0;
 }
 
 
+int crearAPartirDeGlade(Glib::RefPtr<Gtk::Builder>* refBuilder){
 
+	try
+	{
+		(*refBuilder)->add_from_file(VISTA_ENVIAR);
+	}
+	catch(const Glib::FileError& ex)
+	{
+		std::cerr << "FileError: " << ex.what() << std::endl;
+		return 1;
+	}
+	catch(const Glib::MarkupError& ex)
+	{
+		std::cerr << "MarkupError: " << ex.what() << std::endl;
+		return 1;
+	}
+	catch(const Gtk::BuilderError& ex)
+	{
+		std::cerr << "BuilderError: " << ex.what() << std::endl;
+		return 1;
+	}
+
+}

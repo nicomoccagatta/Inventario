@@ -24,13 +24,13 @@ Data::~Data() {
 
 void Data::agregarProducto(std::string nombre, std::string descripcion,
 					unsigned long int id){
-	Producto* nuevo = new Producto(nombre, descripcion, new std::list<Stock*>, id);
+	Producto* nuevo = new Producto(id, nombre, descripcion, new std::list<Stock*>, 0, new std::list<unsigned long int>);
 	this->productos.push_back(nuevo);
 }
 
 void Data::agregarAreaDeVision(std::string ubicacion, std::string tipoDeCapturador,
 							   unsigned long int id){
-	AreaDeVision* nueva = new AreaDeVision(ubicacion,tipoDeCapturador,new std::list<Producto*>(),id);
+	AreaDeVision* nueva = new AreaDeVision(id,ubicacion,tipoDeCapturador,new std::list<Producto*>());
 	this->areasDeVision.push_back(nueva);
 }
 

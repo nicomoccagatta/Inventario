@@ -13,10 +13,10 @@ namespace common {
 
 unsigned long int AreaDeVision::proximoID;
 
-AreaDeVision::AreaDeVision(std::string ubicacion, std::string tipoDeCapturador, std::list<Producto*>* productosDetectados ,unsigned long int id):ubicacion(ubicacion),tipoDeCapturador(tipoDeCapturador),productosDetectados(productosDetectados),id(id){
+AreaDeVision::AreaDeVision(unsigned long int id,const std::string& ubicacion, const std::string& tipoDeCapturador, std::list<Producto*>* productosDetectados):ubicacion(ubicacion),tipoDeCapturador(tipoDeCapturador),productosDetectados(productosDetectados),id(id){
 	//llevo la cuenta de cual id sera el proximo
-		if (AreaDeVision::proximoID<= id)
-			AreaDeVision::proximoID=++id;
+	if (AreaDeVision::proximoID<= id)
+		AreaDeVision::proximoID=++id;
 }
 
 AreaDeVision::AreaDeVision(std::string ubicacion, std::string tipoDeCapturador):ubicacion(ubicacion),tipoDeCapturador(tipoDeCapturador),productosDetectados(new std::list<Producto*>()),id(AreaDeVision::proximoID++){}
@@ -33,11 +33,11 @@ void AreaDeVision::liberarRecursosProductos(){
 
 
 
-const std::string AreaDeVision::getUbicacion() const{
+const std::string& AreaDeVision::getUbicacion() const{
 	return ubicacion;
 }
 
-const std::string AreaDeVision::getTipoDeCapturador() const{
+const std::string& AreaDeVision::getTipoDeCapturador() const{
 	return tipoDeCapturador;
 }
 

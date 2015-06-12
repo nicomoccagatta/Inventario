@@ -9,7 +9,6 @@ namespace server {
 class SocketServidor : public common::Socket {
  public:
   SocketServidor(const std::string& puerto, size_t maximoDeClientesAAtender);
-  virtual ~SocketServidor();
 
  private:
   static const addrinfo getFiltroDeDirecciones();

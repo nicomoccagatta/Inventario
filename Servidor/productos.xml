@@ -27,6 +27,8 @@
             <Cantidad>10</Cantidad>
         </Stock>
     </StockHistorico>
+    <Icono>0</Icono>
+    <Imagenes />
 </Producto>
 <Producto id="15">
     <Nombre>nuevo</Nombre>
@@ -37,6 +39,8 @@
             <Cantidad>0</Cantidad>
         </Stock>
     </StockHistorico>
+    <Icono>0</Icono>
+    <Imagenes />
 </Producto>
 <Producto id="4">
     <Nombre>merengadas</Nombre>
@@ -47,6 +51,8 @@
             <Cantidad>0</Cantidad>
         </Stock>
     </StockHistorico>
+    <Icono>0</Icono>
+    <Imagenes />
 </Producto>
 <Producto id="5">
     <Nombre>operas</Nombre>
@@ -57,6 +63,8 @@
             <Cantidad>0</Cantidad>
         </Stock>
     </StockHistorico>
+    <Icono>0</Icono>
+    <Imagenes />
 </Producto>
 <Producto id="16">
     <Nombre>Coca</Nombre>
@@ -67,14 +75,18 @@
             <Cantidad>0</Cantidad>
         </Stock>
     </StockHistorico>
+    <Icono>0</Icono>
+    <Imagenes />
 </Producto>
 <Producto id="17">
     <Nombre>jabon</Nombre>
-    <Descripcion>dovee</Descripcion>
+    <Descripcion>dove</Descripcion>
     <StockHistorico>
         <Stock>
             <Fecha>Wed Jun 10 02:29:13 2015&#x0A;</Fecha>
             <Cantidad>0</Cantidad>
         </Stock>
     </StockHistorico>
+    <Icono>37</Icono>
+    <Imagenes />
 </Producto>

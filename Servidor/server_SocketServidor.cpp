@@ -17,9 +17,6 @@ SocketServidor::SocketServidor(const std::string& puerto,
   }
 }
 
-SocketServidor::~SocketServidor() {
-  // TODO Auto-generated destructor stub
-}
 
 const addrinfo SocketServidor::getFiltroDeDirecciones() {
   addrinfo filtro;

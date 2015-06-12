@@ -1,10 +1,8 @@
 #include "server_BaseDeDatos.h"
 
-
-
 namespace server {
 
-BaseDeDatos::BaseDeDatos(std::string rutaProductos,std::string rutaAreasDeVision):productos(new std::list<Producto*>()),areasDeVision(new std::list<AreaDeVision*>()) {
+BaseDeDatos::BaseDeDatos(std::string rutaProductos,std::string rutaAreasDeVision):productos(new std::list<Producto*>()),areasDeVision(new std::list<AreaDeVision*>()),proximoIdImagenes(0){
 	cargarProductos(rutaProductos);
 	cargarAreasDeVision(rutaAreasDeVision);
 }
@@ -26,7 +24,9 @@ void BaseDeDatos::cargarProductos(std::string rutaProductos){
 	if (archProductos.LoadFile()){
 		TiXmlElement* nodoProducto=archProductos.FirstChildElement(kTagXMLProducto);
 		for(;nodoProducto;nodoProducto = nodoProducto->NextSiblingElement(kTagXMLProducto)){
-			productos->push_back(hidratarProductoDinamico(nodoProducto));
+			Producto* productoHidratado = hidratarProductoDinamico(nodoProducto);
+			productos->push_back(productoHidratado);
+			contarProximoIdImagenes(productoHidratado);
 		}
 	}
 }
@@ -51,7 +51,18 @@ Producto* BaseDeDatos::hidratarProductoDinamico(TiXmlElement* nodoProducto)const
 		std::stringstream((atributoStock=atributoStock->NextSiblingElement(kTagXMLCantidadStockProducto))->GetText()) >> cantidadStock;
 		stockHistoricoProducto->push_back(new Stock(cantidadStock,fechaStock));
 	}
-	return new Producto(nombreProducto,descripcionProducto,stockHistoricoProducto,idProducto);
+	//obtengo el icono
+	unsigned long int idIconoProducto;
+	std::stringstream((atributoProducto=atributoProducto->NextSiblingElement(kTagXMLIdIconoProducto))->GetText()) >> idIconoProducto;
+	//obtengo la lista de ids de imagenes
+	std::list<unsigned long int>* idsImagenesProducto = new std::list<unsigned long int>;
+	TiXmlElement* nodoImagen=(nodoProducto->FirstChildElement(kTagXMLIdImagenesProducto))->FirstChildElement(kTagXMLIdImagenProducto);
+	for(;nodoImagen;nodoImagen=nodoImagen->NextSiblingElement(kTagXMLIdImagenProducto)){
+		unsigned long int idImagen;
+		std::stringstream(nodoImagen->GetText()) >> idImagen;
+		idsImagenesProducto->push_back(idImagen);
+	}
+	return new Producto(idProducto,nombreProducto,descripcionProducto,stockHistoricoProducto,idIconoProducto,idsImagenesProducto);
 }
 
 void BaseDeDatos::guardarProductos(std::string rutaProductos)const{
@@ -91,8 +102,22 @@ TiXmlElement* BaseDeDatos::persistirProductoDinamico(Producto* productoAPersisti
 		parseador << (*stocks)->getCantidad();
 		atributoCantidad->LinkEndChild(new TiXmlText(parseador.str()));
 		nodoStock->LinkEndChild(atributoCantidad);
-
 		atributoProducto->LinkEndChild(nodoStock);
+	}
+	nodoProducto->LinkEndChild(atributoProducto);
+	//guardo el icono
+	atributoProducto=new TiXmlElement(kTagXMLIdIconoProducto);
+	std::stringstream parseadorIcono;
+	parseadorIcono << productoAPersistir->getIdIcono();
+	atributoProducto->LinkEndChild(new TiXmlText(parseadorIcono.str()));
+	nodoProducto->LinkEndChild(atributoProducto);
+	//guardo la lista de ids de imagenes
+	atributoProducto=new TiXmlElement(kTagXMLIdImagenesProducto);
+	for (std::list<unsigned long int>::const_iterator idImagen = productoAPersistir->getIdsImagenes()->begin(); idImagen!= productoAPersistir->getIdsImagenes()->end(); ++idImagen){
+		TiXmlElement* nodoImagen=new TiXmlElement(kTagXMLIdImagenProducto);
+		std::stringstream parseador;
+		parseador << (*idImagen);
+		nodoImagen->LinkEndChild(new TiXmlText(parseador.str()));
 	}
 	nodoProducto->LinkEndChild(atributoProducto);
 	return nodoProducto;
@@ -149,7 +174,7 @@ AreaDeVision* BaseDeDatos::hidratarAreaDeVisionDinamica(TiXmlElement* nodoAreaDe
 	for(;nodoProducto;nodoProducto=nodoProducto->NextSiblingElement(kTagXMLProducto)){
 		productosDetectadosAreaDeVision->push_back(hidratarProductoDinamico(nodoProducto));
 	}
-	return new AreaDeVision(ubicacionAreaDeVision,tipoDeCapturadorAreaDeVision,productosDetectadosAreaDeVision,idAreaDeVision);
+	return new AreaDeVision(idAreaDeVision,ubicacionAreaDeVision,tipoDeCapturadorAreaDeVision,productosDetectadosAreaDeVision);
 }
 
 void BaseDeDatos::guardarAreasDeVision(std::string rutaAreasDeVision)const{
@@ -200,12 +225,43 @@ void BaseDeDatos::agregarAreaDeVision(AreaDeVision* AreaDeVisionAAgregar){
 
 void BaseDeDatos::eliminarAreaDeVision(const unsigned long int idAreaDeVisionBuscada){
 	for (std::list<AreaDeVision*>::const_iterator it = areasDeVision->begin(); it!=areasDeVision->end(); ++it)
-			if ((*it)->getId() == idAreaDeVisionBuscada){
-				delete (*it);
-				areasDeVision->remove(*it);
-				it=areasDeVision->end();
-			}
+		if ((*it)->getId() == idAreaDeVisionBuscada){
+			delete (*it);
+			areasDeVision->remove(*it);
+			it=areasDeVision->end();
+		}
 }
 
+//guarda imagenes dentro de la carpeta de imagenes
+const unsigned long int BaseDeDatos::agregarImagen(const Imagen& imagenAAgregar){
+	std::stringstream parseador;
+	parseador << proximoIdImagenes;
+	imagenAAgregar.guardarEnArchivo(kRutaPorDefectoImagenes+parseador.str()+kExtensionPorDefectoImagenes);
+	return proximoIdImagenes++;
+}
+
+//elimina una iamgen con el id indicado dentro de la carpeta imagenes
+void BaseDeDatos::eliminarImagen(const unsigned long int idImagen){
+	std::stringstream parseador;
+	parseador << idImagen;
+	remove((kRutaPorDefectoImagenes+parseador.str()+kExtensionPorDefectoImagenes).c_str());
+}
+
+const bool BaseDeDatos::existeImagenConId(const unsigned long int idImagen){
+	if (idImagen<proximoIdImagenes){
+		std::stringstream parseador;
+		parseador << idImagen;
+		return !((cv::imread(kRutaPorDefectoImagenes+parseador.str()+kExtensionPorDefectoImagenes,1)).empty());
+	}
+	return false;
+}
+
+void BaseDeDatos::contarProximoIdImagenes(Producto* const productoConImagenes){
+	if (productoConImagenes->getIdIcono()>= proximoIdImagenes)
+		proximoIdImagenes= (productoConImagenes->getIdIcono())+1;
+	for (std::list<unsigned long int>::const_iterator idImagen = productoConImagenes->getIdsImagenes()->begin(); idImagen!= productoConImagenes->getIdsImagenes()->end(); ++idImagen)
+		if ((*idImagen) >= proximoIdImagenes)
+				proximoIdImagenes= (*idImagen)+1;
+}
 
 } /* namespace server */

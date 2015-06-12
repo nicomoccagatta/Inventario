@@ -7,20 +7,24 @@
             <Descripcion>algo rico</Descripcion>
             <StockHistorico>
                 <Stock>
-                    <Fecha>Tue Jun 9 19:35:54 2015&#x0A;</Fecha>
+                    <Fecha>Tue Jun 9 19:35:54 2015</Fecha>
                     <Cantidad>50</Cantidad>
                 </Stock>
             </StockHistorico>
+            <Icono>0</Icono>
+            <Imagenes />
         </Producto>
         <Producto id="3">
             <Nombre>otro</Nombre>
             <Descripcion>algo feo</Descripcion>
             <StockHistorico>
                 <Stock>
-                    <Fecha>Tue Jun 9 19:35:54 2015&#x0A;</Fecha>
+                    <Fecha>Tue Jun 9 19:35:54 2015</Fecha>
                     <Cantidad>70</Cantidad>
                 </Stock>
             </StockHistorico>
+            <Icono>0</Icono>
+            <Imagenes />
         </Producto>
     </ProductosDetectados>
 </AreaDeVision>
@@ -31,6 +35,6 @@
 </AreaDeVision>
 <AreaDeVision id="4">
     <Ubicacion>entrada de atras</Ubicacion>
-    <TipoDeCapturador>video&#x0A;</TipoDeCapturador>
+    <TipoDeCapturador>video</TipoDeCapturador>
     <ProductosDetectados />
 </AreaDeVision>

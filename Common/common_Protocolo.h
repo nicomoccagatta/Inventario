@@ -24,6 +24,7 @@
 #define kIndicadorComandoFotoFeatureMatching 'N'
 #define kIndicadorComandoVideoTemplateMatching 'O'
 #define kIndicadorComandoVideoFeatureMatching 'P'
+#define kIndicadorComandoBajaImagen 'R'
 
 
 namespace common {

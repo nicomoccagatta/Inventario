@@ -3,10 +3,15 @@
 
 #include <iostream>
 #include <fstream>
+#include "tinyxml.h"
+#include "opencv.hpp"
+#include <cv.h>
+#include <highgui.h>
+#include <stdio.h>
 #include "common_Producto.h"
 #include "common_AreaDeVision.h"
 #include "common_Stock.h"
-#include "tinyxml.h"
+#include "common_Imagen.h"
 
 #define kTagXMLProducto "Producto"
 #define kTagXMLId "id"
@@ -14,19 +19,25 @@
 #define kTagXMLDescripcionProducto "Descripcion"
 #define kTagXMLStockHistoricoProducto "StockHistorico"
 #define kTagXMLStockProducto "Stock"
+#define kTagXMLIdIconoProducto "Icono"
+#define kTagXMLIdImagenesProducto "Imagenes"
+#define kTagXMLIdImagenesProducto "Imagenes"
+#define kTagXMLIdImagenProducto "Imagen"
 #define kTagXMLFechaStockProducto "Fecha"
 #define kTagXMLCantidadStockProducto "Cantidad"
 #define kTagXMLAreaDeVision "AreaDeVision"
 #define kTagXMLUbicacionAreaDeVision "Ubicacion"
 #define kTagXMLTipoDeCapturadorAreaDeVision "TipoDeCapturador"
 #define kTagXMLProductosDetectadosAreaDeVision "ProductosDetectados"
-
 #define kRutaPorDefectoProductos "productos.xml"
 #define kRutaPorDefectoAreasDeVision "areasdevision.xml"
+#define kRutaPorDefectoImagenes "./imagenes/"
+#define kExtensionPorDefectoImagenes ".jpg"
 
 using common::Producto;
 using common::Stock;
 using common::AreaDeVision;
+using common::Imagen;
 
 namespace server {
 
@@ -42,19 +53,23 @@ public:
 	const std::list<AreaDeVision*>* getAreasDeVision() const;
 	void agregarAreaDeVision(AreaDeVision* AreaDeVisionAAgregar);
 	void eliminarAreaDeVision(const unsigned long int idAreaDeVisionBuscada);
+	const bool existeImagenConId(const unsigned long int idImagen);
+	const unsigned long int agregarImagen(const Imagen& imagenAAgregar);
+	void eliminarImagen(const unsigned long int idImagen);
 
 private:
 	std::list<Producto*>* productos;
 	std::list<AreaDeVision*>* areasDeVision;
+	unsigned long int proximoIdImagenes;
 	void cargarProductos(std::string rutaProductos = kRutaPorDefectoProductos);
 	void guardarProductos(std::string rutaProductos = kRutaPorDefectoProductos)const;
 	Producto* hidratarProductoDinamico(TiXmlElement* nodoProducto)const;
 	TiXmlElement* persistirProductoDinamico(Producto* productoAPersistir)const;
-
 	void cargarAreasDeVision(std::string rutaAreasDeVision = kRutaPorDefectoAreasDeVision);
 	void guardarAreasDeVision(std::string rutaAreasDeVision= kRutaPorDefectoAreasDeVision)const;
 	AreaDeVision* hidratarAreaDeVisionDinamica(TiXmlElement* nodoAreaDeVision)const;
 	TiXmlElement* persistirAreaDeVisionDinamica(AreaDeVision* AreaDeVisionAPersistir)const;
+	void contarProximoIdImagenes(Producto* const productoConImagenes);
 };
 
 } /* namespace server */

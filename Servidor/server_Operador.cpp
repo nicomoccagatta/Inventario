@@ -99,6 +99,10 @@ const std::string Operador::realizarOperacion(std::string& comandoDeOperacion) {
 		  return stockHistoricoProducto(comandoDeOperacion);
 		  break;
 		}
+		case kIndicadorComandoBajaImagen: {
+		  return bajaImagen(comandoDeOperacion);
+		  break;
+		}
 	  }
     }
   return kMensajeError;
@@ -109,7 +113,7 @@ const std::string Operador::listarProductos()const{
 	if (listaProductos->size()>0){
 		std::stringstream acumulador;
 		for(std::list<Producto*>::const_iterator it=listaProductos->begin(); it!=listaProductos->end();++it)
-			acumulador<< (*it)->getId() << kMensajeDelimitadorCampos <<(*it)->getNombre() << kMensajeDelimitadorCampos <<(*it)->getDescripcion() << kMensajeDelimitadorCampos;
+			acumulador<< (*it)->getId() << kMensajeDelimitadorCampos <<(*it)->getNombre() << kMensajeDelimitadorCampos <<(*it)->getDescripcion() << kMensajeDelimitadorCampos<< (*it)->getIdIcono() << kMensajeDelimitadorCampos;
 		return acumulador.str();
 	} else {
 		return kMensajeError;
@@ -133,7 +137,9 @@ const std::string Operador::detallarProducto(const std::string& comandoDeOperaci
 	Producto* productoADetallar = datos.getProductoConId(idProducto);
 	if (productoADetallar!=NULL){
 		std::stringstream acumulador;
-		acumulador << productoADetallar->getNombre() << kMensajeDelimitadorCampos << productoADetallar->getDescripcion() << kMensajeDelimitadorCampos ;//falta icono e imagenes
+		acumulador << productoADetallar->getNombre() << kMensajeDelimitadorCampos << productoADetallar->getDescripcion() << kMensajeDelimitadorCampos<< productoADetallar->getIdIcono() << kMensajeDelimitadorCampos;//faltan imagenes
+		for (std::list<unsigned long int>::const_iterator idImagen = productoADetallar->getIdsImagenes()->begin(); idImagen!= productoADetallar->getIdsImagenes()->end(); ++idImagen)
+				acumulador << (*idImagen);
 		return acumulador.str();
 	} else {
 		return kMensajeError;
@@ -143,7 +149,15 @@ const std::string Operador::detallarProducto(const std::string& comandoDeOperaci
 const std::string Operador::altaProducto(const std::string& comandoDeOperacion){
 	const std::string nombreProducto = extraerArgumentoDeComando(comandoDeOperacion,2);
 	const std::string descripcionProducto = extraerArgumentoDeComando(comandoDeOperacion,3);
-	datos.agregarProducto(new Producto(nombreProducto,descripcionProducto));
+	const unsigned long int idIcono = extraerArgumentoNumericoDeComando(comandoDeOperacion,4);
+	datos.agregarProducto(new Producto(nombreProducto,descripcionProducto,idIcono));
+	/*std::vector<unsigned char> icono (iconoProducto.begin(),iconoProducto.end());
+
+	Mat imagen2=cv::imdecode(icono,1);
+
+		  std::vector<int> parametros;
+		  parametros.push_back(100);
+		 imwrite("ultimoIcono.jpg",imagen2,parametros) ;*/
 	return kMensajeOK;
 }
 
@@ -151,14 +165,18 @@ const std::string Operador::modificacionProducto(const std::string& comandoDeOpe
 	const unsigned long int idProducto = extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
 	Producto* productoAModificar = datos.getProductoConId(idProducto);
 	if (productoAModificar!=NULL){
-		const std::string nombreProducto = extraerArgumentoDeComando(comandoDeOperacion,3);
-		productoAModificar->setNombre(nombreProducto);
-		const std::string descripcionProducto = extraerArgumentoDeComando(comandoDeOperacion,4);
-		productoAModificar->setDescripcion(descripcionProducto);
-		return kMensajeOK;
-	} else {
-		return kMensajeError;
+		const unsigned long int idIcono = extraerArgumentoNumericoDeComando(comandoDeOperacion,5);
+		bool existenTodasLasImagenes= datos.existeImagenConId(idIcono);
+		if (existenTodasLasImagenes){
+			const std::string nombreProducto = extraerArgumentoDeComando(comandoDeOperacion,3);
+			const std::string descripcionProducto = extraerArgumentoDeComando(comandoDeOperacion,4);
+			productoAModificar->setNombre(nombreProducto);
+			productoAModificar->setDescripcion(descripcionProducto);
+			productoAModificar->setIdIcono(idIcono);
+			return kMensajeOK;
+		}
 	}
+	return kMensajeError;
 }
 
 const std::string Operador::bajaProducto(const std::string& comandoDeOperacion){
@@ -243,6 +261,15 @@ const std::string Operador::stockHistoricoProducto(const std::string& comandoDeO
 	} else {
 		return kMensajeError;
 	}
+}
+
+const std::string Operador::bajaImagen(const std::string& comandoDeOperacion)const{
+	const unsigned long int idImagen = extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
+	if (datos.existeImagenConId(idImagen)){
+		datos.eliminarImagen(idImagen);
+		return kMensajeOK;
+	}
+	return kMensajeError;
 }
 
 const std::string Operador::extraerArgumentoDeComando(

@@ -3,10 +3,12 @@ Siempre se manda la accion y se espera la respuesta del servidor antes de enviar
 Accion
 Mensaje que se le envia al servidor
 Respuesta del servidor
+Mensaje que se le envia al servidor 2
+Respuesta del servidor 2
 
 Listar Productos
 A|\n
-ID1|NOMBRE1|DESCRIPCION1|ICONO1|ID2|NOMBRE2|DESCRIPCION2|ICONO2|...IDn|NOMBREn|DESCRIPCIONn|ICONOn|\n ó error|\n
+ID1|NOMBRE1|DESCRIPCION1|IDICONO1|ID2|NOMBRE2|DESCRIPCION2|IDICONO2|...IDn|NOMBREn|DESCRIPCIONn|IDICONOn|\n ó error|\n
 
 
 Listar Areas de vision
@@ -16,16 +18,16 @@ ID1|UBICACION1|TIPO1|ID2|UBICACION2|TIPO2|...IDn|UBICACIONn|TIPOn|\n ó error|\n
 
 Detalle Producto
 C|ID|\n
-NOMBRE|DESCRIPCION|ICONO|[IMAGEN1|IMAGEN2|...IMAGENn|]\n ó error|\n	
+NOMBRE|DESCRIPCION|IDICONO|[IDIMAGEN1|IDIMAGEN2|...IDIMAGENn|]\n ó error|\n	
 
 
 Alta Producto
-D|NOMBRE|DESCRIPCION|ICONO|[IMAGEN1|IMAGEN2|...IMAGENn|]\n
+D|NOMBRE|DESCRIPCION|IDICONO|[IDIMAGEN1|IDIMAGEN2|...IDIMAGENn|]\n
 ok|\n ó error|\n
 
 
 Modificacion Producto
-E|ID|NOMBRE|DESCRIPCION|ICONO|[IMAGEN1|IMAGEN2|...IMAGENn|]\n
+E|ID|NOMBRE|DESCRIPCION|IDICONO|[IDIMAGEN1|IDIMAGEN2|...IDIMAGENn|]\n
 ok|\n ó error|\n
 
 
@@ -51,26 +53,29 @@ ok|\n ó error|\n
 
 Stock general
 J|\n
-ID1|STOCK1|ID2|STOCK2|...IDn|STOCKn|\n
+ID1|STOCK1|ID2|STOCK2|...IDn|STOCKn|\n ó error|\n
 
 
 Stock Area de vision
 K|ID|\n
-ID1|STOCK1|ID2|STOCK2|...IDn|STOCKn|\n
+ID1|STOCK1|ID2|STOCK2|...IDn|STOCKn|\n ó error|\n
 
 
 Stock historico Producto
 L|ID|\n
-FECHA1|STOCK1|FECHA2|STOCK2|...FECHAn|STOCKn|\n
+FECHA1|STOCK1|FECHA2|STOCK2|...FECHAn|STOCKn|\n ó error|\n
 
 
 Template Matching foto
-M|ID|FECHA|IMAGEN\n
+M|ID|FECHA|altoIMAGEN|anchoIMAGEN|tamanioIMAGEN|\n
+ok|\n
+BYTESIMAGEN\n
 ok|\n ó error|\n
 
-
 Feature Matching foto
-N|ID|FECHA|IMAGEN\n
+N|ID|FECHA|altoIMAGEN|anchoIMAGEN|tamanioIMAGEN|\n
+ok|\n
+BYTESIMAGEN\n
 ok|\n ó error|\n
 
 
@@ -81,4 +86,20 @@ ok|\n ó error|\n
 
 Feature Matching video
 P|ID|FECHAINICIO|FECHAFIN|VIDEO\n
+ok|\n ó error|\n
+
+Alta Imagen
+O|alto|anchoIMAGEN|tamanioIMAGEN|\n
+ok|\n
+BYTESIMAGEN\n
+ok|\n ó error|\n
+
+Solicitar Imagen
+Q|ID|\n
+altoIMAGEN|anchoIMAGEN|tamanioIMAGEN|\n
+ok|\n
+BYTESIMAGEN\n
+
+Baja Imagen
+R|ID|\n
 ok|\n ó error|\n

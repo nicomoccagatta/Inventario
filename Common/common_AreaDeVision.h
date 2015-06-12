@@ -12,11 +12,11 @@ namespace common {
 
 class AreaDeVision {
 public:
-	AreaDeVision(std::string ubicacion, std::string tipoDeCapturador, std::list<Producto*>* productosDetectados ,unsigned long int id);
+	AreaDeVision(unsigned long int id,const std::string& ubicacion, const std::string& tipoDeCapturador, std::list<Producto*>* productosDetectados);
 	AreaDeVision(std::string ubicacion, std::string tipoDeCapturador);
 	virtual ~AreaDeVision();
-	const std::string getUbicacion() const;
-	const std::string getTipoDeCapturador() const;
+	const std::string& getUbicacion() const;
+	const std::string& getTipoDeCapturador() const;
 	void setUbicacion(const std::string& ubicacion);
 	void setTipoDeCapturador(const std::string& tipoDeCapturador);
 	const unsigned long int getId() const;

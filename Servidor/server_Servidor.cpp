@@ -20,7 +20,7 @@ Servidor::Servidor(const std::string& puerto,
 
 // Se persisten los datos sobre lso que se opero, se liberan los recursos y se
 // destruye el objeto.
-Servidor::~Servidor() {
+Servidor::~Servidor() {}
   /*this->parser.persistirDatos(*(this->turnos));
   while (!this->turnos->empty()) {
     std::list<Turno*>::iterator i = this->turnos->begin();
@@ -29,7 +29,7 @@ Servidor::~Servidor() {
   }
   delete turnos;
   */
-}
+
 
 bool Servidor::conectado() const { return this->skt.estaConectado(); }
 

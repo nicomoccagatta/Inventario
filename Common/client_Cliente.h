@@ -4,8 +4,13 @@
 #include <iostream>
 #include <string.h>
 #include <string>
+#include "client_SocketCliente.h"
 #include "common_Protocolo.h"
-#include "common_SocketCliente.h"
+
+#include <cv.h>
+#include <highgui.h>
+#include "opencv.hpp"
+
 #define kSeparadorDireccion ':'
 #define kMensajeFinDeSesion "S"
 #define kRetornoOK 0

@@ -8,7 +8,6 @@
 #include "common_Protocolo.h"
 #include "server_BaseDeDatos.h"
 
-
 namespace server {
 
 class Operador : public Thread {
@@ -43,6 +42,7 @@ class Operador : public Thread {
   const std::string stockGeneral()const;
   const std::string stockAreaDeVision(const std::string& comandoDeOperacion)const;
   const std::string stockHistoricoProducto(const std::string& comandoDeOperacion)const;
+  const std::string bajaImagen(const std::string& comandoDeOperacion)const;
 };
 }
 

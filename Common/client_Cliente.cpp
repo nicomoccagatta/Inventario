@@ -5,6 +5,8 @@ using common::Protocolo;
 using client::SocketCliente;
 using client::Cliente;
 
+using namespace cv;
+
 // Se instancia el objeto y se intenta conectar al servidor con al direccion
 // indicada.
 Cliente::Cliente(const std::string& direccionServidor, Protocolo protocolo)
@@ -34,14 +36,24 @@ const size_t Cliente::realizarConsultas() {
   // seguira la ejecucion solo si se pudo setear y conectar al servidor
   // correctamente.
   if (skt.estaConectado()) {
-    std::string mensajeAEnviar;
+    std::string mensajeAEnviar="D|prueba de icono|a ver si anda|";
+    Mat imagen = imread("icono.jpg",1);
+
+    	std::vector<unsigned char> icono;
+
+    	imencode(".jpg",imagen,icono);
+
+    	std::string representacion (icono.begin(),icono.end());
+    	mensajeAEnviar.append(representacion);
     while (skt.estaConectado()) {
-      getline(std::cin, mensajeAEnviar);
+      //getline(std::cin, mensajeAEnviar);
+
       if (strcmp(mensajeAEnviar.c_str(), kMensajeFinDeSesion) != 0) {
         enviarMensaje(mensajeAEnviar);
         std::string mensajeRecibido = recibirMensaje();
-        if (skt.estaConectado())
+        if (skt.estaConectado()){
           std::cout << mensajeRecibido;
+        	cerrarConeccion();}
         else
           return 1;
       } else {

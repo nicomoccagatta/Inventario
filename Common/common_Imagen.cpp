@@ -58,6 +58,7 @@ void Imagen::mostrarImagen(){
 
 	namedWindow("Display Image", CV_WINDOW_AUTOSIZE);
 	imshow("Display Image", this->matrizImagen);
+}
 
 const unsigned int Imagen::getAlto()const{
 	return matrizImagen.rows;

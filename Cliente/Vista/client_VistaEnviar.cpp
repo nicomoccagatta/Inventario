@@ -131,8 +131,10 @@ void VistaEnviar::on_button_VistaPrevia(){
 	Glib::ustring rutaArchivo = m_fileChooser->get_filename();
 	std::cerr << "Ruta archivo: " << rutaArchivo << "\n";
 
-	if (rutaArchivo.length() < 3)
+	if (rutaArchivo.length() < 3){
 		std::cerr << "POPUP: NO ELEGISTE ARCHIVO";
+		return;
+	}
 
 	controlador->buttonVistaPreviaClicked(rutaArchivo);
 

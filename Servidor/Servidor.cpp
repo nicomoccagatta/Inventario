@@ -6,10 +6,11 @@
 #include <list>
 #include <string>
 
-
 #include "opencv.hpp"
 #include <cv.h>
 #include <highgui.h>
+
+#define kCodigoRetorno 0
 
 using namespace cv;
 
@@ -23,13 +24,13 @@ int main(int argc, char* argv[]) {
   if (server.conectado())
     server.start();
   else
-    return 0;
+    return kCodigoRetorno;
   std::string rta("");
   while (rta != "q") {
     std::cin >> rta;
   }
   server.ignorarUsuarios();
   server.join();
-  return 0;
+  return kCodigoRetorno;
 }
 

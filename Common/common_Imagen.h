@@ -14,8 +14,12 @@ public:
 	Imagen(const std::string& rutaArchivo);
 	Imagen(const unsigned int ancho,const unsigned int alto, const uchar* informacionDeImagen);
 	void guardarEnArchivo(const std::string& rutaArchivo) const;
-	const uchar* convertirABytesDinamicos();
-	const unsigned int getTamanio()const;
+	const uchar* const obtenerBytesDinamicos()const;
+	const unsigned long int getTamanio()const;
+	const unsigned int getAlto()const;
+	const unsigned int getAncho()const;
+	const static bool existeImagen(const std::string& rutaArchivoImagen);
+	const bool esValida()const;
 
 	void mostrarImagen();
 

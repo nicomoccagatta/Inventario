@@ -6,17 +6,15 @@
 #include <string>
 #include "client_SocketCliente.h"
 #include "common_Protocolo.h"
-
-#include <cv.h>
-#include <highgui.h>
-#include "opencv.hpp"
+#include "common_Imagen.h"
 
 #define kSeparadorDireccion ':'
-#define kMensajeFinDeSesion "S"
+#define kMensajeFinDeSesion "X"
 #define kRetornoOK 0
 #define kRetornoError 1
 
 using common::Protocolo;
+using common::Imagen;
 using client::SocketCliente;
 
 namespace client {
@@ -29,12 +27,14 @@ class Cliente {
   bool conectado() const;
   const std::string recibirMensaje();
   void enviarMensaje(const std::string& mensaje);
+  Imagen recibirImagen(const std::string& idImagen);
+  void enviarImagen(const Imagen& imagenAEnviar);
   void cerrarConeccion();
   const size_t realizarConsultas();
 
  private:
-  client::SocketCliente skt;
-  common::Protocolo protocolo;
+  SocketCliente skt;
+  Protocolo protocolo;
   static const std::string obtenerDireccionIP(
       const std::string& direccionServidor);
   static const std::string obtenerPuerto(const std::string& direccionServidor);

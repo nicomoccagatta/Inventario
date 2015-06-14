@@ -17,14 +17,15 @@ Imagen::Imagen(const std::string& rutaArchivo): matrizImagen(cv::imread(rutaArch
 }
 
 //constructor para imagenes enviadas por red (BETA)
-Imagen::Imagen(const unsigned int ancho,const unsigned int alto, const uchar* informacionDeImagen): matrizImagen(cv::Mat::zeros( alto,ancho, CV_8UC3)){
-	 int ptr=0;
-	 for (int i = 0;  i < matrizImagen.rows; i++) {
-	  for (int j = 0; j < matrizImagen.cols; j++) {
+Imagen::Imagen(const unsigned int alto,const unsigned int ancho, const uchar* informacionDeImagen){
+	matrizImagen=cv::Mat::ones(alto,ancho, CV_8UC3);
+	unsigned long int ptr=0;
+	 for (unsigned int i = 0;  i < alto; i++) {
+	  for (unsigned int j = 0; j < ancho; j++) {
 		  matrizImagen.at<cv::Vec3b>(i,j) = cv::Vec3b(informacionDeImagen[ptr+ 0],informacionDeImagen[ptr+1],informacionDeImagen[ptr+2]);
-		  ptr=ptr+3;
-	   }
+		  ptr+=3;
 	  }
+	 }
 }
 
 void Imagen::guardarEnArchivo(const std::string& rutaArchivo) const{
@@ -37,11 +38,14 @@ void Imagen::guardarEnArchivo(const std::string& rutaArchivo) const{
 	}
 }
 
-const uchar* Imagen::convertirABytesDinamicos(){
-	return (matrizImagen=matrizImagen.reshape(0,1)).data;
+const uchar* const Imagen::obtenerBytesDinamicos() const{
+	cv::Mat matrizTransformada=matrizImagen.reshape(0,1);
+	uchar* bytesARetornar= new uchar[getTamanio()];
+	memcpy(bytesARetornar,matrizTransformada.data,(unsigned int) (getTamanio()));
+	return bytesARetornar;
 }
 
-const unsigned int Imagen::getTamanio()const{
+const unsigned long int Imagen::getTamanio()const{
 	return matrizImagen.total()*matrizImagen.elemSize();
 }
 
@@ -55,6 +59,20 @@ void Imagen::mostrarImagen(){
 	namedWindow("Display Image", CV_WINDOW_AUTOSIZE);
 	imshow("Display Image", this->matrizImagen);
 
+const unsigned int Imagen::getAlto()const{
+	return matrizImagen.rows;
+}
+
+const unsigned int Imagen::getAncho()const{
+	return matrizImagen.cols;
+}
+
+const bool Imagen::existeImagen(const std::string& rutaArchivoImagen){
+	return !((cv::imread(rutaArchivoImagen,1)).empty());
+}
+
+const bool Imagen::esValida()const{
+	return !matrizImagen.empty();
 }
 
 } /* namespace common */

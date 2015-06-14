@@ -29,6 +29,8 @@ class Socket {
   Socket aceptarCliente();
   void enviarMensaje(const std::string& mensaje);
   std::string recibirMensajeFinalizado(const std::string& finalizador);
+  void enviarBytes(const unsigned char* const bytesAEnviar, const unsigned long int cantidadDeBytesAEnviar);
+  unsigned char* const recibirBytesDinamicos(const unsigned long int cantidadDeBytesARecibir);
   void abortarConeccion();
   void cerrarConeccion();
 

@@ -32,30 +32,47 @@ bool Cliente::conectado() const { return this->skt.estaConectado(); }
 
 void Cliente::cerrarConeccion() { this->skt.cerrarConeccion(); }
 
+
+//recibe una imagen usando el protocolo. al salir debe chequearse que el socket sigue avierto o que la imagen es valida.
+Imagen  Cliente::recibirImagen(const std::string& comando){
+	enviarMensaje(comando);
+	if (skt.estaConectado()){
+		std::string mensajeDatosImagen = recibirMensaje();
+		if (mensajeDatosImagen != (kMensajeError+protocolo.getFinalizadorDeMensaje())){
+			const unsigned int altoImagen = Protocolo::extraerArgumentoNumericoDeComando(mensajeDatosImagen,2);
+			const unsigned int anchoImagen = Protocolo::extraerArgumentoNumericoDeComando(mensajeDatosImagen,3);
+			const unsigned long int tamanioImagen = Protocolo::extraerArgumentoNumericoDeComando(mensajeDatosImagen,4);
+			protocolo.enviarMensaje(skt, kMensajeOK);
+			return protocolo.recibirImagen(skt,altoImagen,anchoImagen,tamanioImagen);
+		}
+	}
+	return Imagen("");
+}
+
+void Cliente::enviarImagen(const Imagen& imagenAEnviar){
+	protocolo.enviarImagen(skt,imagenAEnviar);
+}
+
 const size_t Cliente::realizarConsultas() {
   // seguira la ejecucion solo si se pudo setear y conectar al servidor
   // correctamente.
   if (skt.estaConectado()) {
-    std::string mensajeAEnviar="D|prueba de icono|a ver si anda|";
-    Mat imagen = imread("icono.jpg",1);
-
-    	std::vector<unsigned char> icono;
-
-    	imencode(".jpg",imagen,icono);
-
-    	std::string representacion (icono.begin(),icono.end());
-    	mensajeAEnviar.append(representacion);
+    std::string mensajeAEnviar="";
     while (skt.estaConectado()) {
-      //getline(std::cin, mensajeAEnviar);
-
+      getline(std::cin, mensajeAEnviar);
       if (strcmp(mensajeAEnviar.c_str(), kMensajeFinDeSesion) != 0) {
-        enviarMensaje(mensajeAEnviar);
-        std::string mensajeRecibido = recibirMensaje();
-        if (skt.estaConectado()){
-          std::cout << mensajeRecibido;
-        	cerrarConeccion();}
-        else
-          return 1;
+        //enviarMensaje(mensajeAEnviar);
+    	//enviarImagen("sol.jpg");
+    	Imagen imagenRecibida= recibirImagen(mensajeAEnviar);
+    	if (skt.estaConectado() && imagenRecibida.esValida())
+    	imagenRecibida.guardarEnArchivo("recibida.jpg");
+    	//std::string mensajeRecibido = recibirMensaje(); lo comento por que cuando recibo imagenes no temian enviando nada el servidor.
+        if (!skt.estaConectado())
+        	return 1;
+          //std::cout << mensajeRecibido;
+         //else
+
+
       } else {
         // si el usuario ingreso el mensaje de finalizacion cierro la
         // coneccion y la aplicacion.

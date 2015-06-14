@@ -62,6 +62,39 @@ std::string Socket::recibirMensajeFinalizado(const std::string& finalizador) {
   return mensaje;
 }
 
+void Socket::enviarBytes(const unsigned char* const bytesAEnviar, const unsigned long int cantidadDeBytesAEnviar){
+	if (this->estaConectado()) {
+		unsigned int bytesEnviados = 0;
+		int resultadoDeEmision;
+		while (bytesEnviados < cantidadDeBytesAEnviar && this->estaConectado()) {
+		  resultadoDeEmision = send(this->skt, &bytesAEnviar[bytesEnviados],
+									cantidadDeBytesAEnviar - bytesEnviados, MSG_NOSIGNAL);
+		  if (resultadoDeEmision <= 0)
+			this->cerrarConeccion();
+		  else
+			bytesEnviados += resultadoDeEmision;
+		}
+	  }
+}
+
+unsigned char* const Socket::recibirBytesDinamicos(const unsigned long int cantidadDeBytesARecibir){
+	unsigned char* buffer;
+	try{
+		buffer = new unsigned char[cantidadDeBytesARecibir];
+	} catch (...){
+		return NULL;
+	}
+	unsigned long int cantidadDeBytesRecibidos=0;
+	while (this->estaConectado() && (cantidadDeBytesRecibidos<cantidadDeBytesARecibir)) {
+	      int bytesRecibidos = recv(this->skt, &buffer[cantidadDeBytesRecibidos], (cantidadDeBytesARecibir-cantidadDeBytesRecibidos), MSG_NOSIGNAL);
+	      if (bytesRecibidos <= 0)
+	        this->cerrarConeccion();
+	      else
+	    	  cantidadDeBytesRecibidos += bytesRecibidos;
+	}
+	return buffer;
+}
+
 std::string Socket::corrimientoBuffer(const std::string& finalizador) {
   std::stringstream mensaje;
   bool mensajeFinalizado = false;

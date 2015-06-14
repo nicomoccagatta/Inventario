@@ -28,6 +28,8 @@ public:
 	void actualizarStock(long int cantidad, std::string fecha);
 	static void inicializarCuentaId();
 
+
+
 private:
 	unsigned long int id;
 	std::string nombre;

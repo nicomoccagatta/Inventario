@@ -7,6 +7,7 @@
 #include "common_Socket.h"
 #include "common_Protocolo.h"
 #include "server_BaseDeDatos.h"
+#define kRespuestaNula ""
 
 namespace server {
 
@@ -26,10 +27,6 @@ class Operador : public Thread {
   BaseDeDatos& datos;
   bool realizarOperaciones;
   const std::string realizarOperacion(std::string& comandoDeOperacion);
-  static const std::string extraerArgumentoDeComando(
-        const std::string& comandoDeOperacion, const size_t numeroArgumento);
-  static const unsigned long int extraerArgumentoNumericoDeComando(
-	        const std::string& comandoDeOperacion, const size_t numeroArgumento);
   const std::string listarProductos()const;
   const std::string listarAreasDeVision()const;
   const std::string detallarProducto(const std::string& comandoDeOperacion)const;
@@ -42,6 +39,8 @@ class Operador : public Thread {
   const std::string stockGeneral()const;
   const std::string stockAreaDeVision(const std::string& comandoDeOperacion)const;
   const std::string stockHistoricoProducto(const std::string& comandoDeOperacion)const;
+  const std::string altaImagen(const std::string& comandoDeOperacion);
+  const std::string enviarImagen(const std::string& comandoDeOperacion);
   const std::string bajaImagen(const std::string& comandoDeOperacion)const;
 };
 }

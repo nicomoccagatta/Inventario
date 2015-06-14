@@ -12,6 +12,7 @@
 #include "common_AreaDeVision.h"
 #include "common_Stock.h"
 #include "common_Imagen.h"
+#include "common_Mutex.h"
 
 #define kTagXMLProducto "Producto"
 #define kTagXMLId "id"
@@ -38,6 +39,7 @@ using common::Producto;
 using common::Stock;
 using common::AreaDeVision;
 using common::Imagen;
+using common::Mutex;
 
 namespace server {
 
@@ -55,12 +57,14 @@ public:
 	void eliminarAreaDeVision(const unsigned long int idAreaDeVisionBuscada);
 	const bool existeImagenConId(const unsigned long int idImagen);
 	const unsigned long int agregarImagen(const Imagen& imagenAAgregar);
+	Imagen getImagenConId(const unsigned long int idImagen);
 	void eliminarImagen(const unsigned long int idImagen);
 
 private:
 	std::list<Producto*>* productos;
 	std::list<AreaDeVision*>* areasDeVision;
 	unsigned long int proximoIdImagenes;
+	Mutex mutexImagenes;
 	void cargarProductos(std::string rutaProductos = kRutaPorDefectoProductos);
 	void guardarProductos(std::string rutaProductos = kRutaPorDefectoProductos)const;
 	Producto* hidratarProductoDinamico(TiXmlElement* nodoProducto)const;

@@ -69,13 +69,13 @@ FECHA1|STOCK1|FECHA2|STOCK2|...FECHAn|STOCKn|\n ó error|\n
 Template Matching foto
 M|ID|FECHA|altoIMAGEN|anchoIMAGEN|tamanioIMAGEN|\n
 ok|\n
-BYTESIMAGEN\n
+BYTESIMAGEN
 ok|\n ó error|\n
 
 Feature Matching foto
 N|ID|FECHA|altoIMAGEN|anchoIMAGEN|tamanioIMAGEN|\n
 ok|\n
-BYTESIMAGEN\n
+BYTESIMAGEN
 ok|\n ó error|\n
 
 
@@ -89,17 +89,17 @@ P|ID|FECHAINICIO|FECHAFIN|VIDEO\n
 ok|\n ó error|\n
 
 Alta Imagen
-O|alto|anchoIMAGEN|tamanioIMAGEN|\n
+Q|altoIMAGEN|anchoIMAGEN|tamanioIMAGEN|\n
 ok|\n
-BYTESIMAGEN\n
+BYTESIMAGEN
 ok|\n ó error|\n
 
 Solicitar Imagen
-Q|ID|\n
-altoIMAGEN|anchoIMAGEN|tamanioIMAGEN|\n
+R|ID|\n
+Q|altoIMAGEN|anchoIMAGEN|tamanioIMAGEN|\n ó error|\n
 ok|\n
-BYTESIMAGEN\n
+BYTESIMAGEN
 
 Baja Imagen
-R|ID|\n
+S|ID|\n
 ok|\n ó error|\n

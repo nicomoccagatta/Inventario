@@ -26,9 +26,11 @@ void Operador::atenderOperaciones() {
   this->realizarOperaciones = true;
   while (this->cliente.estaConectado() && this->realizarOperaciones) {
     std::string mensajeRecibido = this->protocolo.recibirMensaje(this->cliente);
-    if (this->cliente.estaConectado())
-      this->protocolo.enviarMensaje(this->cliente,
-                                    this->realizarOperacion(mensajeRecibido));
+    if (this->cliente.estaConectado()){
+    	std::string mensajeAResponder(this->realizarOperacion(mensajeRecibido));
+		if (mensajeAResponder != kRespuestaNula)
+				this->protocolo.enviarMensaje(this->cliente,mensajeAResponder);
+    }
   }
   this->cliente.cerrarConeccion();
 }
@@ -99,6 +101,14 @@ const std::string Operador::realizarOperacion(std::string& comandoDeOperacion) {
 		  return stockHistoricoProducto(comandoDeOperacion);
 		  break;
 		}
+		case kIndicadorComandoAltaImagen: {
+		  return altaImagen(comandoDeOperacion);
+		  break;
+		}
+		case kIndicadorComandoSolicitudImagen: {
+		  return enviarImagen(comandoDeOperacion);
+		  break;
+		}
 		case kIndicadorComandoBajaImagen: {
 		  return bajaImagen(comandoDeOperacion);
 		  break;
@@ -122,18 +132,18 @@ const std::string Operador::listarProductos()const{
 
 const std::string Operador::listarAreasDeVision()const{
 	const std::list<AreaDeVision*>* listaAreasDeVision = datos.getAreasDeVision();
-		if (listaAreasDeVision->size()==0){
-			return kMensajeError;
-		} else {
-			std::stringstream acumulador;
-			for(std::list<AreaDeVision*>::const_iterator it=listaAreasDeVision->begin(); it!=listaAreasDeVision->end();++it)
-				acumulador<< (*it)->getId() << kMensajeDelimitadorCampos <<(*it)->getUbicacion() << kMensajeDelimitadorCampos <<(*it)->getTipoDeCapturador() << kMensajeDelimitadorCampos;
-			return acumulador.str();
-		}
+	if (listaAreasDeVision->size()==0){
+		return kMensajeError;
+	} else {
+		std::stringstream acumulador;
+		for(std::list<AreaDeVision*>::const_iterator it=listaAreasDeVision->begin(); it!=listaAreasDeVision->end();++it)
+			acumulador<< (*it)->getId() << kMensajeDelimitadorCampos <<(*it)->getUbicacion() << kMensajeDelimitadorCampos <<(*it)->getTipoDeCapturador() << kMensajeDelimitadorCampos;
+		return acumulador.str();
+	}
 }
 
 const std::string Operador::detallarProducto(const std::string& comandoDeOperacion) const{
-	const unsigned long int idProducto = extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
+	const unsigned long int idProducto = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
 	Producto* productoADetallar = datos.getProductoConId(idProducto);
 	if (productoADetallar!=NULL){
 		std::stringstream acumulador;
@@ -147,29 +157,22 @@ const std::string Operador::detallarProducto(const std::string& comandoDeOperaci
 }
 
 const std::string Operador::altaProducto(const std::string& comandoDeOperacion){
-	const std::string nombreProducto = extraerArgumentoDeComando(comandoDeOperacion,2);
-	const std::string descripcionProducto = extraerArgumentoDeComando(comandoDeOperacion,3);
-	const unsigned long int idIcono = extraerArgumentoNumericoDeComando(comandoDeOperacion,4);
+	const std::string nombreProducto = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,2);
+	const std::string descripcionProducto = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,3);
+	const unsigned long int idIcono = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,4);
 	datos.agregarProducto(new Producto(nombreProducto,descripcionProducto,idIcono));
-	/*std::vector<unsigned char> icono (iconoProducto.begin(),iconoProducto.end());
-
-	Mat imagen2=cv::imdecode(icono,1);
-
-		  std::vector<int> parametros;
-		  parametros.push_back(100);
-		 imwrite("ultimoIcono.jpg",imagen2,parametros) ;*/
 	return kMensajeOK;
 }
 
 const std::string Operador::modificacionProducto(const std::string& comandoDeOperacion){
-	const unsigned long int idProducto = extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
+	const unsigned long int idProducto = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
 	Producto* productoAModificar = datos.getProductoConId(idProducto);
 	if (productoAModificar!=NULL){
-		const unsigned long int idIcono = extraerArgumentoNumericoDeComando(comandoDeOperacion,5);
+		const unsigned long int idIcono = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,5);
 		bool existenTodasLasImagenes= datos.existeImagenConId(idIcono);
 		if (existenTodasLasImagenes){
-			const std::string nombreProducto = extraerArgumentoDeComando(comandoDeOperacion,3);
-			const std::string descripcionProducto = extraerArgumentoDeComando(comandoDeOperacion,4);
+			const std::string nombreProducto = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,3);
+			const std::string descripcionProducto = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,4);
 			productoAModificar->setNombre(nombreProducto);
 			productoAModificar->setDescripcion(descripcionProducto);
 			productoAModificar->setIdIcono(idIcono);
@@ -180,7 +183,7 @@ const std::string Operador::modificacionProducto(const std::string& comandoDeOpe
 }
 
 const std::string Operador::bajaProducto(const std::string& comandoDeOperacion){
-	const unsigned long int idProducto = extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
+	const unsigned long int idProducto = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
 		Producto* productoADetallar = datos.getProductoConId(idProducto);
 		if (productoADetallar!=NULL){
 			datos.eliminarProducto(idProducto);
@@ -191,19 +194,19 @@ const std::string Operador::bajaProducto(const std::string& comandoDeOperacion){
 }
 
 const std::string Operador::altaAreaDeVision(const std::string& comandoDeOperacion){
-	const std::string ubicacionAreaDeVision = extraerArgumentoDeComando(comandoDeOperacion,2);
-	const std::string tipoDeCapturadorAreaDeVision = extraerArgumentoDeComando(comandoDeOperacion,3);
+	const std::string ubicacionAreaDeVision = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,2);
+	const std::string tipoDeCapturadorAreaDeVision = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,3);
 	datos.agregarAreaDeVision(new AreaDeVision(ubicacionAreaDeVision,tipoDeCapturadorAreaDeVision));
 	return kMensajeOK;
 }
 
 const std::string Operador::modificacionAreaDeVision(const std::string& comandoDeOperacion){
-	const unsigned long int idAreaDeVision = extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
+	const unsigned long int idAreaDeVision = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
 	AreaDeVision* AreaDeVisionAModificar = datos.getAreaDeVisionConId(idAreaDeVision);
 	if (AreaDeVisionAModificar!=NULL){
-		const std::string ubicacionAreaDeVision = extraerArgumentoDeComando(comandoDeOperacion,3);
+		const std::string ubicacionAreaDeVision = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,3);
 		AreaDeVisionAModificar->setUbicacion(ubicacionAreaDeVision);
-		const std::string tipoDeCapturadorAreaDeVision = extraerArgumentoDeComando(comandoDeOperacion,4);
+		const std::string tipoDeCapturadorAreaDeVision = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,4);
 		AreaDeVisionAModificar->setTipoDeCapturador(tipoDeCapturadorAreaDeVision);
 		return kMensajeOK;
 	} else {
@@ -212,7 +215,7 @@ const std::string Operador::modificacionAreaDeVision(const std::string& comandoD
 }
 
 const std::string Operador::bajaAreaDeVision(const std::string& comandoDeOperacion){
-	const unsigned long int idAreaDeVision = extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
+	const unsigned long int idAreaDeVision = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
 		AreaDeVision* AreaDeVisionADetallar = datos.getAreaDeVisionConId(idAreaDeVision);
 		if (AreaDeVisionADetallar!=NULL){
 			datos.eliminarAreaDeVision(idAreaDeVision);
@@ -235,7 +238,7 @@ const std::string Operador::stockGeneral() const{
 }
 
 const std::string Operador::stockAreaDeVision(const std::string& comandoDeOperacion)const{
-	const unsigned long int idAreaDeVision = extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
+	const unsigned long int idAreaDeVision = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
 	AreaDeVision* areaDeVisionAInventariar = datos.getAreaDeVisionConId(idAreaDeVision);
 	if (areaDeVisionAInventariar!=NULL){
 		const std::list<Producto*>* productosDetectados= areaDeVisionAInventariar->getProductosDetectados();
@@ -250,7 +253,7 @@ const std::string Operador::stockAreaDeVision(const std::string& comandoDeOperac
 }
 
 const std::string Operador::stockHistoricoProducto(const std::string& comandoDeOperacion)const{
-	const unsigned long int idProducto = extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
+	const unsigned long int idProducto = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
 	Producto* productoAInventariar = datos.getProductoConId(idProducto);
 	if (productoAInventariar!=NULL){
 		const std::list<Stock*>* stockHistoricos = productoAInventariar->getStockHistorico();
@@ -263,8 +266,36 @@ const std::string Operador::stockHistoricoProducto(const std::string& comandoDeO
 	}
 }
 
+
+const std::string Operador::altaImagen(const std::string& comandoDeOperacion){
+	const unsigned int altoImagen = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
+	const unsigned int anchoImagen = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,3);
+	const unsigned long int tamanioImagen = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,4);
+	protocolo.enviarMensaje(cliente, kMensajeOK);
+	Imagen imagenRecibida = protocolo.recibirImagen(cliente,altoImagen,anchoImagen,tamanioImagen);
+	if (cliente.estaConectado()){
+		const unsigned long int idImagen = datos.agregarImagen(imagenRecibida);
+		if (idImagen){
+			std::stringstream acumulador;
+			acumulador<< idImagen << kMensajeDelimitadorCampos;
+			return acumulador.str();
+		}
+	}
+	return kMensajeError;
+}
+
+const std::string Operador::enviarImagen(const std::string& comandoDeOperacion){
+	const unsigned long int idImagen = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
+	if (datos.existeImagenConId(idImagen)){
+		Imagen imagenSolicitada = datos.getImagenConId(idImagen);
+		protocolo.enviarImagen(cliente,imagenSolicitada);
+		return kRespuestaNula;
+	}
+	return kMensajeError;
+}
+
 const std::string Operador::bajaImagen(const std::string& comandoDeOperacion)const{
-	const unsigned long int idImagen = extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
+	const unsigned long int idImagen = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
 	if (datos.existeImagenConId(idImagen)){
 		datos.eliminarImagen(idImagen);
 		return kMensajeOK;
@@ -272,22 +303,7 @@ const std::string Operador::bajaImagen(const std::string& comandoDeOperacion)con
 	return kMensajeError;
 }
 
-const std::string Operador::extraerArgumentoDeComando(
-        const std::string& comandoDeOperacion, const size_t numeroArgumento){
-	std::stringstream parseador(comandoDeOperacion);
-	std::string argumento;
-	for (size_t i =0;i<numeroArgumento;++i)
-		  std::getline(parseador, argumento, '|');
-	return argumento;
-}
 
-const unsigned long int Operador::extraerArgumentoNumericoDeComando(
-    const std::string& comandoDeOperacion, const size_t numeroDeParametro) {
-  std::stringstream parseador(extraerArgumentoDeComando(comandoDeOperacion,numeroDeParametro));
-  unsigned long int argumentoNumerico=0;
-  parseador >> argumentoNumerico;
-  return argumentoNumerico;
-}
 
 
 

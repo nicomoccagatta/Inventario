@@ -5,6 +5,8 @@
  *      Author: leandro
  */
 
+#include <opencv2/opencv.hpp>
+
 #include "common_Imagen.h"
 
 namespace common {
@@ -41,6 +43,18 @@ const uchar* Imagen::convertirABytesDinamicos(){
 
 const unsigned int Imagen::getTamanio()const{
 	return matrizImagen.total()*matrizImagen.elemSize();
+}
+
+void Imagen::mostrarImagen(){
+	using namespace cv;
+
+	//CascadeClassifier face_cascade;
+	//loadClassifier(face_cascade);
+	//markFaces(face_cascade, this->matrizImagen);
+
+	namedWindow("Display Image", CV_WINDOW_AUTOSIZE);
+	imshow("Display Image", this->matrizImagen);
+
 }
 
 } /* namespace common */

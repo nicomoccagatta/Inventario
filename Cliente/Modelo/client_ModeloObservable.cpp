@@ -23,3 +23,7 @@ bool ModeloObservable::actualizarProductos(){
 bool ModeloObservable::actualizarAreasDeVision(){
 	return this->cliente.actualizarAreasDeVision();
 }
+
+const std::list<AreaDeVision*>* ModeloObservable::getAreasDeVision() const{
+	return this->cliente.getAreasDeVision();
+}

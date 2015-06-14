@@ -17,6 +17,8 @@ public:
 	const uchar* convertirABytesDinamicos();
 	const unsigned int getTamanio()const;
 
+	void mostrarImagen();
+
 private:
 	cv::Mat matrizImagen;
 };

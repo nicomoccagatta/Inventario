@@ -21,6 +21,8 @@ public:
 	const static bool existeImagen(const std::string& rutaArchivoImagen);
 	const bool esValida()const;
 
+	void mostrarImagen();
+
 private:
 	cv::Mat matrizImagen;
 };

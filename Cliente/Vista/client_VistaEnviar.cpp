@@ -7,11 +7,15 @@
 
 #include "client_VistaEnviar.h"
 
+#include <glibmm/date.h>
+#include <list>
+
 #define FEATURE_MATCHING 1
 #define TEMPLATE_MATCHING 2
 
+using common::AreaDeVision;
+
 VistaEnviar::VistaEnviar(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade)
-						//,ModeloObservable* modelo)
 : Gtk::Dialog(cobject),
   m_refGlade(refGlade),
   m_quitButton(0), m_ENVIARButton(0), m_vistaPrevia(0), m_fileChooser(0), m_calendar(0),
@@ -19,8 +23,6 @@ VistaEnviar::VistaEnviar(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builde
   m_featureMatching(0), m_AreasDeVision(0)
 
 {
-	//this->modelo = modelo;
-
 	//CONECTAR BOTONES CON SUS FUNCIONES CONTROLADORAS
 	//BOTON SALIR:
 	m_refGlade->get_widget("quit_button", m_quitButton);
@@ -37,24 +39,43 @@ VistaEnviar::VistaEnviar(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builde
 	if(m_vistaPrevia)
 		m_vistaPrevia->signal_clicked().connect( sigc::mem_fun(*this, &VistaEnviar::on_button_VistaPrevia) );
 
-	//FILE CHOOSER
-	/*m_refGlade->get_widget("fileChooserAEnviar", m_fileChooser);
-	if(m_fileChooser)
-		m_fileChooser->signal_file_set().connect( sigc::mem_fun(*this, &VistaEnviar::on_file_set) );
-	*/
 
+	//COMBO-BOX de AreasDeVision
+	//Creamos las columnas, el modelo para los datos del Combobox y el combo que en este caso será la vista para el modelo planteado
+	m_refGlade->get_widget("comboboxAreasDeVision", m_AreasDeVision);
+	modeloComboBox = Gtk::ListStore::create(columnas);
+
+	//Establecemos el modelo del combo e indicamos las columnas a mostrar
+	m_AreasDeVision->set_model(modeloComboBox);
+	//No es necesario agregar la columna valor si sólo queremos mostrar el texto
+	//combo.pack_start(columnas.getColumnaValor());
+	m_AreasDeVision->pack_start(columnas.getColumnaTexto());
 }
 
 VistaEnviar::~VistaEnviar() {
 	// TODO Auto-generated destructor stub
 }
 
-void VistaEnviar::on_button_quit(){
-	hide(); //hide() will cause main::run() to end.
+void VistaEnviar::asignarModelo(ModeloObservable* modelo){
+	this->modelo=modelo;
+	this->update();
 }
 
-void VistaEnviar::on_file_set(){
+void VistaEnviar::asignarControlador(ControladorVistaEnviar* controlador){
+	this->controlador = controlador;
+}
 
+void VistaEnviar::update(){
+	m_refGlade->get_widget("comboboxAreasDeVision", m_AreasDeVision);
+
+	//m_AreasDeVision->clear();
+	agregarAreasAlCombo();
+
+
+}
+
+void VistaEnviar::on_button_quit(){
+	this->hide(); //hide() will cause main::run() to end.
 }
 
 void VistaEnviar::on_button_ENVIAR(){
@@ -66,7 +87,7 @@ void VistaEnviar::on_button_ENVIAR(){
 	m_refGlade->get_widget("radiobuttonTemplateMatching", m_templateMatching);
 	m_refGlade->get_widget("radiobuttonFeatureMatching", m_featureMatching);
 	m_refGlade->get_widget("comboboxAreasDeVision", m_AreasDeVision);
-
+	m_refGlade->get_widget("calendar1", m_calendar);
 
 	Glib::ustring horas = m_entryHora->get_text();
 	Glib::ustring minutos = m_entryMinutos->get_text();
@@ -76,11 +97,16 @@ void VistaEnviar::on_button_ENVIAR(){
 	std::cerr << "Minutos: " << minutos << " ";
 	std::cerr << "Segundos: " << segundos << "\n";
 
-	Glib::ustring rutaArchivo = m_fileChooser->get_filename();
+	Glib::Date fecha;
+	guint dia, mes, anio;
+	m_calendar->get_date(anio,mes,dia);
+	++mes;
+	std::cerr << "Fecha: " << dia << "/" << mes << "/" << anio << "\n";
 
+	Glib::ustring rutaArchivo = m_fileChooser->get_filename();
 	std::cerr << "Ruta archivo: " << rutaArchivo << "\n";
 
-	int matching;
+	int matching = -1;
 	if (m_featureMatching->get_active()){
 		matching = FEATURE_MATCHING;
 		std::cerr << "Feature Matching\n";
@@ -88,12 +114,45 @@ void VistaEnviar::on_button_ENVIAR(){
 		matching = TEMPLATE_MATCHING;
 		std::cerr << "Template Matching\n";
 	}
+	std::cerr << matching;
 
+	Gtk::TreeModel::Row fila = *m_AreasDeVision->get_active();
+	std::cout << "Elemento elegido del Combo: "
+			<< fila[columnas.getColumnaTexto()]
+			<< " \n";//con valor: "
+			//<< fila[columnas->getColumnaValor()] << std::endl;
 
-	//controlador->buttonENVIARClicked(rutaArchivo,fecha,horas,minutos,segundos,matching,
+	//controlador->buttonENVIARClicked(rutaArchivo,dia,mes,anio,horas,minutos,segundos,matching,
 }
 
 void VistaEnviar::on_button_VistaPrevia(){
-	//controlador->buttonVistaPreviaClicked(...);
+	m_refGlade->get_widget("fileChooserAEnviar", m_fileChooser);
+
+	Glib::ustring rutaArchivo = m_fileChooser->get_filename();
+	std::cerr << "Ruta archivo: " << rutaArchivo << "\n";
+
+	if (rutaArchivo.length() < 3)
+		std::cerr << "POPUP: NO ELEGISTE ARCHIVO";
+
+	controlador->buttonVistaPreviaClicked(rutaArchivo);
+
+}
+
+void VistaEnviar::agregarAreasAlCombo(){
+	const std::list<AreaDeVision*>* areas = modelo->getAreasDeVision();
+
+	std::list<AreaDeVision*>::const_iterator it;
+	for (it = areas->begin(); it!= areas->end(); ++it){
+		Gtk::TreeModel::Row fila = *(modeloComboBox->append());
+		fila[columnas.getColumnaValor()] = *it;
+		fila[columnas.getColumnaTexto()] = (*it)->getUbicacion();
+	}
+
+	/*for (int i=1; i<10; ++i){
+		Gtk::TreeModel::Row fila = *(modeloComboBox->append());
+		fila[columnas.getColumnaValor()] = i;
+		fila[columnas.getColumnaTexto()] = "Teeexto";
+	}
+	*/
 
 }

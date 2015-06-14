@@ -127,3 +127,7 @@ bool ClienteDemo::actualizarAreasDeVision(){
 	this->data.eliminarProductos();
 	return true;
 }
+
+const std::list<AreaDeVision*>* ClienteDemo::getAreasDeVision() const{
+	return data.getAreasDeVision();
+}

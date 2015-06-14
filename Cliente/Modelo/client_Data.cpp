@@ -35,14 +35,14 @@ void Data::agregarAreaDeVision(std::string ubicacion, std::string tipoDeCapturad
 }
 
 void Data::eliminarProductos(){
-	std::vector<Producto*>::iterator it;
+	std::list<Producto*>::iterator it;
 	for (it = this->productos.begin(); it != this->productos.end();++it){
 		delete *(it);
 	}
 }
 
 void Data::eliminarAreasDeVision(){
-	std::vector<AreaDeVision*>::iterator it;
+	std::list<AreaDeVision*>::iterator it;
 	for (it = this->areasDeVision.begin(); it != this->areasDeVision.end();++it){
 		std::cout << (*it)->getId() << (*it)->getTipoDeCapturador() << (*it)->getUbicacion();
 		delete *(it);

@@ -8,7 +8,7 @@
 #ifndef CLIENTE_MODELO_CLIENT_DATA_H_
 #define CLIENTE_MODELO_CLIENT_DATA_H_
 
-#include <vector>
+#include <list>
 
 #include "common_Producto.h"
 #include "common_AreaDeVision.h"
@@ -18,19 +18,19 @@ using common::AreaDeVision;
 
 class Data {
 
-	std::vector<Producto*> productos;
+	std::list<Producto*> productos;
 
-	std::vector<AreaDeVision*> areasDeVision;
+	std::list<AreaDeVision*> areasDeVision;
 
 public:
 	Data();
 	virtual ~Data();
 
-	const std::vector<AreaDeVision*>* getAreasDeVision() const {
+	const std::list<AreaDeVision*>* getAreasDeVision() const {
 		return &areasDeVision;
 	}
 
-	const std::vector<Producto*>* getProductos() const {
+	const std::list<Producto*>* getProductos() const {
 		return &productos;
 	}
 

@@ -7,10 +7,11 @@
 #include <string>
 #include <iostream>
 
+#include "Control/client_ControladorVistaEnviar.h"
 #include "Modelo/client_ModeloObservable.h"
 #include "Vista/client_VistaEnviar.h"
 
-#define VISTA_ENVIAR "Enviar_Imagen.glade"
+#define VISTA_ENVIAR "Enviar_Imagen_2.4.glade"
 
 int crearAPartirDeGlade(Glib::RefPtr<Gtk::Builder>* refBuilder);
 
@@ -20,21 +21,34 @@ int main(int argc, char* argv[]) {
   modelo.actualizarProductos();
   modelo.actualizarAreasDeVision();
 
-  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  //Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+
+  Gtk::Main kit(argc, argv);
 
   //Load the Glade file and instiate its widgets:
   Glib::RefPtr<Gtk::Builder> refBuilder = Gtk::Builder::create();
 
-  crearAPartirDeGlade(&refBuilder);
+  if (crearAPartirDeGlade(&refBuilder)==1)
+	  return 1;
 
   //Get the GtkBuilder-instantiated dialog::
   VistaEnviar* pDialogoEnviar = 0;
   refBuilder->get_widget_derived("DialogoEnviar", pDialogoEnviar);
   if(pDialogoEnviar){
 	  //Asignar Modelo y Controlador
+	  ControladorVistaEnviar controlador(&modelo);
+	  pDialogoEnviar->asignarControlador(&controlador);
+	  pDialogoEnviar->asignarModelo(&modelo);
 
 	  //Start:
-	  app->run(*pDialogoEnviar);
+	  //set_position(Gtk::WIN_POS_CENTER);
+	  //app->run(*pDialogoEnviar);
+	  pDialogoEnviar->show();
+	  pDialogoEnviar->run();
+	  //Gtk::Window ventana;
+	  //ventana.add(*pDialogoEnviar);
+	  //ventana.show_all();
+	  //Gtk::Main::run();
   }
 
   delete pDialogoEnviar;
@@ -47,6 +61,7 @@ int crearAPartirDeGlade(Glib::RefPtr<Gtk::Builder>* refBuilder){
 	try
 	{
 		(*refBuilder)->add_from_file(VISTA_ENVIAR);
+		return 0;
 	}
 	catch(const Glib::FileError& ex)
 	{

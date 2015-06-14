@@ -14,6 +14,7 @@
 
 using client::SocketCliente;
 using common::Protocolo;
+using common::AreaDeVision;
 
 class ClienteDemo {
 
@@ -27,6 +28,8 @@ public:
 
 	bool actualizarProductos();
 	bool actualizarAreasDeVision();
+
+	const std::list<AreaDeVision*>* getAreasDeVision() const;
 
 	void cerrarConeccion();
 };

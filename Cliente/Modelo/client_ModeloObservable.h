@@ -28,8 +28,8 @@ public:
 	const std::list<AreaDeVision*>* getAreasDeVision() const;
 
 
-	//void enviarFotoTemplateMatching(std::string id, std::string fecha, ALGO imagen/rutaDeImagen);
-	//void enviarFotoFeatureMatching(std::string id, std::string fecha, ALGO imagen/rutaDeImagen);
+	void enviarFotoTemplateMatching(unsigned long int id, std::string& fecha,std::string& rutaDeImagen);
+	void enviarFotoFeatureMatching(unsigned long int id, std::string& fecha, std::string& rutaDeImagen);
 
 
 };

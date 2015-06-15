@@ -10,6 +10,9 @@
 
 #include "client_ClienteDemo.h"
 #include "common_CommandParser.h"
+#include "common_Imagen.h"
+
+using common::Imagen;
 
 ClienteDemo::ClienteDemo() : client("localhost","1037"){
 	// TODO Auto-generated constructor stub
@@ -133,4 +136,9 @@ bool ClienteDemo::actualizarAreasDeVision(){
 
 const std::list<AreaDeVision*>* ClienteDemo::getAreasDeVision() const{
 	return data.getAreasDeVision();
+}
+
+void ClienteDemo::enviarFotoTemplateMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen){
+	Imagen img(rutaDeImagen);
+	//this->protocolo.enviarImagenTemplateMatching(idArea, fecha, &img);
 }

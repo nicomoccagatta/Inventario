@@ -99,6 +99,8 @@ void VistaEnviar::on_button_ENVIAR(){
 
 	Glib::Date fecha;
 	guint dia, mes, anio;
+	m_calendar->get_date(fecha);
+	//fecha.to_struct_tm();
 	m_calendar->get_date(anio,mes,dia);
 	++mes;
 	std::cerr << "Fecha: " << dia << "/" << mes << "/" << anio << "\n";
@@ -120,9 +122,9 @@ void VistaEnviar::on_button_ENVIAR(){
 	std::cout << "Elemento elegido del Combo: "
 			<< fila[columnas.getColumnaTexto()]
 			<< " \n";//con valor: "
-			//<< fila[columnas->getColumnaValor()] << std::endl;
+	AreaDeVision* area = fila[columnas.getColumnaValor()];
 
-	//controlador->buttonENVIARClicked(rutaArchivo,dia,mes,anio,horas,minutos,segundos,matching,
+	controlador->buttonENVIARClicked(rutaArchivo,&fecha,horas,minutos,segundos,matching,area);
 }
 
 void VistaEnviar::on_button_VistaPrevia(){

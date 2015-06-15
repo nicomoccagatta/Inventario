@@ -9,6 +9,27 @@ project("Control de Inventario")
 #-------------------------------------------------------------------------
 ADD_SUBDIRECTORY("${PROJECT_SOURCE_DIR}/Common")
 include_directories("${PROJECT_SOURCE_DIR}/Common")
+INCLUDE(FindPkgConfig)
+pkg_check_modules(OpenCV REQUIRED opencv)
+include_directories(${OpenCV_INCLUDE_DIRS}) 
+add_executable(Cliente_consola
+			Common/client_Cliente.cpp
+			Common/common_SocketCliente.cpp
+			Common/common_Mutex.cpp
+			Common/common_Protocolo.cpp
+			Common/common_Socket.cpp
+			Common/common_Thread.cpp
+			Common/common_CommandParser.cpp
+			Common/common_Imagen.cpp
+			Common/common_Producto.cpp
+			Common/common_Stock.cpp
+			Common/common_AreaDeVision.cpp
+			Common/client_main.cpp
+		)
+FIND_PACKAGE(OpenCV REQUIRED)
+TARGET_LINK_LIBRARIES(Cliente_consola pthread)
+TARGET_LINK_LIBRARIES(Cliente_consola ${OpenCV_LIBS})
+INSTALL(FILES Cliente_consola DESTINATION ${PROJECT_SOURCE_DIR})
 #-------------------------------------------------------------------------------
 ADD_SUBDIRECTORY("${PROJECT_SOURCE_DIR}/Administrador")
 include_directories("${PROJECT_SOURCE_DIR}/Administrador")

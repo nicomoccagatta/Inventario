@@ -9,6 +9,9 @@
 #define CLIENTE_MODELO_CLIENT_MODELOOBSERVABLE_H_
 
 #include "client_ClienteDemo.h"
+#include "common_AreaDeVision.h"
+
+using common::AreaDeVision;
 
 class ModeloObservable {
 
@@ -22,8 +25,11 @@ public:
 	bool actualizarProductos();
 	bool actualizarAreasDeVision();
 
-	//void enviarFotoTemplateMatching(std::string id, std::string fecha, ALGO imagen/rutaDeImagen);
-	//void enviarFotoFeatureMatching(std::string id, std::string fecha, ALGO imagen/rutaDeImagen);
+	const std::list<AreaDeVision*>* getAreasDeVision() const;
+
+
+	void enviarFotoTemplateMatching(unsigned long int id, std::string& fecha,std::string& rutaDeImagen);
+	void enviarFotoFeatureMatching(unsigned long int id, std::string& fecha, std::string& rutaDeImagen);
 
 
 };

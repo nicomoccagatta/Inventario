@@ -23,8 +23,8 @@ Data::~Data() {
 }
 
 void Data::agregarProducto(std::string nombre, std::string descripcion,
-					unsigned long int id){
-	Producto* nuevo = new Producto(id, nombre, descripcion, new std::list<Stock*>, 0, new std::list<unsigned long int>);
+					unsigned long int id, unsigned long int idIcono){
+	Producto* nuevo = new Producto(id, nombre, descripcion, new std::list<Stock*>, idIcono, new std::list<unsigned long int>);
 	this->productos.push_back(nuevo);
 }
 
@@ -35,16 +35,16 @@ void Data::agregarAreaDeVision(std::string ubicacion, std::string tipoDeCapturad
 }
 
 void Data::eliminarProductos(){
-	std::vector<Producto*>::iterator it;
+	std::list<Producto*>::iterator it;
 	for (it = this->productos.begin(); it != this->productos.end();++it){
 		delete *(it);
 	}
 }
 
 void Data::eliminarAreasDeVision(){
-	std::vector<AreaDeVision*>::iterator it;
+	std::list<AreaDeVision*>::iterator it;
 	for (it = this->areasDeVision.begin(); it != this->areasDeVision.end();++it){
-		std::cout << (*it)->getId() << (*it)->getTipoDeCapturador() << (*it)->getUbicacion();
+		//std::cout << (*it)->getId() << (*it)->getTipoDeCapturador() << (*it)->getUbicacion();
 		delete *(it);
 	}
 }

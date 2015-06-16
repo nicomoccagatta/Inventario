@@ -8,21 +8,28 @@
 #ifndef CLIENTE_VISTA_CLIENT_VISTAENVIAR_H_
 #define CLIENTE_VISTA_CLIENT_VISTAENVIAR_H_
 
-#include <gtkmm-3.0/gtkmm.h>
+//#include <gtkmm-3.0/gtkmm.h>
+#include <gtkmm-2.4/gtkmm.h>
 #include <glibmm-2.4/glibmm.h>
 #include <iostream>
 
+#include "../Control/client_ControladorVistaEnviar.h"
 #include "../Modelo/client_ModeloObservable.h"
+#include "client_AreasDeVisionComboBoxModel.h"
 
 class VistaEnviar : public Gtk::Dialog{
 
-	//ModeloObservable* modelo;
+	ModeloObservable* modelo;
+	ControladorVistaEnviar* controlador;
 
 public:
 	VistaEnviar(BaseObjectType* cobject,
 			const Glib::RefPtr<Gtk::Builder>& refGlade);
 			//,ModeloObservable* modelo);//,ControladorVistaEnviar* ctrol);
 	virtual ~VistaEnviar();
+
+	void asignarModelo(ModeloObservable* modelo);
+	void asignarControlador(ControladorVistaEnviar* controlador);
 
 protected:
 	//signal handlers:
@@ -42,8 +49,13 @@ protected:
 	Gtk::Entry* m_entrySegundos;
 	Gtk::RadioButton* m_templateMatching;
 	Gtk::RadioButton* m_featureMatching;
-	Gtk::ComboBoxText* m_AreasDeVision;
+	Gtk::ComboBox* m_AreasDeVision;
+	AreasDeVisionComboBoxModel columnas;
+	Glib::RefPtr<Gtk::ListStore> modeloComboBox;
 
+private:
+	void update();
+	void agregarAreasAlCombo();
 
 };
 

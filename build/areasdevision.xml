@@ -1,0 +1,40 @@
+<AreaDeVision id="0">
+    <Ubicacion>patio delantero</Ubicacion>
+    <TipoDeCapturador>foto</TipoDeCapturador>
+    <ProductosDetectados>
+        <Producto id="2">
+            <Nombre>nuevo</Nombre>
+            <Descripcion>algo rico</Descripcion>
+            <StockHistorico>
+                <Stock>
+                    <Fecha>Tue Jun 9 19:35:54 2015</Fecha>
+                    <Cantidad>50</Cantidad>
+                </Stock>
+            </StockHistorico>
+            <Icono>0</Icono>
+            <Imagenes />
+        </Producto>
+        <Producto id="3">
+            <Nombre>otro</Nombre>
+            <Descripcion>algo feo</Descripcion>
+            <StockHistorico>
+                <Stock>
+                    <Fecha>Tue Jun 9 19:35:54 2015</Fecha>
+                    <Cantidad>70</Cantidad>
+                </Stock>
+            </StockHistorico>
+            <Icono>0</Icono>
+            <Imagenes />
+        </Producto>
+    </ProductosDetectados>
+</AreaDeVision>
+<AreaDeVision id="3">
+    <Ubicacion>garage</Ubicacion>
+    <TipoDeCapturador>video</TipoDeCapturador>
+    <ProductosDetectados />
+</AreaDeVision>
+<AreaDeVision id="4">
+    <Ubicacion>entrada de atras</Ubicacion>
+    <TipoDeCapturador>video</TipoDeCapturador>
+    <ProductosDetectados />
+</AreaDeVision>

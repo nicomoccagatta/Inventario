@@ -50,13 +50,16 @@ include_directories("${PROJECT_SOURCE_DIR}/Cliente")
 pkg_check_modules(OpenCV REQUIRED opencv)
 include_directories(${OpenCV_INCLUDE_DIRS}) 
 add_executable(Client
-			Cliente/client_main.cpp
+			Cliente/client_main_VistaEnviar.cpp
+			Cliente/client_main_VistaDescargar.cpp
 			Cliente/Modelo/client_ClienteDemo.cpp
 			Cliente/Modelo/client_Data.cpp
 			Cliente/Modelo/client_ModeloObservable.cpp
 			Cliente/Vista/client_VistaEnviar.cpp
-			Cliente/Vista/client_AreasDeVisionComboBoxModel.h
+			Cliente/Vista/client_ModelComboBoxAreasDeVision.h
 			Cliente/Control/client_ControladorVistaEnviar.cpp
+			Cliente/Vista/client_VistaDescargaImagenDeProductos.cpp
+			Cliente/Vista/client_ProductosList.cpp
 			#Common/common_Cliente.cpp
 			Common/common_SocketCliente.cpp
 			Common/common_AreaDeVision.cpp

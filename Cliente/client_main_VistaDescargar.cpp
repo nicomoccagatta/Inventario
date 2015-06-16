@@ -10,8 +10,11 @@
 #include "Control/client_ControladorVistaEnviar.h"
 #include "Modelo/client_ModeloObservable.h"
 #include "Vista/client_VistaEnviar.h"
+#include "Vista/client_VistaDescargaImagenDeProductos.h"
 
 #define VISTA_ENVIAR "Enviar_Imagen_2.4.glade"
+#define VISTA_DESCARGAR "Descargar_Imagenes_Productos.glade"
+
 
 int crearAPartirDeGlade(Glib::RefPtr<Gtk::Builder>* refBuilder);
 
@@ -21,9 +24,9 @@ int main(int argc, char* argv[]) {
   modelo.actualizarProductos();
   modelo.actualizarAreasDeVision();
 
-  //Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
-
   Gtk::Main kit(argc, argv);
+
+
 
   //Load the Glade file and instiate its widgets:
   Glib::RefPtr<Gtk::Builder> refBuilder = Gtk::Builder::create();
@@ -32,26 +35,22 @@ int main(int argc, char* argv[]) {
 	  return 1;
 
   //Get the GtkBuilder-instantiated dialog::
-  VistaEnviar* pDialogoEnviar = 0;
-  refBuilder->get_widget_derived("DialogoEnviar", pDialogoEnviar);
-  if(pDialogoEnviar){
+  //VistaEnviar* pDialogoEnviar = 0;
+  VistaDescargaImagenDeProductos* pWindowDescargar;
+  refBuilder->get_widget_derived("descargaImagenesWindow", pWindowDescargar);
+  if(pWindowDescargar){
 	  //Asignar Modelo y Controlador
 	  ControladorVistaEnviar controlador(&modelo);
-	  pDialogoEnviar->asignarControlador(&controlador);
-	  pDialogoEnviar->asignarModelo(&modelo);
+	  //pWindowDescargar->asignarControlador(&controlador);
+	  pWindowDescargar->asignarModelo(&modelo);
 
 	  //Start:
-	  //set_position(Gtk::WIN_POS_CENTER);
-	  //app->run(*pDialogoEnviar);
-	  pDialogoEnviar->show();
-	  pDialogoEnviar->run();
-	  //Gtk::Window ventana;
-	  //ventana.add(*pDialogoEnviar);
-	  //ventana.show_all();
-	  //Gtk::Main::run();
+	  pWindowDescargar->show();
+	  //pWindowDescargar->run();
+	  Gtk::Main::run();
   }
 
-  delete pDialogoEnviar;
+  delete pWindowDescargar;
   return 0;
 }
 
@@ -60,7 +59,7 @@ int crearAPartirDeGlade(Glib::RefPtr<Gtk::Builder>* refBuilder){
 
 	try
 	{
-		(*refBuilder)->add_from_file(VISTA_ENVIAR);
+		(*refBuilder)->add_from_file(VISTA_DESCARGAR);
 		return 0;
 	}
 	catch(const Glib::FileError& ex)
@@ -80,3 +79,4 @@ int crearAPartirDeGlade(Glib::RefPtr<Gtk::Builder>* refBuilder){
 	}
 
 }
+

@@ -27,6 +27,10 @@ bool ModeloObservable::actualizarAreasDeVision(){
 const std::list<AreaDeVision*>* ModeloObservable::getAreasDeVision() const{
 	return this->cliente.getAreasDeVision();
 }
+
+const std::list<Producto*>* ModeloObservable::getProductos() const {
+	return this->cliente.getProductos();
+}
 /*
 Template Matching foto
 M|ID|FECHA|altoIMAGEN|anchoIMAGEN|tamanioIMAGEN|\n

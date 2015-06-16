@@ -15,7 +15,8 @@
 using common::Imagen;
 
 ClienteDemo::ClienteDemo() : client("localhost","1037"){
-	// TODO Auto-generated constructor stub
+	if (!client.estaConectado())
+		std::cerr << "NO ESTOY CONECTADO\n";
 
 }
 
@@ -125,7 +126,7 @@ bool ClienteDemo::actualizarAreasDeVision(){
 			this->data.agregarAreaDeVision(ubicacion,tipo,id);
 
 			std::cout << "Agregando Area:" << id << " " << ubicacion << " " << tipo << std::endl;
-			argum+=3;//4 con icono
+			argum+=3;
 		}
 	}catch (std::exception& e){
 		//std::cout << "ya se manejar excepciones:)\n";
@@ -136,6 +137,10 @@ bool ClienteDemo::actualizarAreasDeVision(){
 
 const std::list<AreaDeVision*>* ClienteDemo::getAreasDeVision() const{
 	return data.getAreasDeVision();
+}
+
+const std::list<Producto*>* ClienteDemo::getProductos() const {
+	return data.getProductos();
 }
 
 void ClienteDemo::enviarFotoTemplateMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen){

@@ -35,8 +35,6 @@ void ControladorVistaEnviar::buttonENVIARClicked(Glib::ustring rutaArchivo,Glib:
 	struct tm time;
 	fecha->to_struct_tm(time);
 
-	std::cerr << horas << minutos << segundos << std::endl;
-
 	std::stringstream ss;
 	ss << horas;
 	ss >> time.tm_hour;
@@ -50,6 +48,8 @@ void ControladorVistaEnviar::buttonENVIARClicked(Glib::ustring rutaArchivo,Glib:
 	ss.str("");
 	ss << segundos;
 	ss >> time.tm_sec;
+
+	std::cerr << horas << minutos << segundos << std::endl;
 
 	std::cerr << asctime(&time);
 

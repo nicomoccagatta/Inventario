@@ -15,7 +15,7 @@
 
 #include "../Control/client_ControladorVistaEnviar.h"
 #include "../Modelo/client_ModeloObservable.h"
-#include "client_AreasDeVisionComboBoxModel.h"
+#include "client_ModelComboBoxAreasDeVision.h"
 
 class VistaEnviar : public Gtk::Dialog{
 

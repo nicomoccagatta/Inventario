@@ -30,6 +30,7 @@ public:
 	bool actualizarAreasDeVision();
 
 	const std::list<AreaDeVision*>* getAreasDeVision() const;
+	const std::list<Producto*>* getProductos() const;
 
 	void enviarFotoTemplateMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen);
 

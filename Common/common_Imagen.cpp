@@ -5,15 +5,13 @@
  *      Author: leandro
  */
 
-#include <opencv2/opencv.hpp>
-
 #include "common_Imagen.h"
 
 namespace common {
 
 Imagen::Imagen(const std::string& rutaArchivo): matrizImagen(cv::imread(rutaArchivo,1)) {
-	if (matrizImagen.empty())
-		throw "ERROR: No es posible cargar la imagen";
+/*	if (matrizImagen.empty())
+		throw "ERROR: No es posible cargar la imagen";*/
 }
 
 //constructor para imagenes enviadas por red (BETA)
@@ -49,17 +47,6 @@ const unsigned long int Imagen::getTamanio()const{
 	return matrizImagen.total()*matrizImagen.elemSize();
 }
 
-void Imagen::mostrarImagen(){
-	using namespace cv;
-
-	//CascadeClassifier face_cascade;
-	//loadClassifier(face_cascade);
-	//markFaces(face_cascade, this->matrizImagen);
-
-	namedWindow("Display Image", CV_WINDOW_AUTOSIZE);
-	imshow("Display Image", this->matrizImagen);
-}
-
 const unsigned int Imagen::getAlto()const{
 	return matrizImagen.rows;
 }
@@ -87,6 +74,8 @@ const unsigned long int Imagen::contarAparicionesTemplateMatching(const Imagen& 
 	//cv::normalize( resultanteDeComparaciones, resultanteDeComparaciones, 0, 1, cv::NORM_MINMAX, -1, cv::Mat() );
 	//Anulo todos los coeficientes de la matriz que no alcancen el minimo de similitud necesario.
 	//cv::threshold(resultanteDeComparaciones,resultanteDeComparaciones,kValorMinimoDeSimilitud,1.0, CV_THRESH_TOZERO);
+	//cv::imshow("apariciones",resultanteDeComparaciones);
+	//cv::waitKey();
 	double valorMinimo;
 	double valorMaximo=kValorMinimoDeSimilitud;
 	cv::Point puntoMinimo(0,0), puntoMaximo(0,0);

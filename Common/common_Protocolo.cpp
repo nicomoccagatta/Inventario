@@ -47,14 +47,6 @@ Imagen Protocolo::recibirImagen(Socket& socket,const unsigned int altoImagen,con
 	delete[] datosImagen;
 	return Imagen("");
 }
-/*
-void Protocolo::enviarImagenTemplateMatching(Socket& socket,const Imagen& imagenAEnviar) const{
-	//envio nosque
-
-	this->enviarImagen()
-
-}
-*/
 
 void Protocolo::enviarImagen(Socket& socket,const Imagen& imagenAEnviar) const{
 	const unsigned int altoImagen=imagenAEnviar.getAlto();

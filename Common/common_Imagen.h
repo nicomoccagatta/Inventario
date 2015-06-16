@@ -27,8 +27,6 @@ public:
 	static const unsigned long int contarAparicionesTemplateMatching(const Imagen& imagenObjeto, const Imagen& imagenEscena);
 	static const unsigned long int contarAparicionesFeatureMatching(const Imagen& imagenObjeto, const Imagen& imagenEscena);
 
-	void mostrarImagen();
-
 private:
 	cv::Mat matrizImagen;
 };

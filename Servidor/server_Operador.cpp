@@ -332,9 +332,9 @@ const std::string Operador::actualizarStockAreaDeVisionTemplateMatching(const st
 	if (areaDeVisionAActualizar!=NULL){
 		protocolo.enviarMensaje(cliente, kMensajeOK);
 		std::string mensajeRecibido = this->protocolo.recibirMensaje(this->cliente);
-		const unsigned int altoImagen = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
-		const unsigned int anchoImagen = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,3);
-		const unsigned long int tamanioImagen = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,4);
+		const unsigned int altoImagen = Protocolo::extraerArgumentoNumericoDeComando(mensajeRecibido,2);
+		const unsigned int anchoImagen = Protocolo::extraerArgumentoNumericoDeComando(mensajeRecibido,3);
+		const unsigned long int tamanioImagen = Protocolo::extraerArgumentoNumericoDeComando(mensajeRecibido,4);
 		protocolo.enviarMensaje(cliente, kMensajeOK);
 		Imagen imagenRecibida = protocolo.recibirImagen(cliente,altoImagen,anchoImagen,tamanioImagen);
 		if (cliente.estaConectado() && imagenRecibida.esValida()){
@@ -351,13 +351,13 @@ const std::string Operador::actualizarStockAreaDeVisionTemplateMatching(const st
 					stockProductoDetectado->push_back(new Stock(aparicionesDelProducto,fechaDeCaptura));
 					productosDetectados->push_back(new Producto((*it)->getId(),(*it)->getNombre(),"",stockProductoDetectado,0,new std::list<unsigned long int>()));
 				}
+				long int variacionDeStock=aparicionesDelProducto;//si el producto no habia sido antes detectado entonces la cantidad de apariciones es cuanto aumento su stock.
 				for (std::list<Producto*>::const_iterator producto=areaDeVisionAActualizar->getProductosDetectados()->begin(); producto!=areaDeVisionAActualizar->getProductosDetectados()->end();++producto){
-					long int variacionDeStock=0;
-					//el producto ya habia sido detectado y hay que actualizar su stock.
+					//el producto ya habia sido detectado.
 					if ((*producto)->getId()==(*it)->getId())
 						variacionDeStock = aparicionesDelProducto-(*producto)->getStock();
-					(*it)->actualizarStock(variacionDeStock,fechaDeCaptura);
 				}
+				(*it)->actualizarStock(variacionDeStock,fechaDeCaptura);
 			}
 			areaDeVisionAActualizar->actualizarDeteccion(productosDetectados);
 			return kMensajeOK;

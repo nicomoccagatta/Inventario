@@ -1,4 +1,5 @@
 #include <string>
+#include <time.h>
 #include "client_Cliente.h"
 
 using common::Protocolo;
@@ -61,15 +62,21 @@ const size_t Cliente::realizarConsultas() {
     while (skt.estaConectado()) {
       getline(std::cin, mensajeAEnviar);
       if (strcmp(mensajeAEnviar.c_str(), kMensajeFinDeSesion) != 0) {
-        //enviarMensaje(mensajeAEnviar);
-    	//enviarImagen("sol.jpg");
-    	Imagen imagenRecibida= recibirImagen(mensajeAEnviar);
-    	if (skt.estaConectado() && imagenRecibida.esValida())
-    	imagenRecibida.guardarEnArchivo("recibida.jpg");
-    	//std::string mensajeRecibido = recibirMensaje(); lo comento por que cuando recibo imagenes no temian enviando nada el servidor.
+    	  time_t hora;
+		time (&hora);
+        enviarMensaje(mensajeAEnviar+kMensajeDelimitadorCampos+asctime(localtime(&hora))+kMensajeDelimitadorCampos);
+        std::string mensajeRecibido = recibirMensaje();
+        std::cout << mensajeRecibido;
+    	enviarImagen(Imagen("aInventariar.jpg"));
+    	//Imagen imagenRecibida= recibirImagen(mensajeAEnviar);
+    	if (skt.estaConectado() /*&& imagenRecibida.esValida()*/){
+    	//imagenRecibida.guardarEnArchivo("recibida.jpg");
+    	std::string mensajeRecibido = recibirMensaje();//lo comento por que cuando recibo imagenes no temian enviando nada el servidor.
+    	std::cout << mensajeRecibido;
+    	}
         if (!skt.estaConectado())
         	return 1;
-          //std::cout << mensajeRecibido;
+
          //else
 
 

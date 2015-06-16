@@ -33,17 +33,39 @@ INSTALL(FILES Cliente_consola DESTINATION ${PROJECT_SOURCE_DIR})
 #-------------------------------------------------------------------------------
 ADD_SUBDIRECTORY("${PROJECT_SOURCE_DIR}/Administrador")
 include_directories("${PROJECT_SOURCE_DIR}/Administrador")
+pkg_check_modules(OpenCV REQUIRED opencv)
+include_directories(${OpenCV_INCLUDE_DIRS}) 
 INCLUDE(FindPkgConfig)
 pkg_check_modules(GTKMM REQUIRED gtkmm-2.4)
 include_directories(${GTKMM_INCLUDE_DIRS})  
 include_directories(${GTKMM_INCLUDE_DIRS} ${GSTMM_INCLUDE_DIRS})
-#add_executable(Admin
-#			Administrador/Administrador.cpp
-#		)
-#TARGET_LINK_LIBRARIES(Admin pthread)
-#link_directories(${GTKMM_LIBRARY_DIRS})  
-#target_link_libraries(Admin ${GTKMM_LIBRARIES}) 
-#INSTALL(FILES Admin DESTINATION ${PROJECT_SOURCE_DIR})
+add_executable(Admin
+			Administrador/admin_main.cpp
+			Administrador/ControlAdmin/admin_ControladorVistaListadoP.cpp
+			Administrador/ModeloAdmin/Administrador.cpp
+			Administrador/ModeloAdmin/admin_Datos.cpp
+			Administrador/ModeloAdmin/admin_ModeloObservable.cpp
+			Administrador/ModeloAdmin/admin_Observer.cpp
+			Administrador/ModeloAdmin/admin_Subject.cpp
+			Administrador/VistaAdmin/VistaVentanaPPAL.cpp
+			Common/common_SocketCliente.cpp
+			Common/common_AreaDeVision.cpp
+			Common/common_Mutex.cpp
+			Common/common_Producto.cpp
+			Common/common_Stock.cpp
+			Common/common_Protocolo.cpp
+			Common/common_Socket.cpp
+			Common/common_Thread.cpp
+			Common/common_CommandParser.cpp
+			Common/common_Imagen.cpp
+		)
+FIND_PACKAGE(OpenCV REQUIRED)
+TARGET_LINK_LIBRARIES(Admin ${OpenCV_LIBS})
+TARGET_LINK_LIBRARIES(Admin pthread)
+link_directories(${GTKMM_LIBRARY_DIRS})  
+target_link_libraries(Admin ${GTKMM_LIBRARIES}) 
+target_link_libraries(Admin ${OpenCV_LIBS})
+INSTALL(FILES Admin DESTINATION ${PROJECT_SOURCE_DIR})
 #-------------------------------------------------------------------------------
 ADD_SUBDIRECTORY("${PROJECT_SOURCE_DIR}/Cliente")
 include_directories("${PROJECT_SOURCE_DIR}/Cliente")

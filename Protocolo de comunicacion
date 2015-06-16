@@ -67,12 +67,17 @@ FECHA1|STOCK1|FECHA2|STOCK2|...FECHAn|STOCKn|\n ó error|\n
 
 
 Template Matching foto
-M|ID|FECHA|altoIMAGEN|anchoIMAGEN|tamanioIMAGEN|\n
+M|ID|FECHA|\n
+ok|\n ó error|\n
+Q|altoIMAGEN|anchoIMAGEN|tamanioIMAGEN|\n
 ok|\n
 BYTESIMAGEN
 ok|\n ó error|\n
 
+
 Feature Matching foto
+M|ID|FECHA|\n
+ok|\n ó error|\n
 N|ID|FECHA|altoIMAGEN|anchoIMAGEN|tamanioIMAGEN|\n
 ok|\n
 BYTESIMAGEN
@@ -92,14 +97,10 @@ Alta Imagen
 Q|altoIMAGEN|anchoIMAGEN|tamanioIMAGEN|\n
 ok|\n
 BYTESIMAGEN
-ok|\n ó error|\n
+ID|\n ó error|\n
 
 Solicitar Imagen
 R|ID|\n
 Q|altoIMAGEN|anchoIMAGEN|tamanioIMAGEN|\n ó error|\n
 ok|\n
 BYTESIMAGEN
-
-Baja Imagen
-S|ID|\n
-ok|\n ó error|\n

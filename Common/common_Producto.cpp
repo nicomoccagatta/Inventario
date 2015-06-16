@@ -77,13 +77,15 @@ std::list<unsigned long int>* const Producto::getIdsImagenes() {
 }
 
 void Producto::actualizarStock(long int cantidad, std::string fecha){
-	mutex.bloquear();
-	long int nuevoStock =((long int) getStock())+cantidad;
-	if(nuevoStock > 0)
-		stockHistorico->push_front(new Stock((unsigned long int)nuevoStock,fecha));
-	else
-		stockHistorico->push_front(new Stock(0,fecha));
-	mutex.desbloquear();
+	if (cantidad>0){
+		mutex.bloquear();
+		long int nuevoStock =((long int) getStock())+cantidad;
+		if(nuevoStock > 0)
+			stockHistorico->push_front(new Stock((unsigned long int)nuevoStock,fecha));
+		else
+			stockHistorico->push_front(new Stock(0,fecha));
+		mutex.desbloquear();
+	}
 }
 
 void Producto::inicializarCuentaId(){

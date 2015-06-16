@@ -6,6 +6,10 @@
 #include <highgui.h>
 #include <vector>
 #include <string>
+#define kValorMinimoDeSimilitud 0.8
+#define kValorMinimoDeSimilitudDeZonaCercanaAUnaSimilitd 0.2
+#define kMetodoTemplateMatching CV_TM_CCOEFF_NORMED
+
 
 namespace common {
 
@@ -18,8 +22,10 @@ public:
 	const unsigned long int getTamanio()const;
 	const unsigned int getAlto()const;
 	const unsigned int getAncho()const;
-	const static bool existeImagen(const std::string& rutaArchivoImagen);
 	const bool esValida()const;
+	static const bool existeImagen(const std::string& rutaArchivoImagen);
+	static const unsigned long int contarAparicionesTemplateMatching(const Imagen& imagenObjeto, const Imagen& imagenEscena);
+	static const unsigned long int contarAparicionesFeatureMatching(const Imagen& imagenObjeto, const Imagen& imagenEscena);
 
 private:
 	cv::Mat matrizImagen;

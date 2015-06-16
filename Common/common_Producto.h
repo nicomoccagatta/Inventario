@@ -23,7 +23,7 @@ public:
 	const unsigned long int getStock() const;
 	const std::list<Stock*>* const getStockHistorico() const;
 	const unsigned long int getIdIcono() const;
-	void setIdIcono(const unsigned long int  idIcono);
+	void setIdIcono(const unsigned long int idIcono);
 	std::list<unsigned long int>* const getIdsImagenes();
 	void actualizarStock(long int cantidad, std::string fecha);
 	static void inicializarCuentaId();

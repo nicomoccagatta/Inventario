@@ -20,6 +20,7 @@ using common::Imagen;
 
 int main(int argc, char* argv[]) {
 //  if (argc < 3) return 0; no se si ams adelante va a haber que agarrar argumentos, lo dejo.
+
   Servidor server;
   if (server.conectado())
     server.start();
@@ -31,6 +32,10 @@ int main(int argc, char* argv[]) {
   }
   server.ignorarUsuarios();
   server.join();
+  /*
+	Imagen imagenObjeto("partecitaSol.jpg");
+	Imagen imagenEscena("sol.jpg");
+	std::cout<< Imagen::contarAparicionesTemplateMatching(imagenObjeto,imagenEscena);*/
   return kCodigoRetorno;
 }
 

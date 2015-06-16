@@ -41,7 +41,8 @@ class Operador : public Thread {
   const std::string stockHistoricoProducto(const std::string& comandoDeOperacion)const;
   const std::string altaImagen(const std::string& comandoDeOperacion);
   const std::string enviarImagen(const std::string& comandoDeOperacion);
-  const std::string bajaImagen(const std::string& comandoDeOperacion)const;
+  //const std::string bajaImagen(const std::string& comandoDeOperacion)const;
+  const std::string actualizarStockAreaDeVisionTemplateMatching(const std::string& comandoDeOperacion);
 };
 }
 

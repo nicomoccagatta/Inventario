@@ -63,4 +63,33 @@ const bool Imagen::esValida()const{
 	return !matrizImagen.empty();
 }
 
+//Aplica el metodo Template Matching para contar las apariciones de la imagenObjeto dentro de la imagenEscena.
+const unsigned long int Imagen::contarAparicionesTemplateMatching(const Imagen& imagenObjeto, const Imagen& imagenEscena){
+	unsigned long int apariciones=0;
+	//Creo la matriz que aloja los resultados que arrojo cada punto.
+	cv::Mat resultanteDeComparaciones;
+	resultanteDeComparaciones.create(imagenEscena.matrizImagen.rows-imagenObjeto.matrizImagen.rows+1, imagenEscena.matrizImagen.cols-imagenObjeto.matrizImagen.cols+1, CV_32FC1);
+	//Aplico el metodo normalizado dado que conozco el maximo valor uqe alojan los coeficientes de la matriz resutlante y da buenos resultados
+	cv::matchTemplate(imagenEscena.matrizImagen, imagenObjeto.matrizImagen, resultanteDeComparaciones, CV_TM_CCOEFF_NORMED);
+	//cv::normalize( resultanteDeComparaciones, resultanteDeComparaciones, 0, 1, cv::NORM_MINMAX, -1, cv::Mat() );
+	//Anulo todos los coeficientes de la matriz que no alcancen el minimo de similitud necesario.
+	//cv::threshold(resultanteDeComparaciones,resultanteDeComparaciones,kValorMinimoDeSimilitud,1.0, CV_THRESH_TOZERO);
+	double valorMinimo;
+	double valorMaximo=kValorMinimoDeSimilitud;
+	cv::Point puntoMinimo(0,0), puntoMaximo(0,0);
+	bool similitudesProcesadas=false;
+	//itero obteniendo todos los puntos de maxima hasta que el punto obtenido sea el maximo y no alcance el minimo de similitud.
+	while (!similitudesProcesadas){
+		cv::minMaxLoc(resultanteDeComparaciones, &valorMinimo, &valorMaximo, &puntoMinimo, &puntoMaximo);
+		//elimino el residuo de similitud en las cercanias de esta similitud
+		cv::floodFill(resultanteDeComparaciones, puntoMaximo, cv::Scalar(0), 0, cv::Scalar(kValorMinimoDeSimilitudDeZonaCercanaAUnaSimilitd), cv::Scalar(0.0));
+		if (valorMaximo>=kValorMinimoDeSimilitud)
+			++apariciones;
+		else
+			similitudesProcesadas=true;
+		//std::cout<< "similitud en ("<<puntoMaximo.x<<";"<<puntoMaximo.y<<")"<<std::endl;
+	}
+	return apariciones; //retorno las aparicion restando la primera iteracion que no se verifica.
+}
+
 } /* namespace common */

@@ -118,6 +118,7 @@ TiXmlElement* BaseDeDatos::persistirProductoDinamico(Producto* productoAPersisti
 		std::stringstream parseador;
 		parseador << (*idImagen);
 		nodoImagen->LinkEndChild(new TiXmlText(parseador.str()));
+		atributoProducto->LinkEndChild(nodoImagen);
 	}
 	nodoProducto->LinkEndChild(atributoProducto);
 	return nodoProducto;

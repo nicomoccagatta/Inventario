@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string.h>
 #include <string>
+#include <algorithm>
 #include "client_SocketCliente.h"
 #include "common_Protocolo.h"
 #include "common_Imagen.h"
@@ -31,6 +32,7 @@ class Cliente {
   void enviarImagen(const Imagen& imagenAEnviar);
   void cerrarConeccion();
   const size_t realizarConsultas();
+  void templateMatching(const std::string& idAreaDeVision,const Imagen& imagenAEnviar);
 
  private:
   SocketCliente skt;

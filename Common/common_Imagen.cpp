@@ -5,15 +5,13 @@
  *      Author: leandro
  */
 
-#include <opencv2/opencv.hpp>
-
 #include "common_Imagen.h"
 
 namespace common {
 
 Imagen::Imagen(const std::string& rutaArchivo): matrizImagen(cv::imread(rutaArchivo,1)) {
-	if (matrizImagen.empty())
-		throw "ERROR: No es posible cargar la imagen";
+/*	if (matrizImagen.empty())
+		throw "ERROR: No es posible cargar la imagen";*/
 }
 
 //constructor para imagenes enviadas por red (BETA)
@@ -49,17 +47,6 @@ const unsigned long int Imagen::getTamanio()const{
 	return matrizImagen.total()*matrizImagen.elemSize();
 }
 
-void Imagen::mostrarImagen(){
-	using namespace cv;
-
-	//CascadeClassifier face_cascade;
-	//loadClassifier(face_cascade);
-	//markFaces(face_cascade, this->matrizImagen);
-
-	namedWindow("Display Image", CV_WINDOW_AUTOSIZE);
-	imshow("Display Image", this->matrizImagen);
-}
-
 const unsigned int Imagen::getAlto()const{
 	return matrizImagen.rows;
 }
@@ -76,17 +63,27 @@ const bool Imagen::esValida()const{
 	return !matrizImagen.empty();
 }
 
+const unsigned long int Imagen::contarApariciones(const Imagen& imagenObjeto,const std::string& tipoDeteccion)const{
+	if (tipoDeteccion=="M"){
+		return contarAparicionesTemplateMatching(imagenObjeto);
+	} else {
+		return 0;
+	}
+}
+
 //Aplica el metodo Template Matching para contar las apariciones de la imagenObjeto dentro de la imagenEscena.
-const unsigned long int Imagen::contarAparicionesTemplateMatching(const Imagen& imagenObjeto, const Imagen& imagenEscena){
+const unsigned long int Imagen::contarAparicionesTemplateMatching(const Imagen& imagenObjeto)const {
 	unsigned long int apariciones=0;
 	//Creo la matriz que aloja los resultados que arrojo cada punto.
 	cv::Mat resultanteDeComparaciones;
-	resultanteDeComparaciones.create(imagenEscena.matrizImagen.rows-imagenObjeto.matrizImagen.rows+1, imagenEscena.matrizImagen.cols-imagenObjeto.matrizImagen.cols+1, CV_32FC1);
+	resultanteDeComparaciones.create(this->matrizImagen.rows-imagenObjeto.matrizImagen.rows+1, this->matrizImagen.cols-imagenObjeto.matrizImagen.cols+1, CV_32FC1);
 	//Aplico el metodo normalizado dado que conozco el maximo valor uqe alojan los coeficientes de la matriz resutlante y da buenos resultados
-	cv::matchTemplate(imagenEscena.matrizImagen, imagenObjeto.matrizImagen, resultanteDeComparaciones, CV_TM_CCOEFF_NORMED);
+	cv::matchTemplate(this->matrizImagen, imagenObjeto.matrizImagen, resultanteDeComparaciones, CV_TM_CCOEFF_NORMED);
 	//cv::normalize( resultanteDeComparaciones, resultanteDeComparaciones, 0, 1, cv::NORM_MINMAX, -1, cv::Mat() );
 	//Anulo todos los coeficientes de la matriz que no alcancen el minimo de similitud necesario.
 	//cv::threshold(resultanteDeComparaciones,resultanteDeComparaciones,kValorMinimoDeSimilitud,1.0, CV_THRESH_TOZERO);
+	//cv::imshow("apariciones",resultanteDeComparaciones);
+	//cv::waitKey();
 	double valorMinimo;
 	double valorMaximo=kValorMinimoDeSimilitud;
 	cv::Point puntoMinimo(0,0), puntoMaximo(0,0);
@@ -100,7 +97,6 @@ const unsigned long int Imagen::contarAparicionesTemplateMatching(const Imagen& 
 			++apariciones;
 		else
 			similitudesProcesadas=true;
-		//std::cout<< "similitud en ("<<puntoMaximo.x<<";"<<puntoMaximo.y<<")"<<std::endl;
 	}
 	return apariciones; //retorno las aparicion restando la primera iteracion que no se verifica.
 }

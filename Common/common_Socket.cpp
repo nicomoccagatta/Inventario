@@ -99,12 +99,13 @@ std::string Socket::corrimientoBuffer(const std::string& finalizador) {
   std::stringstream mensaje;
   bool mensajeFinalizado = false;
   unsigned int tamanioOriginalBuffer = this->elementosEnBuffer;
-  for (unsigned int i = 0; i < tamanioOriginalBuffer && !mensajeFinalizado;
+  unsigned int i = 0;
+  for (; i < tamanioOriginalBuffer && !mensajeFinalizado;
        i++) {
     mensaje << this->buffer[i];
     this->elementosEnBuffer--;
     if (this->buffer[i] == finalizador[0])
-      strncpy(this->buffer, &this->buffer[i + 1], this->elementosEnBuffer);
+	  strncpy(this->buffer, &this->buffer[i + 1], this->elementosEnBuffer);
   }
   return mensaje.str();
 }

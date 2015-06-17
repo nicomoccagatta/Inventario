@@ -17,15 +17,14 @@
 //#include "../Control/client_ControladorVistaDescargaImagenDeProductos.h"
 #include "../Modelo/client_ModeloObservable.h"
 
-class VistaDescargaImagenDeProductos: public Gtk::Window {
+class VistaDescargaImagenDeProductos2: public Gtk::Window {
 
 	ModeloObservable* modelo;
 	//ControladorVistaDescargaImagenDeProductos* controlador;
 
 public:
-	VistaDescargaImagenDeProductos(BaseObjectType* cobject,
-			const Glib::RefPtr<Gtk::Builder>& refGlade);
-	virtual ~VistaDescargaImagenDeProductos();
+	VistaDescargaImagenDeProductos2(ModeloObservable* modelo);
+	virtual ~VistaDescargaImagenDeProductos2();
 
 	void asignarModelo(ModeloObservable* modelo);
 	//void asignarControlador(ControladorVistaDescargaImagenDeProductos* controlador);
@@ -33,23 +32,31 @@ public:
 private:
 	void update();
 
+	bool on_imagen_button_press(GdkEventButton*);
+
+	void on_producto_seleccionado();
+
+	void ponerImagenesSeleccion();
+
 protected:
 	//signal handlers:
 	void on_button_atras();
 	void on_button_descargar();
 
-
-	Glib::RefPtr<Gtk::Builder> m_refGlade;
-	Gtk::Button* m_atrasButton;
-	Gtk::Button* m_descargarButton;
-
-	Gtk::Viewport* m_viewport;
-	//Gtk::VBox* m_productosVBox;
-	Gtk::HPaned* m_hPaned;
+	Gtk::HPaned m_hPaned;
 
 	ProductosList m_ProductosList;
 
-	Gtk::VBox m_productosVbox;
+	Gtk::VBox m_VBox;
+	Gtk::HBox m_HBoxImagenes;
+	Gtk::HButtonBox m_ButtonBox;
+
+	Gtk::Button m_AtrasButton;
+	Gtk::Button m_DescargarButton;
+
+	//const GdkColor color;
+	Gtk::RadioButtonGroup radioGroup;
+
 
 };
 

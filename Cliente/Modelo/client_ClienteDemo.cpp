@@ -145,5 +145,34 @@ const std::list<Producto*>* ClienteDemo::getProductos() const {
 
 void ClienteDemo::enviarFotoTemplateMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen){
 	Imagen img(rutaDeImagen);
-	//this->protocolo.enviarImagenTemplateMatching(idArea, fecha, &img);
+
+	img.mostrarImagen();
+
+	std::stringstream ss;
+	std::string msje = "M|" + fecha;
+
+	ss << "M|" << idArea << kMensajeDelimitadorCampos << fecha << kMensajeDelimitadorCampos;
+	this->protocolo.enviarMensaje(this->client,ss.str());
+
+	std::cerr << this->protocolo.recibirMensaje(this->client);
+
+	this->protocolo.enviarImagen(this->client, img);
+
+	std::cerr << this->protocolo.recibirMensaje(this->client);
+
+	/*
+	if (this->protocolo.recibirMensaje(this->client) == kMensajeOK+protocolo.getFinalizadorDeMensaje()){
+		this->protocolo.enviarImagen(this->client, img);
+	}
+	else{
+		std::cerr << "NO LLEGO NADA\n";
+	}
+	if (this->protocolo.recibirMensaje(this->client) == kMensajeOK+protocolo.getFinalizadorDeMensaje()){
+		std::cerr << "LLEGO PIOLA\n";
+	}else{
+		std::cerr << "NO LLEGO NADA\n";
+	}
+	*/
+
+
 }

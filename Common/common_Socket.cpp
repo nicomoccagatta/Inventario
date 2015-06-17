@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream>
 #include "common_Socket.h"
 
 using common::Socket;
@@ -92,6 +93,7 @@ unsigned char* const Socket::recibirBytesDinamicos(const unsigned long int canti
 	      else
 	    	  cantidadDeBytesRecibidos += bytesRecibidos;
 	}
+	std::cerr << "RECIBI " << cantidadDeBytesRecibidos << "\n";
 	return buffer;
 }
 

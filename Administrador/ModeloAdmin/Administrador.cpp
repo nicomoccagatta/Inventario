@@ -56,9 +56,9 @@ bool Administrador::actualizarProductos(){
 			ss >> idIcono;
 			this->data.agregarProducto(nombre,descripcion,id, idIcono);
 
-			std::cout << "Agregando Producto:" << id << " "
-					  << nombre << " " << descripcion
-					  << " id Icono: " << idIcono << std::endl;
+			//std::cout << "Agregando Producto:" << id << " "
+				//	  << nombre << " " << descripcion
+					//  << " id Icono: " << idIcono << std::endl;
 			argum+=4;//4 con icono
 		}
 	}catch (std::exception& e){

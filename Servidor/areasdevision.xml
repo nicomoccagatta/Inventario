@@ -2,25 +2,13 @@
     <Ubicacion>patio delantero</Ubicacion>
     <TipoDeCapturador>foto</TipoDeCapturador>
     <ProductosDetectados>
-        <Producto id="2">
-            <Nombre>nuevo</Nombre>
-            <Descripcion>algo rico</Descripcion>
+        <Producto id="17">
+            <Nombre>sol</Nombre>
+            <Descripcion></Descripcion>
             <StockHistorico>
                 <Stock>
-                    <Fecha>Tue Jun 9 19:35:54 2015</Fecha>
-                    <Cantidad>50</Cantidad>
-                </Stock>
-            </StockHistorico>
-            <Icono>0</Icono>
-            <Imagenes />
-        </Producto>
-        <Producto id="3">
-            <Nombre>otro</Nombre>
-            <Descripcion>algo feo</Descripcion>
-            <StockHistorico>
-                <Stock>
-                    <Fecha>Tue Jun 9 19:35:54 2015</Fecha>
-                    <Cantidad>70</Cantidad>
+                    <Fecha>Wed Jun 17 03:12:48 2015</Fecha>
+                    <Cantidad>1</Cantidad>
                 </Stock>
             </StockHistorico>
             <Icono>0</Icono>

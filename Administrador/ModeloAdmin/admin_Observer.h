@@ -8,10 +8,11 @@
 #ifndef ADMINISTRADOR_MODELOADMIN_ADMIN_OBSERVER_H_
 #define ADMINISTRADOR_MODELOADMIN_ADMIN_OBSERVER_H_
 
+#include <iostream>
+
 class Observer {
 public:
-	Observer();
-	void update();
+	virtual void update() = 0;
 	virtual ~Observer();
 };
 

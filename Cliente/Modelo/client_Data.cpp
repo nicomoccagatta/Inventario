@@ -39,6 +39,7 @@ void Data::eliminarProductos(){
 	for (it = this->productos.begin(); it != this->productos.end();++it){
 		delete *(it);
 	}
+	productos.clear();
 }
 
 void Data::eliminarAreasDeVision(){
@@ -47,4 +48,5 @@ void Data::eliminarAreasDeVision(){
 		//std::cout << (*it)->getId() << (*it)->getTipoDeCapturador() << (*it)->getUbicacion();
 		delete *(it);
 	}
+	productos.clear();
 }

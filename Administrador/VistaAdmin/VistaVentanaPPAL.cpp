@@ -52,36 +52,46 @@ VistaVentanaPPAL::~VistaVentanaPPAL() {
 
 void VistaVentanaPPAL::on_button_LP()
 {
-	//model->notify();
-	hide();
+	model->notify();	//borrar todas las vistas
+	controlLP.setearModelo(model);
+	controlLP.actualizarProductos();
+	vistaLP.setearAtributos(panelDinamico,model);
+	model->suscribe(&vistaLP);
+	vistaLP.run();
 }
 
 void VistaVentanaPPAL::on_button_AP()
 {
+	model->notify();
 	hide();
 }
 
 void VistaVentanaPPAL::on_button_LAV()
 {
+	model->notify();
 	hide();
 }
 
 void VistaVentanaPPAL::on_button_AAV()
 {
+	model->notify();
 	hide();
 }
 
 void VistaVentanaPPAL::on_button_SGPP()
 {
+	model->notify();
 	hide();
 }
 
 void VistaVentanaPPAL::on_button_SPAV()
 {
+	model->notify();
 	hide();
 }
 
 void VistaVentanaPPAL::on_button_SHPP()
 {
+	model->notify();
 	hide();
 }

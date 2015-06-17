@@ -10,6 +10,7 @@
 
 #include <vector>
 #include "ModeloAdmin/admin_Observer.h"
+#include <iostream>
 
 class Subject {
 	std::vector<Observer*> observadores;

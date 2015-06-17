@@ -10,13 +10,16 @@
 
 #include <gtkmm-2.4/gtkmm.h>
 #include "ModeloAdmin/admin_ModeloObservable.h"
+#include "VistaItemListado.h"
 #include <list>
 #include "common_Producto.h"
 
 class VistaListadoProductos : public Observer {
 	Modelo_Observable *model;
 	Gtk::Viewport *vista;
+	Gtk::VBox vbox;
 	const std::list<Producto*>* productos;
+	std::vector<VistaItemListado> items;
 public:
 	void update();
 	void setearAtributos(Gtk::Viewport *panelDinamico,Modelo_Observable *modelo);

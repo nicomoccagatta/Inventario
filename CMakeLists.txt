@@ -50,6 +50,7 @@ add_executable(Admin
 			Administrador/ModeloAdmin/admin_Subject.cpp
 			Administrador/VistaAdmin/VistaVentanaPPAL.cpp
 			Administrador/VistaAdmin/VistaListadoProductos.cpp
+			Administrador/VistaAdmin/VistaItemListado.cpp
 			Common/common_SocketCliente.cpp
 			Common/common_AreaDeVision.cpp
 			Common/common_Mutex.cpp

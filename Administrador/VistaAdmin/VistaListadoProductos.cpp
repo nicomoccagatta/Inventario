@@ -19,8 +19,17 @@ void VistaListadoProductos::setearAtributos(Gtk::Viewport *panelDinamico,Modelo_
 
 void VistaListadoProductos::run(){
 	std::list<Producto*>::const_iterator lit (productos->begin()), lend(productos->end());
-	  for(;lit!=lend;++lit)
-		  std::cout << "Nombre Producto: " <<(*lit)->getNombre() << ' ' << std::endl;
+	/*
+	for(;lit!=lend;++lit){
+		VistaItemListado itemNuevo;
+		itemNuevo.setear("/home/nicomoccagatta/Inventario/build/imagenes/37.jpg",(*lit)->getNombre(),(*lit)->getDescripcion());
+		vbox.pack_end(itemNuevo);
+	}
+	*/
+	VistaItemListado itemNuevo;
+	itemNuevo.setear("/home/nicomoccagatta/Inventario/build/imagenes/37.jpg","manzana","es una fruta basicamente");
+	vbox.pack_start((Gtk::HBox)itemNuevo);
+	this->vista->add(vbox);
 }
 
 VistaListadoProductos::~VistaListadoProductos() {

@@ -36,6 +36,7 @@ void Datos::eliminarProductos(){
 	for (it = this->productos.begin(); it != this->productos.end();++it){
 		delete *(it);
 	}
+	productos.clear();
 }
 
 void Datos::eliminarAreasDeVision(){

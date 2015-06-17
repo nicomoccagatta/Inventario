@@ -62,24 +62,13 @@ const size_t Cliente::realizarConsultas() {
     while (skt.estaConectado()) {
       getline(std::cin, mensajeAEnviar);
       if (strcmp(mensajeAEnviar.c_str(), kMensajeFinDeSesion) != 0) {
-    	  time_t hora;
-		time (&hora);
-        enviarMensaje(mensajeAEnviar+kMensajeDelimitadorCampos+asctime(localtime(&hora))+kMensajeDelimitadorCampos);
-        std::string mensajeRecibido = recibirMensaje();
-        std::cout << mensajeRecibido;
-    	enviarImagen(Imagen("aInventariar.jpg"));
-    	//Imagen imagenRecibida= recibirImagen(mensajeAEnviar);
-    	if (skt.estaConectado() /*&& imagenRecibida.esValida()*/){
-    	//imagenRecibida.guardarEnArchivo("recibida.jpg");
-    	std::string mensajeRecibido = recibirMensaje();//lo comento por que cuando recibo imagenes no temian enviando nada el servidor.
+    	templateMatching(mensajeAEnviar,Imagen("aInventariar.jpg"));
+    	if (skt.estaConectado()){
+    	std::string mensajeRecibido = recibirMensaje();
     	std::cout << mensajeRecibido;
+    	} else {
+    		return 1;
     	}
-        if (!skt.estaConectado())
-        	return 1;
-
-         //else
-
-
       } else {
         // si el usuario ingreso el mensaje de finalizacion cierro la
         // coneccion y la aplicacion.
@@ -90,6 +79,20 @@ const size_t Cliente::realizarConsultas() {
     return kRetornoOK;
   }
   return kRetornoError;
+}
+
+void Cliente::templateMatching(const std::string& idAreaDeVision,const Imagen& imagenAEnviar){
+	time_t hora;
+	time (&hora);
+	std::string fecha(asctime(localtime(&hora)));
+	fecha.erase (std::remove(fecha.begin(), fecha.end(), '\n'), fecha.end());
+	std::stringstream mensajeInicial;
+	mensajeInicial<<kIndicadorComandoFotoTemplateMatching<<kMensajeDelimitadorCampos<<idAreaDeVision<<kMensajeDelimitadorCampos<<fecha<<kMensajeDelimitadorCampos;
+	enviarMensaje(mensajeInicial.str());
+	std::string mensajeRecibido = recibirMensaje();
+	if (skt.estaConectado() && mensajeRecibido==kMensajeOK+protocolo.getFinalizadorDeMensaje()){
+		enviarImagen(imagenAEnviar);
+	}
 }
 
 const std::string Cliente::obtenerDireccionIP(

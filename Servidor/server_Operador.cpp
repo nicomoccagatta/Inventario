@@ -114,7 +114,7 @@ const std::string Operador::realizarOperacion(std::string& comandoDeOperacion) {
 		  break;
 		}*/
 		case kIndicadorComandoFotoTemplateMatching: {
-		  return actualizarStockAreaDeVisionTemplateMatching(comandoDeOperacion);
+		  return actualizarStockAreaDeVision(comandoDeOperacion);
 		  break;
 		}
 	  }
@@ -290,11 +290,7 @@ const std::string Operador::stockHistoricoProducto(const std::string& comandoDeO
 
 
 const std::string Operador::altaImagen(const std::string& comandoDeOperacion){
-	const unsigned int altoImagen = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
-	const unsigned int anchoImagen = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,3);
-	const unsigned long int tamanioImagen = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,4);
-	protocolo.enviarMensaje(cliente, kMensajeOK);
-	Imagen imagenRecibida = protocolo.recibirImagen(cliente,altoImagen,anchoImagen,tamanioImagen);
+	Imagen imagenRecibida = recibirImagen(comandoDeOperacion);
 	if (cliente.estaConectado()){
 		const unsigned long int idImagen = datos.agregarImagen(imagenRecibida);
 		if (idImagen){
@@ -325,18 +321,14 @@ const std::string Operador::bajaImagen(const std::string& comandoDeOperacion)con
 	return kMensajeError;
 }
 */
-const std::string Operador::actualizarStockAreaDeVisionTemplateMatching(const std::string& comandoDeOperacion){
-	const unsigned long int idAreaDeVision = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
+const std::string Operador::actualizarStockAreaDeVision(const std::string& comandoDeOperacion){
+	const std::string tipoDeDeteccion = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,1);
 	const std::string fechaDeCaptura = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,3);
-	AreaDeVision* areaDeVisionAActualizar = datos.getAreaDeVisionConId(idAreaDeVision);
+	AreaDeVision* areaDeVisionAActualizar = datos.getAreaDeVisionConId(Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2));
 	if (areaDeVisionAActualizar!=NULL){
 		protocolo.enviarMensaje(cliente, kMensajeOK);
 		std::string mensajeRecibido = this->protocolo.recibirMensaje(this->cliente);
-		const unsigned int altoImagen = Protocolo::extraerArgumentoNumericoDeComando(mensajeRecibido,2);
-		const unsigned int anchoImagen = Protocolo::extraerArgumentoNumericoDeComando(mensajeRecibido,3);
-		const unsigned long int tamanioImagen = Protocolo::extraerArgumentoNumericoDeComando(mensajeRecibido,4);
-		protocolo.enviarMensaje(cliente, kMensajeOK);
-		Imagen imagenRecibida = protocolo.recibirImagen(cliente,altoImagen,anchoImagen,tamanioImagen);
+		Imagen imagenRecibida = recibirImagen(mensajeRecibido);
 		if (cliente.estaConectado() && imagenRecibida.esValida()){
 			std::list<Producto*>* productosDetectados= new std::list<Producto*>();
 			//obtengo todos los producto e itero sobre las iamgenes de cada uno reconociendo la totalidad de sus apariciones.
@@ -345,7 +337,7 @@ const std::string Operador::actualizarStockAreaDeVisionTemplateMatching(const st
 				unsigned long int aparicionesDelProducto=0;
 				for (std::list<unsigned long int>::const_iterator id=(*it)->getIdsImagenes()->begin(); id!=(*it)->getIdsImagenes()->end();++id)
 					if (datos.existeImagenConId(*id))
-						aparicionesDelProducto+=Imagen::contarAparicionesTemplateMatching(datos.getImagenConId(*id),imagenRecibida);
+						aparicionesDelProducto+=imagenRecibida.contarApariciones(datos.getImagenConId(*id),tipoDeDeteccion);
 				if (aparicionesDelProducto>0){
 					std::list<Stock*>* stockProductoDetectado = new std::list<Stock*>();
 					stockProductoDetectado->push_back(new Stock(aparicionesDelProducto,fechaDeCaptura));
@@ -366,6 +358,12 @@ const std::string Operador::actualizarStockAreaDeVisionTemplateMatching(const st
 	return kMensajeError;
 }
 
-
+const Imagen Operador::recibirImagen(const std::string& informacionDeImagen){
+	const unsigned int altoImagen = Protocolo::extraerArgumentoNumericoDeComando(informacionDeImagen,2);
+	const unsigned int anchoImagen = Protocolo::extraerArgumentoNumericoDeComando(informacionDeImagen,3);
+	const unsigned long int tamanioImagen = Protocolo::extraerArgumentoNumericoDeComando(informacionDeImagen,4);
+	protocolo.enviarMensaje(cliente, kMensajeOK);
+	return protocolo.recibirImagen(cliente,altoImagen,anchoImagen,tamanioImagen);
+}
 
 

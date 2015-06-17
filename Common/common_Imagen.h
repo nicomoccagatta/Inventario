@@ -24,11 +24,13 @@ public:
 	const unsigned int getAncho()const;
 	const bool esValida()const;
 	static const bool existeImagen(const std::string& rutaArchivoImagen);
-	static const unsigned long int contarAparicionesTemplateMatching(const Imagen& imagenObjeto, const Imagen& imagenEscena);
-	static const unsigned long int contarAparicionesFeatureMatching(const Imagen& imagenObjeto, const Imagen& imagenEscena);
+	const unsigned long int contarApariciones(const Imagen& imagenObjeto,const std::string& tipoDeteccion)const;
 
 private:
 	cv::Mat matrizImagen;
+	const unsigned long int contarAparicionesTemplateMatching(const Imagen& imagenObjeto)const;
+	const unsigned long int contarAparicionesFeatureMatching(const Imagen& imagenObjeto)const;
+
 };
 
 } /* namespace common */

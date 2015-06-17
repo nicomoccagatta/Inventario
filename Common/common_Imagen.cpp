@@ -101,4 +101,11 @@ const unsigned long int Imagen::contarAparicionesTemplateMatching(const Imagen& 
 	return apariciones; //retorno las aparicion restando la primera iteracion que no se verifica.
 }
 
+void Imagen::mostrarImagen(){
+	using namespace cv;
+
+	namedWindow("Display Image", CV_WINDOW_AUTOSIZE);
+	imshow("Display Image", this->matrizImagen);
+}
+
 } /* namespace common */

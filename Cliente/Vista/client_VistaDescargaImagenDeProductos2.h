@@ -31,6 +31,7 @@ public:
 
 private:
 	void update();
+	void update_lista_productos();
 
 	bool on_imagen_button_press(GdkEventButton*);
 
@@ -42,6 +43,9 @@ protected:
 	//signal handlers:
 	void on_button_atras();
 	void on_button_descargar();
+
+	Glib::RefPtr<Gtk::ListStore> m_refProductosListStore; //The Tree Model.
+	Gtk::TreeView m_ProductosTreeView; //The Tree View.
 
 	Gtk::HPaned m_hPaned;
 

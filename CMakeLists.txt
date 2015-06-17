@@ -14,7 +14,7 @@ pkg_check_modules(OpenCV REQUIRED opencv)
 include_directories(${OpenCV_INCLUDE_DIRS}) 
 add_executable(Cliente_consola
 			Common/client_Cliente.cpp
-			Common/common_SocketCliente.cpp
+			Common/client_SocketCliente.cpp
 			Common/common_Mutex.cpp
 			Common/common_Protocolo.cpp
 			Common/common_Socket.cpp

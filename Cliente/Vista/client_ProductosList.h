@@ -20,9 +20,6 @@ public:
 	virtual ~ProductosList();
 
 	void update(const std::list<Producto*>* prods);
-	const Gtk::TreeView& getTreeView() const {
-		return m_TreeView;
-	}
 
 	class ModelColumns: public Gtk::TreeModel::ColumnRecord{
 	public:
@@ -38,9 +35,10 @@ public:
 
 	ModelColumns m_Columns;
 
-protected:
+protected:/*
 	Glib::RefPtr<Gtk::ListStore> m_refListStore; //The Tree Model.
 	Gtk::TreeView m_TreeView; //The Tree View.
+	*/
 };
 
 #endif /* CLIENTE_VISTA_CLIENT_PRODUCTOSLIST_H_ */

@@ -21,18 +21,33 @@ VistaDescargaImagenDeProductos2::VistaDescargaImagenDeProductos2(ModeloObservabl
 
 	set_title ("Descarga de imagenes de productos");
 	set_border_width(10);
-	set_default_size(450, 400);
+	set_default_size(600, 400);
 
 	/* Add a vpaned widget to our toplevel window */
 	add(m_hPaned);
 
+	/* Create a new scrolled window, with scrollbars only if needed */
+	m_ProductosList.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+	m_ProductosList.set_size_request(200,400);
+
+	m_ProductosList.add(m_ProductosTreeView);
+
+	/* create list store */
+	m_refProductosListStore = Gtk::ListStore::create(m_ProductosList.m_Columns);
+
+	m_ProductosTreeView.set_model(m_refProductosListStore);
+
+	//Add the Model's column to the View's columns:
+	m_ProductosTreeView.append_column("Iconos", m_ProductosList.m_Columns.m_col_icon_id);
+	m_ProductosTreeView.append_column("Productos", m_ProductosList.m_Columns.m_col_text);
+
 	const std::list<Producto*>* prods = modelo->getProductos();
 
 	size_t cantProductos = prods->size();
-
 	std::cerr << "Hay " << cantProductos << " productos\n";
 
-	m_ProductosList.update(prods);
+	this->update_lista_productos();
+	//m_ProductosList.update(prods);
 	m_hPaned.pack1(m_ProductosList);
 
 	m_VBox.pack_end(m_ButtonBox, Gtk::PACK_SHRINK);
@@ -56,8 +71,6 @@ VistaDescargaImagenDeProductos2::VistaDescargaImagenDeProductos2(ModeloObservabl
 
 	ponerImagenesSeleccion();
 
-	const Glib::RefPtr<const Gtk::TreeSelection> refTreeSelection =
-	    m_ProductosList.getTreeView().get_selection();
 
 	//refTreeSelection->signal_changed().connect(
 		//    sigc::mem_fun(*this, &VistaDescargaImagenDeProductos2::on_producto_seleccionado) );
@@ -97,6 +110,23 @@ void VistaDescargaImagenDeProductos2::update(){
 	m_hPaned.add1(m_ProductosList);
 
 
+	show_all_children();
+}
+
+void VistaDescargaImagenDeProductos2::update_lista_productos(){
+	const std::list<Producto*>* prods = modelo->getProductos();
+
+	/* Add some messages to the window */
+	std::list<Producto*>::const_iterator it;
+
+	for (it=prods->begin(); it!=prods->end();++it){
+		std::cerr << (*it)->getId() << " " << (*it)->getNombre() << std::endl;
+
+		Gtk::TreeModel::Row row = *(m_refProductosListStore->append());
+		row[m_ProductosList.m_Columns.m_col_text] = (*it)->getNombre();
+		row[m_ProductosList.m_Columns.m_col_icon_id] = (*it)->getIdIcono();
+		row[m_ProductosList.m_Columns.m_col_data] = *it;
+	}
 	show_all_children();
 }
 

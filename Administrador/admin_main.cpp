@@ -11,7 +11,7 @@
 #include "ModeloAdmin/admin_ModeloObservable.h"
 #include "VistaAdmin/VistaVentanaPPAL.h"
 
-#define VISTAPPAL "/home/nicomoccagatta/Inventario/build/Administrador.glade"
+#define VISTAPPAL "Administrador.glade"
 
 int crearAPartirDeGlade(Glib::RefPtr<Gtk::Builder>* refBuilder);
 

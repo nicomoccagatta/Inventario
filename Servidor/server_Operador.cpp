@@ -177,7 +177,7 @@ const std::string Operador::modificacionProducto(const std::string& comandoDeOpe
 		int numeroDeArgumento=6;
 		std::list<unsigned long int> nuevaListaDeIdsImagenes;
 		unsigned long int idImagen;
-		while (idImagen= Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,numeroDeArgumento)){
+		while ((idImagen= Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,numeroDeArgumento))){
 			if ((idImagen) && (existenTodasLasImagenes=datos.existeImagenConId(idImagen)))
 				nuevaListaDeIdsImagenes.push_back(idImagen);
 			++numeroDeArgumento;

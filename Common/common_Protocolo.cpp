@@ -1,5 +1,7 @@
 #include "common_Protocolo.h"
 #include <string>
+#include <cstring>
+#include <string.h>
 
 using common::Protocolo;
 using common::Socket;
@@ -38,10 +40,13 @@ const std::string Protocolo::protocolizarMensaje(std::string mensaje) const {
 
 //Recibe la imagen enviada por red. Debe chequearse a su salida que el socket siga abierto ya que si no significa que fallo la transmision.
 Imagen Protocolo::recibirImagen(Socket& socket,const unsigned int altoImagen,const unsigned int anchoImagen, const unsigned long int tamanioImagen) const{
+	std::cerr << "RECIBIENDO BYTES IMAGEN\n";
 	const unsigned char* datosImagen=socket.recibirBytesDinamicos(tamanioImagen);
 	if (socket.estaConectado()){
 		Imagen imagenARetornar (altoImagen,anchoImagen,datosImagen);
+		//imagenARetornar.mostrarImagen();
 		delete[] datosImagen;
+		std::cerr << "SIGO CONECTADO\n";
 		return imagenARetornar;
 	}
 	delete[] datosImagen;
@@ -65,6 +70,7 @@ void Protocolo::enviarImagen(Socket& socket,const Imagen& imagenAEnviar) const{
 	enviarMensaje(socket,parseadorMensaje.str());
 	std::string respuesta =recibirMensaje(socket);
 	if (respuesta==kMensajeOK+finalizadorDeMensaje){
+		std::cerr << "ENVIANDO BYTES IMAGEN\n";
 		const unsigned char* const datosImagen= imagenAEnviar.obtenerBytesDinamicos();
 		socket.enviarBytes(datosImagen,tamanioImagen);
 		delete[] datosImagen;

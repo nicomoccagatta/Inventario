@@ -11,7 +11,7 @@
 #include "ModeloAdmin/admin_ModeloObservable.h"
 #include "VistaAdmin/VistaVentanaPPAL.h"
 
-#define VISTAPPAL "/home/nicomoccagatta/git/Inventario/build/Administrador.glade"
+#define VISTAPPAL "Administrador.glade"
 
 //static void on_button_clicked()
 //{

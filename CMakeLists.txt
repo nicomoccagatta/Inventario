@@ -80,7 +80,7 @@ add_executable(Client
 			Cliente/Vista/client_VistaEnviar.cpp
 			Cliente/Vista/client_ModelComboBoxAreasDeVision.h
 			Cliente/Control/client_ControladorVistaEnviar.cpp
-			Cliente/Vista/client_VistaDescargaImagenDeProductos.cpp
+			Cliente/Vista/client_VistaDescargaImagenDeProductos2.cpp
 			Cliente/Vista/client_ProductosList.cpp
 			#Common/common_Cliente.cpp
 			Common/common_SocketCliente.cpp

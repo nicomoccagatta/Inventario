@@ -23,7 +23,6 @@ VistaVentanaPPAL::VistaVentanaPPAL(BaseObjectType* cobject, const Glib::RefPtr<G
 		if(listado_av)
 			listado_av->signal_clicked().connect( sigc::mem_fun(*this, &VistaVentanaPPAL::on_button_LAV) );
 
-
 	m_refGlade->get_widget("Agregar Areas de Vision", agregar_av);
 		if(agregar_av)
 			agregar_av->signal_clicked().connect( sigc::mem_fun(*this, &VistaVentanaPPAL::on_button_AAV) );
@@ -53,35 +52,36 @@ VistaVentanaPPAL::~VistaVentanaPPAL() {
 
 void VistaVentanaPPAL::on_button_LP()
 {
-  hide();
+	//model->notify();
+	hide();
 }
 
 void VistaVentanaPPAL::on_button_AP()
 {
-  hide();
+	hide();
 }
 
 void VistaVentanaPPAL::on_button_LAV()
 {
-  hide();
+	hide();
 }
 
 void VistaVentanaPPAL::on_button_AAV()
 {
-  hide();
+	hide();
 }
 
 void VistaVentanaPPAL::on_button_SGPP()
 {
-  hide();
+	hide();
 }
 
 void VistaVentanaPPAL::on_button_SPAV()
 {
-  hide();
+	hide();
 }
 
 void VistaVentanaPPAL::on_button_SHPP()
 {
-  hide();
+	hide();
 }

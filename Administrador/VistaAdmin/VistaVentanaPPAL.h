@@ -10,9 +10,8 @@
 
 #include <gtkmm-2.4/gtkmm.h>
 #include "ModeloAdmin/admin_ModeloObservable.h"
-#include "ModeloAdmin/admin_Observer.h"
 
-class VistaVentanaPPAL: public Gtk::Window, Observer {
+class VistaVentanaPPAL: public Gtk::Window {
 public:
 	VistaVentanaPPAL(BaseObjectType* cobject,const Glib::RefPtr<Gtk::Builder>& refGlade);
 	void setearAtributos(const Glib::RefPtr<Gtk::Builder>& refGlade,Modelo_Observable *modelo);

@@ -11,11 +11,14 @@ Subject::Subject() {
 }
 
 void Subject::suscribe(Observer *observador){
-
+	observadores.push_back(observador);
 }
 
 void Subject::notify(){
-
+	//std::vector::iterator<Observer*> iterator = observadores.begin();
+	//for( ; iterator != observadores.end() ; ++iterator){
+	//	iterator->update();
+	//}
 }
 
 void Subject::unsuscribe(Observer *observador){

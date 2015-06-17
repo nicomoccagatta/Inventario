@@ -11,10 +11,11 @@
 #include <list>
 #include "common_AreaDeVision.h"
 #include "Administrador.h"
+#include "admin_Subject.h"
 
 using common::AreaDeVision;
 
-class Modelo_Observable {
+class Modelo_Observable: public Subject {
 	Administrador admin;
 public:
 	Modelo_Observable();

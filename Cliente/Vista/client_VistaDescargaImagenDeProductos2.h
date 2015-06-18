@@ -43,6 +43,9 @@ private:
 
 	void on_producto_seleccionado();
 
+	void on_radioButton_toggled(Gtk::RadioButton* radio);
+
+
 protected:
 	//signal handlers:
 	void on_button_atras();
@@ -52,20 +55,21 @@ protected:
 	Gtk::TreeView m_ProductosTreeView; //The Tree View.
 	Glib::RefPtr<Gtk::TreeSelection> refTreeSelection; //The selected
 
-	Gtk::HPaned m_hPaned;
+	Gtk::HPaned m_hPaned; //El panel con la barra que divide
 
-	ProductosList m_ProductosList;
+	ProductosList m_ProductosList; //La Scrolled Window de los productos
 
-	Gtk::VBox m_VBox;
-	Gtk::ScrolledWindow* m_ActiveImagenes;
-	Gtk::HButtonBox m_ButtonBox;
+	Gtk::VBox m_VBox; //Arriba imanes, abajo botones
+	Gtk::ScrolledWindow* m_ActiveImagenes; //ScrolledWindow de imagenes activa
+	Gtk::HButtonBox m_ButtonBox; //Para los botones atras y descargar
+
 
 	Gtk::Button m_AtrasButton;
 	Gtk::Button m_DescargarButton;
 
 	//const GdkColor color;
 	Gtk::RadioButtonGroup radioGroup;
-
+	Gtk::RadioButton* m_ActiveRadio;
 
 };
 

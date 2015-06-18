@@ -27,35 +27,40 @@
             <Cantidad>10</Cantidad>
         </Stock>
     </StockHistorico>
-    <Icono>0</Icono>
+    <Icono>120</Icono>
     <Imagenes />
 </Producto>
 <Producto id="15">
-    <Nombre>nuevo</Nombre>
-    <Descripcion>algo rico</Descripcion>
+    <Nombre>Alfajor Terrabusi</Nombre>
+    <Descripcion>El mas rico de tooooodos</Descripcion>
     <StockHistorico>
         <Stock>
             <Fecha>Tue Jun 9 14:58:27 2015&#x0A;</Fecha>
             <Cantidad>0</Cantidad>
         </Stock>
     </StockHistorico>
-    <Icono>0</Icono>
-    <Imagenes />
+    <Icono>90</Icono>
+    <Imagenes>
+        <Imagen>1</Imagen>
+        <Imagen>2</Imagen>
+        <Imagen>3</Imagen>
+        <Imagen>4</Imagen>
+    </Imagenes>
 </Producto>
 <Producto id="4">
-    <Nombre>merengadas</Nombre>
-    <Descripcion>galletitas muy muy ricas</Descripcion>
+    <Nombre>Merengadas - Bagley</Nombre>
+    <Descripcion>Galletitas muy muy ricas</Descripcion>
     <StockHistorico>
         <Stock>
             <Fecha>Wed Jun 10 01:19:26 2015&#x0A;</Fecha>
             <Cantidad>0</Cantidad>
         </Stock>
     </StockHistorico>
-    <Icono>0</Icono>
+    <Icono>101</Icono>
     <Imagenes />
 </Producto>
 <Producto id="5">
-    <Nombre>operas</Nombre>
+    <Nombre>Opera - Bagley</Nombre>
     <Descripcion>galletitas muy ricas para merendar y desayunar</Descripcion>
     <StockHistorico>
         <Stock>
@@ -63,7 +68,7 @@
             <Cantidad>0</Cantidad>
         </Stock>
     </StockHistorico>
-    <Icono>0</Icono>
+    <Icono>99</Icono>
     <Imagenes />
 </Producto>
 <Producto id="16">
@@ -85,14 +90,26 @@
     </Imagenes>
 </Producto>
 <Producto id="17">
-    <Nombre>jabon</Nombre>
-    <Descripcion>dove</Descripcion>
+    <Nombre>Acondicionador - Sedal</Nombre>
+    <Descripcion>Con Complejo Cremoso docilidad y suavidad para un cabello reseco</Descripcion>
     <StockHistorico>
         <Stock>
             <Fecha>Wed Jun 10 02:29:13 2015&#x0A;</Fecha>
             <Cantidad>0</Cantidad>
         </Stock>
     </StockHistorico>
-    <Icono>37</Icono>
+    <Icono>144</Icono>
+    <Imagenes />
+</Producto>
+<Producto id="18">
+    <Nombre>Fernet - Branca</Nombre>
+    <Descripcion>El elixir de la vida</Descripcion>
+    <StockHistorico>
+        <Stock>
+            <Fecha>Wed Jun 08 01:24:05 2015&#x0A;</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+    </StockHistorico>
+    <Icono>150</Icono>
     <Imagenes />
 </Producto>

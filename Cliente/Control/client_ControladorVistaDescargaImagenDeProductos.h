@@ -28,6 +28,12 @@ public:
 	virtual ~ControladorVistaDescargaImagenDeProductos(){}
 
 	void on_producto_seleccionado(Producto* prod, Gtk::ScrolledWindow* imagenes_container);
+
+	//no pongo referencia para que me copie de glib::ustring a std::string
+	void on_button_descargar(std::string rutaOrigen, std::string rutaDestino);
+
+private:
+	void copiarArchivo(std::string& rutaOrigen, std::string& rutaDestino);
 };
 
 #endif /* CLIENTE_CONTROL_CLIENT_CONTROLADORVISTADESCARGAIMAGENDEPRODUCTOS_H_ */

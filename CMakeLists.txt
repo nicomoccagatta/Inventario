@@ -83,6 +83,7 @@ add_executable(Client
 			Cliente/Vista/client_VistaEnviar.cpp
 			Cliente/Vista/client_ModelComboBoxAreasDeVision.h
 			Cliente/Control/client_ControladorVistaEnviar.cpp
+			Cliente/Control/client_ControladorVistaDescargaImagenDeProductos.cpp
 			Cliente/Vista/client_VistaDescargaImagenDeProductos2.cpp
 			Cliente/Vista/client_ProductosList.cpp
 			#Common/common_Cliente.cpp

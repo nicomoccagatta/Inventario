@@ -31,13 +31,11 @@ const std::list<AreaDeVision*>* ModeloObservable::getAreasDeVision() const{
 const std::list<Producto*>* ModeloObservable::getProductos() const {
 	return this->cliente.getProductos();
 }
-/*
-Template Matching foto
-M|ID|FECHA|altoIMAGEN|anchoIMAGEN|tamanioIMAGEN|\n
-ok|\n
-BYTESIMAGEN
-ok|\n ó error|\n
-*/
+
+std::string ModeloObservable::getImagenConId(unsigned long int id){
+	return this->cliente.getImagenConId(id);
+}
+
 void ModeloObservable::enviarFotoTemplateMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen){
 	this->cliente.enviarFotoTemplateMatching(idArea, fecha, rutaDeImagen);
 }

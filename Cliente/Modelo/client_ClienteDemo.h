@@ -32,6 +32,8 @@ public:
 	const std::list<AreaDeVision*>* getAreasDeVision() const;
 	const std::list<Producto*>* getProductos() const;
 
+	std::string getImagenConId(unsigned long int id);
+
 	void enviarFotoTemplateMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen);
 
 	void cerrarConeccion();

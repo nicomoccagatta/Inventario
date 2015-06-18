@@ -10,8 +10,10 @@
 
 #include "client_ClienteDemo.h"
 #include "common_AreaDeVision.h"
+#include "common_Imagen.h"
 
 using common::AreaDeVision;
+using common::Imagen;
 
 class ModeloObservable {
 
@@ -28,7 +30,7 @@ public:
 	const std::list<AreaDeVision*>* getAreasDeVision() const;
 	const std::list<Producto*>* getProductos() const;
 
-
+	std::string getImagenConId(unsigned long int id);
 
 	void enviarFotoTemplateMatching(unsigned long int id, std::string& fecha,std::string& rutaDeImagen);
 	void enviarFotoFeatureMatching(unsigned long int id, std::string& fecha, std::string& rutaDeImagen);

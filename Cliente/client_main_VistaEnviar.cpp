@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include "Control/client_ControladorVistaEnviar.h"
+#include "Control/client_ControladorVistaDescargaImagenDeProductos.h"
 #include "Modelo/client_ModeloObservable.h"
 #include "Vista/client_VistaEnviar.h"
 #include "Vista/client_VistaDescargaImagenDeProductos2.h"

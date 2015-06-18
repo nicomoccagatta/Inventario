@@ -22,10 +22,11 @@ Data::~Data() {
 	// TODO Auto-generated destructor stub
 }
 
-void Data::agregarProducto(std::string nombre, std::string descripcion,
+Producto* Data::agregarProducto(std::string nombre, std::string descripcion,
 					unsigned long int id, unsigned long int idIcono){
 	Producto* nuevo = new Producto(id, nombre, descripcion, new std::list<Stock*>, idIcono, new std::list<unsigned long int>);
 	this->productos.push_back(nuevo);
+	return nuevo;
 }
 
 void Data::agregarAreaDeVision(std::string ubicacion, std::string tipoDeCapturador,

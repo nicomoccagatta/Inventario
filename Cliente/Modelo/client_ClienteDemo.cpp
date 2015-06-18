@@ -31,7 +31,9 @@ void ClienteDemo::cerrarConeccion(){
 
 void ClienteDemo::actualizarIdImagenesDeProducto(Producto* prod){
 	if (this->client.estaConectado()){
-		protocolo.enviarMensaje(this->client,"C|"+prod->getId());
+		std::stringstream ss;
+		ss << "C|" << prod->getId() << "|";
+		protocolo.enviarMensaje(this->client,ss.str());
 	}
 	std::string respuesta = protocolo.recibirMensaje(this->client);
 
@@ -42,16 +44,22 @@ void ClienteDemo::actualizarIdImagenesDeProducto(Producto* prod){
 
 	parser.tokenize(respuesta);
 
+	std::list<unsigned long int>* ids = prod->getIdsImagenes();
+
 	unsigned int argum = 4;
 	try{
 		while (true){
-			unsigned long int id;
+			unsigned long int id = NAN;
 			std::stringstream ss;
 			ss << parser.getParametro(argum);
+			if (ss.str() == "\n")
+				return;
 			ss >> id;
 
-			//prod->
+			std::cerr << "agrego " << ss.str() << "\n";
 
+			ids->push_back(id);
+			++argum;
 		}
 	}catch (std::exception& e){
 		//std::cout << "ya se manejar excepciones:)\n";
@@ -91,11 +99,22 @@ bool ClienteDemo::actualizarProductos(){
 			ss.str("");
 			ss << parser.getParametro(argum+3);
 			ss >> idIcono;
-			this->data.agregarProducto(nombre,descripcion,id, idIcono);
+			Producto* nuevo = this->data.agregarProducto(nombre,descripcion,id, idIcono);
 
 			std::cerr << "Agregando Producto:" << id << " "
 					  << nombre << " " << descripcion
 					  << " id Icono: " << idIcono << std::endl;
+
+			this->actualizarIdImagenesDeProducto(nuevo);
+
+			std::list<unsigned long int>* ids = nuevo->getIdsImagenes();
+
+			std::list<unsigned long int>::iterator it;
+
+			for (it=ids->begin(); it!=ids->end();++it){
+				std::cerr << "ID IMAGEN AGREGADA AL MODELO: " << *it << "\n";
+			}
+
 			argum+=4;
 		}
 	}catch (std::exception& e){
@@ -169,6 +188,55 @@ const std::list<AreaDeVision*>* ClienteDemo::getAreasDeVision() const{
 
 const std::list<Producto*>* ClienteDemo::getProductos() const {
 	return data.getProductos();
+}
+
+std::string ClienteDemo::getImagenConId(unsigned long int id){
+	/*	enviarMensaje(comando);
+	if (skt.estaConectado()){
+		std::string mensajeDatosImagen = recibirMensaje();
+		if (mensajeDatosImagen != (kMensajeError+protocolo.getFinalizadorDeMensaje())){
+			const unsigned int altoImagen = Protocolo::extraerArgumentoNumericoDeComando(mensajeDatosImagen,2);
+			const unsigned int anchoImagen = Protocolo::extraerArgumentoNumericoDeComando(mensajeDatosImagen,3);
+			const unsigned long int tamanioImagen = Protocolo::extraerArgumentoNumericoDeComando(mensajeDatosImagen,4);
+			protocolo.enviarMensaje(skt, kMensajeOK);
+			return protocolo.recibirImagen(skt,altoImagen,anchoImagen,tamanioImagen);
+		}
+	}
+	return Imagen("");
+}
+
+	 */
+	if (this->client.estaConectado()){
+		std::stringstream ss;
+		ss << "R|" << id << "|";
+		protocolo.enviarMensaje(this->client,ss.str());
+	}
+	std::string respuestaDatosImagen = protocolo.recibirMensaje(this->client);
+	std::cerr << "RESPUESTA A R|" << id << "|\n";
+	std::cerr << respuestaDatosImagen << "\n";
+	if (respuestaDatosImagen == "error|\n")
+		return "";
+	const unsigned int altoImagen = Protocolo::extraerArgumentoNumericoDeComando(respuestaDatosImagen,2);
+	const unsigned int anchoImagen = Protocolo::extraerArgumentoNumericoDeComando(respuestaDatosImagen,3);
+	const unsigned long int tamanioImagen = Protocolo::extraerArgumentoNumericoDeComando(respuestaDatosImagen,4);
+	protocolo.enviarMensaje(this->client, kMensajeOK);
+
+	std::cerr << "Recibiendo IMAGEN...\n";
+	Imagen img = protocolo.recibirImagen(this->client,altoImagen,anchoImagen,tamanioImagen);
+	std::cerr << "IMAGEN recibida\n";
+
+	if (!img.esValida()){
+		std::cerr << "No recibio bien\n";
+		return "";
+	}
+
+	std::stringstream ss;
+	ss << "clienteDemoImagenes/" << id << ".jpg";
+	std::string ruta(ss.str());
+
+	img.guardarEnArchivo(ruta);
+
+	return ruta;
 }
 
 void ClienteDemo::enviarFotoTemplateMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen){

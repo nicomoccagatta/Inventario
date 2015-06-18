@@ -33,6 +33,7 @@ void Imagen::guardarEnArchivo(const std::string& rutaArchivo) const{
 		cv::imwrite(rutaArchivo,matrizImagen,parametros);
 	} catch(...) {
 		throw "ERROR: No es posible guardar la imagen";
+		std::cerr << "ERROR: No es posible guardar la imagen";
 	}
 }
 
@@ -106,6 +107,8 @@ void Imagen::mostrarImagen(){
 
 	namedWindow("Display Image", CV_WINDOW_AUTOSIZE);
 	imshow("Display Image", this->matrizImagen);
+
+	waitKey(5000);
 }
 
 } /* namespace common */

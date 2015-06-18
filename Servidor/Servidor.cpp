@@ -24,8 +24,10 @@ int main(int argc, char* argv[]) {
   Servidor server;
   if (server.conectado())
     server.start();
-  else
+  else{
     return kCodigoRetorno;
+    std::cerr << "SOCKETS MAL\n";
+  }
   std::string rta("");
   while (rta != "q") {
     std::cin >> rta;

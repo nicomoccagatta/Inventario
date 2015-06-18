@@ -10,12 +10,13 @@
 #include <gtkmm-2.4/gtkmm.h>
 
 #include "client_VistaDescargaImagenDeProductos2.h"
-#include "../../Common/common_AreaDeVision.h"
-#include "../../Common/common_Producto.h"
+#include "common_AreaDeVision.h"
+#include "common_Producto.h"
 
 using common::AreaDeVision;
 
-VistaDescargaImagenDeProductos2::VistaDescargaImagenDeProductos2(ModeloObservable* modelo){
+VistaDescargaImagenDeProductos2::VistaDescargaImagenDeProductos2(ModeloObservable* modelo):
+	controlador(modelo,this){
 
 	this->modelo = modelo;
 
@@ -59,7 +60,8 @@ VistaDescargaImagenDeProductos2::VistaDescargaImagenDeProductos2(ModeloObservabl
 	m_ButtonBox.set_spacing(6);
 	m_ButtonBox.set_layout(Gtk::BUTTONBOX_SPREAD);
 
-	m_VBox.pack_start(m_HBoxImagenes, Gtk::PACK_EXPAND_WIDGET);
+	m_HBoxImagenes = new Gtk::HBox(false, 5);
+	m_VBox.pack_start(*m_HBoxImagenes, Gtk::PACK_SHRINK);
 
 	//Gtk::Image a("/home/ale/git/Inventario/Servidor/imagenes/0.jpg");
 
@@ -68,7 +70,7 @@ VistaDescargaImagenDeProductos2::VistaDescargaImagenDeProductos2(ModeloObservabl
 	m_AtrasButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaDescargaImagenDeProductos2::on_button_atras) );
 	m_DescargarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaDescargaImagenDeProductos2::on_button_descargar));
 
-	this->update_lista_imagenes();
+	//this->update_lista_imagenes();
 
 	//SIGNALSSSSSSSSSSSs
 	refTreeSelection = m_ProductosTreeView.get_selection();
@@ -82,20 +84,13 @@ VistaDescargaImagenDeProductos2::~VistaDescargaImagenDeProductos2() {
 	// TODO Auto-generated destructor stub
 }
 
-bool VistaDescargaImagenDeProductos2::on_imagen_button_press(GdkEventButton* m){
-	std::cerr << "APRETE UNA IMAGEN\n";
-	return true;
-}
-
 void VistaDescargaImagenDeProductos2::on_producto_seleccionado(){
 	Gtk::TreeModel::iterator iter = refTreeSelection->get_selected();
 	if(iter){ //If anything is selected
 		Gtk::TreeModel::Row row = *iter;
 		std::cerr << "APRETE EL PRODUCTO " << row[m_ProductosList.m_Columns.m_col_text] <<"\n";
-		//controlador->on_producto_seleccionado(row[m_ProductosList.m_Columns.m_col_data])
+		controlador.on_producto_seleccionado(row[m_ProductosList.m_Columns.m_col_data]);
 	}
-
-
 }
 
 void VistaDescargaImagenDeProductos2::update(){
@@ -125,7 +120,7 @@ void VistaDescargaImagenDeProductos2::update_lista_productos(){
 		Gtk::TreeModel::Row row = *(m_refProductosListStore->append());
 		row[m_ProductosList.m_Columns.m_col_icon_id] = (*it)->getIdIcono();
 		row[m_ProductosList.m_Columns.m_col_text] = (*it)->getNombre();
-		//row[m_ProductosList.m_Columns.m_col_data] = *it;
+		row[m_ProductosList.m_Columns.m_col_data] = *it;
 	}
 }
 
@@ -138,37 +133,51 @@ void VistaDescargaImagenDeProductos2::on_button_atras(){
 
 void VistaDescargaImagenDeProductos2::on_button_descargar(){
 	std::cerr << "DESCARGAR\n";
+	//this->radioGroup.
 }
 
-void VistaDescargaImagenDeProductos2::update_lista_imagenes(){
-	Gtk::Image* image1 = Gtk::manage(new Gtk::Image());
-	image1->set("/home/ale/git/Inventario/Servidor/imagenes/0.jpg");
-	Glib::RefPtr<Gdk::Pixbuf> scaled1 = image1->get_pixbuf()->scale_simple(150,150,Gdk::INTERP_BILINEAR);
-	image1->set(scaled1);
+void VistaDescargaImagenDeProductos2::update_lista_imagenes(std::list<unsigned long int>* ids){
+	//m_VBox.remove(*m_HBoxImagenes);
+	//delete m_HBoxImagenes;
+	//m_HBoxImagenes = new Gtk::HBox(false, 5);
+	//m_VBox.pack_start(*m_HBoxImagenes, Gtk::PACK_SHRINK);
 
-	Gtk::Image* image2 = Gtk::manage(new Gtk::Image());
-	image2->set("/home/ale/git/Inventario/Servidor/imagenes/37.jpg");
-	Glib::RefPtr<Gdk::Pixbuf> scaled2 = image2->get_pixbuf()->scale_simple(150,150,Gdk::INTERP_BILINEAR);
-	image2->set(scaled2);
+	/*Glib::ListHandle<Widget*> radios = m_HBoxImagenes->get_children();
 
+	Glib::ListHandle<Widget*>::const_iterator radioIter;
 
-	Gtk::VBox* vbox1 = Gtk::manage(new Gtk::VBox());
-	Gtk::RadioButton* radio1 = Gtk::manage(new Gtk::RadioButton("radio1"));
+	for (radioIter = radios.begin(); radioIter!=radios.end(); ++radioIter){
+		delete (*radioIter);
+	}
 
-	Gtk::VBox* vbox2 = Gtk::manage(new Gtk::VBox());
-	Gtk::RadioButton* radio2 = Gtk::manage(new Gtk::RadioButton("radio2"));
+	Gtk::Box_Helpers::BoxList *childList = &m_HBoxImagenes->children();
+	Gtk::Box_Helpers::BoxList::iterator start = childList->begin();
+	Gtk::Box_Helpers::BoxList::iterator end = childList->end();
 
-	radio1->set_group(radioGroup);
-	radio2->set_group(radioGroup);
+	childList->erase(start, end);
+*/
+	std::list<unsigned long int>::iterator it;
 
-	vbox1->pack_start(*image1, true, true, 0);
-	vbox1->pack_start(*radio1, true, true, 0);
+	for (it=ids->begin(); it!=ids->end();++it){
+		std::string ruta = modelo->getImagenConId(*it);
 
-	vbox2->pack_start(*image2, Gtk::PACK_EXPAND_WIDGET);
-	vbox2->pack_start(*radio2, Gtk::PACK_EXPAND_WIDGET);
+		Gtk::Image* image = Gtk::manage(new Gtk::Image());
+		image->set(ruta.c_str());
+		Glib::RefPtr<Gdk::Pixbuf> scaled1 = image->get_pixbuf()->scale_simple(150,150,Gdk::INTERP_BILINEAR);
+		image->set(scaled1);
 
-	m_HBoxImagenes.pack_start(*vbox1, true, true, 5);
-	m_HBoxImagenes.pack_start(*vbox2, true, true, 5);
+		//Gtk::VBox* vbox = Gtk::manage(new Gtk::VBox());
+		Gtk::RadioButton* radio = Gtk::manage(new Gtk::RadioButton());
 
+		radio->set_image(*image);
+		radio->set_group(radioGroup);
+
+		//vbox->pack_start(*image, Gtk::PACK_SHRINK);
+		//vbox->pack_start(*radio, Gtk::PACK_SHRINK);
+
+		m_HBoxImagenes->pack_start(*radio, Gtk::PACK_SHRINK);
+	}
+	get_settings()->set_property("gtk-button-images",true);
+	show_all_children();
 }
 

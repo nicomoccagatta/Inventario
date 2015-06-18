@@ -13,14 +13,17 @@
 #include <iostream>
 
 #include "client_ProductosList.h"
-
 //#include "../Control/client_ControladorVistaDescargaImagenDeProductos.h"
+
+#include "../Control/client_ControladorVistaDescargaImagenDeProductos.h"
 #include "../Modelo/client_ModeloObservable.h"
+
+class ControladorVistaDescargaImagenDeProductos;
 
 class VistaDescargaImagenDeProductos2: public Gtk::Window {
 
 	ModeloObservable* modelo;
-	//ControladorVistaDescargaImagenDeProductos* controlador;
+	ControladorVistaDescargaImagenDeProductos controlador;
 
 public:
 	VistaDescargaImagenDeProductos2(ModeloObservable* modelo);
@@ -29,6 +32,8 @@ public:
 	void asignarModelo(ModeloObservable* modelo);
 	//void asignarControlador(ControladorVistaDescargaImagenDeProductos* controlador);
 
+	void update_lista_imagenes(std::list<unsigned long int>* ids);
+
 private:
 	void update();
 	void update_lista_productos();
@@ -36,8 +41,6 @@ private:
 	bool on_imagen_button_press(GdkEventButton*);
 
 	void on_producto_seleccionado();
-
-	void update_lista_imagenes();
 
 protected:
 	//signal handlers:
@@ -53,7 +56,7 @@ protected:
 	ProductosList m_ProductosList;
 
 	Gtk::VBox m_VBox;
-	Gtk::HBox m_HBoxImagenes;
+	Gtk::HBox* m_HBoxImagenes;
 	Gtk::HButtonBox m_ButtonBox;
 
 	Gtk::Button m_AtrasButton;

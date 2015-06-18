@@ -35,7 +35,7 @@ public:
 	}
 
 	/*PRODUCTO*/
-	void agregarProducto(std::string nombre, std::string descripcion,unsigned long int id, unsigned long int idIcono);
+	Producto* agregarProducto(std::string nombre, std::string descripcion,unsigned long int id, unsigned long int idIcono);
 	void eliminarProductos();
 
 	/*AREA DE VISION*/

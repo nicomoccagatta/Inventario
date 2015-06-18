@@ -33,6 +33,7 @@ int main(int argc, char *argv[]) {
 		ventanaPPAL->show();
 		Gtk::Main::run();
 	}
+	std::cout << "Esta terminando" << std::endl;
 	delete ventanaPPAL;
 	return 0;
 }

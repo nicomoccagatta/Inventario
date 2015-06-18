@@ -11,7 +11,9 @@
 #include <gtkmm-2.4/gtkmm.h>
 #include "ModeloAdmin/admin_ModeloObservable.h"
 #include "ControlAdmin/ControlLP.h"
+#include "ControlAdmin/ControlLAV.h"
 #include "VistaListadoProductos.h"
+#include "VistaListadoAreasDeVision.h"
 
 class VistaVentanaPPAL: public Gtk::Window {
 public:
@@ -33,9 +35,12 @@ private:
 	Gtk::Button *listado_av,*agregar_av;
 	Gtk::Button *sgp,*spav,*shpp;
 	Gtk::Viewport *panelDinamico;
+	Gtk::HBox *HBoxDinamico;
 
 	ControlLP controlLP;
+	ControlLAV controlLAV;
 	VistaListadoProductos vistaLP;
+	VistaListadoAreasDeVision vistaLAV;
 };
 
 #endif /* ADMINISTRADOR_VISTAADMIN_VISTAVENTANAPPAL_H_ */

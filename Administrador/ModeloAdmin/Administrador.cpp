@@ -68,10 +68,6 @@ bool Administrador::actualizarProductos(){
 
 bool Administrador::actualizarAreasDeVision(){
 	if (this->admin.estaConectado()){
-		//protocolo.enviarMensaje(this->client,"G|CLOSET|FOTO|");
-		//std::cout << protocolo.recibirMensaje(this->client);
-		//protocolo.enviarMensaje(this->client,"G|PASILLO|VIDEO|");
-		//std::cout << protocolo.recibirMensaje(this->client);
 		protocolo.enviarMensaje(this->admin,"B|");
 	}
 	std::string respuesta = protocolo.recibirMensaje(this->admin);
@@ -82,7 +78,6 @@ bool Administrador::actualizarAreasDeVision(){
 	this->data.eliminarAreasDeVision();
 
 	CommandParser parser;
-	//std::cout << respuesta << "\n";
 
 	parser.tokenize(respuesta);
 	unsigned int argum = 1;
@@ -97,7 +92,6 @@ bool Administrador::actualizarAreasDeVision(){
 			//icono
 			this->data.agregarAreaDeVision(ubicacion,tipo,id);
 
-			std::cout << "Agregando Area:" << id << " " << ubicacion << " " << tipo << std::endl;
 			argum+=3;
 		}
 	}catch (std::exception& e){

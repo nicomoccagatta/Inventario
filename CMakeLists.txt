@@ -43,6 +43,7 @@ add_executable(Admin
 			Administrador/admin_main.cpp
 			Administrador/ControlAdmin/admin_ControladorVistaListadoP.cpp
 			Administrador/ControlAdmin/ControlLP.cpp
+			Administrador/ControlAdmin/ControlLAV.cpp
 			Administrador/ModeloAdmin/Administrador.cpp
 			Administrador/ModeloAdmin/admin_Datos.cpp
 			Administrador/ModeloAdmin/admin_ModeloObservable.cpp
@@ -50,7 +51,9 @@ add_executable(Admin
 			Administrador/ModeloAdmin/admin_Subject.cpp
 			Administrador/VistaAdmin/VistaVentanaPPAL.cpp
 			Administrador/VistaAdmin/VistaListadoProductos.cpp
-			Administrador/VistaAdmin/VistaItemListado.cpp
+			Administrador/VistaAdmin/VistaListadoAreasDeVision.cpp
+			Administrador/VistaAdmin/ListaProductos.cpp
+			Administrador/VistaAdmin/ListaAV.cpp
 			Common/common_SocketCliente.cpp
 			Common/common_AreaDeVision.cpp
 			Common/common_Mutex.cpp

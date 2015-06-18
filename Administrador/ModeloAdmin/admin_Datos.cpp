@@ -45,4 +45,5 @@ void Datos::eliminarAreasDeVision(){
 		//std::cout << (*it)->getId() << (*it)->getTipoDeCapturador() << (*it)->getUbicacion();
 		delete *(it);
 	}
+	areasDeVision.clear();
 }

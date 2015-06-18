@@ -17,7 +17,7 @@
 
 
 
-
+/*
 int main(int argc, char* argv[]) {
   ModeloObservable modelo;
 
@@ -28,11 +28,9 @@ int main(int argc, char* argv[]) {
 
   VistaDescargaImagenDeProductos2 vista(&modelo);
 
-  //vista.asignarModelo(&modelo);
-
   vista.show();
 
   Gtk::Main::run();
 
   return 0;
-}
+}*/

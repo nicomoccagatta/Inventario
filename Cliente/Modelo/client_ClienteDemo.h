@@ -35,6 +35,10 @@ public:
 	void enviarFotoTemplateMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen);
 
 	void cerrarConeccion();
+
+private:
+	void actualizarIdImagenesDeProducto(Producto* prod);
+	void agregarImagenACocaLata(std::string ruta);
 };
 
 #endif /* CLIENTE_MODELO_CLIENT_CLIENTEDEMO_H_ */

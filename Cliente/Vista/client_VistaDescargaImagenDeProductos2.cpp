@@ -37,17 +37,16 @@ VistaDescargaImagenDeProductos2::VistaDescargaImagenDeProductos2(ModeloObservabl
 
 	m_ProductosTreeView.set_model(m_refProductosListStore);
 
-	//Add the Model's column to the View's columns:
-	m_ProductosTreeView.append_column("Iconos", m_ProductosList.m_Columns.m_col_icon_id);
-	m_ProductosTreeView.append_column("Productos", m_ProductosList.m_Columns.m_col_text);
-
 	const std::list<Producto*>* prods = modelo->getProductos();
 
 	size_t cantProductos = prods->size();
 	std::cerr << "Hay " << cantProductos << " productos\n";
 
 	this->update_lista_productos();
-	//m_ProductosList.update(prods);
+	//Add the Model's column to the View's columns:
+	m_ProductosTreeView.append_column("IdIcono", m_ProductosList.m_Columns.m_col_icon_id);
+	m_ProductosTreeView.append_column("Productos", m_ProductosList.m_Columns.m_col_text);
+
 	m_hPaned.pack1(m_ProductosList);
 
 	m_VBox.pack_end(m_ButtonBox, Gtk::PACK_SHRINK);
@@ -69,11 +68,12 @@ VistaDescargaImagenDeProductos2::VistaDescargaImagenDeProductos2(ModeloObservabl
 	m_AtrasButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaDescargaImagenDeProductos2::on_button_atras) );
 	m_DescargarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaDescargaImagenDeProductos2::on_button_descargar));
 
-	ponerImagenesSeleccion();
+	this->update_lista_imagenes();
 
-
-	//refTreeSelection->signal_changed().connect(
-		//    sigc::mem_fun(*this, &VistaDescargaImagenDeProductos2::on_producto_seleccionado) );
+	//SIGNALSSSSSSSSSSSs
+	refTreeSelection = m_ProductosTreeView.get_selection();
+	refTreeSelection->signal_changed().connect(
+		    sigc::mem_fun(*this, &VistaDescargaImagenDeProductos2::on_producto_seleccionado) );
 
 	show_all_children();
 }
@@ -88,12 +88,14 @@ bool VistaDescargaImagenDeProductos2::on_imagen_button_press(GdkEventButton* m){
 }
 
 void VistaDescargaImagenDeProductos2::on_producto_seleccionado(){
+	Gtk::TreeModel::iterator iter = refTreeSelection->get_selected();
+	if(iter){ //If anything is selected
+		Gtk::TreeModel::Row row = *iter;
+		std::cerr << "APRETE EL PRODUCTO " << row[m_ProductosList.m_Columns.m_col_text] <<"\n";
+		//controlador->on_producto_seleccionado(row[m_ProductosList.m_Columns.m_col_data])
+	}
 
-}
 
-void VistaDescargaImagenDeProductos2::asignarModelo(ModeloObservable* modelo){
-	this->modelo=modelo;
-	this->update();
 }
 
 void VistaDescargaImagenDeProductos2::update(){
@@ -106,11 +108,8 @@ void VistaDescargaImagenDeProductos2::update(){
 
 	std::cerr << "Hay " << cantProductos << " productos\n";
 
-	m_ProductosList.update(prods);
-	m_hPaned.add1(m_ProductosList);
 
-
-	show_all_children();
+	//show_all_children();
 }
 
 void VistaDescargaImagenDeProductos2::update_lista_productos(){
@@ -120,15 +119,17 @@ void VistaDescargaImagenDeProductos2::update_lista_productos(){
 	std::list<Producto*>::const_iterator it;
 
 	for (it=prods->begin(); it!=prods->end();++it){
-		std::cerr << (*it)->getId() << " " << (*it)->getNombre() << std::endl;
+		std::cerr << (*it)->getId() << " " << (*it)->getNombre()
+				<< " iconoID: " << (*it)->getIdIcono() << std::endl;
 
 		Gtk::TreeModel::Row row = *(m_refProductosListStore->append());
-		row[m_ProductosList.m_Columns.m_col_text] = (*it)->getNombre();
 		row[m_ProductosList.m_Columns.m_col_icon_id] = (*it)->getIdIcono();
-		row[m_ProductosList.m_Columns.m_col_data] = *it;
+		row[m_ProductosList.m_Columns.m_col_text] = (*it)->getNombre();
+		//row[m_ProductosList.m_Columns.m_col_data] = *it;
 	}
-	show_all_children();
 }
+
+
 
 void VistaDescargaImagenDeProductos2::on_button_atras(){
 	hide();
@@ -139,7 +140,7 @@ void VistaDescargaImagenDeProductos2::on_button_descargar(){
 	std::cerr << "DESCARGAR\n";
 }
 
-void VistaDescargaImagenDeProductos2::ponerImagenesSeleccion(){
+void VistaDescargaImagenDeProductos2::update_lista_imagenes(){
 	Gtk::Image* image1 = Gtk::manage(new Gtk::Image());
 	image1->set("/home/ale/git/Inventario/Servidor/imagenes/0.jpg");
 	Glib::RefPtr<Gdk::Pixbuf> scaled1 = image1->get_pixbuf()->scale_simple(150,150,Gdk::INTERP_BILINEAR);

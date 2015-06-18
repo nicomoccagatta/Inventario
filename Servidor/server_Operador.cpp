@@ -153,7 +153,7 @@ const std::string Operador::detallarProducto(const std::string& comandoDeOperaci
 		std::stringstream acumulador;
 		acumulador << productoADetallar->getNombre() << kMensajeDelimitadorCampos << productoADetallar->getDescripcion() << kMensajeDelimitadorCampos<< productoADetallar->getIdIcono() << kMensajeDelimitadorCampos;//faltan imagenes
 		for (std::list<unsigned long int>::const_iterator idImagen = productoADetallar->getIdsImagenes()->begin(); idImagen!= productoADetallar->getIdsImagenes()->end(); ++idImagen)
-				acumulador << (*idImagen);
+				acumulador << (*idImagen) << kMensajeDelimitadorCampos;
 		return acumulador.str();
 	} else {
 		return kMensajeError;

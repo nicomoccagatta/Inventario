@@ -37,7 +37,7 @@ private:
 
 	void on_producto_seleccionado();
 
-	void ponerImagenesSeleccion();
+	void update_lista_imagenes();
 
 protected:
 	//signal handlers:
@@ -46,6 +46,7 @@ protected:
 
 	Glib::RefPtr<Gtk::ListStore> m_refProductosListStore; //The Tree Model.
 	Gtk::TreeView m_ProductosTreeView; //The Tree View.
+	Glib::RefPtr<Gtk::TreeSelection> refTreeSelection; //The selected
 
 	Gtk::HPaned m_hPaned;
 

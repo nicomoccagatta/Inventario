@@ -75,8 +75,16 @@
             <Cantidad>0</Cantidad>
         </Stock>
     </StockHistorico>
-    <Icono>0</Icono>
-    <Imagenes />
+    <Icono>3</Icono>
+    <Imagenes>
+        <Imagen>38</Imagen>
+        <Imagen>39</Imagen>
+        <Imagen>40</Imagen>
+        <Imagen>41</Imagen>
+        <Imagen>42</Imagen>
+        <Imagen>43</Imagen>
+        <Imagen>44</Imagen>
+    </Imagenes>
 </Producto>
 <Producto id="17">
     <Nombre>jabon</Nombre>

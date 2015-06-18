@@ -29,6 +29,37 @@ void ClienteDemo::cerrarConeccion(){
 	this->client.cerrarConeccion();
 }
 
+void ClienteDemo::actualizarIdImagenesDeProducto(Producto* prod){
+	if (this->client.estaConectado()){
+		protocolo.enviarMensaje(this->client,"C|"+prod->getId());
+	}
+	std::string respuesta = protocolo.recibirMensaje(this->client);
+
+	if (respuesta == "error|\n")
+		return;
+
+	CommandParser parser;
+
+	parser.tokenize(respuesta);
+
+	unsigned int argum = 4;
+	try{
+		while (true){
+			unsigned long int id;
+			std::stringstream ss;
+			ss << parser.getParametro(argum);
+			ss >> id;
+
+			//prod->
+
+		}
+	}catch (std::exception& e){
+		//std::cout << "ya se manejar excepciones:)\n";
+		//std::cout << e.what();
+	}
+
+}
+
 bool ClienteDemo::actualizarProductos(){
 	if (this->client.estaConectado()){
 		protocolo.enviarMensaje(this->client,"A|");
@@ -42,17 +73,7 @@ bool ClienteDemo::actualizarProductos(){
 
 	CommandParser parser;
 
-	//std::cout << respuesta << "\n";
-
 	parser.tokenize(respuesta);
-
-	/*unsigned int p=1;
-	try{
-		while (true){
-			std::cout << parser.getParametro(p++);
-		}
-	}catch (std::exception& e){
-	}*/
 
 	unsigned int argum = 1;
 	try{
@@ -72,10 +93,10 @@ bool ClienteDemo::actualizarProductos(){
 			ss >> idIcono;
 			this->data.agregarProducto(nombre,descripcion,id, idIcono);
 
-			std::cout << "Agregando Producto:" << id << " "
+			std::cerr << "Agregando Producto:" << id << " "
 					  << nombre << " " << descripcion
 					  << " id Icono: " << idIcono << std::endl;
-			argum+=4;//4 con icono
+			argum+=4;
 		}
 	}catch (std::exception& e){
 		//std::cout << "ya se manejar excepciones:)\n";
@@ -84,12 +105,29 @@ bool ClienteDemo::actualizarProductos(){
 	return true;
 }
 
+void ClienteDemo::agregarImagenACocaLata(std::string ruta){
+	Imagen img(ruta);
+	img.mostrarImagen();
+	protocolo.enviarImagen(this->client,img);
+
+	std::string idImagen = protocolo.recibirMensaje(this->client);
+
+	std::cerr << "ID: " << idImagen;
+
+	protocolo.enviarMensaje(this->client,"E|16|Coca|lata chiquita y golpeada|3|"+idImagen+"|");
+
+	std::cerr << protocolo.recibirMensaje(this->client);
+}
+
 bool ClienteDemo::actualizarAreasDeVision(){
 	if (this->client.estaConectado()){
-		//protocolo.enviarMensaje(this->client,"G|CLOSET|FOTO|");
-		//std::cout << protocolo.recibirMensaje(this->client);
-		//protocolo.enviarMensaje(this->client,"G|PASILLO|VIDEO|");
-		//std::cout << protocolo.recibirMensaje(this->client);
+		/*this->agregarImagenACocaLata("/home/ale/git/Inventario/Imagenes/Coca-cola/lunes.jpg");
+		this->agregarImagenACocaLata("/home/ale/git/Inventario/Imagenes/Coca-cola/martes.png");
+		this->agregarImagenACocaLata("/home/ale/git/Inventario/Imagenes/Coca-cola/miercoles.jpg");
+		this->agregarImagenACocaLata("/home/ale/git/Inventario/Imagenes/Coca-cola/jueves.png");
+		this->agregarImagenACocaLata("/home/ale/git/Inventario/Imagenes/Coca-cola/viernes.jpg");
+		this->agregarImagenACocaLata("/home/ale/git/Inventario/Imagenes/Coca-cola/sabado.jpg");
+*/
 		protocolo.enviarMensaje(this->client,"B|");
 	}
 	std::string respuesta = protocolo.recibirMensaje(this->client);
@@ -101,18 +139,8 @@ bool ClienteDemo::actualizarAreasDeVision(){
 
 	CommandParser parser;
 
-	//std::cout << respuesta << "\n";
-
 	parser.tokenize(respuesta);
-/*
-	unsigned int p=1;
-	try{
-		while (true){
-			std::cout << parser.getParametro(p++);
-		}
-	}catch (std::exception& e){
-	}
-*/
+
 	unsigned int argum = 1;
 	try{
 		while (true){
@@ -122,10 +150,10 @@ bool ClienteDemo::actualizarAreasDeVision(){
 			ss >> id;
 			std::string ubicacion = parser.getParametro(argum+1);
 			std::string tipo = parser.getParametro(argum+2);
-			//icono
+
 			this->data.agregarAreaDeVision(ubicacion,tipo,id);
 
-			std::cout << "Agregando Area:" << id << " " << ubicacion << " " << tipo << std::endl;
+			std::cerr << "Agregando Area:" << id << " " << ubicacion << " " << tipo << std::endl;
 			argum+=3;
 		}
 	}catch (std::exception& e){

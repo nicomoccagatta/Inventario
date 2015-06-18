@@ -10,11 +10,10 @@
 #include "Control/client_ControladorVistaEnviar.h"
 #include "Modelo/client_ModeloObservable.h"
 #include "Vista/client_VistaEnviar.h"
+#include "Vista/client_VistaDescargaImagenDeProductos2.h"
 
 #define VISTA_ENVIAR "Enviar_Imagen_2.4.glade"
-#define VISTA_DESCARGAR "Descargar_imagenes_Productos.glade"
 
-/*
 int crearAPartirDeGlade(Glib::RefPtr<Gtk::Builder>* refBuilder);
 
 int main(int argc, char* argv[]) {
@@ -25,7 +24,9 @@ int main(int argc, char* argv[]) {
 
   Gtk::Main kit(argc, argv);
 
+  VistaDescargaImagenDeProductos2 vista(&modelo);
 
+  vista.show();
 
   //Load the Glade file and instiate its widgets:
   Glib::RefPtr<Gtk::Builder> refBuilder = Gtk::Builder::create();
@@ -44,7 +45,8 @@ int main(int argc, char* argv[]) {
 
 	  //Start:
 	  pDialogoEnviar->show();
-	  pDialogoEnviar->run();
+	  //pDialogoEnviar->run();
+	  Gtk::Main::run();
   }
 
   delete pDialogoEnviar;
@@ -76,4 +78,4 @@ int crearAPartirDeGlade(Glib::RefPtr<Gtk::Builder>* refBuilder){
 	}
 
 }
-*/
+

@@ -24,13 +24,14 @@ public:
 	class ModelColumns: public Gtk::TreeModel::ColumnRecord{
 	public:
 		ModelColumns(){
+			add(m_col_icon_id);
 			add(m_col_text);
 			add(m_col_data);
 		}
 
+		Gtk::TreeModelColumn<unsigned long int> m_col_icon_id;
 		Gtk::TreeModelColumn<Glib::ustring> m_col_text;
 		Gtk::TreeModelColumn<Producto*> m_col_data;
-		Gtk::TreeModelColumn<unsigned long int> m_col_icon_id;
 	};
 
 	ModelColumns m_Columns;

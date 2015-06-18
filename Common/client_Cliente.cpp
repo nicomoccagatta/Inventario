@@ -62,10 +62,12 @@ const size_t Cliente::realizarConsultas() {
     while (skt.estaConectado()) {
       getline(std::cin, mensajeAEnviar);
       if (strcmp(mensajeAEnviar.c_str(), kMensajeFinDeSesion) != 0) {
-    	templateMatching(mensajeAEnviar,Imagen("aInventariar.jpg"));
+
+    	protocolo.enviarMensaje(this->skt,mensajeAEnviar);
+    	//templateMatching(mensajeAEnviar,Imagen("aInventariar.jpg"));
     	if (skt.estaConectado()){
-    	std::string mensajeRecibido = recibirMensaje();
-    	std::cout << mensajeRecibido;
+    		std::string mensajeRecibido = recibirMensaje();
+    		std::cout << mensajeRecibido;
     	} else {
     		return 1;
     	}

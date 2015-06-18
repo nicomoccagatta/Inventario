@@ -32,7 +32,8 @@ public:
 	void asignarModelo(ModeloObservable* modelo);
 	//void asignarControlador(ControladorVistaDescargaImagenDeProductos* controlador);
 
-	void update_lista_imagenes(std::list<unsigned long int>* ids);
+	void update_lista_imagenes(std::list<unsigned long int>* ids,
+			Gtk::ScrolledWindow* imagenes_container);
 
 private:
 	void update();
@@ -56,7 +57,7 @@ protected:
 	ProductosList m_ProductosList;
 
 	Gtk::VBox m_VBox;
-	Gtk::HBox* m_HBoxImagenes;
+	Gtk::ScrolledWindow* m_ActiveImagenes;
 	Gtk::HButtonBox m_ButtonBox;
 
 	Gtk::Button m_AtrasButton;

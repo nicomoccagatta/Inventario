@@ -8,6 +8,7 @@
 #include "client_ControladorVistaDescargaImagenDeProductos.h"
 #include "../Vista/client_VistaDescargaImagenDeProductos2.h"
 
-void ControladorVistaDescargaImagenDeProductos::on_producto_seleccionado(Producto* prod){
-	vista->update_lista_imagenes(prod->getIdsImagenes());
+void ControladorVistaDescargaImagenDeProductos::on_producto_seleccionado(
+		Producto* prod, Gtk::ScrolledWindow* imagenes_container){
+	vista->update_lista_imagenes(prod->getIdsImagenes(), imagenes_container);
 }

@@ -8,8 +8,9 @@
 #ifndef CLIENTE_CONTROL_CLIENT_CONTROLADORVISTADESCARGAIMAGENDEPRODUCTOS_H_
 #define CLIENTE_CONTROL_CLIENT_CONTROLADORVISTADESCARGAIMAGENDEPRODUCTOS_H_
 
+#include <gtkmm-2.4/gtkmm/scrolledwindow.h>
+
 #include "../Modelo/client_ModeloObservable.h"
-//#include "../Vista/client_VistaDescargaImagenDeProductos2.h"
 #include "common_Producto.h"
 
 class VistaDescargaImagenDeProductos2;
@@ -26,7 +27,7 @@ public:
 	}
 	virtual ~ControladorVistaDescargaImagenDeProductos(){}
 
-	void on_producto_seleccionado(Producto* prod);
+	void on_producto_seleccionado(Producto* prod, Gtk::ScrolledWindow* imagenes_container);
 };
 
 #endif /* CLIENTE_CONTROL_CLIENT_CONTROLADORVISTADESCARGAIMAGENDEPRODUCTOS_H_ */

@@ -27,11 +27,13 @@ public:
 			add(m_col_icon_id);
 			add(m_col_text);
 			add(m_col_data);
+			add(m_col_imagenes);
 		}
 
 		Gtk::TreeModelColumn<unsigned long int> m_col_icon_id;
 		Gtk::TreeModelColumn<Glib::ustring> m_col_text;
 		Gtk::TreeModelColumn<Producto*> m_col_data;
+		Gtk::TreeModelColumn<Gtk::ScrolledWindow*> m_col_imagenes;
 	};
 
 	ModelColumns m_Columns;

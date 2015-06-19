@@ -53,13 +53,9 @@ void Protocolo::enviarImagen(Socket& socket,const Imagen& imagenAEnviar) const{
 	const unsigned int anchoImagen=imagenAEnviar.getAncho();
 	const unsigned int tamanioImagen=imagenAEnviar.getTamanio();
 	std::stringstream parseadorMensaje;
-
 	parseadorMensaje  << kIndicadorComandoAltaImagen << kMensajeDelimitadorCampos << altoImagen << kMensajeDelimitadorCampos << anchoImagen << kMensajeDelimitadorCampos << tamanioImagen<<kMensajeDelimitadorCampos<<finalizadorDeMensaje;
-	std::cerr << "ENVIANDO: "  << parseadorMensaje.str() << "\n";
-
 	enviarMensaje(socket,parseadorMensaje.str());
 	std::string respuesta =recibirMensaje(socket);
-
 	if (respuesta==kMensajeOK+finalizadorDeMensaje){
 		const unsigned char* const datosImagen= imagenAEnviar.obtenerBytesDinamicos();
 		socket.enviarBytes(datosImagen,tamanioImagen);

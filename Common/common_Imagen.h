@@ -1,7 +1,7 @@
 #ifndef COMMON_IMAGEN_H_
 #define COMMON_IMAGEN_H_
 
-#include "opencv2/opencv.hpp"
+#include "opencv.hpp"
 #include <cv.h>
 #include <highgui.h>
 #include <opencv/cv.h>

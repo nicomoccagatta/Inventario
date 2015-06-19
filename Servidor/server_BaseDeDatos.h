@@ -4,7 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include "tinyxml.h"
-#include "opencv2/opencv.hpp"
+#include "opencv.hpp"
 #include <cv.h>
 #include <highgui.h>
 #include <stdio.h>

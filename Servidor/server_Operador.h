@@ -37,14 +37,16 @@ class Operador : public Thread {
   const std::string modificacionAreaDeVision(const std::string& comandoDeOperacion);
   const std::string bajaAreaDeVision(const std::string& comandoDeOperacion);
   const std::string stockGeneral()const;
-  const std::string stockAreaDeVision(const std::string& comandoDeOperacion)const;
+  const std::string stockAreaDeVision(const std::string& comandoDeOperacion);
   const std::string stockHistoricoProducto(const std::string& comandoDeOperacion)const;
   const std::string altaImagen(const std::string& comandoDeOperacion);
   const std::string enviarImagen(const std::string& comandoDeOperacion);
-  //const std::string bajaImagen(const std::string& comandoDeOperacion)const;
   const std::string actualizarStockAreaDeVision(const std::string& comandoDeOperacion);
 
   const Imagen recibirImagen(const std::string& informacionDeImagen);
+  void actualizarImagenesProducto(Producto* const, std::list<unsigned long int> nuevosIdImagenes);
+  void actualizarDeteccionAreaDeVision(AreaDeVision* const areaDeVisionAActualizar, const Imagen& imagenCapturada,const std::string& fechaDeCaptura,const std::string& tipoDeDeteccion);
+  void validarProductosDetectados(AreaDeVision* const areaDeVisionAValidar);
 };
 }
 

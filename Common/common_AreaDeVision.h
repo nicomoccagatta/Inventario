@@ -22,12 +22,13 @@ public:
 	const unsigned long int getId() const;
 	const std::list<Producto*>* const getProductosDetectados() const;
 	void actualizarDeteccion(std::list<Producto*>* productosDetectados);
+	std::list<Producto*>::const_iterator eliminarProductoDetectado(const unsigned long int idProductoAEliminar);
 	static void inicializarCuentaId();
 
 private:
 	std::string ubicacion;
 	std::string tipoDeCapturador;
-	const std::list<Producto*>* productosDetectados;
+	std::list<Producto*>* productosDetectados;
 	unsigned long int id;
 	Mutex mutex;
 	void liberarRecursosProductos();

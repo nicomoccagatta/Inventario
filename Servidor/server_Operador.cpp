@@ -153,7 +153,7 @@ const std::string Operador::detallarProducto(const std::string& comandoDeOperaci
 		std::stringstream acumulador;
 		acumulador << productoADetallar->getNombre() << kMensajeDelimitadorCampos << productoADetallar->getDescripcion() << kMensajeDelimitadorCampos<< productoADetallar->getIdIcono() << kMensajeDelimitadorCampos;//faltan imagenes
 		for (std::list<unsigned long int>::const_iterator idImagen = productoADetallar->getIdsImagenes()->begin(); idImagen!= productoADetallar->getIdsImagenes()->end(); ++idImagen)
-				acumulador << (*idImagen) << kMensajeDelimitadorCampos;
+				acumulador << (*idImagen);
 		return acumulador.str();
 	} else {
 		return kMensajeError;
@@ -188,16 +188,7 @@ const std::string Operador::modificacionProducto(const std::string& comandoDeOpe
 			productoAModificar->setNombre(nombreProducto);
 			productoAModificar->setDescripcion(descripcionProducto);
 			productoAModificar->setIdIcono(idIcono);
-			std::list<unsigned long int>*const listaDeIdsDeImagenesActualDelProducto=productoAModificar->getIdsImagenes();
-			for(std::list<unsigned long int>::const_iterator id = nuevaListaDeIdsImagenes.begin();id!=nuevaListaDeIdsImagenes.end();++id)
-				if (std::find(listaDeIdsDeImagenesActualDelProducto->begin(),listaDeIdsDeImagenesActualDelProducto->end(),(*id)) == listaDeIdsDeImagenesActualDelProducto->end())
-					listaDeIdsDeImagenesActualDelProducto->push_back(*id);
-			for(std::list<unsigned long int>::iterator id = listaDeIdsDeImagenesActualDelProducto->begin();id!=listaDeIdsDeImagenesActualDelProducto->end();++id){
-				if (std::find(nuevaListaDeIdsImagenes.begin(),nuevaListaDeIdsImagenes.end(),(*id)) == nuevaListaDeIdsImagenes.end()){
-					datos.eliminarImagen((*id));//comentar esta linea si se desea admitir que muchos productos tengan la misma imagen.
-					id = listaDeIdsDeImagenesActualDelProducto->erase(id);
-				}
-			}
+			actualizarImagenesProducto(productoAModificar,nuevaListaDeIdsImagenes);
 			return kMensajeOK;
 		}
 	}
@@ -259,15 +250,17 @@ const std::string Operador::stockGeneral() const{
 	}
 }
 
-const std::string Operador::stockAreaDeVision(const std::string& comandoDeOperacion)const{
+const std::string Operador::stockAreaDeVision(const std::string& comandoDeOperacion){
 	const unsigned long int idAreaDeVision = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
 	AreaDeVision* areaDeVisionAInventariar = datos.getAreaDeVisionConId(idAreaDeVision);
 	if (areaDeVisionAInventariar!=NULL){
+		//valido que los productos anteriormente detectado en el area de vision existan realmente y no allan sido eliminados en el periodo entre actualizaciones
+		validarProductosDetectados(areaDeVisionAInventariar);
 		const std::list<Producto*>* productosDetectados= areaDeVisionAInventariar->getProductosDetectados();
 		if (productosDetectados->size()>0){
 			std::stringstream acumulador;
 			for(std::list<Producto*>::const_iterator it=productosDetectados->begin(); it!=productosDetectados->end();++it)
-				acumulador<< (*it)->getId() << kMensajeDelimitadorCampos <<(*it)->getStock()<< kMensajeDelimitadorCampos;
+				acumulador<< (*it)->getId() << kMensajeDelimitadorCampos<< datos.getProductoConId((*it)->getId())->getNombre() << kMensajeDelimitadorCampos <<(*it)->getStock()<< kMensajeDelimitadorCampos;
 			return acumulador.str();
 		}
 	}
@@ -317,74 +310,73 @@ const std::string Operador::actualizarStockAreaDeVision(const std::string& coman
 	const std::string tipoDeDeteccion = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,1);
 	const std::string fechaDeCaptura = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,3);
 	AreaDeVision* areaDeVisionAActualizar = datos.getAreaDeVisionConId(Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2));
-
 	if (areaDeVisionAActualizar!=NULL){
-		std::cerr << "Actualizo por '" << tipoDeDeteccion << "' en la fecha '"
-					<< fechaDeCaptura <<"; la area de vision " << areaDeVisionAActualizar->getUbicacion()
-					<< "\n";
-
-		std::cerr << "Enviando 'ok'\n";
 		protocolo.enviarMensaje(cliente, kMensajeOK);
 		std::string mensajeRecibido = this->protocolo.recibirMensaje(this->cliente);
-
-		std::cerr << "Llamando a recibirImagen(respuestaConDatos)\n";
 		Imagen imagenRecibida = recibirImagen(mensajeRecibido);
-		std::cerr << "SE RECIBIO LA IMAGEN!!!!!!\n";
-
 		if (cliente.estaConectado() && imagenRecibida.esValida()){
-			std::cerr << "LA IMAGEN es valida  y empiezo a ver si encuentro productos\n";
-
-			std::list<Producto*>* productosDetectados= new std::list<Producto*>();
-			//obtengo todos los producto e itero sobre las iamgenes de cada uno reconociendo la totalidad de sus apariciones.
-			const std::list<Producto*>* catalogoProductos = datos.getProductos();
-
-			for(std::list<Producto*>::const_iterator it=catalogoProductos->begin(); it!=catalogoProductos->end();++it){
-				unsigned long int aparicionesDelProducto=0;
-
-				for (std::list<unsigned long int>::const_iterator id=(*it)->getIdsImagenes()->begin(); id!=(*it)->getIdsImagenes()->end();++id)
-					if (datos.existeImagenConId(*id)){
-						std::cerr << "\nPROCESANDO IMAGEN CON ID: " << *id << "\n";
-						aparicionesDelProducto+=imagenRecibida.contarApariciones(datos.getImagenConId(*id),tipoDeDeteccion);
-					}
-				if (aparicionesDelProducto>0){
-					std::list<Stock*>* stockProductoDetectado = new std::list<Stock*>();
-					stockProductoDetectado->push_back(new Stock(aparicionesDelProducto,fechaDeCaptura));
-					productosDetectados->push_back(new Producto((*it)->getId(),(*it)->getNombre(),(*it)->getDescripcion(),stockProductoDetectado,0,new std::list<unsigned long int>()));
-
-					std::cerr << "Se encontraron " << aparicionesDelProducto << " " << (*it)->getNombre() << "\n";
-				}
-
-				long int variacionDeStock=aparicionesDelProducto;//si el producto no habia sido antes detectado entonces la cantidad de apariciones es cuanto aumento su stock.
-
-				for (std::list<Producto*>::const_iterator producto=areaDeVisionAActualizar->getProductosDetectados()->begin(); producto!=areaDeVisionAActualizar->getProductosDetectados()->end();++producto){
-					//el producto ya habia sido detectado.
-					if ((*producto)->getId()==(*it)->getId())
-						variacionDeStock = aparicionesDelProducto-(*producto)->getStock();
-				}
-
-				if (variacionDeStock!=0)
-					(*it)->actualizarStock(variacionDeStock,fechaDeCaptura);
-			}
-			areaDeVisionAActualizar->actualizarDeteccion(productosDetectados);
+			actualizarDeteccionAreaDeVision(areaDeVisionAActualizar,imagenRecibida,fechaDeCaptura,tipoDeDeteccion);
 			return kMensajeOK;
 		}
 	}
-	std::cerr << "No existe la area de vision o la imagen estaba mala\n";
 	return kMensajeError;
 }
+
+void Operador::actualizarImagenesProducto(Producto* const productoAModificar, std::list<unsigned long int> nuevaListaDeIdsImagenes){
+	std::list<unsigned long int>*const listaDeIdsDeImagenesActualDelProducto=productoAModificar->getIdsImagenes();
+	for(std::list<unsigned long int>::const_iterator id = nuevaListaDeIdsImagenes.begin();id!=nuevaListaDeIdsImagenes.end();++id)
+		//si el nuevo id no se encuentra en la lista de ids actual, lo agrego.
+		if (std::find(listaDeIdsDeImagenesActualDelProducto->begin(),listaDeIdsDeImagenesActualDelProducto->end(),(*id)) == listaDeIdsDeImagenesActualDelProducto->end())
+			listaDeIdsDeImagenesActualDelProducto->push_back(*id);
+		//Por cada uno de los ids que quedaron, si no estaban en la lista de nuevos ids, es porque esas imagens fueron dadas de baja, deben eliminarse.
+		for(std::list<unsigned long int>::iterator id = listaDeIdsDeImagenesActualDelProducto->begin();id!=listaDeIdsDeImagenesActualDelProducto->end();++id){
+		if (std::find(nuevaListaDeIdsImagenes.begin(),nuevaListaDeIdsImagenes.end(),(*id)) == nuevaListaDeIdsImagenes.end()){
+			datos.eliminarImagen((*id));//comentar esta linea si se desea admitir que muchos productos tengan la misma imagen.
+			id = listaDeIdsDeImagenesActualDelProducto->erase(id);
+		}
+	}
+}
+
+void Operador::actualizarDeteccionAreaDeVision(AreaDeVision* const areaDeVisionAActualizar, const Imagen& imagenCapturada,const std::string& fechaDeCaptura,const std::string& tipoDeDeteccion){
+	//valido que los productos anteriormente detectado en el area de vision existan realmente y no allan sido eliminados en el periodo entre actualizaciones
+	validarProductosDetectados(areaDeVisionAActualizar);
+	std::list<Producto*>* productosDetectados= new std::list<Producto*>();
+	//obtengo todos los producto e itero sobre las iamgenes de cada uno reconociendo la totalidad de sus apariciones.
+	const std::list<Producto*>* catalogoProductos = datos.getProductos();
+	for(std::list<Producto*>::const_iterator it=catalogoProductos->begin(); it!=catalogoProductos->end();++it){
+		unsigned long int aparicionesDelProducto=0;
+		for (std::list<unsigned long int>::const_iterator id=(*it)->getIdsImagenes()->begin(); id!=(*it)->getIdsImagenes()->end();++id)
+			if (datos.existeImagenConId(*id))
+				aparicionesDelProducto+=imagenCapturada.contarApariciones(datos.getImagenConId(*id),tipoDeDeteccion);
+		if (aparicionesDelProducto>0){
+			std::list<Stock*>* stockProductoDetectado = new std::list<Stock*>();
+			stockProductoDetectado->push_back(new Stock(aparicionesDelProducto,fechaDeCaptura));
+			productosDetectados->push_back(new Producto((*it)->getId(),(*it)->getNombre(),(*it)->getDescripcion(),stockProductoDetectado,0,new std::list<unsigned long int>()));
+		}
+		long int variacionDeStock=aparicionesDelProducto;//si el producto no habia sido antes detectado entonces la cantidad de apariciones es cuanto aumento su stock.
+		for (std::list<Producto*>::const_iterator producto=areaDeVisionAActualizar->getProductosDetectados()->begin(); producto!=areaDeVisionAActualizar->getProductosDetectados()->end();++producto){
+			//el producto ya habia sido detectado.
+			if ((*producto)->getId()==(*it)->getId())
+				variacionDeStock = aparicionesDelProducto-(*producto)->getStock();
+		}
+		if (variacionDeStock!=0)
+			(*it)->actualizarStock(variacionDeStock,fechaDeCaptura);
+	}
+	areaDeVisionAActualizar->actualizarDeteccion(productosDetectados);
+}
+
+void Operador::validarProductosDetectados(AreaDeVision* const areaDeVisionAValidar){
+	for (std::list<Producto*>::const_iterator producto=areaDeVisionAValidar->getProductosDetectados()->begin(); producto!=areaDeVisionAValidar->getProductosDetectados()->end();++producto)
+		if (datos.getProductoConId((*producto)->getId())==NULL)
+			producto = areaDeVisionAValidar->eliminarProductoDetectado((*producto)->getId());
+}
+
 
 const Imagen Operador::recibirImagen(const std::string& informacionDeImagen){
 	const unsigned int altoImagen = Protocolo::extraerArgumentoNumericoDeComando(informacionDeImagen,2);
 	const unsigned int anchoImagen = Protocolo::extraerArgumentoNumericoDeComando(informacionDeImagen,3);
 	const unsigned long int tamanioImagen = Protocolo::extraerArgumentoNumericoDeComando(informacionDeImagen,4);
-
-	std::cerr << "Recibo alto=" << altoImagen << " ancho=" << anchoImagen
-			<< " tamanio=" << tamanioImagen << "\n";
-
-	std::cerr << "ENVIANDO OK...\n";
 	protocolo.enviarMensaje(cliente, kMensajeOK);
-
-	std::cerr << "RECIBIENDO LOS DATOS DE LA IMAGEN\n";
 	return protocolo.recibirImagen(cliente,altoImagen,anchoImagen,tamanioImagen);
 }
 

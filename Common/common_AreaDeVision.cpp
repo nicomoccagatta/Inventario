@@ -67,6 +67,18 @@ void AreaDeVision::actualizarDeteccion(std::list<Producto*>* productosDetectados
 	mutex.desbloquear();
 }
 
+std::list<Producto*>::const_iterator AreaDeVision::eliminarProductoDetectado(const unsigned long int idProductoAEliminar){
+	mutex.bloquear();
+	for (std::list<Producto*>::iterator it= productosDetectados->begin(); it != productosDetectados->end();++it){
+			delete (*it);
+			std::list<Producto*>::iterator iteradorARetornar = productosDetectados->erase(it);
+			mutex.desbloquear();
+			return iteradorARetornar;
+	}
+	mutex.desbloquear();
+	return productosDetectados->end();
+}
+
 void AreaDeVision::inicializarCuentaId(){
 	proximoID=0;
 }

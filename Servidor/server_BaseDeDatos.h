@@ -4,9 +4,6 @@
 #include <iostream>
 #include <fstream>
 #include "tinyxml.h"
-//#include "opencv.hpp"
-#include <cv.h>
-#include <highgui.h>
 #include <stdio.h>
 #include "common_Producto.h"
 #include "common_AreaDeVision.h"

@@ -1,14 +1,11 @@
 #ifndef COMMON_IMAGEN_H_
 #define COMMON_IMAGEN_H_
 
-#include "opencv2/opencv.hpp"
-#include <opencv/cv.h>
-#include <opencv/highgui.h>
-#include <opencv2/xfeatures2d.hpp>
-#include <opencv2/flann.hpp>
+#include "opencv.hpp"
+#include <cv.h>
+#include <highgui.h>
 #include <vector>
 #include <string>
-#include <cmath>
 #define kValorMinimoDeSimilitud 0.8
 #define kValorMinimoDeSimilitudDeZonaCercanaAUnaSimilitd 0.2
 #define kMetodoTemplateMatching CV_TM_CCOEFF_NORMED
@@ -28,13 +25,13 @@ public:
 	const bool esValida()const;
 	static const bool existeImagen(const std::string& rutaArchivoImagen);
 	const unsigned long int contarApariciones(const Imagen& imagenObjeto,const std::string& tipoDeteccion)const;
-	const unsigned long int contarAparicionesFeatureMatching(const Imagen& imagenObjeto)const;
-	void mostrarImagen() const;
+	void mostrarImagen();
+
 
 private:
 	cv::Mat matrizImagen;
 	const unsigned long int contarAparicionesTemplateMatching(const Imagen& imagenObjeto)const;
-
+	const unsigned long int contarAparicionesFeatureMatching(const Imagen& imagenObjeto)const;
 
 };
 

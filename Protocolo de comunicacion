@@ -58,7 +58,7 @@ ID1|STOCK1|ID2|STOCK2|...IDn|STOCKn|\n ó error|\n
 
 Stock Area de vision
 K|ID|\n
-ID1|STOCK1|ID2|STOCK2|...IDn|STOCKn|\n ó error|\n
+ID1|NOMBRE1|STOCK1|ID2|NOMBRE2|STOCK2|...IDn|NOMBREn|STOCKn|\n ó error|\n
 
 
 Stock historico Producto

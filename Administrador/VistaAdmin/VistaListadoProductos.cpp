@@ -17,6 +17,9 @@ VistaListadoProductos::VistaListadoProductos()
 	m_EditarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaListadoProductos::on_button_editar));
 	m_EliminarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaListadoProductos::on_button_eliminar) );
 
+	m_ProductosTreeView.append_column("Nombre", m_ProductosList.m_Columns.m_col_nombre);
+	m_ProductosTreeView.append_column("Descripcion", m_ProductosList.m_Columns.m_col_descripcion);
+
 	m_imagenPlusBotones.pack_start(m_imagenItem);
 	m_imagenPlusBotones.pack_end(m_ButtonBox);
 	horizontalBox.pack_end(m_imagenPlusBotones,Gtk::PACK_SHRINK,true,0);
@@ -33,7 +36,7 @@ VistaListadoProductos::VistaListadoProductos()
 }
 
 void VistaListadoProductos::update(){
-	this->update_lista_productos();
+	//const std::list<Producto*>* prods = modelo->getProductos();
 }
 
 void VistaListadoProductos::run(Gtk::Viewport *panelDinamico,Modelo_Observable *modelo){
@@ -42,8 +45,6 @@ void VistaListadoProductos::run(Gtk::Viewport *panelDinamico,Modelo_Observable *
 
 	m_refProductosListStore = Gtk::ListStore::create(m_ProductosList.m_Columns);
 	m_ProductosTreeView.set_model(m_refProductosListStore);
-	m_ProductosTreeView.append_column("Nombre", m_ProductosList.m_Columns.m_col_nombre);
-	m_ProductosTreeView.append_column("Descripcion", m_ProductosList.m_Columns.m_col_descripcion);
 	this->update_lista_productos();
 
 	panelDinam->add(horizontalBox);

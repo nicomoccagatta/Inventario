@@ -22,13 +22,17 @@ public:
 	class ModelColumns: public Gtk::TreeModel::ColumnRecord{
 	public:
 		ModelColumns(){
+			add(m_col_id);
 			add(m_col_nombre);
 			add(m_col_descripcion);
+			add(m_col_cantidad);
 			add(m_col_data);
 		}
 
+		Gtk::TreeModelColumn<unsigned int> m_col_id;
 		Gtk::TreeModelColumn<Glib::ustring> m_col_nombre;
 		Gtk::TreeModelColumn<Glib::ustring> m_col_descripcion;
+		Gtk::TreeModelColumn<unsigned int> m_col_cantidad;
 		Gtk::TreeModelColumn<Producto*> m_col_data;
 	};
 

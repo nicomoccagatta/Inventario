@@ -36,7 +36,7 @@ public:
 	void eliminarProductos();
 
 	/*AREA DE VISION*/
-	void agregarAreaDeVision(std::string ubicacion, std::string tipoDeCapturador,unsigned long int id);
+	void agregarAreaDeVision(std::string ubicacion, std::string tipoDeCapturador,unsigned long int id,std::list<Producto*>* listaProductos);
 	void eliminarAreasDeVision();
 };
 #endif /* ADMINISTRADOR_MODELOADMIN_ADMIN_DATOS_H_ */

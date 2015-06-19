@@ -26,8 +26,8 @@ void Datos::agregarProducto(std::string nombre, std::string descripcion,
 }
 
 void Datos::agregarAreaDeVision(std::string ubicacion, std::string tipoDeCapturador,
-							   unsigned long int id){
-	AreaDeVision* nueva = new AreaDeVision(id,ubicacion,tipoDeCapturador,new std::list<Producto*>());
+							   unsigned long int id,std::list<Producto*>* listaProductos){
+	AreaDeVision* nueva = new AreaDeVision(id,ubicacion,tipoDeCapturador,listaProductos);
 	this->areasDeVision.push_back(nueva);
 }
 

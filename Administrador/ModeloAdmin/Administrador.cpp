@@ -87,10 +87,49 @@ bool Administrador::actualizarAreasDeVision(){
 			std::stringstream ss;
 			ss << parser.getParametro(argum);
 			ss >> id;
+			std::stringstream preguntarProductos("K|");
+			preguntarProductos << id;
+			std::list<Producto*>* productos;
+			protocolo.enviarMensaje(this->admin,preguntarProductos.str());
+			std::string respuestaProd = protocolo.recibirMensaje(this->admin);
+			if (respuestaProd != "error|"){
+				productos = new std::list<Producto*>();
+				CommandParser parserProd;
+				parserProd.tokenize(respuestaProd);
+				unsigned int argumProd = 1;
+				try{
+					while(true){
+						std::stringstream obtenerProductos;
+
+						unsigned long int idProd;
+						obtenerProductos << parserProd.getParametro(argumProd);
+						obtenerProductos >> idProd;
+
+						std::string nombreProd;
+						obtenerProductos.str("");
+						obtenerProductos << parserProd.getParametro(argumProd+1);
+						nombreProd = obtenerProductos.str();
+
+						unsigned long int CantProd;
+						obtenerProductos.str("");
+						obtenerProductos << parserProd.getParametro(argumProd+2);
+						obtenerProductos >> CantProd;
+						std::list<common::Stock*> *stockProd = new std::list<common::Stock*>;
+						common::Stock* stockProducto = new common::Stock(CantProd,"listado");
+						stockProd->push_back(stockProducto);
+
+						argumProd += 3;
+
+						Producto *producto = new Producto(idProd,nombreProd,"",stockProd,0,0);
+						productos->push_back(producto);
+					}
+				}catch (std::exception& e){
+				}
+			}
 			std::string ubicacion = parser.getParametro(argum+1);
 			std::string tipo = parser.getParametro(argum+2);
 			//icono
-			this->data.agregarAreaDeVision(ubicacion,tipo,id);
+			this->data.agregarAreaDeVision(ubicacion,tipo,id,productos);
 
 			argum+=3;
 		}

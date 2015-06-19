@@ -16,10 +16,16 @@ VistaListadoAreasDeVision::VistaListadoAreasDeVision()
 	m_ProductosList.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
 	m_ProductosList.set_size_request(200,400);
 	m_ProductosList.add(m_ProductosTreeView);
-	m_ProductosTreeView.append_column("Productos detectados", m_ProductosList.m_Columns.m_col_nombre);
+	m_ProductosTreeView.append_column("Id", m_ProductosList.m_Columns.m_col_id);
+	m_ProductosTreeView.append_column("Producto", m_ProductosList.m_Columns.m_col_nombre);
+	m_ProductosTreeView.append_column("Cantidad", m_ProductosList.m_Columns.m_col_cantidad);
 
 	hBoxListados.pack_start(m_AVList);
-	hBoxListados.pack_end(m_ProductosList);
+	labelProductos.set_text("Productos Detectados");
+	labelProductosMasListado.pack_start(labelProductos);
+	labelProductosMasListado.pack_end(m_ProductosList);
+
+	hBoxListados.pack_end(labelProductosMasListado);
 	m_refProductosListStore = Gtk::ListStore::create(m_ProductosList.m_Columns);
 	m_ProductosTreeView.set_model(m_refProductosListStore);
 
@@ -87,7 +93,9 @@ void VistaListadoAreasDeVision::on_av_seleccionado(){
 		std::list<Producto*>::const_iterator it;
 		for (it=prods->begin(); it!=prods->end();++it){
 		Gtk::TreeModel::Row row = *(m_refProductosListStore->append());
+		row[m_ProductosList.m_Columns.m_col_id] = (*it)->getId();
 		row[m_ProductosList.m_Columns.m_col_nombre] = (*it)->getNombre();
+		row[m_ProductosList.m_Columns.m_col_cantidad] = (*it)->getStock();
 		row[m_ProductosList.m_Columns.m_col_data] = *it;
 		}
 	}

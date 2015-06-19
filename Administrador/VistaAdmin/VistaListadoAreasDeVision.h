@@ -40,6 +40,8 @@ protected:
 	Gtk::HBox hBoxListados;
 	ListaAV m_AVList;
 	ListaProductos m_ProductosList;
+	Gtk::VBox labelProductosMasListado;
+	Gtk::Label labelProductos;
 	Gtk::VButtonBox m_ButtonBox;
 	Gtk::Button m_EditarButton;
 	Gtk::Button m_EliminarButton;

@@ -11,6 +11,7 @@
 #include "common_SocketCliente.h"
 #include "common_Protocolo.h"
 #include "admin_Datos.h"
+#include "common_Stock.h"
 
 using client::SocketCliente;
 using common::Protocolo;

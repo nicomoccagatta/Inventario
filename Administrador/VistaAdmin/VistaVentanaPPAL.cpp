@@ -81,23 +81,23 @@ void VistaVentanaPPAL::on_button_LAV()
 void VistaVentanaPPAL::on_button_AAV()
 {
 	model->notify();
-	hide();
+	panelDinamico->remove();
 }
 
 void VistaVentanaPPAL::on_button_SGPP()
 {
 	model->notify();
-	hide();
+	panelDinamico->remove();
 }
 
 void VistaVentanaPPAL::on_button_SPAV()
 {
 	model->notify();
-	hide();
+	panelDinamico->remove();
 }
 
 void VistaVentanaPPAL::on_button_SHPP()
 {
 	model->notify();
-	hide();
+	panelDinamico->remove();
 }

@@ -17,6 +17,9 @@ VistaListadoAreasDeVision::VistaListadoAreasDeVision()
 	m_EditarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaListadoAreasDeVision::on_button_editar));
 	m_EliminarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaListadoAreasDeVision::on_button_eliminar) );
 
+	m_AVTreeView.append_column("ID", m_AVList.m_Columns.m_col_Id);
+	m_AVTreeView.append_column("Ubicacion", m_AVList.m_Columns.m_col_Ubicacion);
+
 	m_EditarButton.set_label("Editar");
 	m_EliminarButton.set_label("Eliminar");
 
@@ -41,8 +44,6 @@ void VistaListadoAreasDeVision::run(Gtk::Viewport *panelDinamico,Modelo_Observab
 
 	m_refAVListStore = Gtk::ListStore::create(m_AVList.m_Columns);
 	m_AVTreeView.set_model(m_refAVListStore);
-	m_AVTreeView.append_column("ID", m_AVList.m_Columns.m_col_Id);
-	m_AVTreeView.append_column("Ubicacion", m_AVList.m_Columns.m_col_Ubicacion);
 	this->update_lista_av();
 
 	panelDinam->add(verticalBox);

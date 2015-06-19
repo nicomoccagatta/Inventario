@@ -1,0 +1,4 @@
+/home/ale/git/Inventario/build/CMakeFiles/Admin.dir
+/home/ale/git/Inventario/build/CMakeFiles/Client.dir
+/home/ale/git/Inventario/build/CMakeFiles/Cliente_consola.dir
+/home/ale/git/Inventario/build/CMakeFiles/Server.dir

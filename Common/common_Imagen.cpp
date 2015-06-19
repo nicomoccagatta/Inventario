@@ -33,7 +33,6 @@ void Imagen::guardarEnArchivo(const std::string& rutaArchivo) const{
 		cv::imwrite(rutaArchivo,matrizImagen,parametros);
 	} catch(...) {
 		throw "ERROR: No es posible guardar la imagen";
-		std::cerr << "ERROR: No es posible guardar la imagen";
 	}
 }
 
@@ -68,7 +67,7 @@ const unsigned long int Imagen::contarApariciones(const Imagen& imagenObjeto,con
 	if (tipoDeteccion=="M"){
 		return contarAparicionesTemplateMatching(imagenObjeto);
 	} else {
-		return 0;
+		return contarAparicionesFeatureMatching(imagenObjeto);
 	}
 }
 
@@ -102,13 +101,23 @@ const unsigned long int Imagen::contarAparicionesTemplateMatching(const Imagen& 
 	return apariciones; //retorno las aparicion restando la primera iteracion que no se verifica.
 }
 
-void Imagen::mostrarImagen(){
-	using namespace cv;
+const unsigned long int Imagen::contarAparicionesFeatureMatching(const Imagen& imagenObjeto)const{
+	/*cv::SurfFeatureDetector detector(400);
+	std::vector<cv::KeyPoint> keypoints1, keypoints2;
+	detector.detect(img1, keypoints1);
+	detector.detect(img2, keypoints2);
 
-	namedWindow("Display Image", CV_WINDOW_AUTOSIZE);
-	imshow("Display Image", this->matrizImagen);
+	// computing descriptors
+	cv::SurfDescriptorExtractor extractor;
+	cv::Mat descriptors1, descriptors2;
+	extractor.compute(img1, keypoints1, descriptors1);
+	extractor.compute(img2, keypoints2, descriptors2);
 
-	waitKey(5000);
+	// matching descriptors
+	cv::BFMatcher matcher(NORM_L2);
+	std::vector<DMatch> matches;
+	matcher.match(descriptors1, descriptors2, matches);*/
+	return 0;
 }
 
 } /* namespace common */

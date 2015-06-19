@@ -153,7 +153,7 @@ const std::string Operador::detallarProducto(const std::string& comandoDeOperaci
 		std::stringstream acumulador;
 		acumulador << productoADetallar->getNombre() << kMensajeDelimitadorCampos << productoADetallar->getDescripcion() << kMensajeDelimitadorCampos<< productoADetallar->getIdIcono() << kMensajeDelimitadorCampos;//faltan imagenes
 		for (std::list<unsigned long int>::const_iterator idImagen = productoADetallar->getIdsImagenes()->begin(); idImagen!= productoADetallar->getIdsImagenes()->end(); ++idImagen)
-				acumulador << (*idImagen) << kMensajeDelimitadorCampos;
+				acumulador << (*idImagen);
 		return acumulador.str();
 	} else {
 		return kMensajeError;
@@ -311,16 +311,8 @@ const std::string Operador::enviarImagen(const std::string& comandoDeOperacion){
 	}
 	return kMensajeError;
 }
-/*
-const std::string Operador::bajaImagen(const std::string& comandoDeOperacion)const{
-	const unsigned long int idImagen = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
-	if (datos.existeImagenConId(idImagen)){
-		datos.eliminarImagen(idImagen);
-		return kMensajeOK;
-	}
-	return kMensajeError;
-}
-*/
+
+
 const std::string Operador::actualizarStockAreaDeVision(const std::string& comandoDeOperacion){
 	const std::string tipoDeDeteccion = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,1);
 	const std::string fechaDeCaptura = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,3);
@@ -341,7 +333,7 @@ const std::string Operador::actualizarStockAreaDeVision(const std::string& coman
 				if (aparicionesDelProducto>0){
 					std::list<Stock*>* stockProductoDetectado = new std::list<Stock*>();
 					stockProductoDetectado->push_back(new Stock(aparicionesDelProducto,fechaDeCaptura));
-					productosDetectados->push_back(new Producto((*it)->getId(),(*it)->getNombre(),"",stockProductoDetectado,0,new std::list<unsigned long int>()));
+					productosDetectados->push_back(new Producto((*it)->getId(),(*it)->getNombre(),(*it)->getDescripcion(),stockProductoDetectado,0,new std::list<unsigned long int>()));
 				}
 				long int variacionDeStock=aparicionesDelProducto;//si el producto no habia sido antes detectado entonces la cantidad de apariciones es cuanto aumento su stock.
 				for (std::list<Producto*>::const_iterator producto=areaDeVisionAActualizar->getProductosDetectados()->begin(); producto!=areaDeVisionAActualizar->getProductosDetectados()->end();++producto){
@@ -349,7 +341,8 @@ const std::string Operador::actualizarStockAreaDeVision(const std::string& coman
 					if ((*producto)->getId()==(*it)->getId())
 						variacionDeStock = aparicionesDelProducto-(*producto)->getStock();
 				}
-				(*it)->actualizarStock(variacionDeStock,fechaDeCaptura);
+				if (variacionDeStock!=0)
+					(*it)->actualizarStock(variacionDeStock,fechaDeCaptura);
 			}
 			areaDeVisionAActualizar->actualizarDeteccion(productosDetectados);
 			return kMensajeOK;

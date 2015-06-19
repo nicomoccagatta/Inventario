@@ -1,20 +1,7 @@
 <AreaDeVision id="0">
     <Ubicacion>patio delantero</Ubicacion>
     <TipoDeCapturador>foto</TipoDeCapturador>
-    <ProductosDetectados>
-        <Producto id="17">
-            <Nombre>sol</Nombre>
-            <Descripcion></Descripcion>
-            <StockHistorico>
-                <Stock>
-                    <Fecha>Wed Jun 17 03:12:48 2015</Fecha>
-                    <Cantidad>1</Cantidad>
-                </Stock>
-            </StockHistorico>
-            <Icono>0</Icono>
-            <Imagenes />
-        </Producto>
-    </ProductosDetectados>
+    <ProductosDetectados />
 </AreaDeVision>
 <AreaDeVision id="3">
     <Ubicacion>garage</Ubicacion>

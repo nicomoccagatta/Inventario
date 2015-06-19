@@ -54,10 +54,11 @@ void ControladorVistaEnviar::buttonENVIARClicked(Glib::ustring rutaArchivo,Glib:
 	std::cerr << asctime(&time);
 
 	std::string formatoFecha(asctime(&time));
+	formatoFecha.erase(formatoFecha.find('\n'));
 
 	std::string rutaImagen(rutaArchivo.c_str());
 
-	modelo->actualizarProductos();
+	//modelo->actualizarProductos();
 
 	switch(matching){
 	case TEMPLATE_MATCHING:

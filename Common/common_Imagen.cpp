@@ -119,5 +119,13 @@ const unsigned long int Imagen::contarAparicionesFeatureMatching(const Imagen& i
 	matcher.match(descriptors1, descriptors2, matches);*/
 	return 0;
 }
+void Imagen::mostrarImagen(){
+	using namespace cv;
+
+	namedWindow("Display Image", CV_WINDOW_AUTOSIZE);
+	imshow("Display Image", this->matrizImagen);
+
+	waitKey(5000);
+}
 
 } /* namespace common */

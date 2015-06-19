@@ -29,6 +29,8 @@ public:
 	static const bool existeImagen(const std::string& rutaArchivoImagen);
 	const unsigned long int contarApariciones(const Imagen& imagenObjeto,const std::string& tipoDeteccion)const;
 
+	void mostrarImagen();
+
 private:
 	cv::Mat matrizImagen;
 	const unsigned long int contarAparicionesTemplateMatching(const Imagen& imagenObjeto)const;

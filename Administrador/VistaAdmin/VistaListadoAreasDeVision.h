@@ -23,14 +23,14 @@ class VistaListadoAreasDeVision : public Observer {
 	void on_button_editar();
 	void on_button_eliminar();
 public:
+	VistaListadoAreasDeVision();
 	void update();
-	void setearAtributos(Gtk::Viewport *panelDinamico,Modelo_Observable *modelo);
-	void run();
+	void run(Gtk::Viewport *panelDinamico,Modelo_Observable *modelo);
 	virtual ~VistaListadoAreasDeVision();
 protected:
-	Glib::RefPtr<Gtk::ListStore> m_refAVListStore; //The Tree Model.
-	Gtk::TreeView m_AVTreeView; //The Tree View.
-	Glib::RefPtr<Gtk::TreeSelection> refTreeSelection; //The selected
+	Glib::RefPtr<Gtk::ListStore> m_refAVListStore;
+	Gtk::TreeView m_AVTreeView;
+	Glib::RefPtr<Gtk::TreeSelection> refTreeSelection;
 
 	Gtk::VBox verticalBox;
 	Gtk::HBox m_Botones;

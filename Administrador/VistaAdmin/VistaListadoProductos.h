@@ -23,9 +23,9 @@ class VistaListadoProductos : public Observer {
 	void on_button_editar();
 	void on_button_eliminar();
 public:
+	VistaListadoProductos();
 	void update();
-	void setearAtributos(Gtk::Viewport *panelDinamico,Modelo_Observable *modelo);
-	void run();
+	void run(Gtk::Viewport *panelDinamico,Modelo_Observable *modelo);
 	virtual ~VistaListadoProductos();
 protected:
 	Glib::RefPtr<Gtk::ListStore> m_refProductosListStore; //The Tree Model.
@@ -34,7 +34,7 @@ protected:
 
 	Gtk::HBox horizontalBox;
 	Gtk::VBox m_imagenPlusBotones;
-	Gtk::Image* m_imagenItem;
+	Gtk::Image m_imagenItem;
 	ListaProductos m_ProductosList;
 	Gtk::VButtonBox m_ButtonBox;
 	Gtk::Button m_EditarButton;

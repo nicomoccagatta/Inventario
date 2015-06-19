@@ -56,16 +56,15 @@ void VistaVentanaPPAL::on_button_LP()
 	model->notify();
 	controlLP.setearModelo(model);
 	controlLP.actualizarProductos();
-	vistaLP.setearAtributos(panelDinamico,model);
 	model->suscribe(&vistaLP);
-	vistaLP.run();
+	vistaLP.run(panelDinamico,model);
 	this->show_all();
 }
 
 void VistaVentanaPPAL::on_button_AP()
 {
 	model->notify();
-	hide();
+	panelDinamico->remove();
 }
 
 void VistaVentanaPPAL::on_button_LAV()
@@ -74,9 +73,8 @@ void VistaVentanaPPAL::on_button_LAV()
 	model->notify();
 	controlLAV.setearModelo(model);
 	controlLAV.actualizarAreasDeVision();
-	vistaLAV.setearAtributos(panelDinamico,model);
 	model->suscribe(&vistaLAV);
-	vistaLAV.run();
+	vistaLAV.run(panelDinamico,model);
 	this->show_all();
 }
 

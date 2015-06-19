@@ -1,9 +1,10 @@
 #ifndef COMMON_IMAGEN_H_
 #define COMMON_IMAGEN_H_
 
-#include "opencv.hpp"
-#include <cv.h>
-#include <highgui.h>
+#include "opencv2/opencv.hpp"
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
+#include <opencv2/xfeatures2d.hpp>
 #include <vector>
 #include <string>
 #define kValorMinimoDeSimilitud 0.8
@@ -25,8 +26,6 @@ public:
 	const bool esValida()const;
 	static const bool existeImagen(const std::string& rutaArchivoImagen);
 	const unsigned long int contarApariciones(const Imagen& imagenObjeto,const std::string& tipoDeteccion)const;
-	void mostrarImagen();
-
 
 private:
 	cv::Mat matrizImagen;

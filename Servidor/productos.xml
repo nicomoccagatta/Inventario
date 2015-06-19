@@ -3,14 +3,6 @@
     <Descripcion>Botella 1.5l</Descripcion>
     <StockHistorico>
         <Stock>
-            <Fecha>Wed Jun 17 03:12:48 2015</Fecha>
-            <Cantidad>58</Cantidad>
-        </Stock>
-        <Stock>
-            <Fecha>Wed Jun 17 03:09:31 2015</Fecha>
-            <Cantidad>58</Cantidad>
-        </Stock>
-        <Stock>
             <Fecha>Tue Jun 9 16:40:47 2015</Fecha>
             <Cantidad>58</Cantidad>
         </Stock>
@@ -43,14 +35,6 @@
     <Descripcion>algo rico</Descripcion>
     <StockHistorico>
         <Stock>
-            <Fecha>Wed Jun 17 03:12:48 2015</Fecha>
-            <Cantidad>0</Cantidad>
-        </Stock>
-        <Stock>
-            <Fecha>Wed Jun 17 03:09:31 2015</Fecha>
-            <Cantidad>0</Cantidad>
-        </Stock>
-        <Stock>
             <Fecha>Tue Jun 9 14:58:27 2015</Fecha>
             <Cantidad>0</Cantidad>
         </Stock>
@@ -62,14 +46,6 @@
     <Nombre>merengadas</Nombre>
     <Descripcion>galletitas muy muy ricas</Descripcion>
     <StockHistorico>
-        <Stock>
-            <Fecha>Wed Jun 17 03:12:48 2015</Fecha>
-            <Cantidad>0</Cantidad>
-        </Stock>
-        <Stock>
-            <Fecha>Wed Jun 17 03:09:31 2015</Fecha>
-            <Cantidad>0</Cantidad>
-        </Stock>
         <Stock>
             <Fecha>Wed Jun 10 01:19:26 2015</Fecha>
             <Cantidad>0</Cantidad>
@@ -83,14 +59,6 @@
     <Descripcion>galletitas muy ricas para merendar y desayunar</Descripcion>
     <StockHistorico>
         <Stock>
-            <Fecha>Wed Jun 17 03:12:48 2015</Fecha>
-            <Cantidad>0</Cantidad>
-        </Stock>
-        <Stock>
-            <Fecha>Wed Jun 17 03:09:31 2015</Fecha>
-            <Cantidad>0</Cantidad>
-        </Stock>
-        <Stock>
             <Fecha>Wed Jun 10 01:20:24 2015</Fecha>
             <Cantidad>0</Cantidad>
         </Stock>
@@ -102,14 +70,6 @@
     <Nombre>Coca</Nombre>
     <Descripcion>lata chiquita y golpeada</Descripcion>
     <StockHistorico>
-        <Stock>
-            <Fecha>Wed Jun 17 03:12:48 2015</Fecha>
-            <Cantidad>0</Cantidad>
-        </Stock>
-        <Stock>
-            <Fecha>Wed Jun 17 03:09:31 2015</Fecha>
-            <Cantidad>0</Cantidad>
-        </Stock>
         <Stock>
             <Fecha>Wed Jun 10 02:02:55 2015</Fecha>
             <Cantidad>0</Cantidad>
@@ -123,12 +83,16 @@
     <Descripcion>aver si anda esta vez</Descripcion>
     <StockHistorico>
         <Stock>
-            <Fecha>Wed Jun 17 03:12:48 2015</Fecha>
-            <Cantidad>1</Cantidad>
+            <Fecha>Sun Jun 14 16:16:16 2015</Fecha>
+            <Cantidad>4</Cantidad>
         </Stock>
         <Stock>
-            <Fecha>Wed Jun 17 03:09:31 2015</Fecha>
-            <Cantidad>0</Cantidad>
+            <Fecha>Sun Jun 14 15:15:15 2015</Fecha>
+            <Cantidad>5</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Sun Jun 14 10:10:10 2015</Fecha>
+            <Cantidad>4</Cantidad>
         </Stock>
         <Stock>
             <Fecha>Tue Jun 16 15:09:09 2015</Fecha>

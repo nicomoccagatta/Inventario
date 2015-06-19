@@ -11,6 +11,7 @@
 #include <gtkmm-2.4/gtkmm.h>
 #include "ModeloAdmin/admin_ModeloObservable.h"
 #include "ListaAV.h"
+#include "ListaProductos.h"
 #include <list>
 #include "common_AreaDeVision.h"
 
@@ -28,13 +29,17 @@ public:
 	void run(Gtk::Viewport *panelDinamico,Modelo_Observable *modelo);
 	virtual ~VistaListadoAreasDeVision();
 protected:
+	Glib::RefPtr<Gtk::ListStore> m_refProductosListStore;
+	Gtk::TreeView m_ProductosTreeView;
+
 	Glib::RefPtr<Gtk::ListStore> m_refAVListStore;
 	Gtk::TreeView m_AVTreeView;
 	Glib::RefPtr<Gtk::TreeSelection> refTreeSelection;
 
 	Gtk::VBox verticalBox;
-	Gtk::HBox m_Botones;
+	Gtk::HBox hBoxListados;
 	ListaAV m_AVList;
+	ListaProductos m_ProductosList;
 	Gtk::VButtonBox m_ButtonBox;
 	Gtk::Button m_EditarButton;
 	Gtk::Button m_EliminarButton;

@@ -23,8 +23,8 @@ VistaListadoProductos::VistaListadoProductos()
 	m_imagenPlusBotones.pack_start(m_imagenItem);
 	m_imagenPlusBotones.pack_end(m_ButtonBox);
 	horizontalBox.pack_end(m_imagenPlusBotones,Gtk::PACK_SHRINK,true,0);
-	m_EditarButton.set_label("Editar");
-	m_EliminarButton.set_label("Eliminar");
+	m_EditarButton.set_label("Editar Producto");
+	m_EliminarButton.set_label("Eliminar Producto");
 
 	m_ButtonBox.pack_start(m_EditarButton);
 	m_ButtonBox.pack_start(m_EliminarButton);

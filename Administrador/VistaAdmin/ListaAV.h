@@ -24,11 +24,13 @@ public:
 		ModelColumns(){
 			add(m_col_Id);
 			add(m_col_Ubicacion);
+			add(m_ProductosDetectados);
 			add(m_col_data);
 		}
 
 		Gtk::TreeModelColumn<long unsigned int> m_col_Id;
 		Gtk::TreeModelColumn<Glib::ustring> m_col_Ubicacion;
+		Gtk::TreeModelColumn<const std::list<Producto*>*> m_ProductosDetectados;
 		Gtk::TreeModelColumn<AreaDeVision*> m_col_data;
 	};
 

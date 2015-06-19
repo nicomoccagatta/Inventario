@@ -49,7 +49,7 @@ void ClienteDemo::actualizarIdImagenesDeProducto(Producto* prod){
 	unsigned int argum = 4;
 	try{
 		while (true){
-			unsigned long int id = NAN;
+			unsigned long int id = 0;
 			std::stringstream ss;
 			ss << parser.getParametro(argum);
 			if (ss.str() == "\n")
@@ -242,17 +242,21 @@ std::string ClienteDemo::getImagenConId(unsigned long int id){
 void ClienteDemo::enviarFotoTemplateMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen){
 	Imagen img(rutaDeImagen);
 
-	img.mostrarImagen();
+	//img.mostrarImagen();
 
 	std::stringstream ss;
-	std::string msje = "M|" + fecha;
+
 
 	ss << "M|" << idArea << kMensajeDelimitadorCampos << fecha << kMensajeDelimitadorCampos;
+	std::cerr << "ENVIANDO: " << ss.str() << "\n";
+
 	this->protocolo.enviarMensaje(this->client,ss.str());
 
 	std::cerr << this->protocolo.recibirMensaje(this->client);
 
+	std::cerr << "ENVIANDO IMAGEN\n";
 	this->protocolo.enviarImagen(this->client, img);
+	std::cerr << "IMAGEN ENVIADA??\n";
 
 	std::cerr << this->protocolo.recibirMensaje(this->client);
 

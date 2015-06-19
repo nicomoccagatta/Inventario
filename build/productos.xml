@@ -3,19 +3,19 @@
     <Descripcion>Botella 1.5l</Descripcion>
     <StockHistorico>
         <Stock>
-            <Fecha>Tue Jun 9 16:40:47 2015&#x0A;</Fecha>
+            <Fecha>Tue Jun 9 16:40:47 2015</Fecha>
             <Cantidad>58</Cantidad>
         </Stock>
         <Stock>
-            <Fecha>Tue Jun 9 16:40:17 2015&#x0A;</Fecha>
+            <Fecha>Tue Jun 9 16:40:17 2015</Fecha>
             <Cantidad>48</Cantidad>
         </Stock>
         <Stock>
-            <Fecha>Tue Jun 9 15:01:59 2015&#x0A;</Fecha>
+            <Fecha>Tue Jun 9 15:01:59 2015</Fecha>
             <Cantidad>38</Cantidad>
         </Stock>
         <Stock>
-            <Fecha>Tue Jun 9 15:01:44 2015&#x0A;</Fecha>
+            <Fecha>Tue Jun 9 15:01:44 2015</Fecha>
             <Cantidad>28</Cantidad>
         </Stock>
         <Stock>
@@ -35,8 +35,8 @@
     <Descripcion>El mas rico de tooooodos</Descripcion>
     <StockHistorico>
         <Stock>
-            <Fecha>Tue Jun 9 14:58:27 2015&#x0A;</Fecha>
-            <Cantidad>0</Cantidad>
+            <Fecha>Tue Jun 9 14:58:27 2015</Fecha>
+            <Cantidad>21</Cantidad>
         </Stock>
     </StockHistorico>
     <Icono>90</Icono>
@@ -52,7 +52,7 @@
     <Descripcion>Galletitas muy muy ricas</Descripcion>
     <StockHistorico>
         <Stock>
-            <Fecha>Wed Jun 10 01:19:26 2015&#x0A;</Fecha>
+            <Fecha>Wed Jun 10 01:19:26 2015</Fecha>
             <Cantidad>0</Cantidad>
         </Stock>
     </StockHistorico>
@@ -64,7 +64,7 @@
     <Descripcion>galletitas muy ricas para merendar y desayunar</Descripcion>
     <StockHistorico>
         <Stock>
-            <Fecha>Wed Jun 10 01:20:24 2015&#x0A;</Fecha>
+            <Fecha>Wed Jun 10 01:20:24 2015</Fecha>
             <Cantidad>0</Cantidad>
         </Stock>
     </StockHistorico>
@@ -76,7 +76,11 @@
     <Descripcion>lata chiquita y golpeada</Descripcion>
     <StockHistorico>
         <Stock>
-            <Fecha>Wed Jun 10 02:02:55 2015&#x0A;</Fecha>
+            <Fecha>Mon Jun 15 01:02:03 2015</Fecha>
+            <Cantidad>1</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Wed Jun 10 02:02:55 2015</Fecha>
             <Cantidad>0</Cantidad>
         </Stock>
     </StockHistorico>
@@ -94,7 +98,7 @@
     <Descripcion>Con Complejo Cremoso docilidad y suavidad para un cabello reseco</Descripcion>
     <StockHistorico>
         <Stock>
-            <Fecha>Wed Jun 10 02:29:13 2015&#x0A;</Fecha>
+            <Fecha>Wed Jun 10 02:29:13 2015</Fecha>
             <Cantidad>0</Cantidad>
         </Stock>
     </StockHistorico>
@@ -106,10 +110,44 @@
     <Descripcion>El elixir de la vida</Descripcion>
     <StockHistorico>
         <Stock>
-            <Fecha>Wed Jun 08 01:24:05 2015&#x0A;</Fecha>
+            <Fecha>Wed Jun 08 01:24:05 2015</Fecha>
             <Cantidad>0</Cantidad>
         </Stock>
     </StockHistorico>
     <Icono>150</Icono>
     <Imagenes />
+</Producto>
+<Producto id="27">
+    <Nombre>sol</Nombre>
+    <Descripcion>aver si anda esta vez</Descripcion>
+    <StockHistorico>
+        <Stock>
+            <Fecha>Wed Aug 19 06:07:08 2015</Fecha>
+            <Cantidad>7</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Sun Jun 14 16:16:16 2015</Fecha>
+            <Cantidad>4</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Sun Jun 14 15:15:15 2015</Fecha>
+            <Cantidad>5</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Sun Jun 14 10:10:10 2015</Fecha>
+            <Cantidad>4</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Tue Jun 16 15:09:09 2015</Fecha>
+            <Cantidad>3</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Wed Jun 10 02:29:13 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+    </StockHistorico>
+    <Icono>0</Icono>
+    <Imagenes>
+        <Imagen>37</Imagen>
+    </Imagenes>
 </Producto>

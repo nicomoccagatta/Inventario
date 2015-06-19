@@ -244,11 +244,16 @@ const unsigned long int BaseDeDatos::agregarImagen(const Imagen& imagenAAgregar)
 }
 
 Imagen BaseDeDatos::getImagenConId(const unsigned long int idImagen){
+
+	//std::cerr << "\nPROCESANDO IMAGEN CON ID: " << idImagen << "\n";
+
 	mutexImagenes.bloquear();
 	std::stringstream parseador;
 	parseador << idImagen;
 	Imagen imagenSolicitada(kRutaPorDefectoImagenes+parseador.str()+kExtensionPorDefectoImagenes);
 	mutexImagenes.desbloquear();
+
+	//imagenSolicitada.mostrarImagen();
 	return imagenSolicitada;
 }
 

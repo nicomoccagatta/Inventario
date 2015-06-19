@@ -63,11 +63,11 @@ const size_t Cliente::realizarConsultas() {
       getline(std::cin, mensajeAEnviar);
       if (strcmp(mensajeAEnviar.c_str(), kMensajeFinDeSesion) != 0) {
 
-    	protocolo.enviarMensaje(this->skt,mensajeAEnviar);
-    	//templateMatching(mensajeAEnviar,Imagen("aInventariar.jpg"));
+    	//protocolo.enviarMensaje(this->skt,mensajeAEnviar);
+    	templateMatching(mensajeAEnviar,Imagen("aInventariar.jpg"));
     	if (skt.estaConectado()){
     		std::string mensajeRecibido = recibirMensaje();
-    		std::cout << mensajeRecibido;
+    		std::cerr << "RESPUESTA FINAL: " << mensajeRecibido <<"\n";
     	} else {
     		return 1;
     	}
@@ -90,9 +90,13 @@ void Cliente::templateMatching(const std::string& idAreaDeVision,const Imagen& i
 	fecha.erase (std::remove(fecha.begin(), fecha.end(), '\n'), fecha.end());
 	std::stringstream mensajeInicial;
 	mensajeInicial<<kIndicadorComandoFotoTemplateMatching<<kMensajeDelimitadorCampos<<idAreaDeVision<<kMensajeDelimitadorCampos<<fecha<<kMensajeDelimitadorCampos;
+
+	std::cerr << "ENVIANDO MSGE INICIAL: " << mensajeInicial.str() << "\n";
 	enviarMensaje(mensajeInicial.str());
 	std::string mensajeRecibido = recibirMensaje();
+	std::cerr << "RECIBIDO MSGE INICIAL: " << mensajeRecibido << "\n";
 	if (skt.estaConectado() && mensajeRecibido==kMensajeOK+protocolo.getFinalizadorDeMensaje()){
+		std::cerr << "ENVIANDO IMAGEN\n";
 		enviarImagen(imagenAEnviar);
 	}
 }

@@ -6,7 +6,7 @@
 #include <highgui.h>
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
-#include <opencv2/xfeatures2d.hpp>
+//#include <opencv2/xfeatures2d.hpp>
 #include <vector>
 #include <string>
 #define kValorMinimoDeSimilitud 0.8

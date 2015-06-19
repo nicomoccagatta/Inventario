@@ -1,8 +1,8 @@
 cmake_minimum_required (VERSION 2.8)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
-set(CMAKE_CXX_FLAGS "-std=gnu++98 -Wall -Werror -pedantic -pedantic-errors -g -O3 -DNDEBUG -ggdb -DDEBUG -fno-inline")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG -ggdb -DDEBUG -fno-inline")
+set(CMAKE_CXX_FLAGS "-std=gnu++98 -Wall -Werror -pedantic -pedantic-errors -g -O0 -DNDEBUG -ggdb -DDEBUG -fno-inline")
+set(CMAKE_CXX_FLAGS_RELEASE "-O0 -DNDEBUG -ggdb -DDEBUG -fno-inline")
 SET(CMAKE_C_FLAGS "-std=c99 -Wall -Werror -pedantic -pedantic-errors") 
 
 project("Control de Inventario")

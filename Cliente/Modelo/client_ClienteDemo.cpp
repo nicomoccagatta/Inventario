@@ -191,21 +191,6 @@ const std::list<Producto*>* ClienteDemo::getProductos() const {
 }
 
 std::string ClienteDemo::getImagenConId(unsigned long int id){
-	/*	enviarMensaje(comando);
-	if (skt.estaConectado()){
-		std::string mensajeDatosImagen = recibirMensaje();
-		if (mensajeDatosImagen != (kMensajeError+protocolo.getFinalizadorDeMensaje())){
-			const unsigned int altoImagen = Protocolo::extraerArgumentoNumericoDeComando(mensajeDatosImagen,2);
-			const unsigned int anchoImagen = Protocolo::extraerArgumentoNumericoDeComando(mensajeDatosImagen,3);
-			const unsigned long int tamanioImagen = Protocolo::extraerArgumentoNumericoDeComando(mensajeDatosImagen,4);
-			protocolo.enviarMensaje(skt, kMensajeOK);
-			return protocolo.recibirImagen(skt,altoImagen,anchoImagen,tamanioImagen);
-		}
-	}
-	return Imagen("");
-}
-
-	 */
 	if (this->client.estaConectado()){
 		std::stringstream ss;
 		ss << "R|" << id << "|";

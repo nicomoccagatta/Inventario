@@ -155,7 +155,7 @@ void VistaDescargaImagenDeProductos2::on_button_descargar(){
 	/*Abro el dialogo para elegir nombre de archivo, la extencion se pone sola
 	 * la misma de la imagen original*/
 	Gtk::FileChooserDialog dialog("Elige donde y con que nombre guardar la imagen",
-			Gtk::FILE_CHOOSER_ACTION_CREATE_FOLDER);
+			Gtk::FILE_CHOOSER_ACTION_SAVE);
 
 	dialog.set_transient_for(*this);
 

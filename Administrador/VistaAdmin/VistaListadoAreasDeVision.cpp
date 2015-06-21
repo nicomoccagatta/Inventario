@@ -61,6 +61,11 @@ void VistaListadoAreasDeVision::run(Gtk::Viewport *panelDinamico,Modelo_Observab
 
 	m_refAVListStore = Gtk::ListStore::create(m_AVList.m_Columns);
 	m_AVTreeView.set_model(m_refAVListStore);
+
+
+	m_refProductosListStore = Gtk::ListStore::create(m_ProductosList.m_Columns);
+	m_ProductosTreeView.set_model(m_refProductosListStore);
+
 	this->update_lista_av();
 
 	panelDinam->add(verticalBox);
@@ -76,7 +81,21 @@ void VistaListadoAreasDeVision::on_button_editar(){
 }
 
 void VistaListadoAreasDeVision::on_button_eliminar(){
+	Gtk::TreeModel::iterator iter = refTreeSelection->get_selected();
+	if(iter){
+		Gtk::TreeModel::Row row = *iter;
+		const std::list<Producto*>* prods = row[m_AVList.m_Columns.m_ProductosDetectados];
+		std::cerr << "Area de Vision seleccionada: " << row[m_AVList.m_Columns.m_col_Ubicacion] <<"\n";
+		modelo->eliminarAreaVision(row[m_AVList.m_Columns.m_col_Id]);
 
+		std::list<Producto*>::const_iterator it;
+		for (it=prods->begin(); it!=prods->end();++it){
+			modelo->eliminarProducto((*it)->getId());
+		}
+		this->panelDinam->remove();
+		this->modelo->actualizarAreasDeVision();
+		this->run(this->panelDinam,this->modelo);
+	}
 }
 
 void VistaListadoAreasDeVision::on_av_seleccionado(){

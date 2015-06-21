@@ -66,6 +66,17 @@ bool Administrador::actualizarProductos(){
 	return true;
 }
 
+void Administrador::eliminarProducto(unsigned long int id){
+	data.eliminarProducto(id);
+	if (this->admin.estaConectado()){
+			std::stringstream ssID;
+			ssID << id;
+			std::string mensajeEnviar = "F|" + ssID.str();
+			protocolo.enviarMensaje(this->admin,mensajeEnviar);
+		}
+	std::string respuesta = protocolo.recibirMensaje(this->admin);
+}
+
 bool Administrador::actualizarAreasDeVision(){
 	if (this->admin.estaConectado()){
 		protocolo.enviarMensaje(this->admin,"B|");
@@ -87,33 +98,33 @@ bool Administrador::actualizarAreasDeVision(){
 			std::stringstream ss;
 			ss << parser.getParametro(argum);
 			ss >> id;
-			std::stringstream preguntarProductos("K|");
-			preguntarProductos << id;
+			std::string preguntarProductos("K|");
+			std::stringstream ssaux;
+			ssaux << id;
+			preguntarProductos += ssaux.str();
 			std::list<Producto*>* productos;
-			protocolo.enviarMensaje(this->admin,preguntarProductos.str());
+			productos = new std::list<Producto*>;
+			protocolo.enviarMensaje(this->admin,preguntarProductos);
 			std::string respuestaProd = protocolo.recibirMensaje(this->admin);
-			if (respuestaProd != "error|"){
-				productos = new std::list<Producto*>();
+			if (respuestaProd != "error|\n"){
 				CommandParser parserProd;
 				parserProd.tokenize(respuestaProd);
 				unsigned int argumProd = 1;
 				try{
 					while(true){
-						std::stringstream obtenerProductos;
+						std::stringstream obtenerID;
 
 						unsigned long int idProd;
-						obtenerProductos << parserProd.getParametro(argumProd);
-						obtenerProductos >> idProd;
+						obtenerID << parserProd.getParametro(argumProd);
+						obtenerID >> idProd;
 
 						std::string nombreProd;
-						obtenerProductos.str("");
-						obtenerProductos << parserProd.getParametro(argumProd+1);
-						nombreProd = obtenerProductos.str();
+						nombreProd = parserProd.getParametro(argumProd+1);
 
-						unsigned long int CantProd;
-						obtenerProductos.str("");
-						obtenerProductos << parserProd.getParametro(argumProd+2);
-						obtenerProductos >> CantProd;
+						int CantProd;
+						std::stringstream obtenerCant;
+						obtenerCant << parserProd.getParametro(argumProd+2);
+						obtenerCant >> CantProd;
 						std::list<common::Stock*> *stockProd = new std::list<common::Stock*>;
 						common::Stock* stockProducto = new common::Stock(CantProd,"listado");
 						stockProd->push_back(stockProducto);
@@ -136,6 +147,17 @@ bool Administrador::actualizarAreasDeVision(){
 	}catch (std::exception& e){
 	}
 	return true;
+}
+
+void Administrador::eliminarAreaVision(unsigned long int idAV){
+	data.eliminarAreaVision(idAV);
+	if (this->admin.estaConectado()){
+		std::stringstream ssIDAV;
+		ssIDAV << idAV;
+		std::string mensajeAEnviar = "I|" + ssIDAV.str();
+		protocolo.enviarMensaje(this->admin,mensajeAEnviar);
+	}
+	std::string respuesta = protocolo.recibirMensaje(this->admin);
 }
 
 const std::list<AreaDeVision*>* Administrador::getAreasDeVision() const{

@@ -21,7 +21,9 @@ public:
 	Modelo_Observable();
 
 	bool actualizarProductos();
+	void eliminarProducto(unsigned long int id);
 	bool actualizarAreasDeVision();
+	void eliminarAreaVision(unsigned long int idAV);
 
 	const std::list<AreaDeVision*>* getAreasDeVision() const;
 	const std::list<Producto*>* getProductos() const;

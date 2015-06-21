@@ -14,6 +14,7 @@
 #include "ControlAdmin/ControlLAV.h"
 #include "VistaListadoProductos.h"
 #include "VistaListadoAreasDeVision.h"
+#include "VistaAgregarProducto.h"
 
 class VistaVentanaPPAL: public Gtk::Window {
 public:

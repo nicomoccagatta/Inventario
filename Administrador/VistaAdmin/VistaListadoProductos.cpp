@@ -17,6 +17,7 @@ VistaListadoProductos::VistaListadoProductos()
 	m_EditarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaListadoProductos::on_button_editar));
 	m_EliminarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaListadoProductos::on_button_eliminar) );
 
+	m_ProductosTreeView.append_column("ID", m_ProductosList.m_Columns.m_col_id);
 	m_ProductosTreeView.append_column("Nombre", m_ProductosList.m_Columns.m_col_nombre);
 	m_ProductosTreeView.append_column("Descripcion", m_ProductosList.m_Columns.m_col_descripcion);
 
@@ -64,6 +65,16 @@ void VistaListadoProductos::on_button_editar(){
 }
 
 void VistaListadoProductos::on_button_eliminar(){
+	Gtk::TreeModel::iterator iter = refTreeSelection->get_selected();
+	if(iter){
+		Gtk::TreeModel::Row row = *iter;
+		std::cerr << "Producto seleccionado: " << row[m_ProductosList.m_Columns.m_col_nombre] <<"\n";
+		modelo->eliminarProducto(row[m_ProductosList.m_Columns.m_col_id]);
+		this->panelDinam->remove();
+		this->modelo->actualizarProductos();
+		this->run(this->panelDinam,this->modelo);
+		//controlador.on_producto_seleccionado(row[m_ProductosList.m_Columns.m_col_data]);
+	}
 
 }
 
@@ -84,6 +95,7 @@ void VistaListadoProductos::update_lista_productos(){
 	std::list<Producto*>::const_iterator it;
 	for (it=prods->begin(); it!=prods->end();++it){
 	Gtk::TreeModel::Row row = *(m_refProductosListStore->append());
+	row[m_ProductosList.m_Columns.m_col_id] = (*it)->getId();
 	row[m_ProductosList.m_Columns.m_col_nombre] = (*it)->getNombre();
 	row[m_ProductosList.m_Columns.m_col_descripcion] = (*it)->getDescripcion();
 	row[m_ProductosList.m_Columns.m_col_data] = *it;

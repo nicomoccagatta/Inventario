@@ -33,10 +33,12 @@ public:
 	}
 	/*PRODUCTO*/
 	void agregarProducto(std::string nombre, std::string descripcion,unsigned long int id, unsigned long int idIcono);
+	void eliminarProducto(unsigned long int idProd);
 	void eliminarProductos();
 
 	/*AREA DE VISION*/
 	void agregarAreaDeVision(std::string ubicacion, std::string tipoDeCapturador,unsigned long int id,std::list<Producto*>* listaProductos);
+	void eliminarAreaVision(unsigned long int idAV);
 	void eliminarAreasDeVision();
 };
 #endif /* ADMINISTRADOR_MODELOADMIN_ADMIN_DATOS_H_ */

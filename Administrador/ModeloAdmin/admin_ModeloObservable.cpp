@@ -18,8 +18,16 @@ bool Modelo_Observable::actualizarProductos(){
 	return this->admin.actualizarProductos();
 }
 
+void Modelo_Observable::eliminarProducto(unsigned long int id){
+	this->admin.eliminarProducto(id);
+}
+
 bool Modelo_Observable::actualizarAreasDeVision(){
 	return this->admin.actualizarAreasDeVision();
+}
+
+void Modelo_Observable::eliminarAreaVision(unsigned long int idAV){
+	this->admin.eliminarAreaVision(idAV);
 }
 
 const std::list<AreaDeVision*>* Modelo_Observable::getAreasDeVision() const{

@@ -31,12 +31,35 @@ void Datos::agregarAreaDeVision(std::string ubicacion, std::string tipoDeCaptura
 	this->areasDeVision.push_back(nueva);
 }
 
+void Datos::eliminarProducto(unsigned long int idProd){
+	std::list<Producto*>::iterator it = this->productos.begin();
+	for (; it!=this->productos.end(); ++it){
+		if ((*it)->getId() == idProd)
+		{
+			std::cerr << "Producto eliminadoo:" << (*it)->getNombre() << std::endl;
+			this->productos.erase(it);
+			it--;
+		}
+	}
+}
+
 void Datos::eliminarProductos(){
 	std::list<Producto*>::iterator it;
 	for (it = this->productos.begin(); it != this->productos.end();++it){
 		delete *(it);
 	}
 	productos.clear();
+}
+
+void Datos::eliminarAreaVision(unsigned long int idAV){
+	std::list<AreaDeVision*>::iterator it = this->areasDeVision.begin();
+	for (; it!=this->areasDeVision.end() ; ++it )
+		if ((*it)->getId() == idAV)
+		{
+			std::cerr << "Area de Vision eliminada:" << (*it)->getUbicacion() << std::endl;
+			this->areasDeVision.erase(it);
+			it--;
+		}
 }
 
 void Datos::eliminarAreasDeVision(){

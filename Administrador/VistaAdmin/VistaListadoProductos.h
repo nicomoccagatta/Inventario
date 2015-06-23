@@ -28,12 +28,12 @@ public:
 	void run(Gtk::Viewport *panelDinamico,Modelo_Observable *modelo);
 	virtual ~VistaListadoProductos();
 protected:
-	Glib::RefPtr<Gtk::ListStore> m_refProductosListStore; //The Tree Model.
-	Gtk::TreeView m_ProductosTreeView; //The Tree View.
-	Glib::RefPtr<Gtk::TreeSelection> refTreeSelection; //The selected
+	Glib::RefPtr<Gtk::ListStore> m_refProductosListStore;
+	Gtk::TreeView m_ProductosTreeView;
+	Glib::RefPtr<Gtk::TreeSelection> refTreeSelection;
 
-	Gtk::HBox horizontalBox;
-	Gtk::VBox m_imagenPlusBotones;
+	Gtk::VBox verticalBox;
+	Gtk::HBox m_imagenPlusBotones;
 	Gtk::Image m_imagenItem;
 	ListaProductos m_ProductosList;
 	Gtk::VButtonBox m_ButtonBox;

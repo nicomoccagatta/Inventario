@@ -10,6 +10,7 @@
 
 #include "common_SocketCliente.h"
 #include "common_Protocolo.h"
+#include <gtkmm-2.4/gtkmm.h>
 #include "admin_Datos.h"
 #include "common_Stock.h"
 
@@ -21,6 +22,7 @@ class Administrador {
 	SocketCliente admin;
 	Protocolo protocolo;
 	Datos data;
+	long unsigned int obtenerIdImagen(std::string &rutaImagen);
 public:
 	Administrador();
 	virtual ~Administrador();
@@ -29,6 +31,7 @@ public:
 	void eliminarProducto(unsigned long int id);
 	bool actualizarAreasDeVision();
 	void eliminarAreaVision(unsigned long int idAV);
+	void altaProducto(std::string &nombre,std::string &descripcion,long unsigned int idAV,std::string &rutaImagenPPAL,std::list<std::string> &rutaImagenes);
 
 	const std::list<AreaDeVision*>* getAreasDeVision() const;
 	const std::list<Producto*>* getProductos() const;

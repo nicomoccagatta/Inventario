@@ -30,6 +30,12 @@ void Modelo_Observable::eliminarAreaVision(unsigned long int idAV){
 	this->admin.eliminarAreaVision(idAV);
 }
 
+void Modelo_Observable::altaProducto(std::string &nombre,std::string &descripcion,long unsigned int idAV,
+															std::string &rutaImagenPPAL,std::list<std::string> &rutaImagenes){
+	this->admin.altaProducto(nombre,descripcion,idAV,rutaImagenPPAL,rutaImagenes);
+}
+
+
 const std::list<AreaDeVision*>* Modelo_Observable::getAreasDeVision() const{
 	return this->admin.getAreasDeVision();
 }

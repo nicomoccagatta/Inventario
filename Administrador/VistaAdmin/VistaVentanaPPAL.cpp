@@ -63,8 +63,12 @@ void VistaVentanaPPAL::on_button_LP()
 
 void VistaVentanaPPAL::on_button_AP()
 {
-	model->notify();
 	panelDinamico->remove();
+	model->notify();
+	model->actualizarAreasDeVision();
+	model->suscribe(&vistaAP);
+	vistaAP.run(panelDinamico,model);
+	this->show_all();
 }
 
 void VistaVentanaPPAL::on_button_LAV()

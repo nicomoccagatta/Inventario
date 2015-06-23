@@ -1,7 +1,20 @@
 <AreaDeVision id="0">
     <Ubicacion>patio delantero</Ubicacion>
     <TipoDeCapturador>foto</TipoDeCapturador>
-    <ProductosDetectados />
+    <ProductosDetectados>
+        <Producto id="21">
+            <Nombre>IbuApracur 400 VL - Lepetit</Nombre>
+            <Descripcion>Analgesico, antiinflamatorio, antifebril. Tableta de 10 comprimidos recubiertos Ibuprofeno 400mg</Descripcion>
+            <StockHistorico>
+                <Stock>
+                    <Fecha>Tue Jun 16 06:06:06 2015</Fecha>
+                    <Cantidad>8</Cantidad>
+                </Stock>
+            </StockHistorico>
+            <Icono>0</Icono>
+            <Imagenes />
+        </Producto>
+    </ProductosDetectados>
 </AreaDeVision>
 <AreaDeVision id="3">
     <Ubicacion>garage</Ubicacion>

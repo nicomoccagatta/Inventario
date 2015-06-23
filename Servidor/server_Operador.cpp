@@ -6,12 +6,12 @@ using server::Operador;
 using common::Protocolo;
 using common::Socket;
 
-Operador::Operador(const common::Socket& cliente, const common::Protocolo& protocolo,
-		  BaseDeDatos& datos)
+Operador::Operador(Socket& cliente, const Protocolo& protocolo, BaseDeDatos& datos)
     : cliente(cliente),
       protocolo(protocolo),
       datos(datos),
-      realizarOperaciones(true) {}
+      realizarOperaciones(true),
+	  identificadorUsuario(Operador::identificarUsuario(cliente,protocolo)){}
 
 Operador::~Operador() {}
 
@@ -53,73 +53,36 @@ void Operador::detenerOperaciones() {
 const std::string Operador::realizarOperacion(std::string& comandoDeOperacion) {
   if (comandoDeOperacion.length() > 1) {
 	  switch (comandoDeOperacion[0]) {
-		case kIndicadorComandoListarProductos: {
-		  return listarProductos();
-		  break;
-		}
-		case kIndicadorComandoListarAreasDeVision: {
-		  return listarAreasDeVision();
-		  break;
-		}
-		case kIndicadorComandoDetalleProducto: {
-		  return detallarProducto(comandoDeOperacion);
-		  break;
-		}
-		case kIndicadorComandoAltaProducto: {
-		  return altaProducto(comandoDeOperacion);
-		  break;
-		}
-		case kIndicadorComandoModificacionProducto: {
-		  return modificacionProducto(comandoDeOperacion);
-		  break;
-		}
-		case kIndicadorComandoBajaProducto: {
-		  return bajaProducto(comandoDeOperacion);
-		  break;
-		}
-		case kIndicadorComandoAltaAreaDeVision: {
-		  return altaAreaDeVision(comandoDeOperacion);
-		  break;
-		}
-		case kIndicadorComandoModificacionAreaDeVision: {
-		  return modificacionAreaDeVision(comandoDeOperacion);
-		  break;
-		}
-		case kIndicadorComandoBajaAreaDeVision: {
-		  return bajaAreaDeVision(comandoDeOperacion);
-		  break;
-		}
-		case kIndicadorComandoStockGeneral: {
-		  return stockGeneral();
-		  break;
-		}
-		case kIndicadorComandoStockAreaDeVision: {
-		  return stockAreaDeVision(comandoDeOperacion);
-		  break;
-		}
-		case kIndicadorComandoStockHistoricoProducto: {
-		  return stockHistoricoProducto(comandoDeOperacion);
-		  break;
-		}
-		case kIndicadorComandoAltaImagen: {
-		  return altaImagen(comandoDeOperacion);
-		  break;
-		}
-		case kIndicadorComandoSolicitudImagen: {
-		  return enviarImagen(comandoDeOperacion);
-		  break;
-		}/*
-		case kIndicadorComandoBajaImagen: {
-		  return bajaImagen(comandoDeOperacion);
-		  break;
-		}*/
-		case kIndicadorComandoFotoTemplateMatching: {
-		  return actualizarStockAreaDeVision(comandoDeOperacion);
-		  break;
-		}
+		case kIndicadorComandoListarProductos: return listarProductos();
+		case kIndicadorComandoListarAreasDeVision:return listarAreasDeVision();
+		case kIndicadorComandoDetalleProducto:return detallarProducto(comandoDeOperacion);
+		case kIndicadorComandoSolicitudImagen:return enviarImagen(comandoDeOperacion);
+		default :return realizarOperacionEspecifica(comandoDeOperacion);
 	  }
     }
   return kMensajeError;
+}
+
+const std::string Operador::realizarOperacionEspecifica(std::string& comandoDeOperacion){
+	if (identificadorUsuario==(kIdentificacionAdministrador+protocolo.getFinalizadorDeMensaje()))
+		switch (comandoDeOperacion[0]) {
+			case kIndicadorComandoAltaProducto:return altaProducto(comandoDeOperacion);
+			case kIndicadorComandoModificacionProducto:return modificacionProducto(comandoDeOperacion);
+			case kIndicadorComandoBajaProducto: return bajaProducto(comandoDeOperacion);
+			case kIndicadorComandoAltaAreaDeVision: return altaAreaDeVision(comandoDeOperacion);
+			case kIndicadorComandoModificacionAreaDeVision:return modificacionAreaDeVision(comandoDeOperacion);
+			case kIndicadorComandoBajaAreaDeVision: return bajaAreaDeVision(comandoDeOperacion);
+			case kIndicadorComandoStockGeneral: return stockGeneral();
+			case kIndicadorComandoStockAreaDeVision: return stockAreaDeVision(comandoDeOperacion);
+			case kIndicadorComandoStockHistoricoProducto: return stockHistoricoProducto(comandoDeOperacion);
+			case kIndicadorComandoAltaImagen: return altaImagen(comandoDeOperacion);
+		}
+	if (identificadorUsuario==(kIdentificacionCliente+protocolo.getFinalizadorDeMensaje()))
+		switch (comandoDeOperacion[0]) {
+			case kIndicadorComandoFotoTemplateMatching:return actualizarStockAreaDeVision(comandoDeOperacion);
+			case kIndicadorComandoFotoFeatureMatching:return actualizarStockAreaDeVision(comandoDeOperacion);
+		}
+	return kMensajeError;
 }
 
 const std::string Operador::listarProductos()const{
@@ -153,12 +116,37 @@ const std::string Operador::detallarProducto(const std::string& comandoDeOperaci
 		std::stringstream acumulador;
 		acumulador << productoADetallar->getNombre() << kMensajeDelimitadorCampos << productoADetallar->getDescripcion() << kMensajeDelimitadorCampos<< productoADetallar->getIdIcono() << kMensajeDelimitadorCampos;//faltan imagenes
 		for (std::list<unsigned long int>::const_iterator idImagen = productoADetallar->getIdsImagenes()->begin(); idImagen!= productoADetallar->getIdsImagenes()->end(); ++idImagen)
-				acumulador << (*idImagen);
+				acumulador << (*idImagen)<<kMensajeDelimitadorCampos;
 		return acumulador.str();
 	} else {
 		return kMensajeError;
 	}
 }
+
+const std::string Operador::enviarImagen(const std::string& comandoDeOperacion){
+	const unsigned long int idImagen = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
+	if (datos.existeImagenConId(idImagen)){
+		Imagen imagenSolicitada = datos.getImagenConId(idImagen);
+		protocolo.enviarImagen(cliente,imagenSolicitada);
+		return kRespuestaNula;
+	}
+	return kMensajeError;
+}
+
+void Operador::validarProductosDetectados(AreaDeVision* const areaDeVisionAValidar){
+	for (std::list<Producto*>::const_iterator producto=areaDeVisionAValidar->getProductosDetectados()->begin(); producto!=areaDeVisionAValidar->getProductosDetectados()->end();++producto)
+		if (datos.getProductoConId((*producto)->getId())==NULL)
+			producto = areaDeVisionAValidar->eliminarProductoDetectado((*producto)->getId());
+}
+
+const Imagen Operador::recibirImagen(const std::string& informacionDeImagen){
+	const unsigned int altoImagen = Protocolo::extraerArgumentoNumericoDeComando(informacionDeImagen,2);
+	const unsigned int anchoImagen = Protocolo::extraerArgumentoNumericoDeComando(informacionDeImagen,3);
+	const unsigned long int tamanioImagen = Protocolo::extraerArgumentoNumericoDeComando(informacionDeImagen,4);
+	protocolo.enviarMensaje(cliente, kMensajeOK);
+	return protocolo.recibirImagen(cliente,altoImagen,anchoImagen,tamanioImagen);
+}
+
 
 const std::string Operador::altaProducto(const std::string& comandoDeOperacion){
 	const std::string nombreProducto = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,2);
@@ -295,47 +283,6 @@ const std::string Operador::altaImagen(const std::string& comandoDeOperacion){
 	return kMensajeError;
 }
 
-const std::string Operador::enviarImagen(const std::string& comandoDeOperacion){
-	const unsigned long int idImagen = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2);
-	if (datos.existeImagenConId(idImagen)){
-		Imagen imagenSolicitada = datos.getImagenConId(idImagen);
-		protocolo.enviarImagen(cliente,imagenSolicitada);
-		return kRespuestaNula;
-	}
-	return kMensajeError;
-}
-
-
-const std::string Operador::actualizarStockAreaDeVision(const std::string& comandoDeOperacion){
-	const std::string tipoDeDeteccion = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,1);
-	const std::string fechaDeCaptura = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,3);
-	AreaDeVision* areaDeVisionAActualizar = datos.getAreaDeVisionConId(Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2));
-	if (areaDeVisionAActualizar!=NULL){
-		protocolo.enviarMensaje(cliente, kMensajeOK);
-		std::string mensajeRecibido = this->protocolo.recibirMensaje(this->cliente);
-		Imagen imagenRecibida = recibirImagen(mensajeRecibido);
-		if (cliente.estaConectado() && imagenRecibida.esValida()){
-			actualizarDeteccionAreaDeVision(areaDeVisionAActualizar,imagenRecibida,fechaDeCaptura,tipoDeDeteccion);
-			return kMensajeOK;
-		}
-	}
-	return kMensajeError;
-}
-
-void Operador::actualizarImagenesProducto(Producto* const productoAModificar, std::list<unsigned long int> nuevaListaDeIdsImagenes){
-	std::list<unsigned long int>*const listaDeIdsDeImagenesActualDelProducto=productoAModificar->getIdsImagenes();
-	for(std::list<unsigned long int>::const_iterator id = nuevaListaDeIdsImagenes.begin();id!=nuevaListaDeIdsImagenes.end();++id)
-		//si el nuevo id no se encuentra en la lista de ids actual, lo agrego.
-		if (std::find(listaDeIdsDeImagenesActualDelProducto->begin(),listaDeIdsDeImagenesActualDelProducto->end(),(*id)) == listaDeIdsDeImagenesActualDelProducto->end())
-			listaDeIdsDeImagenesActualDelProducto->push_back(*id);
-		//Por cada uno de los ids que quedaron, si no estaban en la lista de nuevos ids, es porque esas imagens fueron dadas de baja, deben eliminarse.
-		for(std::list<unsigned long int>::iterator id = listaDeIdsDeImagenesActualDelProducto->begin();id!=listaDeIdsDeImagenesActualDelProducto->end();++id){
-		if (std::find(nuevaListaDeIdsImagenes.begin(),nuevaListaDeIdsImagenes.end(),(*id)) == nuevaListaDeIdsImagenes.end()){
-			datos.eliminarImagen((*id));//comentar esta linea si se desea admitir que muchos productos tengan la misma imagen.
-			id = listaDeIdsDeImagenesActualDelProducto->erase(id);
-		}
-	}
-}
 
 void Operador::actualizarDeteccionAreaDeVision(AreaDeVision* const areaDeVisionAActualizar, const Imagen& imagenCapturada,const std::string& fechaDeCaptura,const std::string& tipoDeDeteccion){
 	//valido que los productos anteriormente detectado en el area de vision existan realmente y no allan sido eliminados en el periodo entre actualizaciones
@@ -369,19 +316,47 @@ void Operador::actualizarDeteccionAreaDeVision(AreaDeVision* const areaDeVisionA
 	areaDeVisionAActualizar->actualizarDeteccion(productosDetectados);
 }
 
-void Operador::validarProductosDetectados(AreaDeVision* const areaDeVisionAValidar){
-	for (std::list<Producto*>::const_iterator producto=areaDeVisionAValidar->getProductosDetectados()->begin(); producto!=areaDeVisionAValidar->getProductosDetectados()->end();++producto)
-		if (datos.getProductoConId((*producto)->getId())==NULL)
-			producto = areaDeVisionAValidar->eliminarProductoDetectado((*producto)->getId());
+const std::string Operador::actualizarStockAreaDeVision(const std::string& comandoDeOperacion){
+	const std::string tipoDeDeteccion = common::Protocolo::extraerArgumentoDeComando(comandoDeOperacion,1);
+	const std::string fechaDeCaptura = common::Protocolo::extraerArgumentoDeComando(comandoDeOperacion,3);
+	AreaDeVision* areaDeVisionAActualizar = datos.getAreaDeVisionConId(common::Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,2));
+	if (areaDeVisionAActualizar!=NULL){
+		protocolo.enviarMensaje(cliente, kMensajeOK);
+		std::string mensajeRecibido = this->protocolo.recibirMensaje(this->cliente);
+		Imagen imagenRecibida = recibirImagen(mensajeRecibido);
+		if (cliente.estaConectado() && imagenRecibida.esValida()){
+			actualizarDeteccionAreaDeVision(areaDeVisionAActualizar,imagenRecibida,fechaDeCaptura,tipoDeDeteccion);
+			return kMensajeOK;
+		}
+	}
+	return kMensajeError;
 }
 
-
-const Imagen Operador::recibirImagen(const std::string& informacionDeImagen){
-	const unsigned int altoImagen = Protocolo::extraerArgumentoNumericoDeComando(informacionDeImagen,2);
-	const unsigned int anchoImagen = Protocolo::extraerArgumentoNumericoDeComando(informacionDeImagen,3);
-	const unsigned long int tamanioImagen = Protocolo::extraerArgumentoNumericoDeComando(informacionDeImagen,4);
-	protocolo.enviarMensaje(cliente, kMensajeOK);
-	return protocolo.recibirImagen(cliente,altoImagen,anchoImagen,tamanioImagen);
+void Operador::actualizarImagenesProducto(Producto* const productoAModificar, std::list<unsigned long int> nuevaListaDeIdsImagenes){
+	std::list<unsigned long int>*const listaDeIdsDeImagenesActualDelProducto=productoAModificar->getIdsImagenes();
+	for(std::list<unsigned long int>::const_iterator id = nuevaListaDeIdsImagenes.begin();id!=nuevaListaDeIdsImagenes.end();++id)
+		//si el nuevo id no se encuentra en la lista de ids actual, lo agrego.
+		if (std::find(listaDeIdsDeImagenesActualDelProducto->begin(),listaDeIdsDeImagenesActualDelProducto->end(),(*id)) == listaDeIdsDeImagenesActualDelProducto->end())
+			listaDeIdsDeImagenesActualDelProducto->push_back(*id);
+		//Por cada uno de los ids que quedaron, si no estaban en la lista de nuevos ids, es porque esas imagens fueron dadas de baja, deben eliminarse.
+		for(std::list<unsigned long int>::iterator id = listaDeIdsDeImagenesActualDelProducto->begin();id!=listaDeIdsDeImagenesActualDelProducto->end();++id){
+		if (std::find(nuevaListaDeIdsImagenes.begin(),nuevaListaDeIdsImagenes.end(),(*id)) == nuevaListaDeIdsImagenes.end()){
+			datos.eliminarImagen((*id));//comentar esta linea si se desea admitir que muchos productos tengan la misma imagen.
+			id = listaDeIdsDeImagenesActualDelProducto->erase(id);
+		}
+	}
 }
 
-
+const std::string Operador::identificarUsuario(Socket& cliente,const Protocolo& protocolo){
+	bool usuarioIdentificado=false;
+	while (!usuarioIdentificado){
+		const std::string mensajeIdentificacion = protocolo.recibirMensaje(cliente);
+		if (mensajeIdentificacion==(kIdentificacionAdministrador+protocolo.getFinalizadorDeMensaje()) || mensajeIdentificacion==(kIdentificacionCliente+protocolo.getFinalizadorDeMensaje())){
+			protocolo.enviarMensaje(cliente,kMensajeOK);
+			return mensajeIdentificacion;
+		} else {
+			protocolo.enviarMensaje(cliente,kMensajeError);
+		}
+	}
+	return "";
+}

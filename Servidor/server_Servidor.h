@@ -4,11 +4,21 @@
 #include <string>
 #include "common_Protocolo.h"
 #include "common_Thread.h"
+#include "common_Imagen.h"
 #include "server_Operador.h"
 #include "server_SocketServidor.h"
 #include "server_BaseDeDatos.h"
+#include "server_ParserXML.h"
 #define kNumeroMaximoDeClientes 20
 #define kPuertoDefault "1037"
+#define kRutaArchivoConfiguracionDefault "config.xml"
+#define kTagXMLRutaCarpetaImagenes "RutaCarpetaImagenes"
+#define kTagXMLRutaArchivoProductos "RutaArchivoProductos"
+#define kTagXMLRutaArchivoAreasDeVision "RutaArchivoAreasDeVision"
+#define kTagXMLConfigImagenesValorMinimoDeSimilitudTemplateMatching "ValorMinimoDeSimilitudTemplateMatching"
+#define kTagXMLConfigImagenesValorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud "ValorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud"
+#define kTagXMLConfigImagenesValorMinimoHessianoSURFFeatureMatching "ValorMinimoHessianoSURFFeatureMatching"
+#define kTagXMLConfigImagenesDistanciaMaximaDeSimilitudFeatureMatching "DistanciaMaximaDeSimilitudFeatureMatching"
 
 using common::Protocolo;
 
@@ -16,7 +26,7 @@ namespace server {
 
 class Servidor : public Thread {
  public:
-  Servidor(const std::string& puerto= kPuertoDefault,
+  Servidor(const std::string& puerto= kPuertoDefault,const std::string& rutaArchivoConfiguracion=kRutaArchivoConfiguracionDefault,
            size_t maximoDeClientesAAtender = kNumeroMaximoDeClientes,
            Protocolo protocolo = Protocolo());
   virtual ~Servidor();

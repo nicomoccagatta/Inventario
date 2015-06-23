@@ -2,17 +2,17 @@
 
 namespace server {
 
-BaseDeDatos::BaseDeDatos(std::string rutaProductos,std::string rutaAreasDeVision):productos(new std::list<Producto*>()),areasDeVision(new std::list<AreaDeVision*>()),proximoIdImagenes(0){
+BaseDeDatos::BaseDeDatos(const std::string& rutaProductos,const std::string& rutaAreasDeVision,const std::string& rutaImagenes):rutaProductos(rutaProductos) ,rutaAreasDeVision(rutaAreasDeVision) , rutaImagenes(rutaImagenes),productos(new std::list<Producto*>()),areasDeVision(new std::list<AreaDeVision*>()),proximoIdImagenes(0){
 	cargarProductos(rutaProductos);
 	cargarAreasDeVision(rutaAreasDeVision);
 }
 
 BaseDeDatos::~BaseDeDatos() {
-	guardarProductos();
+	guardarProductos(rutaProductos);
 	for (std::list<Producto*>::const_iterator it = productos->begin();it!=productos->end();++it)
 		delete (*it);
 	delete productos;
-	guardarAreasDeVision();
+	guardarAreasDeVision(rutaAreasDeVision);
 	for (std::list<AreaDeVision*>::const_iterator it = areasDeVision->begin();it!=areasDeVision->end();++it)
 		delete (*it);
 	delete areasDeVision;
@@ -238,7 +238,7 @@ const unsigned long int BaseDeDatos::agregarImagen(const Imagen& imagenAAgregar)
 	mutexImagenes.bloquear();
 	std::stringstream parseador;
 	parseador << proximoIdImagenes;
-	imagenAAgregar.guardarEnArchivo(kRutaPorDefectoImagenes+parseador.str()+kExtensionPorDefectoImagenes);
+	imagenAAgregar.guardarEnArchivo(rutaImagenes+parseador.str()+kExtensionPorDefectoImagenes);
 	mutexImagenes.desbloquear();
 	return proximoIdImagenes++;
 }
@@ -247,7 +247,7 @@ Imagen BaseDeDatos::getImagenConId(const unsigned long int idImagen){
 	mutexImagenes.bloquear();
 	std::stringstream parseador;
 	parseador << idImagen;
-	Imagen imagenSolicitada(kRutaPorDefectoImagenes+parseador.str()+kExtensionPorDefectoImagenes);
+	Imagen imagenSolicitada(rutaImagenes+parseador.str()+kExtensionPorDefectoImagenes);
 	mutexImagenes.desbloquear();
 	return imagenSolicitada;
 }
@@ -257,7 +257,7 @@ void BaseDeDatos::eliminarImagen(const unsigned long int idImagen){
 	mutexImagenes.bloquear();
 	std::stringstream parseador;
 	parseador << idImagen;
-	remove((kRutaPorDefectoImagenes+parseador.str()+kExtensionPorDefectoImagenes).c_str());
+	remove((rutaImagenes+parseador.str()+kExtensionPorDefectoImagenes).c_str());
 	mutexImagenes.desbloquear();
 }
 
@@ -266,7 +266,7 @@ const bool BaseDeDatos::existeImagenConId(const unsigned long int idImagen){
 	if (idImagen<proximoIdImagenes){
 		std::stringstream parseador;
 		parseador << idImagen;
-		bool existeImagenSolicitada =Imagen::existeImagen(kRutaPorDefectoImagenes+parseador.str()+kExtensionPorDefectoImagenes);
+		bool existeImagenSolicitada =Imagen::existeImagen(rutaImagenes+parseador.str()+kExtensionPorDefectoImagenes);
 		mutexImagenes.desbloquear();
 		return existeImagenSolicitada;
 	}

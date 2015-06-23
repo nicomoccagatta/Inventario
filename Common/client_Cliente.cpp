@@ -58,13 +58,15 @@ const size_t Cliente::realizarConsultas() {
   // seguira la ejecucion solo si se pudo setear y conectar al servidor
   // correctamente.
   if (skt.estaConectado()) {
+	  identificarse();
     std::string mensajeAEnviar="";
     while (skt.estaConectado()) {
       getline(std::cin, mensajeAEnviar);
       if (strcmp(mensajeAEnviar.c_str(), kMensajeFinDeSesion) != 0) {
 
     	//protocolo.enviarMensaje(this->skt,mensajeAEnviar);
-    	templateMatching(mensajeAEnviar,Imagen("aInventariar.jpg"));
+    	//featureMatching(mensajeAEnviar,Imagen("aInventariar.jpg"));
+    	enviarImagen(Imagen(mensajeAEnviar));
     	if (skt.estaConectado()){
     		std::string mensajeRecibido = recibirMensaje();
     		std::cerr << "RESPUESTA FINAL: " << mensajeRecibido <<"\n";
@@ -101,6 +103,24 @@ void Cliente::templateMatching(const std::string& idAreaDeVision,const Imagen& i
 	}
 }
 
+void Cliente::featureMatching(const std::string& idAreaDeVision,const Imagen& imagenAEnviar){
+	time_t hora;
+	time (&hora);
+	std::string fecha(asctime(localtime(&hora)));
+	fecha.erase (std::remove(fecha.begin(), fecha.end(), '\n'), fecha.end());
+	std::stringstream mensajeInicial;
+	mensajeInicial<<kIndicadorComandoFotoFeatureMatching<<kMensajeDelimitadorCampos<<idAreaDeVision<<kMensajeDelimitadorCampos<<fecha<<kMensajeDelimitadorCampos;
+
+	std::cerr << "ENVIANDO MSGE INICIAL: " << mensajeInicial.str() << "\n";
+	enviarMensaje(mensajeInicial.str());
+	std::string mensajeRecibido = recibirMensaje();
+	std::cerr << "RECIBIDO MSGE INICIAL: " << mensajeRecibido << "\n";
+	if (skt.estaConectado() && mensajeRecibido==kMensajeOK+protocolo.getFinalizadorDeMensaje()){
+		std::cerr << "ENVIANDO IMAGEN\n";
+		enviarImagen(imagenAEnviar);
+	}
+}
+
 const std::string Cliente::obtenerDireccionIP(
     const std::string& direccionServidor) {
   std::stringstream parseadorDeArgumentos(direccionServidor);
@@ -116,4 +136,13 @@ const std::string Cliente::obtenerPuerto(const std::string& direccionServidor) {
   std::string puerto;
   parseadorDeArgumentos >> puerto;
   return puerto;
+}
+
+void Cliente::identificarse(){
+	std::string respuestaServidor("");
+	while (respuestaServidor != (kMensajeOK+protocolo.getFinalizadorDeMensaje())){
+		protocolo.enviarMensaje(skt,"Client|");
+		respuestaServidor=protocolo.recibirMensaje(skt);
+		std::cerr << "IDENTIFICACION: " <<respuestaServidor<<std::endl;
+	}
 }

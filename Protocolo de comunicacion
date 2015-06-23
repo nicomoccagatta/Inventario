@@ -6,6 +6,14 @@ Respuesta del servidor
 Mensaje que se le envia al servidor 2
 Respuesta del servidor 2
 
+Identificacion Administrador
+Admin|
+ok|\n ó error|\n
+
+Identificacion Cliente
+Client|
+ok|\n ó error|\n
+
 Listar Productos
 A|\n
 ID1|NOMBRE1|DESCRIPCION1|IDICONO1|ID2|NOMBRE2|DESCRIPCION2|IDICONO2|...IDn|NOMBREn|DESCRIPCIONn|IDICONOn|\n ó error|\n

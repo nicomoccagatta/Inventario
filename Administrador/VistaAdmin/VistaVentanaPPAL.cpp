@@ -84,8 +84,12 @@ void VistaVentanaPPAL::on_button_LAV()
 
 void VistaVentanaPPAL::on_button_AAV()
 {
-	model->notify();
 	panelDinamico->remove();
+	model->notify();
+	model->actualizarAreasDeVision();
+	model->suscribe(&vistaAAV);
+	vistaAAV.run(panelDinamico,model);
+	this->show_all();
 }
 
 void VistaVentanaPPAL::on_button_SGPP()

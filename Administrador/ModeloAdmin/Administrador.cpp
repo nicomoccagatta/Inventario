@@ -210,6 +210,13 @@ long unsigned int Administrador::obtenerIdImagen(std::string &rutaImagen){
 	return id;
 }
 
+void Administrador::altaAreaVision(const std::string &ubicacion,const std::string &capturador){
+	if (this->admin.estaConectado()){
+			std::string mensajeAEnviar = "G|" + ubicacion + '|' + capturador + '|';
+			protocolo.enviarMensaje(this->admin,mensajeAEnviar);
+			std::string respuesta = protocolo.recibirMensaje(this->admin);
+		}
+}
 
 const std::list<AreaDeVision*>* Administrador::getAreasDeVision() const{
 	return data.getAreasDeVision();

@@ -35,6 +35,9 @@ void Modelo_Observable::altaProducto(std::string &nombre,std::string &descripcio
 	this->admin.altaProducto(nombre,descripcion,idAV,rutaImagenPPAL,rutaImagenes);
 }
 
+void Modelo_Observable::altaAreaVision(const std::string &ubicacion,const std::string &capturador){
+	this->admin.altaAreaVision(ubicacion,capturador);
+}
 
 const std::list<AreaDeVision*>* Modelo_Observable::getAreasDeVision() const{
 	return this->admin.getAreasDeVision();

@@ -56,6 +56,7 @@ add_executable(Admin
 			Administrador/VistaAdmin/ListaProductos.cpp
 			Administrador/VistaAdmin/ListaAV.cpp
 			Administrador/VistaAdmin/VistaAgregarProducto.cpp
+			Administrador/VistaAdmin/VistaAgregarAreaVision.cpp
 			Common/common_SocketCliente.cpp
 			Common/common_AreaDeVision.cpp
 			Common/common_Mutex.cpp

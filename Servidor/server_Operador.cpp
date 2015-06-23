@@ -152,8 +152,9 @@ const std::string Operador::altaProducto(const std::string& comandoDeOperacion){
 	const std::string nombreProducto = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,2);
 	const std::string descripcionProducto = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,3);
 	const unsigned long int idIcono = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,4);
-	datos.agregarProducto(new Producto(nombreProducto,descripcionProducto,idIcono));
-	return kMensajeOK;
+	Producto* productoAAgregar = new Producto(nombreProducto,descripcionProducto,idIcono);
+	datos.agregarProducto(productoAAgregar);
+	return productoAAgregar->getId();
 }
 
 const std::string Operador::modificacionProducto(const std::string& comandoDeOperacion){
@@ -197,8 +198,9 @@ const std::string Operador::bajaProducto(const std::string& comandoDeOperacion){
 const std::string Operador::altaAreaDeVision(const std::string& comandoDeOperacion){
 	const std::string ubicacionAreaDeVision = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,2);
 	const std::string tipoDeCapturadorAreaDeVision = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,3);
-	datos.agregarAreaDeVision(new AreaDeVision(ubicacionAreaDeVision,tipoDeCapturadorAreaDeVision));
-	return kMensajeOK;
+	AreaDeVision* areaDeVisionAAgregar = new AreaDeVision(ubicacionAreaDeVision,tipoDeCapturadorAreaDeVision);
+	datos.agregarAreaDeVision(areaDeVisionAAgregar);
+	return areaDeVisionAAgregar->getId();
 }
 
 const std::string Operador::modificacionAreaDeVision(const std::string& comandoDeOperacion){

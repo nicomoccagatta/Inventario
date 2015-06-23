@@ -31,7 +31,7 @@ NOMBRE|DESCRIPCION|IDICONO|[IDIMAGEN1|IDIMAGEN2|...IDIMAGENn|]\n ó error|\n
 
 Alta Producto
 D|NOMBRE|DESCRIPCION|IDICONO|[IDIMAGEN1|IDIMAGEN2|...IDIMAGENn|]\n
-ok|\n ó error|\n
+ID|\n ó error|\n
 
 
 Modificacion Producto
@@ -46,7 +46,7 @@ ok|\n ó error|\n
 
 Alta Area de vision
 G|UBICACION|TIPO|\n
-ok|\n ó error|\n
+ID|\n ó error|\n
 
 
 Modificacion Area de vision

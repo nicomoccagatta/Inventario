@@ -154,7 +154,9 @@ const std::string Operador::altaProducto(const std::string& comandoDeOperacion){
 	const unsigned long int idIcono = Protocolo::extraerArgumentoNumericoDeComando(comandoDeOperacion,4);
 	Producto* productoAAgregar = new Producto(nombreProducto,descripcionProducto,idIcono);
 	datos.agregarProducto(productoAAgregar);
-	return productoAAgregar->getId();
+	std::stringstream parseador;
+	parseador << productoAAgregar->getId();
+	return (parseador.str() + kMensajeDelimitadorCampos);
 }
 
 const std::string Operador::modificacionProducto(const std::string& comandoDeOperacion){
@@ -200,7 +202,9 @@ const std::string Operador::altaAreaDeVision(const std::string& comandoDeOperaci
 	const std::string tipoDeCapturadorAreaDeVision = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,3);
 	AreaDeVision* areaDeVisionAAgregar = new AreaDeVision(ubicacionAreaDeVision,tipoDeCapturadorAreaDeVision);
 	datos.agregarAreaDeVision(areaDeVisionAAgregar);
-	return areaDeVisionAAgregar->getId();
+	std::stringstream parseador;
+	parseador << areaDeVisionAAgregar->getId();
+	return (parseador.str() + kMensajeDelimitadorCampos);
 }
 
 const std::string Operador::modificacionAreaDeVision(const std::string& comandoDeOperacion){
@@ -297,10 +301,6 @@ void Operador::actualizarDeteccionAreaDeVision(AreaDeVision* const areaDeVisionA
 		for (std::list<unsigned long int>::const_iterator id=(*it)->getIdsImagenes()->begin(); id!=(*it)->getIdsImagenes()->end();++id)
 			if (datos.existeImagenConId(*id))
 				aparicionesDelProducto+=imagenCapturada.contarApariciones(datos.getImagenConId(*id),tipoDeDeteccion);
-
-		std::cerr << "Se encontraron " << aparicionesDelProducto << " unidades de "
-				<< (*it)->getNombre() << "\n";
-
 		if (aparicionesDelProducto>0){
 			std::list<Stock*>* stockProductoDetectado = new std::list<Stock*>();
 			stockProductoDetectado->push_back(new Stock(aparicionesDelProducto,fechaDeCaptura));

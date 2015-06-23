@@ -89,6 +89,7 @@ add_executable(Client
 			Cliente/Control/client_ControladorVistaDescargaImagenDeProductos.cpp
 			Cliente/Vista/client_VistaDescargaImagenDeProductos2.cpp
 			Cliente/Vista/client_ProductosList.cpp
+			Cliente/Vista/client_VistaPrincipal.cpp
 			#Common/common_Cliente.cpp
 			Common/common_SocketCliente.cpp
 			Common/common_AreaDeVision.cpp
@@ -100,6 +101,7 @@ add_executable(Client
 			Common/common_Thread.cpp
 			Common/common_CommandParser.cpp
 			Common/common_Imagen.cpp
+			Common/common_Video.cpp
 		)
 
 FIND_PACKAGE(OpenCV REQUIRED)

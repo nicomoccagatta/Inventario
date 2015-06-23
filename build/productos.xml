@@ -122,7 +122,7 @@
         <Imagen>89</Imagen>
         <Imagen>90</Imagen>
         <Imagen>91</Imagen>
-    </Imagenes>	
+    </Imagenes>
 </Producto>
 <Producto id="19">
     <Nombre>Dulce de leche - La Serenisima</Nombre>
@@ -140,7 +140,7 @@
         <Imagen>83</Imagen>
         <Imagen>84</Imagen>
         <Imagen>85</Imagen>
-    </Imagenes>	
+    </Imagenes>
 </Producto>
 <Producto id="20">
     <Nombre>IbupiracPlus - Pfizer</Nombre>
@@ -161,12 +161,16 @@
         <Imagen>78</Imagen>
         <Imagen>79</Imagen>
         <Imagen>80</Imagen>
-    </Imagenes>	
+    </Imagenes>
 </Producto>
 <Producto id="21">
     <Nombre>IbuApracur 400 VL - Lepetit</Nombre>
     <Descripcion>Analgesico, antiinflamatorio, antifebril. Tableta de 10 comprimidos recubiertos Ibuprofeno 400mg</Descripcion>
     <StockHistorico>
+        <Stock>
+            <Fecha>Tue Jun 16 06:06:06 2015</Fecha>
+            <Cantidad>8</Cantidad>
+        </Stock>
         <Stock>
             <Fecha>Wed Jun 08 01:24:05 2015</Fecha>
             <Cantidad>0</Cantidad>
@@ -180,11 +184,11 @@
         <Imagen>70</Imagen>
         <Imagen>71</Imagen>
         <Imagen>72</Imagen>
-    </Imagenes>	
+    </Imagenes>
 </Producto>
 <Producto id="22">
     <Nombre>Sonrisas sabor frambuesa - Bagley</Nombre>
-    <Descripcion>Galletitas dulces con relleno sabor frambuesa con "nutrileche"</Descripcion>
+    <Descripcion>Galletitas dulces con relleno sabor frambuesa con &quot;nutrileche&quot;</Descripcion>
     <StockHistorico>
         <Stock>
             <Fecha>Wed Jun 08 01:24:05 2015</Fecha>
@@ -198,7 +202,7 @@
         <Imagen>64</Imagen>
         <Imagen>65</Imagen>
         <Imagen>66</Imagen>
-    </Imagenes>	
+    </Imagenes>
 </Producto>
 <Producto id="23">
     <Nombre>Salsa Napolitana 340g - Knorr</Nombre>
@@ -217,7 +221,7 @@
         <Imagen>59</Imagen>
         <Imagen>60</Imagen>
         <Imagen>61</Imagen>
-    </Imagenes>	
+    </Imagenes>
 </Producto>
 <Producto id="24">
     <Nombre>Mermelada de frutilla BC 390g - La Campagnola</Nombre>
@@ -229,7 +233,7 @@
         </Stock>
     </StockHistorico>
     <Icono>50</Icono>
-     <Imagenes>
+    <Imagenes>
         <Imagen>50</Imagen>
         <Imagen>51</Imagen>
         <Imagen>52</Imagen>

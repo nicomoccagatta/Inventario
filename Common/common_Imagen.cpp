@@ -69,7 +69,13 @@ const bool Imagen::esValida()const{
 
 const unsigned long int Imagen::contarApariciones(const Imagen& imagenObjeto,const std::string& tipoDeteccion)const{
 	if (tipoDeteccion=="M"){
-		return contarAparicionesTemplateMatching(imagenObjeto);
+		try{
+			return contarAparicionesTemplateMatching(imagenObjeto);
+		}catch (std::exception& e){
+			std::cout << "La imagen a comparar era mas grande\n";
+			//std::cout << e.what();
+			return 0;
+		}
 	} else {
 		return contarAparicionesFeatureMatching(imagenObjeto);
 	}

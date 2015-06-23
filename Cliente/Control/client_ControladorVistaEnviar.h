@@ -28,6 +28,11 @@ public:
 	void buttonENVIARClicked(Glib::ustring rutaArchivo,Glib::Date* fecha,
 			Glib::ustring horas,Glib::ustring minutos, Glib::ustring segundos,
 			int matching,AreaDeVision* area);
+
+private:
+	void aStructTime(Glib::Date* fecha,
+		Glib::ustring horas,Glib::ustring minutos,Glib::ustring segundos,
+		struct tm& time);
 };
 
 #endif /* CLIENTE_CONTROL_CLIENT_CONTROLADORVISTAENVIAR_H_ */

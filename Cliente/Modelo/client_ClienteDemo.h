@@ -35,7 +35,9 @@ public:
 	std::string getImagenConId(unsigned long int id);
 
 	void enviarFotoTemplateMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen);
+	void enviarFotoFeatureMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen);
 
+	bool identificarse();
 	void cerrarConeccion();
 
 private:

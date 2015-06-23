@@ -2,13 +2,25 @@
     <Ubicacion>patio delantero</Ubicacion>
     <TipoDeCapturador>foto</TipoDeCapturador>
     <ProductosDetectados>
+        <Producto id="16">
+            <Nombre>Coca</Nombre>
+            <Descripcion>lata chiquita y golpeada</Descripcion>
+            <StockHistorico>
+                <Stock>
+                    <Fecha>Tue May 5 05:05:05 2015</Fecha>
+                    <Cantidad>1</Cantidad>
+                </Stock>
+            </StockHistorico>
+            <Icono>0</Icono>
+            <Imagenes />
+        </Producto>
         <Producto id="21">
             <Nombre>IbuApracur 400 VL - Lepetit</Nombre>
             <Descripcion>Analgesico, antiinflamatorio, antifebril. Tableta de 10 comprimidos recubiertos Ibuprofeno 400mg</Descripcion>
             <StockHistorico>
                 <Stock>
-                    <Fecha>Tue Jun 16 06:06:06 2015</Fecha>
-                    <Cantidad>8</Cantidad>
+                    <Fecha>Tue May 5 05:05:05 2015</Fecha>
+                    <Cantidad>7</Cantidad>
                 </Stock>
             </StockHistorico>
             <Icono>0</Icono>
@@ -19,32 +31,103 @@
 <AreaDeVision id="3">
     <Ubicacion>garage</Ubicacion>
     <TipoDeCapturador>video</TipoDeCapturador>
-    <ProductosDetectados>
-        <Producto id="16">
-            <Nombre>Coca</Nombre>
-            <Descripcion>lata chiquita y golpeada</Descripcion>
-            <StockHistorico>
-                <Stock>
-                    <Fecha>Mon Jun 15 01:02:03 2015</Fecha>
-                    <Cantidad>1</Cantidad>
-                </Stock>
-            </StockHistorico>
-            <Icono>0</Icono>
-            <Imagenes />
-        </Producto>
-    </ProductosDetectados>
+    <ProductosDetectados />
 </AreaDeVision>
 <AreaDeVision id="4">
     <Ubicacion>entrada de atras</Ubicacion>
     <TipoDeCapturador>video</TipoDeCapturador>
     <ProductosDetectados>
+        <Producto id="15">
+            <Nombre>Alfajor Terrabusi</Nombre>
+            <Descripcion>El mas rico de tooooodos</Descripcion>
+            <StockHistorico>
+                <Stock>
+                    <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+                    <Cantidad>3</Cantidad>
+                </Stock>
+            </StockHistorico>
+            <Icono>0</Icono>
+            <Imagenes />
+        </Producto>
+        <Producto id="16">
+            <Nombre>Coca</Nombre>
+            <Descripcion>lata chiquita y golpeada</Descripcion>
+            <StockHistorico>
+                <Stock>
+                    <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+                    <Cantidad>13</Cantidad>
+                </Stock>
+            </StockHistorico>
+            <Icono>0</Icono>
+            <Imagenes />
+        </Producto>
+        <Producto id="18">
+            <Nombre>Fernet - Branca</Nombre>
+            <Descripcion>El elixir de la vida</Descripcion>
+            <StockHistorico>
+                <Stock>
+                    <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+                    <Cantidad>10</Cantidad>
+                </Stock>
+            </StockHistorico>
+            <Icono>0</Icono>
+            <Imagenes />
+        </Producto>
+        <Producto id="20">
+            <Nombre>IbupiracPlus - Pfizer</Nombre>
+            <Descripcion>Tableta de 10 comprimidos Ibuprofeno 400mg + Cafeina 65mg</Descripcion>
+            <StockHistorico>
+                <Stock>
+                    <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+                    <Cantidad>6</Cantidad>
+                </Stock>
+            </StockHistorico>
+            <Icono>0</Icono>
+            <Imagenes />
+        </Producto>
+        <Producto id="21">
+            <Nombre>IbuApracur 400 VL - Lepetit</Nombre>
+            <Descripcion>Analgesico, antiinflamatorio, antifebril. Tableta de 10 comprimidos recubiertos Ibuprofeno 400mg</Descripcion>
+            <StockHistorico>
+                <Stock>
+                    <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+                    <Cantidad>24</Cantidad>
+                </Stock>
+            </StockHistorico>
+            <Icono>0</Icono>
+            <Imagenes />
+        </Producto>
+        <Producto id="22">
+            <Nombre>Sonrisas sabor frambuesa - Bagley</Nombre>
+            <Descripcion>Galletitas dulces con relleno sabor frambuesa con &quot;nutrileche&quot;</Descripcion>
+            <StockHistorico>
+                <Stock>
+                    <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+                    <Cantidad>2</Cantidad>
+                </Stock>
+            </StockHistorico>
+            <Icono>0</Icono>
+            <Imagenes />
+        </Producto>
+        <Producto id="25">
+            <Nombre>Chocolinas 250g - Bagley</Nombre>
+            <Descripcion>Galletitas dulces sabor chocolate.</Descripcion>
+            <StockHistorico>
+                <Stock>
+                    <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+                    <Cantidad>7</Cantidad>
+                </Stock>
+            </StockHistorico>
+            <Icono>0</Icono>
+            <Imagenes />
+        </Producto>
         <Producto id="27">
             <Nombre>sol</Nombre>
             <Descripcion>aver si anda esta vez</Descripcion>
             <StockHistorico>
                 <Stock>
-                    <Fecha>Wed Aug 19 06:07:08 2015</Fecha>
-                    <Cantidad>3</Cantidad>
+                    <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+                    <Cantidad>1</Cantidad>
                 </Stock>
             </StockHistorico>
             <Icono>0</Icono>

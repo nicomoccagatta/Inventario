@@ -68,17 +68,18 @@ const bool Imagen::esValida()const{
 }
 
 const unsigned long int Imagen::contarApariciones(const Imagen& imagenObjeto,const std::string& tipoDeteccion)const{
-	if (tipoDeteccion=="M"){
-		try{
+	try{
+		if (tipoDeteccion=="M"){
 			return contarAparicionesTemplateMatching(imagenObjeto);
-		}catch (std::exception& e){
-			std::cout << "La imagen a comparar era mas grande\n";
-			//std::cout << e.what();
-			return 0;
+		} else {
+			return contarAparicionesFeatureMatching(imagenObjeto);
 		}
-	} else {
-		return contarAparicionesFeatureMatching(imagenObjeto);
+	}catch (std::exception& e){
+		std::cout << "La imagen a comparar era mas grande\n";
+		//std::cout << e.what();
+		return 0;
 	}
+
 }
 
 //Aplica el metodo Template Matching para contar las apariciones de la imagenObjeto dentro de la imagenEscena.
@@ -215,7 +216,7 @@ const unsigned long int Imagen::contarAparicionesFeatureMatching(const Imagen& i
 }
 
 void Imagen::mostrarImagen(const std::string& tituloVentana) const{
-	cv::namedWindow(tituloVentana, CV_WINDOW_NORMAL);
+	cv::namedWindow(tituloVentana, cv::WINDOW_KEEPRATIO);
 	cv::imshow(tituloVentana, this->matrizImagen);
 	cv::waitKey();
 }

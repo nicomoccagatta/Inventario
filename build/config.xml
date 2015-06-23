@@ -1,0 +1,7 @@
+<RutaArchivoProductos>productos.xml</RutaArchivoProductos>
+<RutaArchivoAreasDeVision>areasdevision.xml</RutaArchivoAreasDeVision>
+<RutaCarpetaImagenes>./imagenes/</RutaCarpetaImagenes>
+<ValorMinimoDeSimilitudTemplateMatching>0.8</ValorMinimoDeSimilitudTemplateMatching>
+<ValorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud>0.2</ValorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud>
+<ValorMinimoHessianoSURFFeatureMatching>400</ValorMinimoHessianoSURFFeatureMatching>
+<DistanciaMaximaDeSimilitudFeatureMatching>0.14</DistanciaMaximaDeSimilitudFeatureMatching>

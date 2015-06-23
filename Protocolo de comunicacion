@@ -84,7 +84,7 @@ ok|\n ó error|\n
 
 
 Feature Matching foto
-M|ID|FECHA|\n
+N|ID|FECHA|\n
 ok|\n ó error|\n
 N|ID|FECHA|altoIMAGEN|anchoIMAGEN|tamanioIMAGEN|\n
 ok|\n

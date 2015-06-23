@@ -39,3 +39,7 @@ std::string ModeloObservable::getImagenConId(unsigned long int id){
 void ModeloObservable::enviarFotoTemplateMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen){
 	this->cliente.enviarFotoTemplateMatching(idArea, fecha, rutaDeImagen);
 }
+
+void ModeloObservable::enviarFotoFeatureMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen){
+	this->cliente.enviarFotoFeatureMatching(idArea, fecha, rutaDeImagen);
+}

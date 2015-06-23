@@ -120,6 +120,7 @@ add_executable(Server
 			Servidor/server_Operador.cpp
 			Servidor/server_Servidor.cpp
 			Servidor/server_SocketServidor.cpp
+			Servidor/server_ParserXML.cpp
 			Servidor/Servidor.cpp
 			Common/client_Cliente.cpp
 			Common/common_SocketCliente.cpp

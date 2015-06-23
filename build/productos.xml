@@ -35,6 +35,10 @@
     <Descripcion>El mas rico de tooooodos</Descripcion>
     <StockHistorico>
         <Stock>
+            <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+            <Cantidad>24</Cantidad>
+        </Stock>
+        <Stock>
             <Fecha>Tue Jun 9 14:58:27 2015</Fecha>
             <Cantidad>21</Cantidad>
         </Stock>
@@ -76,6 +80,14 @@
     <Descripcion>lata chiquita y golpeada</Descripcion>
     <StockHistorico>
         <Stock>
+            <Fecha>Tue May 5 05:05:05 2015</Fecha>
+            <Cantidad>15</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+            <Cantidad>14</Cantidad>
+        </Stock>
+        <Stock>
             <Fecha>Mon Jun 15 01:02:03 2015</Fecha>
             <Cantidad>1</Cantidad>
         </Stock>
@@ -109,6 +121,10 @@
     <Nombre>Fernet - Branca</Nombre>
     <Descripcion>El elixir de la vida</Descripcion>
     <StockHistorico>
+        <Stock>
+            <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+            <Cantidad>10</Cantidad>
+        </Stock>
         <Stock>
             <Fecha>Wed Jun 08 01:24:05 2015</Fecha>
             <Cantidad>0</Cantidad>
@@ -147,6 +163,10 @@
     <Descripcion>Tableta de 10 comprimidos Ibuprofeno 400mg + Cafeina 65mg</Descripcion>
     <StockHistorico>
         <Stock>
+            <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+            <Cantidad>6</Cantidad>
+        </Stock>
+        <Stock>
             <Fecha>Wed Jun 08 01:24:05 2015</Fecha>
             <Cantidad>0</Cantidad>
         </Stock>
@@ -167,6 +187,14 @@
     <Nombre>IbuApracur 400 VL - Lepetit</Nombre>
     <Descripcion>Analgesico, antiinflamatorio, antifebril. Tableta de 10 comprimidos recubiertos Ibuprofeno 400mg</Descripcion>
     <StockHistorico>
+        <Stock>
+            <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+            <Cantidad>40</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Sun Jun 14 01:01:01 2015</Fecha>
+            <Cantidad>16</Cantidad>
+        </Stock>
         <Stock>
             <Fecha>Tue Jun 16 06:06:06 2015</Fecha>
             <Cantidad>8</Cantidad>
@@ -190,6 +218,10 @@
     <Nombre>Sonrisas sabor frambuesa - Bagley</Nombre>
     <Descripcion>Galletitas dulces con relleno sabor frambuesa con &quot;nutrileche&quot;</Descripcion>
     <StockHistorico>
+        <Stock>
+            <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+            <Cantidad>2</Cantidad>
+        </Stock>
         <Stock>
             <Fecha>Wed Jun 08 01:24:05 2015</Fecha>
             <Cantidad>0</Cantidad>
@@ -246,6 +278,10 @@
     <Nombre>Chocolinas 250g - Bagley</Nombre>
     <Descripcion>Galletitas dulces sabor chocolate.</Descripcion>
     <StockHistorico>
+        <Stock>
+            <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+            <Cantidad>7</Cantidad>
+        </Stock>
         <Stock>
             <Fecha>Wed Jun 08 01:24:05 2015</Fecha>
             <Cantidad>0</Cantidad>

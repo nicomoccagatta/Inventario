@@ -18,11 +18,23 @@ ClienteDemo::ClienteDemo() : client("localhost","1037"){
 	if (!client.estaConectado())
 		std::cerr << "NO ESTOY CONECTADO\n";
 
+	if (!this->identificarse())
+		std::cerr << "NO ME IDENTIFICO BIEN!\n";
 }
 
 ClienteDemo::~ClienteDemo() {
 	this->data.eliminarAreasDeVision();
 	this->data.eliminarProductos();
+}
+
+bool ClienteDemo::identificarse(){
+	if (this->client.estaConectado()){
+		std::cerr << "Indetificandose...\n";
+		protocolo.enviarMensaje(this->client, "Client|");
+	}
+	if (this->protocolo.recibirMensaje(this->client) == "ok|")
+		return true;
+	return false;
 }
 
 void ClienteDemo::cerrarConeccion(){
@@ -74,8 +86,10 @@ bool ClienteDemo::actualizarProductos(){
 	}
 	std::string respuesta = protocolo.recibirMensaje(this->client);
 
-	if (respuesta == "error|\n")
+	if (respuesta == "error|\n"){
+		std::cerr << "error pidiendo productos\n";
 		return false;
+	}
 
 	this->data.eliminarProductos();
 
@@ -258,6 +272,27 @@ void ClienteDemo::enviarFotoTemplateMatching(unsigned long int idArea, std::stri
 		std::cerr << "NO LLEGO NADA\n";
 	}
 	*/
-
-
 }
+
+void ClienteDemo::enviarFotoFeatureMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen){
+	Imagen img(rutaDeImagen);
+
+	//img.mostrarImagen();
+
+	std::stringstream ss;
+
+
+	ss << "N|" << idArea << kMensajeDelimitadorCampos << fecha << kMensajeDelimitadorCampos;
+	std::cerr << "ENVIANDO: " << ss.str() << "\n";
+
+	this->protocolo.enviarMensaje(this->client,ss.str());
+
+	std::cerr << this->protocolo.recibirMensaje(this->client);
+
+	std::cerr << "ENVIANDO IMAGEN\n";
+	this->protocolo.enviarImagen(this->client, img);
+	std::cerr << "IMAGEN ENVIADA??\n";
+
+	std::cerr << this->protocolo.recibirMensaje(this->client);
+}
+

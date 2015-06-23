@@ -301,8 +301,6 @@ void Operador::actualizarDeteccionAreaDeVision(AreaDeVision* const areaDeVisionA
 		for (std::list<unsigned long int>::const_iterator id=(*it)->getIdsImagenes()->begin(); id!=(*it)->getIdsImagenes()->end();++id)
 			if (datos.existeImagenConId(*id))
 				aparicionesDelProducto+=imagenCapturada.contarApariciones(datos.getImagenConId(*id),tipoDeDeteccion);
-
-		std::cerr << "Se encontraron " << aparicionesDelProducto << " " << (*it)->getNombre() << std::endl;
 		if (aparicionesDelProducto>0){
 			std::list<Stock*>* stockProductoDetectado = new std::list<Stock*>();
 			stockProductoDetectado->push_back(new Stock(aparicionesDelProducto,fechaDeCaptura));
@@ -329,8 +327,9 @@ const std::string Operador::actualizarStockAreaDeVision(const std::string& coman
 		std::string mensajeRecibido = this->protocolo.recibirMensaje(this->cliente);
 		Imagen imagenRecibida = recibirImagen(mensajeRecibido);
 		if (cliente.estaConectado() && imagenRecibida.esValida()){
+			protocolo.enviarMensaje(cliente, kMensajeOK);
 			actualizarDeteccionAreaDeVision(areaDeVisionAActualizar,imagenRecibida,fechaDeCaptura,tipoDeDeteccion);
-			return kMensajeOK;
+			return kRespuestaNula;
 		}
 	}
 	return kMensajeError;

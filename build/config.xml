@@ -4,4 +4,4 @@
 <ValorMinimoDeSimilitudTemplateMatching>0.8</ValorMinimoDeSimilitudTemplateMatching>
 <ValorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud>0.2</ValorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud>
 <ValorMinimoHessianoSURFFeatureMatching>400</ValorMinimoHessianoSURFFeatureMatching>
-<DistanciaMaximaDeSimilitudFeatureMatching>0.14</DistanciaMaximaDeSimilitudFeatureMatching>
+<DistanciaMaximaDeSimilitudFeatureMatching>0.15</DistanciaMaximaDeSimilitudFeatureMatching>

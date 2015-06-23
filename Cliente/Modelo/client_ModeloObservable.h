@@ -35,6 +35,9 @@ public:
 	void enviarFotoTemplateMatching(unsigned long int id, std::string& fecha,std::string& rutaDeImagen);
 	void enviarFotoFeatureMatching(unsigned long int id, std::string& fecha, std::string& rutaDeImagen);
 
+	void enviarVideoTemplateMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeVideo);
+	void enviarVideoFeatureMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeVideo);
+
 
 };
 

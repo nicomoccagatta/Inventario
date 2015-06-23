@@ -42,6 +42,7 @@ private:
 	ControlLAV controlLAV;
 	VistaListadoProductos vistaLP;
 	VistaListadoAreasDeVision vistaLAV;
+	VistaAgregarProducto vistaAP;
 };
 
 #endif /* ADMINISTRADOR_VISTAADMIN_VISTAVENTANAPPAL_H_ */

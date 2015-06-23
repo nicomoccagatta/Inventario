@@ -1,38 +1,30 @@
-#include <time.h>
-#include "server_Servidor.h"
-#include "server_BaseDeDatos.h"
+#include "common_Video.h"
 #include "common_Imagen.h"
-#include <iostream>
 #include <list>
 #include <string>
-/*
-#include "opencv.hpp"
-#include <cv.h>
-#include <highgui.h>
-*/
-#define kCodigoRetorno 0
 
-using namespace cv;
+
+#include <iostream>
+#include <string>
+#include "server_Servidor.h"
+#define kCodigoRetornoExistoso 0
+#define kCodigoRetornoErroneo 1
 
 using server::Servidor;
-using server::BaseDeDatos;
-using common::Imagen;
 
 int main(int argc, char* argv[]) {
-//  if (argc < 3) return 0; no se si ams adelante va a haber que agarrar argumentos, lo dejo.
-
-  Servidor server;
-
+  if (argc < 3) return kCodigoRetornoErroneo;
+  Servidor server(argv[1],argv[2]);
   if (server.conectado())
     server.start();
   else
-    return kCodigoRetorno;
+    return kCodigoRetornoErroneo;
   std::string rta("");
   while (rta != "q") {
     std::cin >> rta;
   }
   server.ignorarUsuarios();
   server.join();
-  return kCodigoRetorno;
+  return kCodigoRetornoExistoso;
 }
 

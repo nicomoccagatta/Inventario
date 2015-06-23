@@ -42,7 +42,7 @@ namespace server {
 
 class BaseDeDatos {
 public:
-	BaseDeDatos(std::string rutaProductos = kRutaPorDefectoProductos,std::string rutaAreasDeVision = kRutaPorDefectoAreasDeVision);
+	BaseDeDatos(const std::string& rutaProductos = kRutaPorDefectoProductos,const std::string& rutaAreasDeVision = kRutaPorDefectoAreasDeVision,const std::string& rutaImagenes =kRutaPorDefectoImagenes);
 	~BaseDeDatos();
 	Producto* const getProductoConId(const unsigned long int idProductoBuscado) const;
 	const std::list<Producto*>* getProductos() const;
@@ -58,6 +58,9 @@ public:
 	void eliminarImagen(const unsigned long int idImagen);
 
 private:
+	const std::string rutaProductos;
+	const std::string rutaAreasDeVision;
+	const std::string rutaImagenes;
 	std::list<Producto*>* productos;
 	std::list<AreaDeVision*>* areasDeVision;
 	unsigned long int proximoIdImagenes;

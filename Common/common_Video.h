@@ -5,7 +5,9 @@
 #include <opencv/highgui.h>
 #include "opencv2/videoio.hpp"
 #include <list>
+#include <ctime>
 #include "common_Imagen.h"
+#define kFormatoFecha "%a %b %d %H:%M:%S %Y"
 
 using common::Imagen;
 
@@ -15,7 +17,7 @@ class Video {
 public:
 	Video(const std::string& rutaArchivo);
 	bool esValido()const;
-	void capturasPeriodicasVideo(std::list<const Imagen>& listaImagenes, double periodoEnMinutos=30)const;
+	void capturasPeriodicasVideo(std::list<Imagen>& listaImagenes,std::list<std::string>& listaDeFechas,const std::string& fechaInicial , float periodoEnSegundos=60);
 
 private:
 	cv::VideoCapture capturasVideo;

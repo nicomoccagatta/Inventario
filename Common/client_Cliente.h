@@ -32,7 +32,6 @@ class Cliente {
   void enviarImagen(const Imagen& imagenAEnviar);
   void cerrarConeccion();
   const size_t realizarConsultas();
-  void templateMatching(const std::string& idAreaDeVision,const Imagen& imagenAEnviar);
 
  private:
   SocketCliente skt;
@@ -40,6 +39,9 @@ class Cliente {
   static const std::string obtenerDireccionIP(
       const std::string& direccionServidor);
   static const std::string obtenerPuerto(const std::string& direccionServidor);
+  void templateMatching(const std::string& idAreaDeVision,const Imagen& imagenAEnviar);
+    void featureMatching(const std::string& idAreaDeVision,const Imagen& imagenAEnviar);
+    void identificarse();
 };
 }
 

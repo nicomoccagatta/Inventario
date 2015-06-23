@@ -9,13 +9,30 @@ using server::Operador;
 
 // Se instancia el objeto, obtiene la informacion relevante del archivo e
 // intenta setear correctamente la escucha de clientes.
-Servidor::Servidor(const std::string& puerto,
+Servidor::Servidor(const std::string& puerto,const std::string& rutaArchivoConfiguracion,
                    size_t maximoDeClientesAAtender, Protocolo protocolo)
     : skt(puerto, maximoDeClientesAAtender),
       atenderClientes(true),
       operadoresActivos(0),
-      protocolo(protocolo) {
-  //this->parser.parsearArchivoDinamicamente(*(this->turnos));
+      protocolo(protocolo),
+	  datos(ParserXML::valorDelElementoEnArchivo(kTagXMLRutaArchivoProductos,rutaArchivoConfiguracion),ParserXML::valorDelElementoEnArchivo(kTagXMLRutaArchivoAreasDeVision,rutaArchivoConfiguracion),ParserXML::valorDelElementoEnArchivo(kTagXMLRutaCarpetaImagenes,rutaArchivoConfiguracion)){
+	float valorMinimoDeSimilitudTemplateMatching;
+	float valorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud;
+	unsigned long int valorMinimoHessianoSURFFeatureMatching;
+	float distanciaMaximaDeSimilitudFeatureMatching;
+	std::stringstream parseador;
+	parseador << ParserXML::valorDelElementoEnArchivo(kTagXMLConfigImagenesValorMinimoDeSimilitudTemplateMatching,rutaArchivoConfiguracion);
+	parseador >> valorMinimoDeSimilitudTemplateMatching;
+	parseador.clear();
+	parseador << ParserXML::valorDelElementoEnArchivo(kTagXMLConfigImagenesValorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud,rutaArchivoConfiguracion);
+	parseador >> valorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud;
+	parseador.clear();
+	parseador << ParserXML::valorDelElementoEnArchivo(kTagXMLConfigImagenesValorMinimoHessianoSURFFeatureMatching,rutaArchivoConfiguracion);
+	parseador >> valorMinimoHessianoSURFFeatureMatching;
+	parseador.clear();
+	parseador << ParserXML::valorDelElementoEnArchivo(kTagXMLConfigImagenesDistanciaMaximaDeSimilitudFeatureMatching,rutaArchivoConfiguracion);
+	parseador >> distanciaMaximaDeSimilitudFeatureMatching;
+	Imagen::setearPatametros(valorMinimoDeSimilitudTemplateMatching,valorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud,valorMinimoHessianoSURFFeatureMatching,distanciaMaximaDeSimilitudFeatureMatching);
 }
 
 // Se persisten los datos sobre lso que se opero, se liberan los recursos y se
@@ -54,8 +71,7 @@ void Servidor::atenderUsuarios() {
     if (this->skt.estaConectado() && this->atenderClientes) {
       // si se esta en conedicioens de atender al cliente le asigno un operador
       // que lo atienda en otro hilo.
-      Operador* operadorDeCliente =
-          new Operador(clienteAceptado, this->protocolo, datos);
+      Operador* operadorDeCliente = new Operador(clienteAceptado, this->protocolo, datos);
       operadorDeCliente->start();
       this->operadoresActivos++;
       // me guardo una referencia al operador para poder conocer el resultado y

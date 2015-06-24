@@ -2,25 +2,13 @@
     <Ubicacion>patio delantero</Ubicacion>
     <TipoDeCapturador>foto</TipoDeCapturador>
     <ProductosDetectados>
-        <Producto id="16">
-            <Nombre>Coca</Nombre>
-            <Descripcion>lata chiquita y golpeada</Descripcion>
-            <StockHistorico>
-                <Stock>
-                    <Fecha>Tue May 5 05:05:05 2015</Fecha>
-                    <Cantidad>1</Cantidad>
-                </Stock>
-            </StockHistorico>
-            <Icono>0</Icono>
-            <Imagenes />
-        </Producto>
         <Producto id="21">
             <Nombre>IbuApracur 400 VL - Lepetit</Nombre>
             <Descripcion>Analgesico, antiinflamatorio, antifebril. Tableta de 10 comprimidos recubiertos Ibuprofeno 400mg</Descripcion>
             <StockHistorico>
                 <Stock>
-                    <Fecha>Tue May 5 05:05:05 2015</Fecha>
-                    <Cantidad>7</Cantidad>
+                    <Fecha>Sun Jun 14 01:02:03 2015</Fecha>
+                    <Cantidad>8</Cantidad>
                 </Stock>
             </StockHistorico>
             <Icono>0</Icono>

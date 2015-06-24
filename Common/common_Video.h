@@ -20,11 +20,11 @@ public:
 
 	/*image sequence (eg. img_%02d.jpg, which will read samples like
 	 * img_00.jpg, img_01.jpg, img_02.jpg, ...)*/
-	bool setearSecuenciaDeImagenes(std::string templateImagenes);
+	bool setearSecuenciaDeImagenes(std::string templateImagenes, double fps);
 	bool esValido()const;
 	void capturasPeriodicasVideo(std::list<Imagen>& listaImagenes,std::list<std::string>& listaDeFechas,const std::string& fechaInicial , float periodoEnSegundos=60);
 
-	void mostrarVideo(double fps);
+	void mostrarVideo();
 
 private:
 	cv::VideoCapture capturasVideo;

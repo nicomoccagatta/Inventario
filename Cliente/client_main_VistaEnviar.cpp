@@ -24,9 +24,25 @@ int crearAPartirDeGlade(Glib::RefPtr<Gtk::Builder>* refBuilder,
 
 int main(int argc, char* argv[]) {
 
-	//common::Video vid("/home/ale/git/Inventario/Imagenes/Areas/Farmacia/farmacia_%02d.jpg");
-	//vid.mostrarVideo(20);
+	common::Video vid("/home/ale/git/Inventario/Imagenes/Areas/Farmacia/farmacia_%02d.jpg");
+	//common::Video vid("/home/ale/git/Inventario/Imagenes/20150623_144843.mp4");
+	vid.mostrarVideo();
 
+	std::list<Imagen> frames;
+	std::list<std::string> fechas;
+
+	vid.capturasPeriodicasVideo(frames,fechas,"Sun Jun 14 01:02:03 2015",1);
+
+	std::list<Imagen>::iterator itIm;
+	std::list<std::string>::iterator itStr;
+
+	for (itIm=frames.begin(), itStr=fechas.begin();
+			itIm != frames.end(); ++itIm, ++itStr){
+		(*itIm).mostrarImagen();
+		cv::waitKey(1000);
+		std::cerr << "Fecha: " << (*itStr) << "\n";
+	}
+	return 0;
 	ModeloObservable modelo;
 
 	modelo.actualizarProductos();

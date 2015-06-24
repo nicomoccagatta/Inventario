@@ -3,7 +3,7 @@
 #include "client_Cliente.h"
 
 using client::Cliente;
-/*
+
 int main(int argc, char* argv[]) {
 	std::cout<<"Cliente"<<std::endl;
   if (argc > 1) {
@@ -13,5 +13,5 @@ int main(int argc, char* argv[]) {
   }
   return 0;
 }
-*/
+
 

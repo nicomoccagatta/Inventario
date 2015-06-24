@@ -138,7 +138,7 @@ void VistaDescargaImagenDeProductos2::update_lista_productos(){
 
 void VistaDescargaImagenDeProductos2::on_button_atras(){
 	hide();
-	Gtk::Main::quit();
+	//Gtk::Main::quit();
 }
 
 void VistaDescargaImagenDeProductos2::on_button_descargar(){

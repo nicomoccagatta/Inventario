@@ -11,8 +11,10 @@
 #include "client_ClienteDemo.h"
 #include "common_CommandParser.h"
 #include "common_Imagen.h"
+#include "common_Video.h"
 
 using common::Imagen;
+using common::Video;
 
 ClienteDemo::ClienteDemo() : client("localhost","1037"){
 	if (!client.estaConectado())
@@ -238,61 +240,69 @@ std::string ClienteDemo::getImagenConId(unsigned long int id){
 	return ruta;
 }
 
-void ClienteDemo::enviarFotoTemplateMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen){
-	Imagen img(rutaDeImagen);
-
-	//img.mostrarImagen();
-
+void ClienteDemo::enviarFoto(const char* comando, unsigned long int idArea, std::string& fecha,Imagen& img){
 	std::stringstream ss;
 
-
-	ss << "M|" << idArea << kMensajeDelimitadorCampos << fecha << kMensajeDelimitadorCampos;
+	ss << comando << idArea << kMensajeDelimitadorCampos << fecha << kMensajeDelimitadorCampos;
 	std::cerr << "ENVIANDO: " << ss.str() << "\n";
+
 
 	this->protocolo.enviarMensaje(this->client,ss.str());
 
-	std::cerr << this->protocolo.recibirMensaje(this->client);
-
-	std::cerr << "ENVIANDO IMAGEN\n";
-	this->protocolo.enviarImagen(this->client, img);
-	std::cerr << "IMAGEN ENVIADA??\n";
-
-	std::cerr << this->protocolo.recibirMensaje(this->client);
-
-	/*
 	if (this->protocolo.recibirMensaje(this->client) == kMensajeOK+protocolo.getFinalizadorDeMensaje()){
 		this->protocolo.enviarImagen(this->client, img);
 	}
 	else{
-		std::cerr << "NO LLEGO NADA\n";
+		std::cerr << "NO LLEGO SE ENVIARON BIEN LOS DETALLES NADA\n";
 	}
 	if (this->protocolo.recibirMensaje(this->client) == kMensajeOK+protocolo.getFinalizadorDeMensaje()){
-		std::cerr << "LLEGO PIOLA\n";
+		std::cerr << "TODO PIOLA\n";
 	}else{
 		std::cerr << "NO LLEGO NADA\n";
 	}
-	*/
+
+}
+
+void ClienteDemo::enviarFotoTemplateMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen){
+	Imagen img(rutaDeImagen);
+
+	this->enviarFoto("M|",idArea,fecha,img);
 }
 
 void ClienteDemo::enviarFotoFeatureMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen){
 	Imagen img(rutaDeImagen);
 
-	//img.mostrarImagen();
-
-	std::stringstream ss;
-
-
-	ss << "N|" << idArea << kMensajeDelimitadorCampos << fecha << kMensajeDelimitadorCampos;
-	std::cerr << "ENVIANDO: " << ss.str() << "\n";
-
-	this->protocolo.enviarMensaje(this->client,ss.str());
-
-	std::cerr << this->protocolo.recibirMensaje(this->client);
-
-	std::cerr << "ENVIANDO IMAGEN\n";
-	this->protocolo.enviarImagen(this->client, img);
-	std::cerr << "IMAGEN ENVIADA??\n";
-
-	std::cerr << this->protocolo.recibirMensaje(this->client);
+	this->enviarFoto("N|",idArea,fecha,img);
 }
 
+
+
+void ClienteDemo::enviarVideo(const char* comando, unsigned long int idArea, std::string& fechaInicio,Video& vid){
+	std::stringstream ss;
+
+	std::list<Imagen> frames;
+	std::list<std::string> fechas;
+
+	vid.capturasPeriodicasVideo(frames,fechas,fechaInicio,1);
+
+	std::list<Imagen>::iterator itIm;
+	std::list<std::string>::iterator itStr;
+
+	for (itIm=frames.begin(), itStr=fechas.begin();
+			itIm != frames.end(); ++itIm, ++itStr){
+		this->enviarFoto(comando,idArea,*itStr,*itIm);
+	}
+
+
+}
+
+void ClienteDemo::enviarVideoTemplateMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeVideo){
+	Video vid(rutaDeVideo);
+	this->enviarVideo("M|",idArea,fechaInicio,vid);
+}
+
+void ClienteDemo::enviarVideoFeatureMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeVideo){
+	Video vid(rutaDeVideo);
+
+	this->enviarVideo("N|",idArea,fechaInicio,vid);
+}

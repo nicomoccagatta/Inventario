@@ -9,8 +9,9 @@ Video::Video(){
 Video::Video(const std::string& rutaArchivo):capturasVideo(rutaArchivo)  {}
 
 
-bool Video::setearSecuenciaDeImagenes(std::string templateImagenes){
+bool Video::setearSecuenciaDeImagenes(std::string templateImagenes, double fps){
 	capturasVideo.open(templateImagenes);
+	capturasVideo.set(CV_CAP_PROP_FPS,fps);
 	return this->esValido();
 }
 
@@ -50,10 +51,12 @@ void Video::capturasPeriodicasVideo(std::list<Imagen>& listaImagenes,std::list<s
 	}
 }
 
-void Video::mostrarVideo(double fps){
+void Video::mostrarVideo(){
 	using namespace cv;
 	Mat image;
 	namedWindow("Image sequence | press ESC to close", WINDOW_KEEPRATIO);
+
+	double fps = capturasVideo.get(CV_CAP_PROP_FPS);
 
 	while (true){
 		// Read in image from sequence

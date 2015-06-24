@@ -43,3 +43,11 @@ void ModeloObservable::enviarFotoTemplateMatching(unsigned long int idArea, std:
 void ModeloObservable::enviarFotoFeatureMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen){
 	this->cliente.enviarFotoFeatureMatching(idArea, fecha, rutaDeImagen);
 }
+
+void ModeloObservable::enviarVideoTemplateMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeImagen){
+	this->cliente.enviarVideoTemplateMatching(idArea, fechaInicio, rutaDeImagen);
+}
+
+void ModeloObservable::enviarVideoFeatureMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeImagen){
+	this->cliente.enviarVideoFeatureMatching(idArea, fechaInicio, rutaDeImagen);
+}

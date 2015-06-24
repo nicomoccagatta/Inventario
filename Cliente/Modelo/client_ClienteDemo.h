@@ -10,11 +10,15 @@
 
 #include "common_SocketCliente.h"
 #include "common_Protocolo.h"
+#include "common_Imagen.h"
+#include "common_Video.h"
 #include "client_Data.h"
 
 using client::SocketCliente;
 using common::Protocolo;
 using common::AreaDeVision;
+using common::Imagen;
+using common::Video;
 
 class ClienteDemo {
 
@@ -36,6 +40,18 @@ public:
 
 	void enviarFotoTemplateMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen);
 	void enviarFotoFeatureMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen);
+
+	void enviarFoto(const char* comando, unsigned long int idArea, std::string& fecha,Imagen& img);
+
+
+	void enviarVideo(const char* comando, unsigned long int idArea, std::string& fechaInicio,Video& vid);
+
+	void enviarVideoTemplateMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeVideo);
+	void enviarVideoFeatureMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeVideo);
+
+	void enviarVideoTemplateMatching(unsigned long int idArea, std::string& fechaInicio,std::list<Imagen>& listaImagenes);
+	void enviarVideoFeatureMatching(unsigned long int idArea, std::string& fechaInicio,std::list<Imagen>& listaImagenes);
+
 
 	bool identificarse();
 	void cerrarConeccion();

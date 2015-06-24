@@ -16,6 +16,7 @@
 #include "VistaListadoAreasDeVision.h"
 #include "VistaAgregarProducto.h"
 #include "VistaAgregarAreaVision.h"
+#include "VistaStockGeneral.h"
 
 class VistaVentanaPPAL: public Gtk::Window {
 public:
@@ -45,6 +46,7 @@ private:
 	VistaListadoAreasDeVision vistaLAV;
 	VistaAgregarProducto vistaAP;
 	VistaAgregarAreaVision vistaAAV;
+	VistaStockGeneral vistaSG;
 };
 
 #endif /* ADMINISTRADOR_VISTAADMIN_VISTAVENTANAPPAL_H_ */

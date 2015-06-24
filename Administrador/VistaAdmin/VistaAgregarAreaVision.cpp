@@ -75,7 +75,6 @@ void VistaAgregarAreaVision::on_button_OK(){
 }
 
 void VistaAgregarAreaVision::update(){
-
 }
 
 void VistaAgregarAreaVision::run(Gtk::Viewport *panelDinamico,Modelo_Observable *modelo){

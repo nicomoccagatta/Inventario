@@ -85,7 +85,6 @@ void VistaListadoAreasDeVision::on_button_eliminar(){
 	if(iter){
 		Gtk::TreeModel::Row row = *iter;
 		const std::list<Producto*>* prods = row[m_AVList.m_Columns.m_ProductosDetectados];
-		std::cerr << "Area de Vision seleccionada: " << row[m_AVList.m_Columns.m_col_Ubicacion] <<"\n";
 		modelo->eliminarAreaVision(row[m_AVList.m_Columns.m_col_Id]);
 
 		std::list<Producto*>::const_iterator it;
@@ -103,8 +102,6 @@ void VistaListadoAreasDeVision::on_av_seleccionado(){
 	if(iter){
 		Gtk::TreeModel::Row row = *iter;
 		const std::list<Producto*>* prods = row[m_AVList.m_Columns.m_ProductosDetectados];
-		std::cerr << "Area de Vision seleccionada: " << row[m_AVList.m_Columns.m_col_Ubicacion] <<"\n";
-		std::cerr << "Cantidad Productos: " << prods->size() << std::endl;
 
 		m_refProductosListStore = Gtk::ListStore::create(m_ProductosList.m_Columns);
 		m_ProductosTreeView.set_model(m_refProductosListStore);

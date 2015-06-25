@@ -11,6 +11,10 @@
 #include <gtkmm-2.4/gtkmm.h>
 #include <glibmm-2.4/glibmm.h>
 
+/*
+ * A CAMBIAR POR PANELES CON PESTANIAS.
+ * Es la ventana principal que contiene a las otras tres vistas.
+ */
 class VistaPrincipal: public Gtk::Window {
 public:
 	VistaPrincipal(BaseObjectType* cobject,

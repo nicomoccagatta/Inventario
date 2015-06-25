@@ -15,6 +15,12 @@
 using common::AreaDeVision;
 using common::Imagen;
 
+/*
+ * El ModeloObservable es utilizado para implementar el patron MVC y asi
+ * separar la parte recoleccion de los datos que se necesitan con la
+ * interfaz grafica y contiene un metodo por cada dato que la interfaz
+ * pudiera llegar a necesitar.
+ */
 class ModeloObservable {
 
 	ClienteDemo cliente;
@@ -23,8 +29,14 @@ public:
 	ModeloObservable();
 	virtual ~ModeloObservable();
 
-
+	/*
+	 *Actualiza los Productos :)
+	 */
 	bool actualizarProductos();
+
+	/*
+	 *Actualiza las Areas de vision :)
+	 */
 	bool actualizarAreasDeVision();
 
 	const std::list<AreaDeVision*>* getAreasDeVision() const;
@@ -32,6 +44,9 @@ public:
 
 	std::string getImagenConId(unsigned long int id);
 
+	/*
+	 * Envia la imagen mediante el ClienteDemo.
+	 */
 	void enviarFotoTemplateMatching(unsigned long int id, std::string& fecha,std::string& rutaDeImagen);
 	void enviarFotoFeatureMatching(unsigned long int id, std::string& fecha, std::string& rutaDeImagen);
 

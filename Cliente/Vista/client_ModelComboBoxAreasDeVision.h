@@ -12,6 +12,9 @@
 
 using common::AreaDeVision;
 
+/*
+ * Representa el modeo del combobox que se usa para listar las areas de vision.
+ */
 class AreasDeVisionComboBoxModel : public Gtk::TreeModel::ColumnRecord{
 private:
     Gtk::TreeModelColumn<AreaDeVision*> columnaValor;

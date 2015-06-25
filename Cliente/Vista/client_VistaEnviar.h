@@ -17,6 +17,11 @@
 #include "../Modelo/client_ModeloObservable.h"
 #include "client_ModelComboBoxAreasDeVision.h"
 
+/*
+ * Es la vista que permite seleccionar los datos necesarios para enviar una
+ * foto o video al servidor para realizar una demonstracion de un
+ * control de inventario.
+ */
 class VistaEnviar : public Gtk::Dialog{
 
 	ModeloObservable* modelo;

@@ -20,6 +20,10 @@
 
 class ControladorVistaDescargaImagenDeProductos;
 
+/*
+ * Es la Vista que permite ver las imagenes de cada producto y
+ * descargar la que uno quiera.
+ */
 class VistaDescargaImagenDeProductos2: public Gtk::Window {
 
 	ModeloObservable* modelo;
@@ -68,8 +72,8 @@ protected:
 	Gtk::Button m_DescargarButton;
 
 	//const GdkColor color;
-	Gtk::RadioButtonGroup radioGroup;
-	Gtk::RadioButton* m_ActiveRadio;
+	Gtk::RadioButtonGroup radioGroup; //de las imagenes
+	Gtk::RadioButton* m_ActiveRadio; //La imagen clickeada activa
 
 };
 

@@ -14,6 +14,10 @@
 
 #include "../Modelo/client_ModeloObservable.h"
 
+/*
+ * Representa, junto con ModelColumns, la ventana donde se listan los
+ * Productos.
+ */
 class ProductosList: public Gtk::ScrolledWindow {
 public:
 	ProductosList();

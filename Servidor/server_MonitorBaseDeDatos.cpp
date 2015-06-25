@@ -170,7 +170,7 @@ const std::string MonitorBaseDeDatos::obtenerStockAreaDeVision(const unsigned lo
 			std::stringstream acumulador;
 			mutexProductos.bloquear();
 			for(std::list<Producto*>::const_iterator it=productosDetectados->begin(); it!=productosDetectados->end();++it)
-				acumulador<< (*it)->getId() << kMensajeDelimitadorCampos<< datos.getProductoConId((*it)->getId())->getNombre() << kMensajeDelimitadorCampos <<(*it)->getStock()<< kMensajeDelimitadorCampos;
+				acumulador<< (*it)->getId() << kMensajeDelimitadorCampos<< datos.getProductoConId((*it)->getId())->getNombre() << kMensajeDelimitadorCampos << datos.getProductoConId((*it)->getId())->getIdIcono() << kMensajeDelimitadorCampos <<(*it)->getStock()<< kMensajeDelimitadorCampos;
 			mutexProductos.desbloquear();
 			mutexAreasDeVision.desbloquear();
 			return acumulador.str();

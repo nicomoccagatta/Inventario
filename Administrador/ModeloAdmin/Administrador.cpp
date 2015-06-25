@@ -125,17 +125,22 @@ bool Administrador::actualizarAreasDeVision(){
 						std::string nombreProd;
 						nombreProd = parserProd.getParametro(argumProd+1);
 
+						unsigned long int idIcono;
+						std::stringstream ssIdIcono;
+						ssIdIcono << parserProd.getParametro(argumProd+2);
+						ssIdIcono >> idIcono;
+
 						int CantProd;
 						std::stringstream obtenerCant;
-						obtenerCant << parserProd.getParametro(argumProd+2);
+						obtenerCant << parserProd.getParametro(argumProd+3);
 						obtenerCant >> CantProd;
 						std::list<common::Stock*> *stockProd = new std::list<common::Stock*>;
 						common::Stock* stockProducto = new common::Stock(CantProd,"listado");
 						stockProd->push_back(stockProducto);
 
-						argumProd += 3;
+						argumProd += 4;
 
-						Producto *producto = new Producto(idProd,nombreProd,"",stockProd,0,0);
+						Producto *producto = new Producto(idProd,nombreProd,"",stockProd,idIcono,0);
 						productos->push_back(producto);
 					}
 				}catch (std::exception& e){

@@ -52,13 +52,13 @@ void VistaStockGeneral::run(Gtk::Viewport *panelDinamico,Modelo_Observable *mode
 void VistaStockGeneral::on_producto_seleccionado(){
 	Gtk::TreeModel::iterator iter = refTreeSelection->get_selected();
 	if(iter){
-		Gtk::TreeModel::Row row = *iter;
-		std::stringstream idIcono;
+	//	Gtk::TreeModel::Row row = *iter;
+		//std::stringstream idIcono;
 		//idIcono << (row[m_ProductosList.m_Columns.m_col_idIcono]);
-		std::string rutaImagen = "imagenes/" + idIcono.str() +".jpg";
-		m_ImagenItem.set(rutaImagen);
-		Glib::RefPtr<Gdk::Pixbuf> scaled1 = m_ImagenItem.get_pixbuf()->scale_simple(250,250,Gdk::INTERP_BILINEAR);
-		m_ImagenItem.set(scaled1);
+	//	std::string rutaImagen = "imagenes/" + idIcono.str() +".jpg";
+		//m_ImagenItem.set(rutaImagen);
+		//Glib::RefPtr<Gdk::Pixbuf> scaled1 = m_ImagenItem.get_pixbuf()->scale_simple(250,250,Gdk::INTERP_BILINEAR);
+		//m_ImagenItem.set(scaled1);
 	}
 }
 

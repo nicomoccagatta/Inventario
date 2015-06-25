@@ -1,9 +1,3 @@
-#include "common_Video.h"
-#include "common_Imagen.h"
-#include <list>
-#include <string>
-
-
 #include <iostream>
 #include <string>
 #include "server_Servidor.h"
@@ -33,4 +27,3 @@ int main(int argc, char* argv[]) {
 	server.join();
 	return kCodigoRetornoExistoso;
 }
-

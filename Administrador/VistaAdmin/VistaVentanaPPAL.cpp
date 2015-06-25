@@ -94,8 +94,11 @@ void VistaVentanaPPAL::on_button_AAV()
 
 void VistaVentanaPPAL::on_button_SGPP()
 {
-	model->notify();
 	panelDinamico->remove();
+	model->notify();
+	model->suscribe(&vistaSG);
+	vistaSG.run(panelDinamico,model);
+	this->show_all();
 }
 
 void VistaVentanaPPAL::on_button_SPAV()

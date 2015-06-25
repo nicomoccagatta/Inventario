@@ -57,6 +57,7 @@ add_executable(Admin
 			Administrador/VistaAdmin/ListaAV.cpp
 			Administrador/VistaAdmin/VistaAgregarProducto.cpp
 			Administrador/VistaAdmin/VistaAgregarAreaVision.cpp
+			Administrador/VistaAdmin/VistaStockGeneral.cpp
 			Common/common_SocketCliente.cpp
 			Common/common_AreaDeVision.cpp
 			Common/common_Mutex.cpp
@@ -119,7 +120,7 @@ ADD_SUBDIRECTORY("${PROJECT_SOURCE_DIR}/Servidor")
 include_directories("${PROJECT_SOURCE_DIR}/Servidor")
 add_executable(Server
 			Servidor/server_BaseDeDatos.cpp
-			Servidor/server_DetectorDeObjetos.cpp
+			Servidor/server_MonitorBaseDeDatos.cpp
 			Servidor/server_Operador.cpp
 			Servidor/server_Servidor.cpp
 			Servidor/server_SocketServidor.cpp

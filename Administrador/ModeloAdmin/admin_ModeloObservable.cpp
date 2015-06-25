@@ -39,6 +39,10 @@ void Modelo_Observable::altaAreaVision(const std::string &ubicacion,const std::s
 	this->admin.altaAreaVision(ubicacion,capturador);
 }
 
+unsigned long int Modelo_Observable::consultarStock(unsigned long int idProducto){
+	return(this->admin.consultarStock(idProducto));
+}
+
 const std::list<AreaDeVision*>* Modelo_Observable::getAreasDeVision() const{
 	return this->admin.getAreasDeVision();
 }

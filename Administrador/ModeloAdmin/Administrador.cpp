@@ -218,6 +218,15 @@ void Administrador::altaAreaVision(const std::string &ubicacion,const std::strin
 		}
 }
 
+unsigned long int Administrador::consultarStock(unsigned long int idProd){
+	if (this->admin.estaConectado()){
+		//std::string mensajeAEnviar = "G|" + ubicacion + '|' + capturador + '|';
+		//protocolo.enviarMensaje(this->admin,mensajeAEnviar);
+		std::string respuesta = protocolo.recibirMensaje(this->admin);
+	}
+	return 0;
+}
+
 const std::list<AreaDeVision*>* Administrador::getAreasDeVision() const{
 	return data.getAreasDeVision();
 }

@@ -119,14 +119,8 @@ void VistaAgregarProducto::on_button_ImagenPPAL(){
 	      m_ImagenSeteada=true;
 	      break;
 	    }
-	    case(Gtk::RESPONSE_CANCEL):
-	    {
-	      std::cout << "Cancel clicked." << std::endl;
-	      break;
-	    }
 	    default:
 	    {
-	      std::cout << "Unexpected button clicked." << std::endl;
 	      break;
 	    }
 	  }

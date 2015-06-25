@@ -8,6 +8,7 @@
 #include "server_Operador.h"
 #include "server_SocketServidor.h"
 #include "server_BaseDeDatos.h"
+#include "server_MonitorBaseDeDatos.h"
 #include "server_ParserXML.h"
 #define kNumeroMaximoDeClientes 20
 #define kPuertoDefault "1037"

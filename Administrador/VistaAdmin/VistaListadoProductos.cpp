@@ -82,11 +82,9 @@ void VistaListadoProductos::on_producto_seleccionado(){
 	Gtk::TreeModel::iterator iter = refTreeSelection->get_selected();
 	if(iter){
 		Gtk::TreeModel::Row row = *iter;
-		std::cerr << "Producto seleccionado: " << row[m_ProductosList.m_Columns.m_col_nombre] <<"\n";
 		std::stringstream idIcono;
 		idIcono << (row[m_ProductosList.m_Columns.m_col_idIcono]);
 		std::string rutaImagen = "imagenes/" + idIcono.str() +".jpg";
-		std::cout << "RUTA IMAGEN:" <<rutaImagen << std::endl;
 		m_imagenItem.set(rutaImagen);
 		Glib::RefPtr<Gdk::Pixbuf> scaled1 = m_imagenItem.get_pixbuf()->scale_simple(250,250,Gdk::INTERP_BILINEAR);
 		m_imagenItem.set(scaled1);

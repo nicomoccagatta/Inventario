@@ -35,6 +35,14 @@ void Modelo_Observable::altaProducto(std::string &nombre,std::string &descripcio
 	this->admin.altaProducto(nombre,descripcion,idAV,rutaImagenPPAL,rutaImagenes);
 }
 
+std::list<unsigned long int> Modelo_Observable::getIdsImagenes(unsigned long int id){
+	return this->admin.getIdsImagenes(id);
+}
+
+std::string Modelo_Observable::getImagenConID(unsigned long int id){
+	return (this->admin.getImagenConID(id));
+}
+
 void Modelo_Observable::altaAreaVision(const std::string &ubicacion,const std::string &capturador){
 	this->admin.altaAreaVision(ubicacion,capturador);
 }

@@ -14,6 +14,8 @@
 #include "Administrador.h"
 #include "admin_Subject.h"
 
+#define RUTA_CARPETA_TEMP "temp_admin/"
+
 using common::AreaDeVision;
 
 class Modelo_Observable: public Subject {
@@ -27,6 +29,8 @@ public:
 	void eliminarAreaVision(unsigned long int idAV);
 	void altaProducto(std::string &nombre,std::string &descripcion,long unsigned int idAV,
 			std::string &rutaImagenPPAL,std::list<std::string> &rutaImagenes);
+	std::list<unsigned long int> getIdsImagenes(unsigned long int idProducto);
+	std::string getImagenConID(unsigned long int id);
 	void altaAreaVision(const std::string &ubicacion,const std::string &capturador);
 	unsigned long int consultarStock(unsigned long int idProducto);
 

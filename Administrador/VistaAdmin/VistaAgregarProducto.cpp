@@ -139,33 +139,24 @@ void VistaAgregarProducto::on_button_agregarIcono(){
 		dialog.add_filter(filter_any);
 
 		int result = dialog.run();
-
-		switch(result)
+		if (result == Gtk::RESPONSE_OK)
 		{
-			case(Gtk::RESPONSE_OK):
-	    	{
-				std::string filename = dialog.get_filename();
-				Gtk::Image *imagen = new Gtk::Image;
-				m_rutaImagenesIconos.push_back(filename);
-				imagen->set(filename);
-				Gtk::Button *boton = new Gtk::Button;
-				ControlAP *controlador = new ControlAP(boton,this);
-				boton->signal_clicked().connect( sigc::mem_fun(*controlador, &ControlAP::on_button_eliminarIcono));
-				boton->set_image(*imagen);
-				Glib::RefPtr<Gdk::Pixbuf> scaled1 = imagen->get_pixbuf()->scale_simple(100,100,Gdk::INTERP_BILINEAR);
-				imagen->set(scaled1);
-				this->controladores.push_back(controlador);
-				this->m_ImagenIconosSecundarios.push_back(boton);
-				m_botoneraImagenes.pack_start(*boton);
-				panelDinam->remove();
-				panelDinam->add(vBoxPrincipal);
-				panelDinam->show_all();
-				break;
-	    	}
-			default:
-			{
-				break;
-			}
+			std::string filename = dialog.get_filename();
+			Gtk::Image *imagen = new Gtk::Image;
+			m_rutaImagenesIconos.push_back(filename);
+			imagen->set(filename);
+			Gtk::Button *boton = new Gtk::Button;
+			ControlAP *controlador = new ControlAP(boton,this);
+			boton->signal_clicked().connect( sigc::mem_fun(*controlador, &ControlAP::on_button_eliminarIcono));
+			boton->set_image(*imagen);
+			Glib::RefPtr<Gdk::Pixbuf> scaled1 = imagen->get_pixbuf()->scale_simple(100,100,Gdk::INTERP_BILINEAR);
+			imagen->set(scaled1);
+			this->controladores.push_back(controlador);
+			this->m_ImagenIconosSecundarios.push_back(boton);
+			m_botoneraImagenes.pack_start(*boton);
+			panelDinam->remove();
+			panelDinam->add(vBoxPrincipal);
+			panelDinam->show_all();
 		}
 	}else{
 		Gtk::Window *ventanitaError = new Gtk::Window;

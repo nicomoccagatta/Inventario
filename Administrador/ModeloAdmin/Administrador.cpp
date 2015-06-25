@@ -18,7 +18,7 @@ Administrador::Administrador() : admin("localhost","1037"){
 		std::cerr << "NO ESTOY CONECTADO\n";
 	protocolo.enviarMensaje(this->admin,"Admin|");
 	std::string respuesta = protocolo.recibirMensaje(this->admin);
-	if (respuesta == "ok|")
+	if (respuesta == "ok|\n")
 		std::cerr << "Admin logueado correctamente" << std::endl;
 }
 
@@ -53,6 +53,7 @@ bool Administrador::actualizarProductos(){
 			ss << parser.getParametro(argum);
 			ss >> id;
 			std::string nombre = parser.getParametro(argum+1);
+			std::cout << "Nombree:" << nombre << std::endl;
 			std::string descripcion = parser.getParametro(argum+2);
 
 			unsigned long int idIcono;
@@ -165,12 +166,11 @@ void Administrador::eliminarAreaVision(unsigned long int idAV){
 
 void Administrador::altaProducto(std::string &nombre,std::string &descripcion,long unsigned int idAV,std::string &rutaImagenPPAL,std::list<std::string> &rutaImagenes){
 	if (this->admin.estaConectado()){
-		long unsigned int idImagen = obtenerIdImagen(rutaImagenPPAL);
+		long unsigned int idImagen = altaImagen(rutaImagenPPAL);
 		std::string mensajeEnviar = "D|" + nombre + '|' + descripcion + '|';
 		std::stringstream ssID;
 		ssID << idImagen;
-		mensajeEnviar += ssID.str();
-		mensajeEnviar += '|';
+		mensajeEnviar += ssID.str() + '|';
 		protocolo.enviarMensaje(this->admin,mensajeEnviar);
 		std::string respuesta = protocolo.recibirMensaje(this->admin);
 		CommandParser parser;
@@ -181,7 +181,7 @@ void Administrador::altaProducto(std::string &nombre,std::string &descripcion,lo
 		std::list<long unsigned int> idsImagenes;
 		std::list<std::string>::iterator it = rutaImagenes.begin();
 		for (; it!=rutaImagenes.end() ; ++it){
-			long unsigned int idAgregar = obtenerIdImagen(*it);
+			long unsigned int idAgregar = altaImagen(*it);
 			idsImagenes.push_back(idAgregar);
 		}
 		mensajeEnviar = "E|" + ssIDProducto.str() + '|' + nombre +'|' + descripcion +'|' + ssID.str() + '|';
@@ -197,7 +197,7 @@ void Administrador::altaProducto(std::string &nombre,std::string &descripcion,lo
 	}
 }
 
-long unsigned int Administrador::obtenerIdImagen(std::string &rutaImagen){
+long unsigned int Administrador::altaImagen(std::string &rutaImagen){
 	Imagen imgppal(rutaImagen);
 	protocolo.enviarImagen(this->admin,imgppal);
 	std::string respuesta = protocolo.recibirMensaje(this->admin);
@@ -208,6 +208,86 @@ long unsigned int Administrador::obtenerIdImagen(std::string &rutaImagen){
 	long unsigned int id;
 	ssID >> id;
 	return id;
+}
+
+std::list<unsigned long int> Administrador::getIdsImagenes(unsigned long int idProducto){
+	std::list<unsigned long int> listaIDS;
+	if (this->admin.estaConectado()){
+		std::stringstream ssId;
+		ssId << idProducto;
+		std::string mensajeAEnviar = "C|" + ssId.str() + '|';
+		protocolo.enviarMensaje(this->admin,mensajeAEnviar);
+		std::string respuesta = protocolo.recibirMensaje(this->admin);
+		CommandParser parserProd;
+		parserProd.tokenize(respuesta);
+		unsigned int argumImagen = 4;
+		try{
+			while(true){ 					//Arreglar esta horribilidad..
+				int idImagen;
+				std::stringstream obtenerID;
+				obtenerID << parserProd.getParametro(argumImagen);
+				obtenerID >> idImagen;
+				this->getImagenConID(idImagen);
+				std::stringstream obtenerID2;
+				obtenerID2 << parserProd.getParametro(argumImagen+1);
+				listaIDS.push_back(idImagen);
+				obtenerID2 >> idImagen;
+				this->getImagenConID(idImagen);
+				listaIDS.push_back(idImagen);
+				argumImagen += 2;
+			}
+		}catch (std::exception& e){
+			return listaIDS;
+		}
+	}
+	return listaIDS;
+}
+
+std::string Administrador::getImagenConID(unsigned long int id){
+	std::string ruta;
+	if (this->admin.estaConectado()){
+		std::list<unsigned long int>::iterator it = idsDescargados.begin();
+		bool idYaEsta = false;
+		for ( ; it != idsDescargados.end() ; ++it){
+			if (id == (*it))
+					idYaEsta = true;
+		}
+		if (!idYaEsta){
+				std::stringstream ssConsulta;
+				ssConsulta << "R|" << id << "|";
+				protocolo.enviarMensaje(this->admin,ssConsulta.str());
+			std::string respuestaDatosImagen = protocolo.recibirMensaje(this->admin);
+			if (respuestaDatosImagen == "error|\n"){
+				std::cerr << "No encontro imagen del ID: " << id << "\n";
+				return IMAGEN_DEFAULT;
+			}
+			const unsigned int altoImagen = Protocolo::extraerArgumentoNumericoDeComando(respuestaDatosImagen,2);
+			const unsigned int anchoImagen = Protocolo::extraerArgumentoNumericoDeComando(respuestaDatosImagen,3);
+			const unsigned long int tamanioImagen = Protocolo::extraerArgumentoNumericoDeComando(respuestaDatosImagen,4);
+			protocolo.enviarMensaje(this->admin, kMensajeOK);
+
+			std::cerr << "Recibiendo IMAGEN...\n";
+			Imagen img = protocolo.recibirImagen(this->admin,altoImagen,anchoImagen,tamanioImagen);
+			std::cerr << "IMAGEN recibida\n";
+			idsDescargados.push_back(id);
+
+			if (!img.esValida()){
+				std::cerr << "No recibio bien\n";
+				return IMAGEN_DEFAULT;
+			}
+			std::stringstream ss;
+			ss << RUTA_CARPETA_TEMP << id << ".jpg";
+			ruta = ss.str();
+			img.guardarEnArchivo(ruta);
+			return ruta;
+		}else{
+			std::stringstream ss;
+			ss << RUTA_CARPETA_TEMP << id << ".jpg";
+			ruta = ss.str();
+			return ruta;
+		}
+}
+	return IMAGEN_DEFAULT;
 }
 
 void Administrador::altaAreaVision(const std::string &ubicacion,const std::string &capturador){

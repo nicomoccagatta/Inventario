@@ -12,24 +12,31 @@ VistaListadoProductos::VistaListadoProductos()
 	m_ProductosList.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
 	m_ProductosList.set_size_request(200,400);
 
-	m_ProductosTreeView.append_column("ID", m_ProductosList.m_Columns.m_col_id);
+	m_AgregarButton.set_label("Agregar");
+	m_botoneraABM.pack_start(m_AgregarButton);
+	m_EditarButton.set_label("Editar");
+	m_botoneraABM.pack_start(m_EditarButton);
+	m_EliminarButton.set_label("Eliminar");
+	m_botoneraABM.pack_start(m_EliminarButton);
+	m_botoneraABM.set_layout(Gtk::BUTTONBOX_END);
+
+	m_verticalBox.pack_start(m_botoneraABM,Gtk::PACK_SHRINK,true,0);
+
+	m_ProductosTreeView.append_column("Icono", m_ProductosList.m_Columns.m_col_imagenIcono);
 	m_ProductosTreeView.append_column("Nombre", m_ProductosList.m_Columns.m_col_nombre);
 	m_ProductosTreeView.append_column("Descripcion", m_ProductosList.m_Columns.m_col_descripcion);
 	m_ProductosList.add(m_ProductosTreeView);
-	verticalBox.pack_end(m_ProductosList);
+	m_ProductosList.set_size_request(Gtk::EXPAND,300);
+	m_verticalBox.pack_start(m_ProductosList);
 
-	m_imagenPlusBotones.pack_start(m_imagenItem);
-	m_imagenPlusBotones.pack_end(m_ButtonBox);
-	verticalBox.pack_start(m_imagenPlusBotones,Gtk::PACK_SHRINK,true,0);
-	m_EditarButton.set_label("Editar Producto");
-	m_EliminarButton.set_label("Eliminar Producto");
+	m_viewportVentanitaBotoneraImagenes = new Gtk::Viewport(*m_ventanitaBotoneraImagenes.get_hadjustment(),*m_ventanitaBotoneraImagenes.get_vadjustment());
+	m_ventanitaBotoneraImagenes.add(*m_viewportVentanitaBotoneraImagenes);
+	m_viewportVentanitaBotoneraImagenes->add(m_botoneraImagenesProducto);
+	m_verticalBox.pack_end(m_ventanitaBotoneraImagenes);
+
+
 	m_EditarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaListadoProductos::on_button_editar));
 	m_EliminarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaListadoProductos::on_button_eliminar) );
-
-
-	m_ButtonBox.pack_start(m_EditarButton);
-	m_ButtonBox.pack_start(m_EliminarButton);
-	m_ButtonBox.set_layout(Gtk::BUTTONBOX_SPREAD);
 
 	refTreeSelection = m_ProductosTreeView.get_selection();
 	refTreeSelection->signal_changed().connect(
@@ -37,7 +44,12 @@ VistaListadoProductos::VistaListadoProductos()
 }
 
 void VistaListadoProductos::update(){
-	//const std::list<Producto*>* prods = modelo->getProductos();
+	std::list<Gtk::Image*>::iterator it = m_listaPunteroImagenes.begin();
+	for( ; it != m_listaPunteroImagenes.end() ; ++it) {
+		delete (*it);
+	}
+	m_listaPunteroImagenes.clear();
+	panelDinam->show_all();
 }
 
 void VistaListadoProductos::run(Gtk::Viewport *panelDinamico,Modelo_Observable *modelo){
@@ -48,16 +60,13 @@ void VistaListadoProductos::run(Gtk::Viewport *panelDinamico,Modelo_Observable *
 	m_ProductosTreeView.set_model(m_refProductosListStore);
 	this->update_lista_productos();
 
-	panelDinam->add(verticalBox);
-
-	m_imagenItem.set("imagenes/imagen_vacia.png");
-	Glib::RefPtr<Gdk::Pixbuf> scaled1 = m_imagenItem.get_pixbuf()->scale_simple(250,250,Gdk::INTERP_BILINEAR);
-	m_imagenItem.set(scaled1);
+	panelDinam->add(m_verticalBox);
 
 	refTreeSelection = m_ProductosTreeView.get_selection();
 }
 
 VistaListadoProductos::~VistaListadoProductos() {
+	delete m_viewportVentanitaBotoneraImagenes;
 }
 
 void VistaListadoProductos::on_button_editar(){
@@ -79,15 +88,32 @@ void VistaListadoProductos::on_button_eliminar(){
 }
 
 void VistaListadoProductos::on_producto_seleccionado(){
+	std::list<Gtk::Image*>::iterator it = m_listaPunteroImagenes.begin();
+	for( ; it != m_listaPunteroImagenes.end() ; ++it) {
+		delete (*it);
+	}
+	m_listaPunteroImagenes.clear();
+
 	Gtk::TreeModel::iterator iter = refTreeSelection->get_selected();
 	if(iter){
 		Gtk::TreeModel::Row row = *iter;
-		std::stringstream idIcono;
-		idIcono << (row[m_ProductosList.m_Columns.m_col_idIcono]);
-		std::string rutaImagen = "imagenes/" + idIcono.str() +".jpg";
-		m_imagenItem.set(rutaImagen);
-		Glib::RefPtr<Gdk::Pixbuf> scaled1 = m_imagenItem.get_pixbuf()->scale_simple(250,250,Gdk::INTERP_BILINEAR);
-		m_imagenItem.set(scaled1);
+		std::stringstream idProd;
+		idProd << (row[m_ProductosList.m_Columns.m_col_id]);
+		unsigned long int idProducto;
+		idProd >> idProducto;
+		std::list<unsigned long int> vectorIdsImagenes = modelo->getIdsImagenes(idProducto);
+		std::list<unsigned long int>::iterator itVectorImagenes = vectorIdsImagenes.begin();
+		for ( ; itVectorImagenes != vectorIdsImagenes.end() ; ++itVectorImagenes){
+			Gtk::Image *imagen = new Gtk::Image;
+			std::string rutaImagen = modelo->getImagenConID(*itVectorImagenes);
+			std::cerr << "RUTA DE IMAGEN A SETEAR" << rutaImagen << std::endl;
+			imagen->set(rutaImagen);
+			Glib::RefPtr<Gdk::Pixbuf> scaled1 = imagen->get_pixbuf()->scale_simple(150,150,Gdk::INTERP_BILINEAR);
+			imagen->set(scaled1);
+			m_listaPunteroImagenes.push_back(imagen);
+			m_botoneraImagenesProducto.pack_end(*imagen);
+		}
+		panelDinam->show_all();
 	}
 }
 
@@ -98,8 +124,12 @@ void VistaListadoProductos::update_lista_productos(){
 	Gtk::TreeModel::Row row = *(m_refProductosListStore->append());
 	row[m_ProductosList.m_Columns.m_col_id] = (*it)->getId();
 	row[m_ProductosList.m_Columns.m_col_nombre] = (*it)->getNombre();
+	std::cout << "Actualizo producto: " << (*it)->getNombre() << std::endl;
 	row[m_ProductosList.m_Columns.m_col_descripcion] = (*it)->getDescripcion();
-	row[m_ProductosList.m_Columns.m_col_idIcono] = (*it)->getIdIcono();
+	std::string rutaImagen = modelo->getImagenConID((*it)->getIdIcono());
+	std::cout << "Ruta de imagen: " << rutaImagen << std::endl;
+	Glib::RefPtr<Gdk::Pixbuf>  pic = Gdk::Pixbuf::create_from_file(rutaImagen,30,30,false);
+	row[m_ProductosList.m_Columns.m_col_imagenIcono] = pic;
 	row[m_ProductosList.m_Columns.m_col_data] = *it;
 	}
 }

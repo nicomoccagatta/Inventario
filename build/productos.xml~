@@ -1,0 +1,336 @@
+<Producto id="14">
+    <Nombre>Coca-Cola</Nombre>
+    <Descripcion>Botella 1.5l</Descripcion>
+    <StockHistorico>
+        <Stock>
+            <Fecha>Tue Jun 9 16:40:47 2015</Fecha>
+            <Cantidad>58</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Tue Jun 9 16:40:17 2015</Fecha>
+            <Cantidad>48</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Tue Jun 9 15:01:59 2015</Fecha>
+            <Cantidad>38</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Tue Jun 9 15:01:44 2015</Fecha>
+            <Cantidad>28</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>ahora</Fecha>
+            <Cantidad>18</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>hoy</Fecha>
+            <Cantidad>10</Cantidad>
+        </Stock>
+    </StockHistorico>
+    <Icono>120</Icono>
+    <Imagenes />
+</Producto>
+<Producto id="15">
+    <Nombre>Alfajor Terrabusi</Nombre>
+    <Descripcion>El mas rico de tooooodos</Descripcion>
+    <StockHistorico>
+        <Stock>
+            <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+            <Cantidad>24</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Tue Jun 9 14:58:27 2015</Fecha>
+            <Cantidad>21</Cantidad>
+        </Stock>
+    </StockHistorico>
+    <Icono>2</Icono>
+    <Imagenes>
+        <Imagen>1</Imagen>
+        <Imagen>2</Imagen>
+        <Imagen>3</Imagen>
+        <Imagen>4</Imagen>
+    </Imagenes>
+</Producto>
+<Producto id="4">
+    <Nombre>Merengadas - Bagley</Nombre>
+    <Descripcion>Galletitas muy muy ricas</Descripcion>
+    <StockHistorico>
+        <Stock>
+            <Fecha>Wed Jun 10 01:19:26 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+    </StockHistorico>
+    <Icono>101</Icono>
+    <Imagenes />
+</Producto>
+<Producto id="5">
+    <Nombre>Opera - Bagley</Nombre>
+    <Descripcion>galletitas muy ricas para merendar y desayunar</Descripcion>
+    <StockHistorico>
+        <Stock>
+            <Fecha>Wed Jun 10 01:20:24 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+    </StockHistorico>
+    <Icono>99</Icono>
+    <Imagenes />
+</Producto>
+<Producto id="16">
+    <Nombre>Coca</Nombre>
+    <Descripcion>lata chiquita y golpeada</Descripcion>
+    <StockHistorico>
+        <Stock>
+            <Fecha>Tue May 5 05:05:05 2015</Fecha>
+            <Cantidad>15</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+            <Cantidad>14</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Mon Jun 15 01:02:03 2015</Fecha>
+            <Cantidad>1</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Wed Jun 10 02:02:55 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+    </StockHistorico>
+    <Icono>38</Icono>
+    <Imagenes>
+        <Imagen>38</Imagen>
+        <Imagen>40</Imagen>
+        <Imagen>42</Imagen>
+        <Imagen>43</Imagen>
+        <Imagen>44</Imagen>
+    </Imagenes>
+</Producto>
+<Producto id="17">
+    <Nombre>Acondicionador - Sedal</Nombre>
+    <Descripcion>Con Complejo Cremoso docilidad y suavidad para un cabello reseco</Descripcion>
+    <StockHistorico>
+        <Stock>
+            <Fecha>Wed Jun 10 02:29:13 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+    </StockHistorico>
+    <Icono>144</Icono>
+    <Imagenes />
+</Producto>
+<Producto id="18">
+    <Nombre>Fernet - Branca</Nombre>
+    <Descripcion>El elixir de la vida</Descripcion>
+    <StockHistorico>
+        <Stock>
+            <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+            <Cantidad>10</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Wed Jun 08 01:24:05 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+    </StockHistorico>
+    <Icono>86</Icono>
+    <Imagenes>
+        <Imagen>86</Imagen>
+        <Imagen>87</Imagen>
+        <Imagen>88</Imagen>
+        <Imagen>89</Imagen>
+        <Imagen>90</Imagen>
+        <Imagen>91</Imagen>
+    </Imagenes>
+</Producto>
+<Producto id="19">
+    <Nombre>Dulce de leche - La Serenisima</Nombre>
+    <Descripcion>DDL repostero para tortas</Descripcion>
+    <StockHistorico>
+        <Stock>
+            <Fecha>Wed Jun 08 01:24:05 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+    </StockHistorico>
+    <Icono>81</Icono>
+    <Imagenes>
+        <Imagen>81</Imagen>
+        <Imagen>82</Imagen>
+        <Imagen>83</Imagen>
+        <Imagen>84</Imagen>
+        <Imagen>85</Imagen>
+    </Imagenes>
+</Producto>
+<Producto id="20">
+    <Nombre>IbupiracPlus - Pfizer</Nombre>
+    <Descripcion>Tableta de 10 comprimidos Ibuprofeno 400mg + Cafeina 65mg</Descripcion>
+    <StockHistorico>
+        <Stock>
+            <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+            <Cantidad>6</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Wed Jun 08 01:24:05 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+    </StockHistorico>
+    <Icono>73</Icono>
+    <Imagenes>
+        <Imagen>73</Imagen>
+        <Imagen>74</Imagen>
+        <Imagen>75</Imagen>
+        <Imagen>76</Imagen>
+        <Imagen>77</Imagen>
+        <Imagen>78</Imagen>
+        <Imagen>79</Imagen>
+        <Imagen>80</Imagen>
+    </Imagenes>
+</Producto>
+<Producto id="21">
+    <Nombre>IbuApracur 400 VL - Lepetit</Nombre>
+    <Descripcion>Analgesico, antiinflamatorio, antifebril. Tableta de 10 comprimidos recubiertos Ibuprofeno 400mg</Descripcion>
+    <StockHistorico>
+        <Stock>
+            <Fecha>Sun Jun 14 01:02:03 2015</Fecha>
+            <Cantidad>43</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+            <Cantidad>40</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Sun Jun 14 01:01:01 2015</Fecha>
+            <Cantidad>16</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Tue Jun 16 06:06:06 2015</Fecha>
+            <Cantidad>8</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Wed Jun 08 01:24:05 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+    </StockHistorico>
+    <Icono>67</Icono>
+    <Imagenes>
+        <Imagen>67</Imagen>
+        <Imagen>68</Imagen>
+        <Imagen>69</Imagen>
+        <Imagen>70</Imagen>
+        <Imagen>71</Imagen>
+        <Imagen>72</Imagen>
+    </Imagenes>
+</Producto>
+<Producto id="22">
+    <Nombre>Sonrisas sabor frambuesa - Bagley</Nombre>
+    <Descripcion>Galletitas dulces con relleno sabor frambuesa con &quot;nutrileche&quot;</Descripcion>
+    <StockHistorico>
+        <Stock>
+            <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+            <Cantidad>2</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Wed Jun 08 01:24:05 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+    </StockHistorico>
+    <Icono>62</Icono>
+    <Imagenes>
+        <Imagen>62</Imagen>
+        <Imagen>63</Imagen>
+        <Imagen>64</Imagen>
+        <Imagen>65</Imagen>
+        <Imagen>66</Imagen>
+    </Imagenes>
+</Producto>
+<Producto id="23">
+    <Nombre>Salsa Napolitana 340g - Knorr</Nombre>
+    <Descripcion>Salsa lista Napolitana con aceitunas y perejil con ingredientes seleccionados</Descripcion>
+    <StockHistorico>
+        <Stock>
+            <Fecha>Wed Jun 08 01:24:05 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+    </StockHistorico>
+    <Icono>56</Icono>
+    <Imagenes>
+        <Imagen>56</Imagen>
+        <Imagen>57</Imagen>
+        <Imagen>58</Imagen>
+        <Imagen>59</Imagen>
+        <Imagen>60</Imagen>
+        <Imagen>61</Imagen>
+    </Imagenes>
+</Producto>
+<Producto id="24">
+    <Nombre>Mermelada de frutilla BC 390g - La Campagnola</Nombre>
+    <Descripcion>Mermelada de frutilla reducida en calorias libre de gluten</Descripcion>
+    <StockHistorico>
+        <Stock>
+            <Fecha>Wed Jun 08 01:24:05 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+    </StockHistorico>
+    <Icono>50</Icono>
+    <Imagenes>
+        <Imagen>50</Imagen>
+        <Imagen>51</Imagen>
+        <Imagen>52</Imagen>
+        <Imagen>53</Imagen>
+        <Imagen>54</Imagen>
+        <Imagen>55</Imagen>
+    </Imagenes>
+</Producto>
+<Producto id="25">
+    <Nombre>Chocolinas 250g - Bagley</Nombre>
+    <Descripcion>Galletitas dulces sabor chocolate.</Descripcion>
+    <StockHistorico>
+        <Stock>
+            <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
+            <Cantidad>7</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Wed Jun 08 01:24:05 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+    </StockHistorico>
+    <Icono>45</Icono>
+    <Imagenes>
+        <Imagen>45</Imagen>
+        <Imagen>46</Imagen>
+        <Imagen>47</Imagen>
+        <Imagen>48</Imagen>
+        <Imagen>49</Imagen>
+    </Imagenes>
+</Producto>
+<Producto id="27">
+    <Nombre>sol</Nombre>
+    <Descripcion>aver si anda esta vez</Descripcion>
+    <StockHistorico>
+        <Stock>
+            <Fecha>Wed Aug 19 06:07:08 2015</Fecha>
+            <Cantidad>7</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Sun Jun 14 16:16:16 2015</Fecha>
+            <Cantidad>4</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Sun Jun 14 15:15:15 2015</Fecha>
+            <Cantidad>5</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Sun Jun 14 10:10:10 2015</Fecha>
+            <Cantidad>4</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Tue Jun 16 15:09:09 2015</Fecha>
+            <Cantidad>3</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Wed Jun 10 02:29:13 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+    </StockHistorico>
+    <Icono>0</Icono>
+    <Imagenes>
+        <Imagen>37</Imagen>
+    </Imagenes>
+</Producto>

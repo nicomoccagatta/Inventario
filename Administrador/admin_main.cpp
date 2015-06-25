@@ -33,13 +33,11 @@ int main(int argc, char *argv[]) {
 		ventanaPPAL->show();
 		Gtk::Main::run();
 	}
-	std::cout << "Esta terminando" << std::endl;
 	delete ventanaPPAL;
 	return 0;
 }
 
 int crearAPartirDeGlade(Glib::RefPtr<Gtk::Builder>* refBuilder){
-
 	try
 	{
 		(*refBuilder)->add_from_file(VISTAPPAL);
@@ -60,5 +58,4 @@ int crearAPartirDeGlade(Glib::RefPtr<Gtk::Builder>* refBuilder){
 		std::cerr << "BuilderError: " << ex.what() << std::endl;
 		return 1;
 	}
-
 }

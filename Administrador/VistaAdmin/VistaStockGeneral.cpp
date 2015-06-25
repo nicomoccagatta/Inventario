@@ -54,7 +54,7 @@ void VistaStockGeneral::on_producto_seleccionado(){
 	if(iter){
 		Gtk::TreeModel::Row row = *iter;
 		std::stringstream idIcono;
-		idIcono << (row[m_ProductosList.m_Columns.m_col_idIcono]);
+		//idIcono << (row[m_ProductosList.m_Columns.m_col_idIcono]);
 		std::string rutaImagen = "imagenes/" + idIcono.str() +".jpg";
 		m_ImagenItem.set(rutaImagen);
 		Glib::RefPtr<Gdk::Pixbuf> scaled1 = m_ImagenItem.get_pixbuf()->scale_simple(250,250,Gdk::INTERP_BILINEAR);
@@ -71,7 +71,7 @@ void VistaStockGeneral::update_lista_productos(){
 	row[m_ProductosList.m_Columns.m_col_id] = (*it)->getId();
 	row[m_ProductosList.m_Columns.m_col_nombre] = (*it)->getNombre();
 	row[m_ProductosList.m_Columns.m_col_cantidad] = 0;//modelo->consultarStock((*it)->getId());
-	row[m_ProductosList.m_Columns.m_col_idIcono] = (*it)->getIdIcono();
+//	row[m_ProductosList.m_Columns.m_col_idIcono] = (*it)->getIdIcono();
 	row[m_ProductosList.m_Columns.m_col_data] = *it;
 	}
 }

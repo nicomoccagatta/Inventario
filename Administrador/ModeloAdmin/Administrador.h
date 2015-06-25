@@ -14,6 +14,9 @@
 #include "admin_Datos.h"
 #include "common_Stock.h"
 
+#define RUTA_CARPETA_TEMP "temp_admin/"
+#define IMAGEN_DEFAULT "temp_admin/imagen_vacia.png"
+
 using client::SocketCliente;
 using common::Protocolo;
 using common::AreaDeVision;
@@ -22,7 +25,8 @@ class Administrador {
 	SocketCliente admin;
 	Protocolo protocolo;
 	Datos data;
-	long unsigned int obtenerIdImagen(std::string &rutaImagen);
+	long unsigned int altaImagen(std::string &rutaImagen);
+	std::list<unsigned long int> idsDescargados;
 public:
 	Administrador();
 	virtual ~Administrador();
@@ -32,6 +36,8 @@ public:
 	bool actualizarAreasDeVision();
 	void eliminarAreaVision(unsigned long int idAV);
 	void altaProducto(std::string &nombre,std::string &descripcion,long unsigned int idAV,std::string &rutaImagenPPAL,std::list<std::string> &rutaImagenes);
+	std::list<unsigned long int> getIdsImagenes(unsigned long int idProducto);
+	std::string getImagenConID(unsigned long int id);
 	void altaAreaVision(const std::string &ubicacion,const std::string &capturador);
 	unsigned long int consultarStock(unsigned long int idProd);
 

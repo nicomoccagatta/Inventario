@@ -9,42 +9,45 @@
 
 VistaListadoAreasDeVision::VistaListadoAreasDeVision()
 {
+	m_AgregarButton.set_label("Agregar");
+	m_EditarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaListadoAreasDeVision::on_button_agregar));
+	m_EditarButton.set_label("Editar");
+	m_EditarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaListadoAreasDeVision::on_button_editar));
+	m_EliminarButton.set_label("Eliminar");
+	m_EliminarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaListadoAreasDeVision::on_button_eliminar) );
+
+	m_ButtonBox.pack_start(m_AgregarButton);
+	m_ButtonBox.pack_start(m_EditarButton);
+	m_ButtonBox.pack_start(m_EliminarButton);
+	m_ButtonBox.set_layout(Gtk::BUTTONBOX_START);
+
+	verticalBox.pack_start(m_ButtonBox,Gtk::PACK_SHRINK,true,0);
+
 	m_AVList.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
 	m_AVList.set_size_request(200,400);
 	m_AVList.add(m_AVTreeView);
 
-	m_ProductosList.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
-	m_ProductosList.set_size_request(200,400);
-	m_ProductosList.add(m_ProductosTreeView);
-	m_ProductosTreeView.append_column("Id", m_ProductosList.m_Columns.m_col_id);
-	m_ProductosTreeView.append_column("Producto", m_ProductosList.m_Columns.m_col_nombre);
-	m_ProductosTreeView.append_column("Cantidad", m_ProductosList.m_Columns.m_col_cantidad);
+	m_AVTreeView.append_column("Ubicacion", m_AVList.m_Columns.m_col_Ubicacion);
 
 	hBoxListados.pack_start(m_AVList);
 	labelProductos.set_text("Productos Detectados");
 	labelProductosMasListado.pack_start(labelProductos);
 	labelProductosMasListado.pack_end(m_ProductosList);
-
+	labelProductosMasListado.set_size_request(400,Gtk::EXPAND);
+	hBoxListados.pack_start(m_Vseparator);
 	hBoxListados.pack_end(labelProductosMasListado);
+
+	m_ProductosList.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+	m_ProductosList.set_size_request(200,400);
+	m_ProductosList.add(m_ProductosTreeView);
+	m_ProductosTreeView.append_column("Icono", m_ProductosList.m_Columns.m_col_imagenIcono);
+	m_ProductosTreeView.append_column("Producto", m_ProductosList.m_Columns.m_col_nombre);
+	m_ProductosTreeView.append_column("Cantidad", m_ProductosList.m_Columns.m_col_cantidad);
+
 	m_refProductosListStore = Gtk::ListStore::create(m_ProductosList.m_Columns);
 	m_ProductosTreeView.set_model(m_refProductosListStore);
 
-	verticalBox.pack_start(hBoxListados);
-
-	m_EditarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaListadoAreasDeVision::on_button_editar));
-	m_EliminarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaListadoAreasDeVision::on_button_eliminar) );
-
-	m_AVTreeView.append_column("ID", m_AVList.m_Columns.m_col_Id);
-	m_AVTreeView.append_column("Ubicacion", m_AVList.m_Columns.m_col_Ubicacion);
-
-	m_EditarButton.set_label("Editar Area de Vision");
-	m_EliminarButton.set_label("Eliminar Area de Vision");
-
-
-	verticalBox.pack_end(m_ButtonBox);
-	m_ButtonBox.pack_start(m_EditarButton);
-	m_ButtonBox.pack_start(m_EliminarButton);
-	m_ButtonBox.set_layout(Gtk::BUTTONBOX_SPREAD);
+	verticalBox.pack_end(hBoxListados);
 
 	refTreeSelection = m_AVTreeView.get_selection();
 	refTreeSelection->signal_changed().connect(
@@ -74,6 +77,10 @@ void VistaListadoAreasDeVision::run(Gtk::Viewport *panelDinamico,Modelo_Observab
 }
 
 VistaListadoAreasDeVision::~VistaListadoAreasDeVision() {
+}
+
+void VistaListadoAreasDeVision::on_button_agregar(){
+
 }
 
 void VistaListadoAreasDeVision::on_button_editar(){
@@ -109,7 +116,9 @@ void VistaListadoAreasDeVision::on_av_seleccionado(){
 		std::list<Producto*>::const_iterator it;
 		for (it=prods->begin(); it!=prods->end();++it){
 		Gtk::TreeModel::Row row = *(m_refProductosListStore->append());
-		row[m_ProductosList.m_Columns.m_col_id] = (*it)->getId();
+		std::string rutaImagen = modelo->getImagenConID((*it)->getIdIcono());
+		Glib::RefPtr<Gdk::Pixbuf>  pic = Gdk::Pixbuf::create_from_file(rutaImagen,20,20,false);
+		row[m_ProductosList.m_Columns.m_col_imagenIcono] = pic;
 		row[m_ProductosList.m_Columns.m_col_nombre] = (*it)->getNombre();
 		row[m_ProductosList.m_Columns.m_col_cantidad] = (*it)->getStock();
 		row[m_ProductosList.m_Columns.m_col_data] = *it;
@@ -122,7 +131,6 @@ void VistaListadoAreasDeVision::update_lista_av(){
 	std::list<AreaDeVision*>::const_iterator it;
 	for (it=avs->begin(); it!=avs->end();++it){
 	Gtk::TreeModel::Row row = *(m_refAVListStore->append());
-	row[m_AVList.m_Columns.m_col_Id] = (*it)->getId();
 	row[m_AVList.m_Columns.m_col_Ubicacion] = (*it)->getUbicacion();
 	row[m_AVList.m_Columns.m_ProductosDetectados] = (*it)->getProductosDetectados();
 	row[m_AVList.m_Columns.m_col_data] = *it;

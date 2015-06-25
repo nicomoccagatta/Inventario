@@ -21,6 +21,7 @@ class VistaListadoAreasDeVision : public Observer {
 	void update_lista_av();
 	bool on_imagen_button_press(GdkEventButton*);
 	void on_av_seleccionado();
+	void on_button_agregar();
 	void on_button_editar();
 	void on_button_eliminar();
 public:
@@ -40,9 +41,11 @@ protected:
 	Gtk::HBox hBoxListados;
 	ListaAV m_AVList;
 	ListaProductos m_ProductosList;
+	Gtk::VSeparator m_Vseparator;
 	Gtk::VBox labelProductosMasListado;
 	Gtk::Label labelProductos;
-	Gtk::VButtonBox m_ButtonBox;
+	Gtk::HButtonBox m_ButtonBox;
+	Gtk::Button m_AgregarButton;
 	Gtk::Button m_EditarButton;
 	Gtk::Button m_EliminarButton;
 };

@@ -40,7 +40,6 @@ const std::string Protocolo::protocolizarMensaje(std::string mensaje) const {
 Imagen Protocolo::recibirImagen(Socket& socket,const unsigned int altoImagen,const unsigned int anchoImagen, const unsigned long int tamanioImagen) const{
 	const unsigned char* datosImagen=socket.recibirBytesDinamicos(tamanioImagen);
 	if (socket.estaConectado()){
-		//std::cerr << "INSTANCIANDO IMAGEN\n";
 		Imagen imagenARetornar (altoImagen,anchoImagen,datosImagen);
 		delete[] datosImagen;
 		return imagenARetornar;

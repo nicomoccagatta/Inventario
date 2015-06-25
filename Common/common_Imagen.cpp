@@ -11,7 +11,7 @@ Imagen::Imagen(const std::string& rutaArchivo): matrizImagen(cv::imread(rutaArch
 
 Imagen::Imagen(const cv::Mat matrizImagen): matrizImagen(matrizImagen) {}
 
-//constructor para imagenes enviadas por red
+//Construye la imagen a partir de sus datos binarios y la informacion de su organizacion en la imagen.
 Imagen::Imagen(const unsigned int alto,const unsigned int ancho, const uchar* informacionDeImagen){
 	matrizImagen=cv::Mat::ones(alto,ancho, CV_8UC3);
 	unsigned long int ptr=0;
@@ -33,6 +33,7 @@ void Imagen::guardarEnArchivo(const std::string& rutaArchivo) const{
 	}
 }
 
+//Obtiene los datos binarios de la matriz de la imagen y los almacena en un buffer cuya direccion es retornada.
 const uchar* const Imagen::obtenerBytesDinamicos() const{
 	cv::Mat matrizTransformada=matrizImagen.reshape(0,1);
 	uchar* bytesARetornar= new uchar[getTamanio()];
@@ -40,6 +41,7 @@ const uchar* const Imagen::obtenerBytesDinamicos() const{
 	return bytesARetornar;
 }
 
+//Devuelve la cantidad de valores de coordenadas de color que contiene la imagen.
 const unsigned long int Imagen::getTamanio()const{
 	return matrizImagen.total()*matrizImagen.elemSize();
 }
@@ -56,6 +58,8 @@ const bool Imagen::existeImagen(const std::string& rutaArchivoImagen){
 	return !((cv::imread(rutaArchivoImagen,1)).empty());
 }
 
+//Inicializa los parametros que emplearan los metodos de Template Matching y Feature Matching en la deteccion de objetos.
+//Este metodo debe ser invocado antes de cualquiera de los metodos que cuentan apariciones de una imagen dentro de otra.
 void Imagen::setearPatametros(float valorMinimoDeSimilitudTemplateMatching,float valorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud,unsigned long int valorMinimoHessianoSURFFeatureMatching,float distanciaMaximaDeSimilitudFeatureMatching){
 	Imagen::valorMinimoDeSimilitudTemplateMatching=valorMinimoDeSimilitudTemplateMatching;
 	Imagen::valorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud=valorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud;
@@ -68,18 +72,11 @@ const bool Imagen::esValida()const{
 }
 
 const unsigned long int Imagen::contarApariciones(const Imagen& imagenObjeto,const std::string& tipoDeteccion)const{
-	try{
-		if (tipoDeteccion=="M"){
-			return contarAparicionesTemplateMatching(imagenObjeto);
-		} else {
-			return contarAparicionesFeatureMatching(imagenObjeto);
-		}
-	}catch (std::exception& e){
-		std::cout << "La imagen a comparar era mas grande\n";
-		//std::cout << e.what();
-		return 0;
+	if (tipoDeteccion=="M"){
+		return contarAparicionesTemplateMatching(imagenObjeto);
+	} else {
+		return contarAparicionesFeatureMatching(imagenObjeto);
 	}
-
 }
 
 //Aplica el metodo Template Matching para contar las apariciones de la imagenObjeto dentro de la imagenEscena.
@@ -112,7 +109,8 @@ const unsigned long int Imagen::contarAparicionesTemplateMatching(const Imagen& 
 	return apariciones; //retorno las aparicion restando la primera iteracion que no se verifica.
 }
 
-//Aplica el metodo Feature Matching para contar las apariciones de la imagenObjeto dentro de la imagenEscena. Es muy beta todavia.
+//Aplica el metodo Feature Matching para contar las apariciones de la imagenObjeto dentro de la imagenEscena.
+//Cuenta la cantidad de apariciones a partir de calcular la media de la distribucion del numero de apariciones de cada punto de interes de la imagen objeto en la imagenEscena.
 const unsigned long int Imagen::contarAparicionesFeatureMatching(const Imagen& imagenObjeto)const{
 	//Busco los puntos de interes de ambas imagenes.
 	cv::Ptr<cv::xfeatures2d::SURF> detectorDePuntosDeInteres = cv::xfeatures2d::SURF::create(valorMinimoHessianoSURFFeatureMatching);
@@ -131,7 +129,7 @@ const unsigned long int Imagen::contarAparicionesFeatureMatching(const Imagen& i
 	std::vector< std::vector<cv::DMatch> > coincidenciasPuntosDeInteres;
 	comparadorDeDescripciones.radiusMatch( descripcionPuntosDeInteresObjeto,descripcionPuntosDeInteresEscena, coincidenciasPuntosDeInteres,distanciaMaximaDeSimilitudFeatureMatching);
 
-	//Itero por las coincidencias calculando mediante la esperanza (promedio de apariciones ponderado por la probabilidad de aparicion(o algo asi))
+	//Itero por las coincidencias calculando las apariciones mediante la esperanza (promedio de apariciones ponderado por la probabilidad de aparicion)
 	//std::vector<cv::KeyPoint> puntosDeInteresCoincidentes; sirve para pintar la ventana que te muestre los resultados
 
 	//unsigned long int cantidadDeCoincidencias=0;
@@ -215,8 +213,10 @@ const unsigned long int Imagen::contarAparicionesFeatureMatching(const Imagen& i
 	return std::floor(esperanza);
 }
 
+//Muestra la imagen en una ventana de tamaño ajustable.
+//Causa advertencias de posibles errores al correr el ejecutable si se considera (no se comentan) alguna de sus lineas.
 void Imagen::mostrarImagen(const std::string& tituloVentana) const{
-	cv::namedWindow(tituloVentana, cv::WINDOW_KEEPRATIO);
+	cv::namedWindow(tituloVentana, CV_WINDOW_NORMAL);
 	cv::imshow(tituloVentana, this->matrizImagen);
 	cv::waitKey();
 }

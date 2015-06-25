@@ -235,42 +235,33 @@ void BaseDeDatos::eliminarAreaDeVision(const unsigned long int idAreaDeVisionBus
 
 //guarda imagenes dentro de la carpeta de imagenes
 const unsigned long int BaseDeDatos::agregarImagen(const Imagen& imagenAAgregar){
-	mutexImagenes.bloquear();
 	std::stringstream parseador;
 	parseador << proximoIdImagenes;
 	imagenAAgregar.guardarEnArchivo(rutaImagenes+parseador.str()+kExtensionPorDefectoImagenes);
-	mutexImagenes.desbloquear();
 	return proximoIdImagenes++;
 }
 
 Imagen BaseDeDatos::getImagenConId(const unsigned long int idImagen){
-	mutexImagenes.bloquear();
 	std::stringstream parseador;
 	parseador << idImagen;
 	Imagen imagenSolicitada(rutaImagenes+parseador.str()+kExtensionPorDefectoImagenes);
-	mutexImagenes.desbloquear();
 	return imagenSolicitada;
 }
 
-//elimina una iamgen con el id indicado dentro de la carpeta imagenes
+//elimina una imagen con el id indicado dentro de la carpeta imagenes
 void BaseDeDatos::eliminarImagen(const unsigned long int idImagen){
-	mutexImagenes.bloquear();
 	std::stringstream parseador;
 	parseador << idImagen;
 	remove((rutaImagenes+parseador.str()+kExtensionPorDefectoImagenes).c_str());
-	mutexImagenes.desbloquear();
 }
 
 const bool BaseDeDatos::existeImagenConId(const unsigned long int idImagen){
-	mutexImagenes.bloquear();
 	if (idImagen<proximoIdImagenes){
 		std::stringstream parseador;
 		parseador << idImagen;
 		bool existeImagenSolicitada =Imagen::existeImagen(rutaImagenes+parseador.str()+kExtensionPorDefectoImagenes);
-		mutexImagenes.desbloquear();
 		return existeImagenSolicitada;
 	}
-	mutexImagenes.desbloquear();
 	return false;
 }
 

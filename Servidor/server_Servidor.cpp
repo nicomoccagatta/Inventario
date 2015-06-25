@@ -6,6 +6,8 @@ using common::Protocolo;
 using common::Socket;
 using server::Servidor;
 using server::Operador;
+using server::MonitorBaseDeDatos;
+
 
 // Se instancia el objeto, obtiene la informacion relevante del archivo e
 // intenta setear correctamente la escucha de clientes.
@@ -64,6 +66,7 @@ Socket Servidor::aceptarCliente() {
 void Servidor::atenderUsuarios() {
   this->atenderClientes = true;
   std::list<Operador*> operadores;
+  MonitorBaseDeDatos monitorDB(datos);
   while (this->skt.estaConectado() && this->atenderClientes) {
     Socket clienteAceptado = this->aceptarCliente();
     // solo sigo si recibi un cliente en buenos terminos y no es que se aborto
@@ -71,7 +74,7 @@ void Servidor::atenderUsuarios() {
     if (this->skt.estaConectado() && this->atenderClientes) {
       // si se esta en conedicioens de atender al cliente le asigno un operador
       // que lo atienda en otro hilo.
-      Operador* operadorDeCliente = new Operador(clienteAceptado, this->protocolo, datos);
+      Operador* operadorDeCliente = new Operador(clienteAceptado, this->protocolo, monitorDB);
       operadorDeCliente->start();
       this->operadoresActivos++;
       // me guardo una referencia al operador para poder conocer el resultado y

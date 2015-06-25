@@ -54,15 +54,21 @@ void Producto::setDescripcion(const std::string& descripcion){
 	mutex.desbloquear();
 }
 
-const unsigned long int Producto::getId() const{
-	return id;
+const unsigned long int Producto::getId() {
+	mutex.bloquear();
+	const unsigned int idARetornar = id;
+	mutex.desbloquear();
+	return idARetornar;
 }
 
-const unsigned long int Producto::getStock() const{
-	return (* stockHistorico->begin())->getCantidad();
+const unsigned long int Producto::getStock() {
+	mutex.bloquear();
+	const unsigned int stockARetornar = (* stockHistorico->begin())->getCantidad();
+	mutex.desbloquear();
+	return stockARetornar;
 }
 
-const std::list<Stock*>* const Producto::getStockHistorico() const{
+const std::list<Stock*>* const Producto::getStockHistorico() {
 	return stockHistorico;
 }
 
@@ -77,15 +83,13 @@ std::list<unsigned long int>* const Producto::getIdsImagenes() {
 }
 
 void Producto::actualizarStock(long int cantidad, std::string fecha){
-	if (cantidad>0){
-		mutex.bloquear();
-		long int nuevoStock =((long int) getStock())+cantidad;
-		if(nuevoStock > 0)
-			stockHistorico->push_front(new Stock((unsigned long int)nuevoStock,fecha));
-		else
-			stockHistorico->push_front(new Stock(0,fecha));
-		mutex.desbloquear();
-	}
+	mutex.bloquear();
+	long int nuevoStock =((long int) getStock())+cantidad;
+	if(nuevoStock > 0)
+		stockHistorico->push_front(new Stock((unsigned long int)nuevoStock,fecha));
+	else
+		stockHistorico->push_front(new Stock(0,fecha));
+	mutex.desbloquear();
 }
 
 void Producto::inicializarCuentaId(){

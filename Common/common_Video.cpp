@@ -2,23 +2,13 @@
 
 namespace common {
 
-Video::Video(){
-
-}
-
 Video::Video(const std::string& rutaArchivo):capturasVideo(rutaArchivo)  {}
-
-
-bool Video::setearSecuenciaDeImagenes(std::string templateImagenes, double fps){
-	capturasVideo.open(templateImagenes);
-	capturasVideo.set(CV_CAP_PROP_FPS,fps);
-	return this->esValido();
-}
 
 bool Video::esValido()const{
 	return capturasVideo.isOpened();
 }
 
+//Completa la lista de imagenes y strings con las imagenes separadas por un periodo en segundos dado por periodoEnSegundos, completando en el mismo orden la lista de string con las fechas de esas imagenes teniendo en cuenta la fechaInicial como la de la primera imagen del video.
 void Video::capturasPeriodicasVideo(std::list<Imagen>& listaImagenes,std::list<std::string>& listaDeFechas,const std::string& fechaInicial, float periodoEnSegundos){
 	struct tm fechaProcesada;
 	if(esValido()&& strptime(fechaInicial.c_str(),kFormatoFecha,&fechaProcesada)){
@@ -49,6 +39,12 @@ void Video::capturasPeriodicasVideo(std::list<Imagen>& listaImagenes,std::list<s
 			segundosParcialesProcesados-=periodoEnSegundos;
 		}
 	}
+}
+
+bool Video::setearSecuenciaDeImagenes(std::string templateImagenes, double fps){
+	capturasVideo.open(templateImagenes);
+	capturasVideo.set(CV_CAP_PROP_FPS,fps);
+	return this->esValido();
 }
 
 void Video::mostrarVideo(){

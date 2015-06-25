@@ -24,8 +24,21 @@ int crearAPartirDeGlade(Glib::RefPtr<Gtk::Builder>* refBuilder,
 
 int main(int argc, char* argv[]) {
 
-	common::Video vid("/home/ale/git/Inventario/Imagenes/Areas/Farmacia/farmacia_%02d.jpg");
-	//common::Video vid("/home/ale/git/Inventario/Imagenes/20150623_144843.mp4");
+	//common::Video vid("/home/ale/git/Inventario/Imagenes/Areas/Farmacia/farmacia_%02d.jpg");
+	/*common::Video vid("/home/ale/git/Inventario/Imagenes/20150301_222329.mp4");
+
+	cv::VideoCapture capturasVideo("testLeo.mp4");
+
+	if (!capturasVideo.isOpened()){
+		std::cerr << "EL OPENCV ES UNA MIERDA!\n";
+		return 0;
+	}
+
+	if (!vid.esValido()){
+		std::cerr << "EL VIDEO NO ES VALIDO\n";
+		return 0;
+	}
+
 	vid.mostrarVideo();
 
 	std::list<Imagen> frames;
@@ -43,6 +56,8 @@ int main(int argc, char* argv[]) {
 		std::cerr << "Fecha: " << (*itStr) << "\n";
 	}
 	return 0;
+*/
+
 	ModeloObservable modelo;
 
 	modelo.actualizarProductos();

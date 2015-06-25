@@ -2,23 +2,13 @@
 
 namespace common {
 
-Video::Video(){
-
-}
-
 Video::Video(const std::string& rutaArchivo):capturasVideo(rutaArchivo)  {}
-
-
-bool Video::setearSecuenciaDeImagenes(std::string templateImagenes, double fps){
-	capturasVideo.open(templateImagenes);
-	capturasVideo.set(CV_CAP_PROP_FPS,fps);
-	return this->esValido();
-}
 
 bool Video::esValido()const{
 	return capturasVideo.isOpened();
 }
 
+//Completa la lista de imagenes y strings con las imagenes separadas por un periodo en segundos dado por periodoEnSegundos, completando en el mismo orden la lista de string con las fechas de esas imagenes teniendo en cuenta la fechaInicial como la de la primera imagen del video.
 void Video::capturasPeriodicasVideo(std::list<Imagen>& listaImagenes,std::list<std::string>& listaDeFechas,const std::string& fechaInicial, float periodoEnSegundos){
 	struct tm fechaProcesada;
 	if(esValido()&& strptime(fechaInicial.c_str(),kFormatoFecha,&fechaProcesada)){
@@ -51,12 +41,23 @@ void Video::capturasPeriodicasVideo(std::list<Imagen>& listaImagenes,std::list<s
 	}
 }
 
+bool Video::setearSecuenciaDeImagenes(std::string templateImagenes, double fps){
+	capturasVideo.open(templateImagenes);
+	capturasVideo.set(CV_CAP_PROP_FPS,fps);
+	return this->esValido();
+}
+
 void Video::mostrarVideo(){
 	using namespace cv;
 	Mat image;
 	namedWindow("Image sequence | press ESC to close", WINDOW_KEEPRATIO);
 
 	double fps = capturasVideo.get(CV_CAP_PROP_FPS);
+
+	std::cerr << "FPS: " << fps << std::endl;
+
+	if (fps == 0)
+		fps=1;
 
 	while (true){
 		// Read in image from sequence
@@ -67,7 +68,8 @@ void Video::mostrarVideo(){
 		{
 			std::cout << "End of Sequence" << std::endl;
 			capturasVideo.set(CAP_PROP_POS_MSEC,0);
-			continue;
+			//continue;
+			break;
 		}
 
 		imshow("Image sequence | press ESC to close", image);
@@ -83,10 +85,10 @@ void Video::mostrarVideo(){
 			return;
 		case ' ': //
 			while (true){
-				switch((char)waitKey(0)){
-				case ' ':
+				char key = (char)waitKey(0);
+				if(key == ' ')
 					break;
-				case 27:
+				if(key == 27){
 					destroyAllWindows();
 					return;
 				}

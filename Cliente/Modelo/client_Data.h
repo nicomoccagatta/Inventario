@@ -16,6 +16,10 @@
 using common::Producto;
 using common::AreaDeVision;
 
+/*
+ * La clase Data almacena una lista de Productos y Areas de Vision y los metodos
+ * necesarios que se necesitan para que la interfaz grafica muestre sus atributos.
+ */
 class Data {
 
 	std::list<Producto*> productos;
@@ -36,10 +40,17 @@ public:
 
 	/*PRODUCTO*/
 	Producto* agregarProducto(std::string nombre, std::string descripcion,unsigned long int id, unsigned long int idIcono);
+
+	/*
+	 * Libera y elimina todos los productos de la lista.
+	 */
 	void eliminarProductos();
 
 	/*AREA DE VISION*/
 	void agregarAreaDeVision(std::string ubicacion, std::string tipoDeCapturador,unsigned long int id);
+	/*
+	 * Libera y elimina todas las Areas de Vision de la lista.
+	 */
 	void eliminarAreasDeVision();
 };
 

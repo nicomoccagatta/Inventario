@@ -1,9 +1,3 @@
-#include "common_Video.h"
-#include "common_Imagen.h"
-#include <list>
-#include <string>
-
-
 #include <iostream>
 #include <string>
 #include "server_Servidor.h"
@@ -14,13 +8,13 @@ using server::Servidor;
 
 int main(int argc, char* argv[]) {
 
-	Servidor server;
-/*
+
+
 	if (argc < 3)
-		server();
-	else
-		server(argv[1],argv[2]);
-*/
+		return kCodigoRetornoErroneo;
+
+	Servidor server(argv[1],argv[2]);
+
 	if (server.conectado())
 		server.start();
 	else
@@ -33,4 +27,3 @@ int main(int argc, char* argv[]) {
 	server.join();
 	return kCodigoRetornoExistoso;
 }
-

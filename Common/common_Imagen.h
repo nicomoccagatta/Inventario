@@ -5,7 +5,6 @@
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
 #include <opencv2/xfeatures2d.hpp>
-#include <opencv2/flann.hpp>
 #include <vector>
 #include <string>
 #include <cmath>

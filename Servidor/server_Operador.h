@@ -6,7 +6,7 @@
 #include "common_Thread.h"
 #include "common_Socket.h"
 #include "common_Protocolo.h"
-#include "server_BaseDeDatos.h"
+#include "server_MonitorBaseDeDatos.h"
 #define kRespuestaNula ""
 #define kIdentificacionAdministrador "Admin|"
 #define kIdentificacionCliente "Client|"
@@ -19,7 +19,7 @@ namespace server {
 
 class Operador : public Thread {
  public:
-  Operador(Socket& cliente, const Protocolo& protocolo, BaseDeDatos& datos);
+  Operador(Socket& cliente, const Protocolo& protocolo, MonitorBaseDeDatos& datos);
 	virtual ~Operador();
 	void run();
 	void atenderOperaciones();
@@ -30,7 +30,7 @@ class Operador : public Thread {
  private:
 	Socket cliente;
 	const Protocolo& protocolo;
-	BaseDeDatos& datos;
+	MonitorBaseDeDatos& datos;
 	bool realizarOperaciones;
 	const std::string identificadorUsuario;
 	static const std::string identificarUsuario(Socket& cliente, const Protocolo& protocolo);
@@ -41,8 +41,6 @@ class Operador : public Thread {
 	const std::string enviarImagen(const std::string& comandoDeOperacion);
 	const Imagen recibirImagen(const std::string& informacionDeImagen);
 	const std::string actualizarStockAreaDeVision(const std::string& comandoDeOperacion);
-	void actualizarDeteccionAreaDeVision(AreaDeVision* const areaDeVisionAActualizar, const Imagen& imagenCapturada,const std::string& fechaDeCaptura,const std::string& tipoDeDeteccion);
-	void validarProductosDetectados(AreaDeVision* const areaDeVisionAValidar);
 	const std::string altaProducto(const std::string& comandoDeOperacion);
 	const std::string modificacionProducto(const std::string& comandoDeOperacion);
 	const std::string bajaProducto(const std::string& comandoDeOperacion);
@@ -53,7 +51,6 @@ class Operador : public Thread {
 	const std::string stockAreaDeVision(const std::string& comandoDeOperacion);
 	const std::string stockHistoricoProducto(const std::string& comandoDeOperacion)const;
 	const std::string altaImagen(const std::string& comandoDeOperacion);
-	void actualizarImagenesProducto(Producto* const, std::list<unsigned long int> nuevosIdImagenes);
 };
 }
 

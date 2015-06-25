@@ -19,9 +19,9 @@ public:
 	const std::string& getDescripcion() const;
 	void setNombre(const std::string& nombre);
 	void setDescripcion(const std::string& descripcion);
-	const unsigned long int getId() const;
-	const unsigned long int getStock() const;
-	const std::list<Stock*>* const getStockHistorico() const;
+	const unsigned long int getId();
+	const unsigned long int getStock();
+	const std::list<Stock*>* const getStockHistorico();
 	const unsigned long int getIdIcono() const;
 	void setIdIcono(const unsigned long int idIcono);
 	std::list<unsigned long int>* const getIdsImagenes();

@@ -120,11 +120,10 @@ ADD_SUBDIRECTORY("${PROJECT_SOURCE_DIR}/Servidor")
 include_directories("${PROJECT_SOURCE_DIR}/Servidor")
 add_executable(Server
 			Servidor/server_BaseDeDatos.cpp
-			Servidor/server_DetectorDeObjetos.cpp
+			Servidor/server_MonitorBaseDeDatos.cpp
 			Servidor/server_Operador.cpp
 			Servidor/server_Servidor.cpp
 			Servidor/server_SocketServidor.cpp
-			Servidor/server_ParserXML.cpp
 			Servidor/Servidor.cpp
 			Common/client_Cliente.cpp
 			Common/common_SocketCliente.cpp

@@ -6,6 +6,8 @@ using common::Protocolo;
 using common::Socket;
 using server::Servidor;
 using server::Operador;
+using server::MonitorBaseDeDatos;
+
 
 // Se instancia el objeto, obtiene la informacion relevante del archivo e
 // intenta setear correctamente la escucha de clientes.
@@ -15,22 +17,22 @@ Servidor::Servidor(const std::string& puerto,const std::string& rutaArchivoConfi
       atenderClientes(true),
       operadoresActivos(0),
       protocolo(protocolo),
-	  datos(ParserXML::valorDelElementoEnArchivo(kTagXMLRutaArchivoProductos,rutaArchivoConfiguracion),ParserXML::valorDelElementoEnArchivo(kTagXMLRutaArchivoAreasDeVision,rutaArchivoConfiguracion),ParserXML::valorDelElementoEnArchivo(kTagXMLRutaCarpetaImagenes,rutaArchivoConfiguracion)){
+	  datos(obtenerValorDeConfiguracion(kTagXMLRutaArchivoProductos,rutaArchivoConfiguracion),obtenerValorDeConfiguracion(kTagXMLRutaArchivoAreasDeVision,rutaArchivoConfiguracion),obtenerValorDeConfiguracion(kTagXMLRutaCarpetaImagenes,rutaArchivoConfiguracion)){
 	float valorMinimoDeSimilitudTemplateMatching;
 	float valorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud;
 	unsigned long int valorMinimoHessianoSURFFeatureMatching;
 	float distanciaMaximaDeSimilitudFeatureMatching;
 	std::stringstream parseador;
-	parseador << ParserXML::valorDelElementoEnArchivo(kTagXMLConfigImagenesValorMinimoDeSimilitudTemplateMatching,rutaArchivoConfiguracion);
+	parseador << obtenerValorDeConfiguracion(kTagXMLConfigImagenesValorMinimoDeSimilitudTemplateMatching,rutaArchivoConfiguracion);
 	parseador >> valorMinimoDeSimilitudTemplateMatching;
 	parseador.clear();
-	parseador << ParserXML::valorDelElementoEnArchivo(kTagXMLConfigImagenesValorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud,rutaArchivoConfiguracion);
+	parseador << obtenerValorDeConfiguracion(kTagXMLConfigImagenesValorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud,rutaArchivoConfiguracion);
 	parseador >> valorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud;
 	parseador.clear();
-	parseador << ParserXML::valorDelElementoEnArchivo(kTagXMLConfigImagenesValorMinimoHessianoSURFFeatureMatching,rutaArchivoConfiguracion);
+	parseador << obtenerValorDeConfiguracion(kTagXMLConfigImagenesValorMinimoHessianoSURFFeatureMatching,rutaArchivoConfiguracion);
 	parseador >> valorMinimoHessianoSURFFeatureMatching;
 	parseador.clear();
-	parseador << ParserXML::valorDelElementoEnArchivo(kTagXMLConfigImagenesDistanciaMaximaDeSimilitudFeatureMatching,rutaArchivoConfiguracion);
+	parseador << obtenerValorDeConfiguracion(kTagXMLConfigImagenesDistanciaMaximaDeSimilitudFeatureMatching,rutaArchivoConfiguracion);
 	parseador >> distanciaMaximaDeSimilitudFeatureMatching;
 	Imagen::setearPatametros(valorMinimoDeSimilitudTemplateMatching,valorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud,valorMinimoHessianoSURFFeatureMatching,distanciaMaximaDeSimilitudFeatureMatching);
 }
@@ -64,6 +66,7 @@ Socket Servidor::aceptarCliente() {
 void Servidor::atenderUsuarios() {
   this->atenderClientes = true;
   std::list<Operador*> operadores;
+  MonitorBaseDeDatos monitorDB(datos);
   while (this->skt.estaConectado() && this->atenderClientes) {
     Socket clienteAceptado = this->aceptarCliente();
     // solo sigo si recibi un cliente en buenos terminos y no es que se aborto
@@ -71,7 +74,7 @@ void Servidor::atenderUsuarios() {
     if (this->skt.estaConectado() && this->atenderClientes) {
       // si se esta en conedicioens de atender al cliente le asigno un operador
       // que lo atienda en otro hilo.
-      Operador* operadorDeCliente = new Operador(clienteAceptado, this->protocolo, datos);
+      Operador* operadorDeCliente = new Operador(clienteAceptado, this->protocolo, monitorDB);
       operadorDeCliente->start();
       this->operadoresActivos++;
       // me guardo una referencia al operador para poder conocer el resultado y
@@ -135,4 +138,14 @@ void Servidor::limpiarOperadoresInactivos(std::list<Operador*>& operadores) {
       this->detenerOperador(operadoraChequear);
     }
   }
+}
+
+std::string Servidor::obtenerValorDeConfiguracion(const std::string& identificadorElemento,const std::string& rutaArchivoConfiguracion){
+	TiXmlDocument archXML(rutaArchivoConfiguracion);
+	if (archXML.LoadFile()){
+		TiXmlElement* nodoElemento=archXML.FirstChildElement(identificadorElemento);
+		if (nodoElemento!=NULL)
+			return std::string(nodoElemento->GetText());
+	}
+	return "";
 }

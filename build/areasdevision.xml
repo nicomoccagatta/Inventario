@@ -2,13 +2,37 @@
     <Ubicacion>patio delantero</Ubicacion>
     <TipoDeCapturador>foto</TipoDeCapturador>
     <ProductosDetectados>
+        <Producto id="16">
+            <Nombre>Coca</Nombre>
+            <Descripcion>lata chiquita y golpeada</Descripcion>
+            <StockHistorico>
+                <Stock>
+                    <Fecha>Tue Jun 16 02:03:04 2015</Fecha>
+                    <Cantidad>2</Cantidad>
+                </Stock>
+            </StockHistorico>
+            <Icono>0</Icono>
+            <Imagenes />
+        </Producto>
+        <Producto id="20">
+            <Nombre>IbupiracPlus - Pfizer</Nombre>
+            <Descripcion>Tableta de 10 comprimidos Ibuprofeno 400mg + Cafeina 65mg</Descripcion>
+            <StockHistorico>
+                <Stock>
+                    <Fecha>Tue Jun 16 02:03:04 2015</Fecha>
+                    <Cantidad>3</Cantidad>
+                </Stock>
+            </StockHistorico>
+            <Icono>0</Icono>
+            <Imagenes />
+        </Producto>
         <Producto id="21">
             <Nombre>IbuApracur 400 VL - Lepetit</Nombre>
             <Descripcion>Analgesico, antiinflamatorio, antifebril. Tableta de 10 comprimidos recubiertos Ibuprofeno 400mg</Descripcion>
             <StockHistorico>
                 <Stock>
-                    <Fecha>Sun Jun 14 01:02:03 2015</Fecha>
-                    <Cantidad>8</Cantidad>
+                    <Fecha>Tue Jun 16 02:03:04 2015</Fecha>
+                    <Cantidad>5</Cantidad>
                 </Stock>
             </StockHistorico>
             <Icono>0</Icono>

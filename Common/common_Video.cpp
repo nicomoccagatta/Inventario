@@ -58,6 +58,11 @@ void Video::mostrarVideo(){
 
 	double fps = capturasVideo.get(CV_CAP_PROP_FPS);
 
+	std::cerr << "FPS: " << fps << std::endl;
+
+	if (fps == 0)
+		fps=1;
+
 	while (true){
 		// Read in image from sequence
 		capturasVideo >> image;
@@ -67,7 +72,8 @@ void Video::mostrarVideo(){
 		{
 			std::cout << "End of Sequence" << std::endl;
 			capturasVideo.set(CAP_PROP_POS_MSEC,0);
-			continue;
+			//continue;
+			break;
 		}
 
 		imshow("Image sequence | press ESC to close", image);
@@ -83,10 +89,10 @@ void Video::mostrarVideo(){
 			return;
 		case ' ': //
 			while (true){
-				switch((char)waitKey(0)){
-				case ' ':
+				char key = (char)waitKey(0);
+				if(key == ' ')
 					break;
-				case 27:
+				if(key == 27){
 					destroyAllWindows();
 					return;
 				}

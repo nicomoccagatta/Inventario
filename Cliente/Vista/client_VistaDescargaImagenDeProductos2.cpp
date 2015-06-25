@@ -77,7 +77,7 @@ VistaDescargaImagenDeProductos2::VistaDescargaImagenDeProductos2(ModeloObservabl
 }
 
 VistaDescargaImagenDeProductos2::~VistaDescargaImagenDeProductos2() {
-	std::cerr << "\nDESTRULLENDO VISTA DESCARGAR\n";
+	std::cerr << "\nDESTRUYENDO VISTA DESCARGAR\n";
 
 	Gtk::TreeModel::Children children = m_refProductosListStore->children();
 	Gtk::TreeModel::Children::iterator it;
@@ -104,16 +104,7 @@ void VistaDescargaImagenDeProductos2::on_producto_seleccionado(){
 /*En caso de que tengamos que actualizar altas y bajas en tiempo real*/
 void VistaDescargaImagenDeProductos2::update(){
 
-	//m_ProductosList.borrarLosAnteriores()
 
-	//const std::list<Producto*>* prods = modelo->getProductos();
-
-	//size_t cantProductos = prods->size();
-
-	//std::cerr << "Hay " << cantProductos << " productos\n";
-
-
-	//show_all_children();
 }
 
 void VistaDescargaImagenDeProductos2::update_lista_productos(){

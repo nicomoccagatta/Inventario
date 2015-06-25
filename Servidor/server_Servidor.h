@@ -2,6 +2,7 @@
 #define SERVER_SERVIDOR_H_
 #include <list>
 #include <string>
+#include "tinyxml.h"
 #include "common_Protocolo.h"
 #include "common_Thread.h"
 #include "common_Imagen.h"
@@ -9,7 +10,6 @@
 #include "server_SocketServidor.h"
 #include "server_BaseDeDatos.h"
 #include "server_MonitorBaseDeDatos.h"
-#include "server_ParserXML.h"
 #define kNumeroMaximoDeClientes 20
 #define kPuertoDefault "1037"
 #define kRutaArchivoConfiguracionDefault "config.xml"
@@ -47,6 +47,7 @@ class Servidor : public Thread {
   Protocolo protocolo;
   BaseDeDatos datos;
   void limpiarOperadoresInactivos(std::list<Operador*>& operadores);
+  static std::string obtenerValorDeConfiguracion(const std::string& identificadorElemento,const std::string& rutaArchivoConfiguracion=kRutaArchivoConfiguracionDefault);
 };
 }
 

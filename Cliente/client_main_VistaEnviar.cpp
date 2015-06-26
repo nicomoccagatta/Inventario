@@ -65,39 +65,19 @@ int main(int argc, char* argv[]) {
 
 	Gtk::Main kit(argc, argv);
 
-	VistaDescargaImagenDeProductos2 vista(&modelo);
-
-	vista.show();
-
-	//Load the Glade file and instiate its widgets:
-	Glib::RefPtr<Gtk::Builder> refBuilder1 = Gtk::Builder::create();
 	Glib::RefPtr<Gtk::Builder> refBuilder2 = Gtk::Builder::create();
-
-	if (crearAPartirDeGlade(&refBuilder1, VISTA_ENVIAR)==1)
-		return 1;
 
 	if (crearAPartirDeGlade(&refBuilder2, VISTA_PPAL)==1)
 		return 1;
 
-	//Get the GtkBuilder-instantiated dialog::
-	VistaEnviar* pDialogoEnviar = 0;
 	VistaPrincipal* pPrincipal = 0;
-	refBuilder1->get_widget_derived("DialogoEnviar", pDialogoEnviar);
 	refBuilder2->get_widget_derived("VentanaPrincipal",pPrincipal);
-	if(pDialogoEnviar && pPrincipal){
-		//Asignar Modelo y Controlador
-		ControladorVistaEnviar controlador(&modelo);
-		pDialogoEnviar->asignarControlador(&controlador);
-		pDialogoEnviar->asignarModelo(&modelo);
-
+	if( pPrincipal){
 		//Start:
+		pPrincipal->setModelo(&modelo);
 		pPrincipal->show();
-		pDialogoEnviar->show();
-		//pDialogoEnviar->run();
 		Gtk::Main::run();
 	}
-
-	delete pDialogoEnviar;
 	delete pPrincipal;
 	return 0;
 }

@@ -11,6 +11,10 @@
 #include <gtkmm-2.4/gtkmm.h>
 #include <glibmm-2.4/glibmm.h>
 
+#include "../Modelo/client_ModeloObservable.h"
+#include "client_VistaEnviar.h"
+#include "client_VistaDescargaImagenDeProductos2.h"
+
 /*
  * A CAMBIAR POR PANELES CON PESTANIAS.
  * Es la ventana principal que contiene a las otras tres vistas.
@@ -21,19 +25,24 @@ public:
 			const Glib::RefPtr<Gtk::Builder>& refGlade);
 	virtual ~VistaPrincipal();
 
+	void setModelo(ModeloObservable* modelo);
+
 private:
 	//signal handlers:
-	void on_button_Enviar();
-	void on_button_Descargar();
-	void on_button_CrearVideo();
 	bool on_exit_clicked(GdkEventAny* event);
 
-	Glib::RefPtr<Gtk::Builder> m_refGlade;
-	Gtk::Button* m_EnviarButton;
-	Gtk::Button* m_DescargarButton;
-	Gtk::Button* m_CrearVideoButton;
+	bool crearVistaEnviarAPartirDeGlade();
 
-	Gtk::VBox* m_bottonesBox;
+	Glib::RefPtr<Gtk::Builder> m_refGlade;
+	//Gtk::Viewport *panelDinamicoEnviar;
+	Gtk::Viewport *panelDinamicoDescargar;
+	Gtk::Viewport *panelDinamicoCrearVideo;
+
+	VistaEnviar* vistaEnviarPtr;
+	VistaDescargaImagenDeProductos2* vistaDescargar;
+
+
+
 };
 
 #endif /* CLIENTE_VISTA_CLIENT_VISTAPRINCIPAL_H_ */

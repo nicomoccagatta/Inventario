@@ -22,7 +22,7 @@
  * foto o video al servidor para realizar una demonstracion de un
  * control de inventario.
  */
-class VistaEnviar : public Gtk::Dialog{
+class VistaEnviar : public Gtk::Viewport{
 
 	ModeloObservable* modelo;
 	ControladorVistaEnviar* controlador;
@@ -30,7 +30,7 @@ class VistaEnviar : public Gtk::Dialog{
 public:
 	VistaEnviar(BaseObjectType* cobject,
 			const Glib::RefPtr<Gtk::Builder>& refGlade);
-			//,ModeloObservable* modelo);//,ControladorVistaEnviar* ctrol);
+
 	virtual ~VistaEnviar();
 
 	void asignarModelo(ModeloObservable* modelo);

@@ -16,7 +16,7 @@
 using common::AreaDeVision;
 
 VistaEnviar::VistaEnviar(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade)
-: Gtk::Dialog(cobject),
+: Gtk::Viewport(cobject),
   m_refGlade(refGlade),
   m_quitButton(0), m_ENVIARButton(0), m_vistaPrevia(0), m_fileChooser(0), m_calendar(0),
   m_entryHora(0), m_entryMinutos(0), m_entrySegundos(0), m_templateMatching(0),
@@ -25,9 +25,9 @@ VistaEnviar::VistaEnviar(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builde
 {
 	//CONECTAR BOTONES CON SUS FUNCIONES CONTROLADORAS
 	//BOTON SALIR:
-	m_refGlade->get_widget("quit_button", m_quitButton);
-	if(m_quitButton)
-		m_quitButton->signal_clicked().connect( sigc::mem_fun(*this, &VistaEnviar::on_button_quit) );
+	//m_refGlade->get_widget("quit_button", m_quitButton);
+	//if(m_quitButton)
+		//m_quitButton->signal_clicked().connect( sigc::mem_fun(*this, &VistaEnviar::on_button_quit) );
 
 	//BOTON ENVIAR
 	m_refGlade->get_widget("buttonEnviar", m_ENVIARButton);
@@ -53,11 +53,13 @@ VistaEnviar::VistaEnviar(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builde
 }
 
 VistaEnviar::~VistaEnviar() {
-	// TODO Auto-generated destructor stub
+	if(controlador)
+		delete controlador;
 }
 
 void VistaEnviar::asignarModelo(ModeloObservable* modelo){
 	this->modelo=modelo;
+	this->controlador = new ControladorVistaEnviar(modelo);
 	this->update();
 }
 
@@ -70,6 +72,8 @@ void VistaEnviar::update(){
 
 	//m_AreasDeVision->clear();
 	agregarAreasAlCombo();
+
+	show_all_children();
 
 
 }
@@ -151,12 +155,5 @@ void VistaEnviar::agregarAreasAlCombo(){
 		fila[columnas.getColumnaValor()] = *it;
 		fila[columnas.getColumnaTexto()] = (*it)->getUbicacion();
 	}
-
-	/*for (int i=1; i<10; ++i){
-		Gtk::TreeModel::Row fila = *(modeloComboBox->append());
-		fila[columnas.getColumnaValor()] = i;
-		fila[columnas.getColumnaTexto()] = "Teeexto";
-	}
-	*/
 
 }

@@ -80,7 +80,12 @@ const unsigned long int Imagen::contarApariciones(const Imagen& imagenObjeto,con
 }
 
 //Aplica el metodo Template Matching para contar las apariciones de la imagenObjeto dentro de la imagenEscena.
+//Este metodo solo soporta imagenes template pasada por el parametro imagenObjeto de dimensiones menores a la imagen receptora del mensaje.
 const unsigned long int Imagen::contarAparicionesTemplateMatching(const Imagen& imagenObjeto)const {
+	//Si imagenObjero es de mayores dimensiones indico que no puede aparecer en la imagen por las caracteristicas del metodo.
+	if (imagenObjeto.matrizImagen.rows>matrizImagen.rows || imagenObjeto.matrizImagen.cols>matrizImagen.cols)
+		return 0;
+
 	unsigned long int apariciones=0;
 	//Creo la matriz que aloja los resultados que arrojo cada punto.
 	cv::Mat resultanteDeComparaciones;

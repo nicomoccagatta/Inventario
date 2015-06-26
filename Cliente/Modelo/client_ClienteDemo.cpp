@@ -140,20 +140,6 @@ bool ClienteDemo::actualizarProductos(){
 	return true;
 }
 
-void ClienteDemo::agregarImagenACocaLata(std::string ruta){
-	Imagen img(ruta);
-	img.mostrarImagen();
-	protocolo.enviarImagen(this->client,img);
-
-	std::string idImagen = protocolo.recibirMensaje(this->client);
-
-	std::cerr << "ID: " << idImagen;
-
-	protocolo.enviarMensaje(this->client,"E|16|Coca|lata chiquita y golpeada|3|"+idImagen+"|");
-
-	std::cerr << protocolo.recibirMensaje(this->client);
-}
-
 bool ClienteDemo::actualizarAreasDeVision(){
 	if (this->client.estaConectado()){
 		/*this->agregarImagenACocaLata("/home/ale/git/Inventario/Imagenes/Coca-cola/lunes.jpg");

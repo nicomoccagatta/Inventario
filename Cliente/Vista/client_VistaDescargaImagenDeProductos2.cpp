@@ -15,15 +15,9 @@
 
 using common::AreaDeVision;
 
-VistaDescargaImagenDeProductos2::VistaDescargaImagenDeProductos2(ModeloObservable* modelo):
-	controlador(modelo,this), m_ActiveImagenes(0){
-
-	this->modelo = modelo;
-
-	/*Seteo la ventana*/
-	set_title ("Descarga de imagenes de productos");
-	set_border_width(10);
-	set_default_size(600, 400);
+VistaDescargaImagenDeProductos2::VistaDescargaImagenDeProductos2(BaseObjectType* cobject,
+		const Glib::RefPtr<Gtk::Builder>& refGlade):
+			Gtk::Viewport(cobject),m_ActiveImagenes(0){
 
 	/* Add a Hpaned widget to our toplevel window */
 	add(m_hPaned);
@@ -41,7 +35,7 @@ VistaDescargaImagenDeProductos2::VistaDescargaImagenDeProductos2(ModeloObservabl
 	m_ProductosTreeView.set_model(m_refProductosListStore);
 
 	/*Agrego los productos desde el ModeloObservable al modelo del TreeView*/
-	this->update_lista_productos();
+	//this->update_lista_productos();
 
 	//Add the Model's column to the View's columns:
 	m_ProductosTreeView.append_column("IdIcono", m_ProductosList.m_Columns.m_col_icon_id);
@@ -89,12 +83,19 @@ VistaDescargaImagenDeProductos2::~VistaDescargaImagenDeProductos2() {
 	}
 }
 
+void VistaDescargaImagenDeProductos2::asignarModelo(ModeloObservable* modelo){
+	this->modelo=modelo;
+	this->controlador = new ControladorVistaDescargaImagenDeProductos(modelo,this);
+	/*Agrego los productos desde el ModeloObservable al modelo del TreeView*/
+	this->update_lista_productos();
+}
+
 void VistaDescargaImagenDeProductos2::on_producto_seleccionado(){
 	Gtk::TreeModel::iterator iter = refTreeSelection->get_selected();
 	if(iter){ //If anything is selected
 		Gtk::TreeModel::Row row = *iter;
 		std::cerr << "APRETE EL PRODUCTO " << row[m_ProductosList.m_Columns.m_col_text] <<"\n";
-		controlador.on_producto_seleccionado(
+		controlador->on_producto_seleccionado(
 				row[m_ProductosList.m_Columns.m_col_data],
 				row[m_ProductosList.m_Columns.m_col_imagenes]);
 	}
@@ -148,7 +149,7 @@ void VistaDescargaImagenDeProductos2::on_button_descargar(){
 	Gtk::FileChooserDialog dialog("Elige donde y con que nombre guardar la imagen",
 			Gtk::FILE_CHOOSER_ACTION_SAVE);
 
-	dialog.set_transient_for(*this);
+	//dialog.set_transient_for(*this);
 
 	//Add response buttons the the dialog:
 	dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
@@ -163,7 +164,7 @@ void VistaDescargaImagenDeProductos2::on_button_descargar(){
 		std::cerr << "Folder selected: " << dialog.get_filename()
 	        		<< std::endl;
 
-		controlador.on_button_descargar(m_ActiveRadio->get_image()->get_name(), dialog.get_filename());
+		controlador->on_button_descargar(m_ActiveRadio->get_image()->get_name(), dialog.get_filename());
 
 		break;
 	}

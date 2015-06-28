@@ -163,13 +163,13 @@ void Administrador::eliminarAreaVision(unsigned long int idAV){
 	if (this->admin.estaConectado()){
 		std::stringstream ssIDAV;
 		ssIDAV << idAV;
-		std::string mensajeAEnviar = "I|" + ssIDAV.str();
+		std::string mensajeAEnviar = "I|" + ssIDAV.str() + '|';
 		protocolo.enviarMensaje(this->admin,mensajeAEnviar);
 	}
 	std::string respuesta = protocolo.recibirMensaje(this->admin);
 }
 
-void Administrador::altaProducto(std::string &nombre,std::string &descripcion,long unsigned int idAV,std::string &rutaImagenPPAL,std::list<std::string> &rutaImagenes){
+void Administrador::altaProducto(std::string &nombre,std::string &descripcion,std::string &rutaImagenPPAL,std::list<std::string*> &rutaImagenes){
 	if (this->admin.estaConectado()){
 		long unsigned int idImagen = altaImagen(rutaImagenPPAL);
 		std::string mensajeEnviar = "D|" + nombre + '|' + descripcion + '|';
@@ -184,9 +184,9 @@ void Administrador::altaProducto(std::string &nombre,std::string &descripcion,lo
 		ssIDProducto << parser.getParametro(1);
 
 		std::list<long unsigned int> idsImagenes;
-		std::list<std::string>::iterator it = rutaImagenes.begin();
+		std::list<std::string*>::iterator it = rutaImagenes.begin();
 		for (; it!=rutaImagenes.end() ; ++it){
-			long unsigned int idAgregar = altaImagen(*it);
+			long unsigned int idAgregar = altaImagen(*(*it));
 			idsImagenes.push_back(idAgregar);
 		}
 		mensajeEnviar = "E|" + ssIDProducto.str() + '|' + nombre +'|' + descripcion +'|' + ssID.str() + '|';
@@ -200,6 +200,33 @@ void Administrador::altaProducto(std::string &nombre,std::string &descripcion,lo
 		protocolo.enviarMensaje(this->admin,mensajeEnviar);
 		respuesta = protocolo.recibirMensaje(this->admin);
 	}
+}
+
+void Administrador::modificarProducto(unsigned long int id,std::string &nombre,std::string &descripcion,std::string &rutaImagenPPAL,
+												std::list<unsigned long int> idsAnteriores,std::list<std::string*> &rutaImagenesAgregar){
+	std::stringstream ssIDProducto;
+	ssIDProducto << id;
+	long unsigned int idIcono = altaImagen(rutaImagenPPAL);
+	std::stringstream ssIDIcono;
+	ssIDIcono << idIcono;
+	std::string mensajeEnviar = "E|" + ssIDProducto.str() + '|' + nombre +'|' + descripcion +'|' + ssIDIcono.str() + '|';
+	std::list<unsigned long int>::iterator it = idsAnteriores.begin();
+	for(; it != idsAnteriores.end() ; ++it){
+		std::stringstream ssIDAnt;
+		ssIDAnt << (*it);
+		mensajeEnviar += ssIDAnt.str();
+		mensajeEnviar += '|';
+	}
+	std::list<std::string*>::iterator iterator = rutaImagenesAgregar.begin();
+	for(; iterator != rutaImagenesAgregar.end() ; ++iterator){
+		long unsigned int idImagen = altaImagen(*(*iterator));
+		std::stringstream ss;
+		ss << idImagen;
+		mensajeEnviar += ss.str();
+		mensajeEnviar += '|';
+	}
+	protocolo.enviarMensaje(this->admin,mensajeEnviar);
+	std::string respuesta = protocolo.recibirMensaje(this->admin);
 }
 
 long unsigned int Administrador::altaImagen(std::string &rutaImagen){
@@ -225,24 +252,14 @@ std::list<unsigned long int> Administrador::getIdsImagenes(unsigned long int idP
 		std::string respuesta = protocolo.recibirMensaje(this->admin);
 		CommandParser parserProd;
 		parserProd.tokenize(respuesta);
-		unsigned int argumImagen = 4;
-		try{
-			while(true){ 					//Arreglar esta horribilidad..
+		for(unsigned int argumImagen = 4; argumImagen < parserProd.getCantParamtros() ; argumImagen++)
+		{
 				int idImagen;
 				std::stringstream obtenerID;
 				obtenerID << parserProd.getParametro(argumImagen);
 				obtenerID >> idImagen;
 				this->getImagenConID(idImagen);
-				std::stringstream obtenerID2;
-				obtenerID2 << parserProd.getParametro(argumImagen+1);
 				listaIDS.push_back(idImagen);
-				obtenerID2 >> idImagen;
-				this->getImagenConID(idImagen);
-				listaIDS.push_back(idImagen);
-				argumImagen += 2;
-			}
-		}catch (std::exception& e){
-			return listaIDS;
 		}
 	}
 	return listaIDS;
@@ -301,6 +318,16 @@ void Administrador::altaAreaVision(const std::string &ubicacion,const std::strin
 			protocolo.enviarMensaje(this->admin,mensajeAEnviar);
 			std::string respuesta = protocolo.recibirMensaje(this->admin);
 		}
+}
+
+void Administrador::modificarAreaVision(unsigned long int idAV,std::string& ubicacion,std::string& capturador){
+	if (this->admin.estaConectado()){
+		std::stringstream ssID;
+		ssID << idAV;
+		std::string mensajeAEnviar = "H|" + ssID.str() + '|' + ubicacion + '|' + capturador + '|';
+		protocolo.enviarMensaje(this->admin,mensajeAEnviar);
+		std::string respuesta = protocolo.recibirMensaje(this->admin);
+	}
 }
 
 unsigned long int Administrador::consultarStock(unsigned long int idProd){

@@ -18,6 +18,9 @@ void VistaVentanaPPAL::setearAtributos(const Glib::RefPtr<Gtk::Builder>& refGlad
 	m_refGlade = refGlade;
 	model = modelo;
 
+	model->suscribe(&vistaLP);
+	model->suscribe(&vistaLAV);
+
 	model->actualizarProductos();
 	vistaLP.run(panelDinamicoP,model);
 
@@ -29,15 +32,3 @@ void VistaVentanaPPAL::setearAtributos(const Glib::RefPtr<Gtk::Builder>& refGlad
 
 VistaVentanaPPAL::~VistaVentanaPPAL() {
 }
-/*
-void VistaVentanaPPAL::on_button_LP()
-{
-	panelDinamico->remove();
-	model->notify();
-	controlLP.setearModelo(model);
-	controlLP.actualizarProductos();
-	model->suscribe(&vistaLP);
-	vistaLP.run(panelDinamico,model);
-	this->show_all();
-}
-*/

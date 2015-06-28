@@ -45,6 +45,7 @@ add_executable(Admin
 			Administrador/ControlAdmin/ControlLP.cpp
 			Administrador/ControlAdmin/ControlLAV.cpp
 			Administrador/ControlAdmin/admin_ControlAP.cpp
+			Administrador/ControlAdmin/ControlEP.cpp
 			Administrador/ModeloAdmin/Administrador.cpp
 			Administrador/ModeloAdmin/admin_Datos.cpp
 			Administrador/ModeloAdmin/admin_ModeloObservable.cpp
@@ -58,6 +59,7 @@ add_executable(Admin
 			Administrador/VistaAdmin/VistaAgregarProducto.cpp
 			Administrador/VistaAdmin/VistaAgregarAreaVision.cpp
 			Administrador/VistaAdmin/VistaStockGeneral.cpp
+			Administrador/VistaAdmin/VistaEditarProducto.cpp
 			Common/common_SocketCliente.cpp
 			Common/common_AreaDeVision.cpp
 			Common/common_Mutex.cpp
@@ -83,7 +85,7 @@ pkg_check_modules(OpenCV REQUIRED opencv)
 include_directories(${OpenCV_INCLUDE_DIRS}) 
 add_executable(Client
 			Cliente/client_main_VistaEnviar.cpp
-			Cliente/client_main_VistaDescargar.cpp
+			#Cliente/client_main_VistaDescargar.cpp
 			Cliente/Modelo/client_ClienteDemo.cpp
 			Cliente/Modelo/client_Data.cpp
 			Cliente/Modelo/client_ModeloObservable.cpp

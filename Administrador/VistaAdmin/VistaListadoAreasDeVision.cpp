@@ -10,7 +10,7 @@
 VistaListadoAreasDeVision::VistaListadoAreasDeVision()
 {
 	m_AgregarButton.set_label("Agregar");
-	m_EditarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaListadoAreasDeVision::on_button_agregar));
+	m_AgregarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaListadoAreasDeVision::on_button_agregar));
 	m_EditarButton.set_label("Editar");
 	m_EditarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaListadoAreasDeVision::on_button_editar));
 	m_EliminarButton.set_label("Eliminar");
@@ -55,7 +55,15 @@ VistaListadoAreasDeVision::VistaListadoAreasDeVision()
 }
 
 void VistaListadoAreasDeVision::update(){
+	m_refAVListStore = Gtk::ListStore::create(m_AVList.m_Columns);
+	m_AVTreeView.set_model(m_refAVListStore);
+
+	m_refProductosListStore = Gtk::ListStore::create(m_ProductosList.m_Columns);
+	m_ProductosTreeView.set_model(m_refProductosListStore);
+
 	this->update_lista_av();
+
+	refTreeSelection = m_AVTreeView.get_selection();
 }
 
 void VistaListadoAreasDeVision::run(Gtk::Viewport *panelDinamico,Modelo_Observable *model){
@@ -64,7 +72,6 @@ void VistaListadoAreasDeVision::run(Gtk::Viewport *panelDinamico,Modelo_Observab
 
 	m_refAVListStore = Gtk::ListStore::create(m_AVList.m_Columns);
 	m_AVTreeView.set_model(m_refAVListStore);
-
 
 	m_refProductosListStore = Gtk::ListStore::create(m_ProductosList.m_Columns);
 	m_ProductosTreeView.set_model(m_refProductosListStore);
@@ -80,27 +87,28 @@ VistaListadoAreasDeVision::~VistaListadoAreasDeVision() {
 }
 
 void VistaListadoAreasDeVision::on_button_agregar(){
-
+	vistaAgregarAreaVision = new VistaAgregarAreaVision(modelo);
 }
 
 void VistaListadoAreasDeVision::on_button_editar(){
-
+	Gtk::TreeModel::iterator iter = refTreeSelection->get_selected();
+	if(iter){
+		Gtk::TreeModel::Row row = *iter;
+		AreaDeVision *area = row[m_AVList.m_Columns.m_col_data];
+		unsigned long int id = area->getId();
+		std::string ubicacion = area->getUbicacion();
+		std::string capturador = area->getTipoDeCapturador();
+		std::cerr << "TIPO DE CAPTURADOR : --" << area->getTipoDeCapturador() <<"--"<<std::endl;
+		vistaEditarAreaVision = new VistaEditarAreaVision(modelo,id,ubicacion,capturador);
+	}
 }
 
 void VistaListadoAreasDeVision::on_button_eliminar(){
 	Gtk::TreeModel::iterator iter = refTreeSelection->get_selected();
 	if(iter){
 		Gtk::TreeModel::Row row = *iter;
-		const std::list<Producto*>* prods = row[m_AVList.m_Columns.m_ProductosDetectados];
 		modelo->eliminarAreaVision(row[m_AVList.m_Columns.m_col_Id]);
-
-		std::list<Producto*>::const_iterator it;
-		for (it=prods->begin(); it!=prods->end();++it){
-			modelo->eliminarProducto((*it)->getId());
-		}
-		this->panelDinam->remove();
-		this->modelo->actualizarAreasDeVision();
-		this->run(this->panelDinam,this->modelo);
+		modelo->notify();
 	}
 }
 
@@ -127,10 +135,12 @@ void VistaListadoAreasDeVision::on_av_seleccionado(){
 }
 
 void VistaListadoAreasDeVision::update_lista_av(){
+	modelo->actualizarAreasDeVision();
 	const std::list<AreaDeVision*>* avs = modelo->getAreasDeVision();
 	std::list<AreaDeVision*>::const_iterator it;
 	for (it=avs->begin(); it!=avs->end();++it){
 	Gtk::TreeModel::Row row = *(m_refAVListStore->append());
+	row[m_AVList.m_Columns.m_col_Id] = (*it)->getId();
 	row[m_AVList.m_Columns.m_col_Ubicacion] = (*it)->getUbicacion();
 	row[m_AVList.m_Columns.m_ProductosDetectados] = (*it)->getProductosDetectados();
 	row[m_AVList.m_Columns.m_col_data] = *it;

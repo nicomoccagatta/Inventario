@@ -30,9 +30,14 @@ void Modelo_Observable::eliminarAreaVision(unsigned long int idAV){
 	this->admin.eliminarAreaVision(idAV);
 }
 
-void Modelo_Observable::altaProducto(std::string &nombre,std::string &descripcion,long unsigned int idAV,
-															std::string &rutaImagenPPAL,std::list<std::string> &rutaImagenes){
-	this->admin.altaProducto(nombre,descripcion,idAV,rutaImagenPPAL,rutaImagenes);
+void Modelo_Observable::altaProducto(std::string &nombre,std::string &descripcion,
+													std::string &rutaImagenPPAL,std::list<std::string*> &rutaImagenes){
+	this->admin.altaProducto(nombre,descripcion,rutaImagenPPAL,rutaImagenes);
+}
+
+void Modelo_Observable::modificarProducto(unsigned long int id,std::string &nombre,std::string &descripcion,std::string &rutaImagenPPAL,
+											std::list<unsigned long int> idsAnteriores,std::list<std::string*> &rutaImagenesAgregar){
+	this->admin.modificarProducto(id,nombre,descripcion,rutaImagenPPAL,idsAnteriores,rutaImagenesAgregar);
 }
 
 std::list<unsigned long int> Modelo_Observable::getIdsImagenes(unsigned long int id){
@@ -45,6 +50,10 @@ std::string Modelo_Observable::getImagenConID(unsigned long int id){
 
 void Modelo_Observable::altaAreaVision(const std::string &ubicacion,const std::string &capturador){
 	this->admin.altaAreaVision(ubicacion,capturador);
+}
+
+void Modelo_Observable::modificarAreaVision(unsigned long int idAV,std::string& ubicacion,std::string& capturador){
+	this->admin.modificarAreaVision(idAV,ubicacion,capturador);
 }
 
 unsigned long int Modelo_Observable::consultarStock(unsigned long int idProducto){

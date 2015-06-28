@@ -1,15 +1,15 @@
 /*
- * VistaAgregarAreaVision.cpp
+ * VistaEditarAreaVision.cpp
  *
- *  Created on: 23/6/2015
+ *  Created on: 28/6/2015
  *      Author: nicomoccagatta
  */
 
-#include "VistaAgregarAreaVision.h"
+#include "VistaEditarAreaVision.h"
 
-VistaAgregarAreaVision::VistaAgregarAreaVision(Modelo_Observable *model): modelo(model) {
+VistaEditarAreaVision::VistaEditarAreaVision(Modelo_Observable *model,unsigned long int id,std::string& ubicacion,std::string capturador): modelo(model), idAV(id) {
 	this->set_size_request(500,150);
-	this->set_title("Agregar Area de Vision");
+	this->set_title("Editar Area de Vision");
 	this->set_position(Gtk::WIN_POS_CENTER);
 	this->set_resizable(false);
 
@@ -17,6 +17,7 @@ VistaAgregarAreaVision::VistaAgregarAreaVision(Modelo_Observable *model): modelo
 	m_labelUbicacion.set_size_request(150,30);
 	m_hBoxUbicacion.pack_start(m_labelUbicacion);
 	m_obtenerUbicacion.set_size_request(350,30);
+	m_obtenerUbicacion.set_text(ubicacion);
 	m_hBoxUbicacion.pack_end(m_obtenerUbicacion);
 
 	m_VBoxPrincipal.pack_start(m_hBoxUbicacion);
@@ -33,15 +34,19 @@ VistaAgregarAreaVision::VistaAgregarAreaVision(Modelo_Observable *model): modelo
 	fila[columnas.getColumnaCapturador()] = "Video";
 	m_TiposCapturador.pack_start(columnas.getColumnaCapturador());
 	m_TiposCapturador.set_size_request(350,30);
+	if (capturador == "Foto")
+		m_TiposCapturador.set_active(0);
+	else if(capturador == "Video")
+		m_TiposCapturador.set_active(1);
 	m_hBoxCapturador.pack_end(m_TiposCapturador);
 
 	m_VBoxPrincipal.pack_start(m_hBoxCapturador);
 
 	m_ButtonCrearAV.set_label("OK");
-	m_ButtonCrearAV.signal_clicked().connect( sigc::mem_fun(*this, &VistaAgregarAreaVision::on_button_OK));
+	m_ButtonCrearAV.signal_clicked().connect( sigc::mem_fun(*this, &VistaEditarAreaVision::on_button_OK));
 	m_botoneraBotonOK.pack_start(m_ButtonCrearAV);
 	m_ButtonCANCEL.set_label("CANCEL");
-	m_ButtonCANCEL.signal_clicked().connect( sigc::mem_fun(*this, &VistaAgregarAreaVision::on_button_CANCEL));
+	m_ButtonCANCEL.signal_clicked().connect( sigc::mem_fun(*this, &VistaEditarAreaVision::on_button_CANCEL));
 	m_botoneraBotonOK.pack_start(m_ButtonCANCEL);
 	m_VBoxPrincipal.pack_end(m_botoneraBotonOK);
 
@@ -49,10 +54,11 @@ VistaAgregarAreaVision::VistaAgregarAreaVision(Modelo_Observable *model): modelo
 	this->show_all();
 }
 
-VistaAgregarAreaVision::~VistaAgregarAreaVision() {
+VistaEditarAreaVision::~VistaEditarAreaVision() {
+
 }
 
-void VistaAgregarAreaVision::on_button_OK(){
+void VistaEditarAreaVision::on_button_OK(){
 	if( m_obtenerUbicacion.get_text() == "" ){
 			Gtk::Window *ventanitaError = new Gtk::Window;
 			Gtk::MessageDialog dialog(*ventanitaError,"Ingrese Ubicacion",false, Gtk::MESSAGE_ERROR);
@@ -73,10 +79,10 @@ void VistaAgregarAreaVision::on_button_OK(){
 	Glib::ustring tCapturador = fila[columnas.getColumnaCapturador()];
 	std::string capturador = tCapturador;
 	std::string ubicacion = m_obtenerUbicacion.get_text();
-	this->modelo->altaAreaVision(ubicacion,capturador);
+	this->modelo->modificarAreaVision(idAV,ubicacion,capturador);
 
 	Gtk::Window *ventanitaOK = new Gtk::Window;
-	Gtk::MessageDialog dialog(*ventanitaOK,"Area de Vision agregada correctamente!",false, Gtk::MESSAGE_INFO);
+	Gtk::MessageDialog dialog(*ventanitaOK,"Area de Vision modificada correctamente!",false, Gtk::MESSAGE_INFO);
 	dialog.set_title("Operacion Exitosa");
 	dialog.set_size_request(370,100);
 	dialog.run();
@@ -85,8 +91,6 @@ void VistaAgregarAreaVision::on_button_OK(){
 	delete this;
 }
 
-void VistaAgregarAreaVision::on_button_CANCEL(){
+void VistaEditarAreaVision::on_button_CANCEL(){
 	delete this;
-}
-void VistaAgregarAreaVision::update(){
 }

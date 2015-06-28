@@ -27,11 +27,14 @@ public:
 	void eliminarProducto(unsigned long int id);
 	bool actualizarAreasDeVision();
 	void eliminarAreaVision(unsigned long int idAV);
-	void altaProducto(std::string &nombre,std::string &descripcion,long unsigned int idAV,
-			std::string &rutaImagenPPAL,std::list<std::string> &rutaImagenes);
+	void altaProducto(std::string &nombre,std::string &descripcion,
+			std::string &rutaImagenPPAL,std::list<std::string*> &rutaImagenes);
+	void modificarProducto(unsigned long int id,std::string &nombre,std::string &descripcion,std::string &rutaImagenPPAL,
+												std::list<unsigned long int> idsAnteriores,std::list<std::string*> &rutaImagenesAgregar);
 	std::list<unsigned long int> getIdsImagenes(unsigned long int idProducto);
 	std::string getImagenConID(unsigned long int id);
 	void altaAreaVision(const std::string &ubicacion,const std::string &capturador);
+	void modificarAreaVision(unsigned long int idAV,std::string& ubicacion,std::string& capturador);
 	unsigned long int consultarStock(unsigned long int idProducto);
 
 	const std::list<AreaDeVision*>* getAreasDeVision() const;

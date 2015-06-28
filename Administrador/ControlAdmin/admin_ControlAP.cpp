@@ -8,11 +8,11 @@
 #include "admin_ControlAP.h"
 #include "VistaAdmin/VistaAgregarProducto.h"
 
-ControlAP::ControlAP(Gtk::Button *button,void *view): boton(button), vista(view) {
+ControlAP::ControlAP(Gtk::VBox *button,std::string *sfiledir,void *view): boton(button), filedir(sfiledir), vista(view) {
 }
 
 void ControlAP::on_button_eliminarIcono(){
-	((VistaAgregarProducto*)(vista))->eliminarIconoPertenecienteABoton(boton);
+	((VistaAgregarProducto*)(vista))->eliminarIconoPertenecienteABoton(boton,filedir);
 }
 
 ControlAP::~ControlAP() {

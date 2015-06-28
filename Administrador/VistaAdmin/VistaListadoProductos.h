@@ -13,6 +13,8 @@
 #include "ListaProductos.h"
 #include <list>
 #include "common_Producto.h"
+#include "VistaAgregarProducto.h"
+#include "VistaEditarProducto.h"
 
 #define RUTA_CARPETA_TEMP "temp_admin/"
 
@@ -22,6 +24,7 @@ class VistaListadoProductos : public Observer {
 	void update_lista_productos();
 	bool on_imagen_button_press(GdkEventButton*);
 	void on_producto_seleccionado();
+	void on_button_agregar();
 	void on_button_editar();
 	void on_button_eliminar();
 public:
@@ -46,6 +49,9 @@ protected:
 	Gtk::Viewport *m_viewportVentanitaBotoneraImagenes;
 	Gtk::HButtonBox m_botoneraImagenesProducto;
 	std::list<Gtk::Image*> m_listaPunteroImagenes;
+
+	VistaAgregarProducto *vistaAgregarProducto;
+	VistaEditarProducto *vistaEditarProducto;
 };
 
 #endif /* ADMINISTRADOR_VISTAADMIN_VISTALISTADOPRODUCTOS_H_ */

@@ -106,6 +106,7 @@ add_executable(Client
 			Common/common_CommandParser.cpp
 			Common/common_Imagen.cpp
 			Common/common_Video.cpp
+			Common/common_ListaProductos.h
 		)
 
 FIND_PACKAGE(OpenCV REQUIRED)

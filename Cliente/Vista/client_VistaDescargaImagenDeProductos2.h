@@ -17,6 +17,7 @@
 
 #include "../Control/client_ControladorVistaDescargaImagenDeProductos.h"
 #include "../Modelo/client_ModeloObservable.h"
+#include "common_ListaProductos.h"
 
 class ControladorVistaDescargaImagenDeProductos;
 
@@ -62,7 +63,8 @@ protected:
 
 	Gtk::HPaned m_hPaned; //El panel con la barra que divide
 
-	ProductosList m_ProductosList; //La Scrolled Window de los productos
+	//ProductosList m_ProductosList; //La Scrolled Window de los productos
+	ListaProductos m_ProductosList;
 
 	Gtk::VBox m_VBox; //Arriba imanes, abajo botones
 	Gtk::ScrolledWindow* m_ActiveImagenes; //ScrolledWindow de imagenes activa

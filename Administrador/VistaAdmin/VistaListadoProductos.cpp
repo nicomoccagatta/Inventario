@@ -121,15 +121,15 @@ void VistaListadoProductos::update_lista_productos(){
 	const std::list<Producto*>* prods = modelo->getProductos();
 	std::list<Producto*>::const_iterator it;
 	for (it=prods->begin(); it!=prods->end();++it){
-	Gtk::TreeModel::Row row = *(m_refProductosListStore->append());
-	row[m_ProductosList.m_Columns.m_col_id] = (*it)->getId();
-	row[m_ProductosList.m_Columns.m_col_nombre] = (*it)->getNombre();
-	std::cout << "Actualizo producto: " << (*it)->getNombre() << std::endl;
-	row[m_ProductosList.m_Columns.m_col_descripcion] = (*it)->getDescripcion();
-	std::string rutaImagen = modelo->getImagenConID((*it)->getIdIcono());
-	std::cout << "Ruta de imagen: " << rutaImagen << std::endl;
-	Glib::RefPtr<Gdk::Pixbuf>  pic = Gdk::Pixbuf::create_from_file(rutaImagen,30,30,false);
-	row[m_ProductosList.m_Columns.m_col_imagenIcono] = pic;
-	row[m_ProductosList.m_Columns.m_col_data] = *it;
+		Gtk::TreeModel::Row row = *(m_refProductosListStore->append());
+		row[m_ProductosList.m_Columns.m_col_id] = (*it)->getId();
+		row[m_ProductosList.m_Columns.m_col_nombre] = (*it)->getNombre();
+		std::cout << "Actualizo producto: " << (*it)->getNombre() << std::endl;
+		row[m_ProductosList.m_Columns.m_col_descripcion] = (*it)->getDescripcion();
+		std::string rutaImagen = modelo->getImagenConID((*it)->getIdIcono());
+		std::cout << "Ruta de imagen: " << rutaImagen << std::endl;
+		Glib::RefPtr<Gdk::Pixbuf>  pic = Gdk::Pixbuf::create_from_file(rutaImagen,30,30,false);
+		row[m_ProductosList.m_Columns.m_col_imagenIcono] = pic;
+		row[m_ProductosList.m_Columns.m_col_data] = *it;
 	}
 }

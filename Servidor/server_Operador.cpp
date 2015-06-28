@@ -171,7 +171,7 @@ const std::string Operador::modificacionAreaDeVision(const std::string& comandoD
 	const std::string ubicacionAreaDeVision = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,3);
 	const std::string tipoDeCapturadorAreaDeVision = Protocolo::extraerArgumentoDeComando(comandoDeOperacion,4);
 	if (datos.existeAreaDeVision(idAreaDeVision)){
-
+		datos.modificarAreaDeVision(idAreaDeVision,ubicacionAreaDeVision,tipoDeCapturadorAreaDeVision);
 		return kMensajeOK;
 	} else {
 		return kMensajeError;

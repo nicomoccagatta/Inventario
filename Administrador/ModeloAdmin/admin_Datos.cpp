@@ -36,9 +36,8 @@ void Datos::eliminarProducto(unsigned long int idProd){
 	for (; it!=this->productos.end(); ++it){
 		if ((*it)->getId() == idProd)
 		{
-			std::cerr << "Producto eliminadoo:" << (*it)->getNombre() << std::endl;
 			this->productos.erase(it);
-			it--;
+			break;
 		}
 	}
 }
@@ -56,16 +55,14 @@ void Datos::eliminarAreaVision(unsigned long int idAV){
 	for (; it!=this->areasDeVision.end() ; ++it )
 		if ((*it)->getId() == idAV)
 		{
-			std::cerr << "Area de Vision eliminada:" << (*it)->getUbicacion() << std::endl;
 			this->areasDeVision.erase(it);
-			it--;
+			break;
 		}
 }
 
 void Datos::eliminarAreasDeVision(){
 	std::list<AreaDeVision*>::iterator it;
 	for (it = this->areasDeVision.begin(); it != this->areasDeVision.end();++it){
-		//std::cout << (*it)->getId() << (*it)->getTipoDeCapturador() << (*it)->getUbicacion();
 		delete *(it);
 	}
 	areasDeVision.clear();

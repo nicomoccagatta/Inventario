@@ -10,6 +10,8 @@
 
 #include <gtkmm-2.4/gtkmm.h>
 #include "ModeloAdmin/admin_ModeloObservable.h"
+#include "VistaAgregarAreaVision.h"
+#include "VistaEditarAreaVision.h"
 #include "ListaAV.h"
 #include "ListaProductos.h"
 #include <list>
@@ -48,6 +50,9 @@ protected:
 	Gtk::Button m_AgregarButton;
 	Gtk::Button m_EditarButton;
 	Gtk::Button m_EliminarButton;
+
+	VistaAgregarAreaVision *vistaAgregarAreaVision;
+	VistaEditarAreaVision *vistaEditarAreaVision;
 };
 
 #endif /* ADMINISTRADOR_VISTAADMIN_VISTALISTADOAREASDEVISION_H_ */

@@ -1,18 +1,18 @@
 /*
- * VistaAgregarAreaVision.h
+ * VistaEditarAreaVision.h
  *
- *  Created on: 23/6/2015
+ *  Created on: 28/6/2015
  *      Author: nicomoccagatta
  */
 
-#ifndef ADMINISTRADOR_VISTAADMIN_VISTAAGREGARAREAVISION_H_
-#define ADMINISTRADOR_VISTAADMIN_VISTAAGREGARAREAVISION_H_
+#ifndef ADMINISTRADOR_VISTAADMIN_VISTAEDITARAREAVISION_H_
+#define ADMINISTRADOR_VISTAADMIN_VISTAEDITARAREAVISION_H_
 
 #include <gtkmm-2.4/gtkmm.h>
 #include "ModeloAdmin/admin_ModeloObservable.h"
 #include "TiposCapturadorComboBoxModel.h"
 
-class VistaAgregarAreaVision : public Gtk::Window {
+class VistaEditarAreaVision : public Gtk::Window {
 	void on_button_OK();
 	void on_button_CANCEL();
 
@@ -33,10 +33,11 @@ class VistaAgregarAreaVision : public Gtk::Window {
 	Gtk::HButtonBox m_botoneraBotonOK;
 	Gtk::Button m_ButtonCrearAV;
 	Gtk::Button m_ButtonCANCEL;
+
+	unsigned long int idAV;
 public:
-	VistaAgregarAreaVision(Modelo_Observable *model);
-	virtual ~VistaAgregarAreaVision();
-	void update();
+	VistaEditarAreaVision(Modelo_Observable *model,unsigned long int id,std::string& ubicacion,std::string capturador);
+	virtual ~VistaEditarAreaVision();
 };
 
-#endif /* ADMINISTRADOR_VISTAADMIN_VISTAAGREGARAREAVISION_H_ */
+#endif /* ADMINISTRADOR_VISTAADMIN_VISTAEDITARAREAVISION_H_ */

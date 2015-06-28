@@ -24,13 +24,14 @@ class ControladorVistaDescargaImagenDeProductos;
  * Es la Vista que permite ver las imagenes de cada producto y
  * descargar la que uno quiera.
  */
-class VistaDescargaImagenDeProductos2: public Gtk::Window {
+class VistaDescargaImagenDeProductos2: public Gtk::Viewport {
 
 	ModeloObservable* modelo;
-	ControladorVistaDescargaImagenDeProductos controlador;
+	ControladorVistaDescargaImagenDeProductos* controlador;
 
 public:
-	VistaDescargaImagenDeProductos2(ModeloObservable* modelo);
+	VistaDescargaImagenDeProductos2(BaseObjectType* cobject,
+			const Glib::RefPtr<Gtk::Builder>& refGlade);
 	virtual ~VistaDescargaImagenDeProductos2();
 
 	void asignarModelo(ModeloObservable* modelo);

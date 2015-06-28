@@ -9,42 +9,28 @@
 
 VistaPrincipal::VistaPrincipal(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade)
 : Gtk::Window(cobject),
-  m_refGlade(refGlade),
-  m_EnviarButton(0), m_DescargarButton(0), m_CrearVideoButton(0),
-  m_bottonesBox(0){
+  m_refGlade(refGlade){
 
-	//CONECTAR BOTONES CON SUS FUNCIONES CONTROLADORAS
-	//BOTON SALIR:
-	m_refGlade->get_widget("quit_button", m_EnviarButton);
-	if(m_EnviarButton)
-		m_EnviarButton->signal_clicked().connect( sigc::mem_fun(*this, &VistaPrincipal::on_button_Enviar) );
-
-	//BOTON ENVIAR
-	m_refGlade->get_widget("buttonEnviar", m_DescargarButton);
-	if(m_DescargarButton)
-		m_DescargarButton->signal_clicked().connect( sigc::mem_fun(*this, &VistaPrincipal::on_button_Descargar) );
-
-	//BOTON VISTA PREVIA
-	m_refGlade->get_widget("buttonVistaPrevia", m_CrearVideoButton);
-	if(m_CrearVideoButton)
-		m_CrearVideoButton->signal_clicked().connect( sigc::mem_fun(*this, &VistaPrincipal::on_button_CrearVideo) );
-
+	std::cerr << "CREANDO VISTA PRINCIPAL\n";
+	m_refGlade->get_widget_derived("viewportEnviar", vistaEnviarPtr);//panelDinamicoEnviar);
+	m_refGlade->get_widget_derived("viewportDescargar", vistaDescargar);
+	m_refGlade->get_widget("viewportCrearVideo", panelDinamicoCrearVideo);
 
 	this->signal_delete_event().connect(sigc::mem_fun(*this, &VistaPrincipal::on_exit_clicked) );
 }
 
 VistaPrincipal::~VistaPrincipal() {
-	// TODO Auto-generated destructor stub
+	std::cerr << "DESTRUYENDO VISTA PRINCIPAL\n";
+	if(vistaEnviarPtr)
+		delete vistaEnviarPtr;
+	if(vistaDescargar)
+		delete vistaDescargar;
 }
 
-void VistaPrincipal::on_button_Enviar(){
+void VistaPrincipal::setModelo(ModeloObservable* modelo){
+	vistaEnviarPtr->asignarModelo(modelo);
+	vistaDescargar->asignarModelo(modelo);
 
-}
-void VistaPrincipal::on_button_Descargar(){
-
-}
-void VistaPrincipal::on_button_CrearVideo(){
-	Gtk::Main::quit();
 }
 
 bool VistaPrincipal::on_exit_clicked(GdkEventAny* event){
@@ -52,6 +38,35 @@ bool VistaPrincipal::on_exit_clicked(GdkEventAny* event){
 	return true;
 }
 
+bool VistaPrincipal::crearVistaEnviarAPartirDeGlade(){
 
+	Glib::RefPtr<Gtk::Builder> refBuilder = Gtk::Builder::create();
 
-
+	try
+	{
+		refBuilder->add_from_file("Enviar_Imagen_2.4.glade");
+		refBuilder->get_widget_derived("DialogoEnviar", vistaEnviarPtr);
+		if(vistaEnviarPtr){
+			std::cerr << "TODO BIEN CON LA VISTA ENVIAR\n";
+			//vistaEnviarPtr->show();
+			return true;
+		}else{
+			return false;
+		}
+	}
+	catch(const Glib::FileError& ex)
+	{
+		std::cerr << "FileError: " << ex.what() << std::endl;
+		return false;
+	}
+	catch(const Glib::MarkupError& ex)
+	{
+		std::cerr << "MarkupError: " << ex.what() << std::endl;
+		return false;
+	}
+	catch(const Gtk::BuilderError& ex)
+	{
+		std::cerr << "BuilderError: " << ex.what() << std::endl;
+		return false;
+	}
+}

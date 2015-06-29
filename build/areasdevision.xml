@@ -1,6 +1,6 @@
 <AreaDeVision id="0">
     <Ubicacion>patio delantero</Ubicacion>
-    <TipoDeCapturador>foto</TipoDeCapturador>
+    <TipoDeCapturador>Foto</TipoDeCapturador>
     <ProductosDetectados>
         <Producto id="16">
             <Nombre>Coca</Nombre>
@@ -42,12 +42,12 @@
 </AreaDeVision>
 <AreaDeVision id="3">
     <Ubicacion>garage</Ubicacion>
-    <TipoDeCapturador>video</TipoDeCapturador>
+    <TipoDeCapturador>Video</TipoDeCapturador>
     <ProductosDetectados />
 </AreaDeVision>
 <AreaDeVision id="4">
     <Ubicacion>entrada de atras</Ubicacion>
-    <TipoDeCapturador>video</TipoDeCapturador>
+    <TipoDeCapturador>Video</TipoDeCapturador>
     <ProductosDetectados>
         <Producto id="15">
             <Nombre>Alfajor Terrabusi</Nombre>

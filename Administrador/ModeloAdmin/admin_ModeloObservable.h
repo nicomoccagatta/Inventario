@@ -35,6 +35,7 @@ public:
 	std::string getImagenConID(unsigned long int id);
 	void altaAreaVision(const std::string &ubicacion,const std::string &capturador);
 	void modificarAreaVision(unsigned long int idAV,std::string& ubicacion,std::string& capturador);
+	void actualizarStockGeneral();
 	unsigned long int consultarStock(unsigned long int idProducto);
 
 	const std::list<AreaDeVision*>* getAreasDeVision() const;

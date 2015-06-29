@@ -24,6 +24,7 @@ VistaListadoProductos::VistaListadoProductos()
 	m_ProductosTreeView.append_column("Icono", m_ProductosList.m_Columns.m_col_imagenIcono);
 	m_ProductosTreeView.append_column("Nombre", m_ProductosList.m_Columns.m_col_nombre);
 	m_ProductosTreeView.append_column("Descripcion", m_ProductosList.m_Columns.m_col_descripcion);
+	m_ProductosTreeView.set_search_column(1);
 	m_ProductosList.add(m_ProductosTreeView);
 	m_ProductosList.set_size_request(Gtk::EXPAND,450);
 	m_verticalBox.pack_start(m_ProductosList);
@@ -144,10 +145,8 @@ void VistaListadoProductos::update_lista_productos(){
 	Gtk::TreeModel::Row row = *(m_refProductosListStore->append());
 	row[m_ProductosList.m_Columns.m_col_id] = (*it)->getId();
 	row[m_ProductosList.m_Columns.m_col_nombre] = (*it)->getNombre();
-	std::cout << "Actualizo producto: " << (*it)->getNombre() << std::endl;
 	row[m_ProductosList.m_Columns.m_col_descripcion] = (*it)->getDescripcion();
 	std::string rutaImagen = modelo->getImagenConID((*it)->getIdIcono());
-	std::cout << "Ruta de imagen: " << rutaImagen << std::endl;
 	Glib::RefPtr<Gdk::Pixbuf>  pic = Gdk::Pixbuf::create_from_file(rutaImagen,30,30,false);
 	row[m_ProductosList.m_Columns.m_col_imagenIcono] = pic;
 	row[m_ProductosList.m_Columns.m_col_idIcono] = (*it)->getIdIcono();

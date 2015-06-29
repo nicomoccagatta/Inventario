@@ -38,8 +38,8 @@ VistaDescargaImagenDeProductos2::VistaDescargaImagenDeProductos2(BaseObjectType*
 	//this->update_lista_productos();
 
 	//Add the Model's column to the View's columns:
-	m_ProductosTreeView.append_column("IdIcono", m_ProductosList.m_Columns.m_col_icon_id);
-	m_ProductosTreeView.append_column("Productos", m_ProductosList.m_Columns.m_col_text);
+	m_ProductosTreeView.append_column("Icono", m_ProductosList.m_Columns.m_col_imagenIcono);
+	m_ProductosTreeView.append_column("Producto", m_ProductosList.m_Columns.m_col_nombre);
 
 	m_hPaned.pack1(m_ProductosList,false,true);
 
@@ -94,7 +94,7 @@ void VistaDescargaImagenDeProductos2::on_producto_seleccionado(){
 	Gtk::TreeModel::iterator iter = refTreeSelection->get_selected();
 	if(iter){ //If anything is selected
 		Gtk::TreeModel::Row row = *iter;
-		std::cerr << "APRETE EL PRODUCTO " << row[m_ProductosList.m_Columns.m_col_text] <<"\n";
+		std::cerr << "APRETE EL PRODUCTO " << row[m_ProductosList.m_Columns.m_col_nombre] <<"\n";
 		controlador->on_producto_seleccionado(
 				row[m_ProductosList.m_Columns.m_col_data],
 				row[m_ProductosList.m_Columns.m_col_imagenes]);
@@ -119,8 +119,10 @@ void VistaDescargaImagenDeProductos2::update_lista_productos(){
 				<< " iconoID: " << (*it)->getIdIcono() << std::endl;
 
 		Gtk::TreeModel::Row row = *(m_refProductosListStore->append());
-		row[m_ProductosList.m_Columns.m_col_icon_id] = (*it)->getIdIcono();
-		row[m_ProductosList.m_Columns.m_col_text] = (*it)->getNombre();
+		std::string rutaImagen = modelo->getImagenConId((*it)->getIdIcono());
+		Glib::RefPtr<Gdk::Pixbuf>  pic = Gdk::Pixbuf::create_from_file(rutaImagen,30,30,false);
+		row[m_ProductosList.m_Columns.m_col_imagenIcono] = pic;
+		row[m_ProductosList.m_Columns.m_col_nombre] = (*it)->getNombre();
 		row[m_ProductosList.m_Columns.m_col_data] = *it;
 		row[m_ProductosList.m_Columns.m_col_imagenes] = new Gtk::ScrolledWindow();
 	}

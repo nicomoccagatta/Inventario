@@ -218,7 +218,7 @@ std::string ClienteDemo::getImagenConId(unsigned long int id){
 	}
 
 	std::stringstream ss;
-	ss << "clienteDemoImagenes/" << id << ".jpg";
+	ss << "TEMP_clienteDemoImagenes/" << id << ".jpg";
 	std::string ruta(ss.str());
 
 	img.guardarEnArchivo(ruta);

@@ -25,6 +25,7 @@ VistaPrincipal::~VistaPrincipal() {
 		delete vistaEnviarPtr;
 	if(vistaDescargar)
 		delete vistaDescargar;
+	std::cerr << "SE TERMINO DE DESTRUIR\n";
 }
 
 void VistaPrincipal::setModelo(ModeloObservable* modelo){

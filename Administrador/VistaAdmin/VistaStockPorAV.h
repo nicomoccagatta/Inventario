@@ -31,7 +31,7 @@ class VistaStockPorAV : public Observer {
 	ListaProductos m_ProductosList;
 
 	Gtk::VBox m_vBoxPrincipal;
-	Gtk::HButtonBox m_HBoxGrillaEImagen;
+	Gtk::HBox m_HBoxGrillaEImagen;
 	Gtk::DrawingArea m_ImagenItem;
 public:
 	VistaStockPorAV();

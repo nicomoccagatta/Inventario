@@ -9,7 +9,7 @@
 
 VistaStockGeneral::VistaStockGeneral() : modelo(0), panelDinam(0) {
 	m_ProductosList.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
-	m_ProductosList.set_size_request(450,550);
+	m_ProductosList.set_size_request(450,Gtk::EXPAND);
 
 	m_ProductosTreeView.append_column("Icono", m_ProductosList.m_Columns.m_col_imagenIcono);
 	m_ProductosTreeView.append_column("Nombre", m_ProductosList.m_Columns.m_col_nombre);
@@ -18,6 +18,7 @@ VistaStockGeneral::VistaStockGeneral() : modelo(0), panelDinam(0) {
 	m_ProductosList.add(m_ProductosTreeView);
 	m_HBoxGrillaEImagen.pack_start(m_ProductosList);
 
+	m_ImagenItem.set_size_request(720,Gtk::EXPAND);
 	m_HBoxGrillaEImagen.pack_end(m_ImagenItem);
 }
 

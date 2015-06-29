@@ -23,7 +23,7 @@ class VistaStockGeneral : public Observer {
 	Gtk::TreeView m_ProductosTreeView;
 	ListaProductos m_ProductosList;
 
-	Gtk::HButtonBox m_HBoxGrillaEImagen;
+	Gtk::HBox m_HBoxGrillaEImagen;
 	Gtk::DrawingArea m_ImagenItem;
 public:
 	VistaStockGeneral();

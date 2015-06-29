@@ -22,7 +22,7 @@ class VistaStockHistorico : public Observer {
 	void on_check_button_desde();
 	void on_check_button_hasta();
 
-	Gtk::HButtonBox m_HBoxGrillaEImagen;
+	Gtk::HBox m_HBoxGrillaEImagen;
 	Gtk::DrawingArea m_ImagenItem;
 
 	Gtk::VBox m_vBoxPrincipalGrilla;

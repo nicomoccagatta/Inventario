@@ -41,6 +41,7 @@ VistaStockHistorico::VistaStockHistorico() {
 
 	m_HBoxGrillaEImagen.pack_start(m_vBoxPrincipalGrilla);
 	m_HBoxGrillaEImagen.pack_end(m_ImagenItem);
+	m_ImagenItem.set_size_request(750,Gtk::EXPAND);
 }
 
 VistaStockHistorico::~VistaStockHistorico() {

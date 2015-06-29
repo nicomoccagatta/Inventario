@@ -25,6 +25,7 @@ VistaStockPorAV::VistaStockPorAV() : modelo(0), panelDinam(0) {
 	m_ProductosList.add(m_ProductosTreeView);
 	m_HBoxGrillaEImagen.pack_start(m_ProductosList);
 
+	m_ImagenItem.set_size_request(770,Gtk::EXPAND);
 	m_HBoxGrillaEImagen.pack_end(m_ImagenItem);
 	m_vBoxPrincipal.pack_end(m_HBoxGrillaEImagen);
 }

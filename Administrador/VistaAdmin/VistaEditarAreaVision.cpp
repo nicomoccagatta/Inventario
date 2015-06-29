@@ -34,9 +34,9 @@ VistaEditarAreaVision::VistaEditarAreaVision(Modelo_Observable *model,unsigned l
 	fila[columnas.getColumnaCapturador()] = "Video";
 	m_TiposCapturador.pack_start(columnas.getColumnaCapturador());
 	m_TiposCapturador.set_size_request(350,30);
-	if (capturador == "Foto")
+	if (capturador == "Foto" || capturador == "foto")
 		m_TiposCapturador.set_active(0);
-	else if(capturador == "Video")
+	else if(capturador == "Video" || capturador == "video")
 		m_TiposCapturador.set_active(1);
 	m_hBoxCapturador.pack_end(m_TiposCapturador);
 
@@ -48,6 +48,7 @@ VistaEditarAreaVision::VistaEditarAreaVision(Modelo_Observable *model,unsigned l
 	m_ButtonCANCEL.set_label("CANCEL");
 	m_ButtonCANCEL.signal_clicked().connect( sigc::mem_fun(*this, &VistaEditarAreaVision::on_button_CANCEL));
 	m_botoneraBotonOK.pack_start(m_ButtonCANCEL);
+	m_botoneraBotonOK.set_layout(Gtk::BUTTONBOX_CENTER);
 	m_VBoxPrincipal.pack_end(m_botoneraBotonOK);
 
 	this->add(m_VBoxPrincipal);

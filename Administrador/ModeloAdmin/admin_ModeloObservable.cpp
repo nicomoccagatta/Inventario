@@ -56,6 +56,10 @@ void Modelo_Observable::modificarAreaVision(unsigned long int idAV,std::string& 
 	this->admin.modificarAreaVision(idAV,ubicacion,capturador);
 }
 
+void Modelo_Observable::actualizarStockGeneral(){
+	this->admin.actualizarStockGeneral();
+}
+
 unsigned long int Modelo_Observable::consultarStock(unsigned long int idProducto){
 	return(this->admin.consultarStock(idProducto));
 }

@@ -13,6 +13,7 @@
 #include <gtkmm-2.4/gtkmm.h>
 #include "admin_Datos.h"
 #include "common_Stock.h"
+#include <map>
 
 #define RUTA_CARPETA_TEMP "temp_admin/"
 #define IMAGEN_DEFAULT "temp_admin/imagen_vacia.png"
@@ -27,6 +28,7 @@ class Administrador {
 	Datos data;
 	long unsigned int altaImagen(std::string &rutaImagen);
 	std::list<unsigned long int> idsDescargados;
+	std::map<unsigned long int,unsigned long int> stockGeneral;
 public:
 	Administrador();
 	virtual ~Administrador();
@@ -42,6 +44,7 @@ public:
 	std::string getImagenConID(unsigned long int id);
 	void altaAreaVision(const std::string &ubicacion,const std::string &capturador);
 	void modificarAreaVision(unsigned long int idAV,std::string& ubicacion,std::string& capturador);
+	void actualizarStockGeneral();
 	unsigned long int consultarStock(unsigned long int idProd);
 
 	const std::list<AreaDeVision*>* getAreasDeVision() const;

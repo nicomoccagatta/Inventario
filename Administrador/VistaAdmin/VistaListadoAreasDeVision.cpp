@@ -24,10 +24,12 @@ VistaListadoAreasDeVision::VistaListadoAreasDeVision()
 	verticalBox.pack_start(m_ButtonBox,Gtk::PACK_SHRINK,true,0);
 
 	m_AVList.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
-	m_AVList.set_size_request(200,400);
+	m_AVList.set_size_request(150,400);
 	m_AVList.add(m_AVTreeView);
 
 	m_AVTreeView.append_column("Ubicacion", m_AVList.m_Columns.m_col_Ubicacion);
+	m_AVTreeView.append_column("Capturador", m_AVList.m_Columns.m_col_Capturador);
+	m_AVTreeView.set_search_column(1);
 
 	hBoxListados.pack_start(m_AVList);
 	labelProductos.set_text("Productos Detectados");
@@ -55,6 +57,7 @@ VistaListadoAreasDeVision::VistaListadoAreasDeVision()
 }
 
 void VistaListadoAreasDeVision::update(){
+	std::cerr << "UPDATE VISTA LISTADO Areas de VISION.." << std::endl;
 	m_refAVListStore = Gtk::ListStore::create(m_AVList.m_Columns);
 	m_AVTreeView.set_model(m_refAVListStore);
 
@@ -98,7 +101,6 @@ void VistaListadoAreasDeVision::on_button_editar(){
 		unsigned long int id = area->getId();
 		std::string ubicacion = area->getUbicacion();
 		std::string capturador = area->getTipoDeCapturador();
-		std::cerr << "TIPO DE CAPTURADOR : --" << area->getTipoDeCapturador() <<"--"<<std::endl;
 		vistaEditarAreaVision = new VistaEditarAreaVision(modelo,id,ubicacion,capturador);
 	}
 }
@@ -141,6 +143,7 @@ void VistaListadoAreasDeVision::update_lista_av(){
 	for (it=avs->begin(); it!=avs->end();++it){
 	Gtk::TreeModel::Row row = *(m_refAVListStore->append());
 	row[m_AVList.m_Columns.m_col_Id] = (*it)->getId();
+	row[m_AVList.m_Columns.m_col_Capturador] = (*it)->getTipoDeCapturador();
 	row[m_AVList.m_Columns.m_col_Ubicacion] = (*it)->getUbicacion();
 	row[m_AVList.m_Columns.m_ProductosDetectados] = (*it)->getProductosDetectados();
 	row[m_AVList.m_Columns.m_col_data] = *it;

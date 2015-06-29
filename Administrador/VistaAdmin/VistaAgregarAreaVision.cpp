@@ -43,6 +43,7 @@ VistaAgregarAreaVision::VistaAgregarAreaVision(Modelo_Observable *model): modelo
 	m_ButtonCANCEL.set_label("CANCEL");
 	m_ButtonCANCEL.signal_clicked().connect( sigc::mem_fun(*this, &VistaAgregarAreaVision::on_button_CANCEL));
 	m_botoneraBotonOK.pack_start(m_ButtonCANCEL);
+	m_botoneraBotonOK.set_layout(Gtk::BUTTONBOX_CENTER);
 	m_VBoxPrincipal.pack_end(m_botoneraBotonOK);
 
 	this->add(m_VBoxPrincipal);

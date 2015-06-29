@@ -23,14 +23,4 @@ public:
     virtual ~AreasDeVisionComboBoxModel(){}
 };
 
-/*
-//Función callback para la señal changed del combo. Muestra el valor actual por salida estándar
-void on_combo_changed(Gtk::ComboBox* combo, AreasDeVisionComboBoxModel* columnas){
-    if (combo->get_active()){
-        Gtk::TreeModel::Row fila = *combo->get_active();
-        std::cout << "Elemento elegido: " << fila[columnas->getColumnaTexto()] << " con valor: " << fila[columnas->getColumnaValor()] << std::endl;
-    }
-}
-*/
-
 #endif /* CLIENTE_VISTA_MODELCOMBOBOXAREASDEVISION_H_ */

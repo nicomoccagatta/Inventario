@@ -53,7 +53,6 @@ bool Administrador::actualizarProductos(){
 			ss << parser.getParametro(argum);
 			ss >> id;
 			std::string nombre = parser.getParametro(argum+1);
-			std::cout << "Nombree:" << nombre << std::endl;
 			std::string descripcion = parser.getParametro(argum+2);
 
 			unsigned long int idIcono;
@@ -148,7 +147,6 @@ bool Administrador::actualizarAreasDeVision(){
 			}
 			std::string ubicacion = parser.getParametro(argum+1);
 			std::string tipo = parser.getParametro(argum+2);
-			//icono
 			this->data.agregarAreaDeVision(ubicacion,tipo,id,productos);
 
 			argum+=3;
@@ -330,13 +328,29 @@ void Administrador::modificarAreaVision(unsigned long int idAV,std::string& ubic
 	}
 }
 
-unsigned long int Administrador::consultarStock(unsigned long int idProd){
+void Administrador::actualizarStockGeneral(){
+	stockGeneral.clear();
 	if (this->admin.estaConectado()){
-		//std::string mensajeAEnviar = "G|" + ubicacion + '|' + capturador + '|';
-		//protocolo.enviarMensaje(this->admin,mensajeAEnviar);
+		std::string mensajeAEnviar = "J|";
+		protocolo.enviarMensaje(this->admin,mensajeAEnviar);
 		std::string respuesta = protocolo.recibirMensaje(this->admin);
+		CommandParser parserProd;
+		parserProd.tokenize(respuesta);
+		for(unsigned int argumImagen = 1; argumImagen < parserProd.getCantParamtros() ; argumImagen+=2)
+		{
+			unsigned long int idProducto,cantidad;
+			std::stringstream ssIDProducto, ssCantidad;
+			ssIDProducto << parserProd.getParametro(argumImagen);
+			ssIDProducto >> idProducto;
+			ssCantidad << parserProd.getParametro(argumImagen+1);
+			ssCantidad >> cantidad;
+			stockGeneral[idProducto] = cantidad;
+		}
 	}
-	return 0;
+}
+
+unsigned long int Administrador::consultarStock(unsigned long int idProd){
+	return stockGeneral[idProd];
 }
 
 const std::list<AreaDeVision*>* Administrador::getAreasDeVision() const{

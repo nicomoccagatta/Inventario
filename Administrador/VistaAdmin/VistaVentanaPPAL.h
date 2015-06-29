@@ -15,6 +15,8 @@
 #include "VistaListadoProductos.h"
 #include "VistaListadoAreasDeVision.h"
 #include "VistaStockGeneral.h"
+#include "VistaStockPorAV.h"
+#include "VistaStockHistorico.h"
 
 class VistaVentanaPPAL: public Gtk::Window {
 public:
@@ -27,10 +29,15 @@ private:
 	Glib::RefPtr<Gtk::Builder> m_refGlade;
 	Gtk::Viewport *panelDinamicoP;
 	Gtk::Viewport *panelDinamicoAV;
+	Gtk::Viewport *panelDinamicoRSG;
+	Gtk::Viewport *panelDinamicoRAV;
+	Gtk::Viewport *panelDinamicoRHP;
 
 	VistaListadoProductos vistaLP;
 	VistaListadoAreasDeVision vistaLAV;
-	VistaStockGeneral vistaSG;
+	VistaStockGeneral vistaRSG;
+	VistaStockPorAV vistaRAV;
+	VistaStockHistorico vistaRHP;
 };
 
 #endif /* ADMINISTRADOR_VISTAADMIN_VISTAVENTANAPPAL_H_ */

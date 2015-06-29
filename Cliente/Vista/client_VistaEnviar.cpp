@@ -8,6 +8,8 @@
 #include "client_VistaEnviar.h"
 
 #include <glibmm/date.h>
+#include <sys/stat.h> //para sacar el las modified
+#include <time.h>
 #include <list>
 
 #define FEATURE_MATCHING 1
@@ -18,17 +20,12 @@ using common::AreaDeVision;
 VistaEnviar::VistaEnviar(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade)
 : Gtk::Viewport(cobject),
   m_refGlade(refGlade),
-  m_quitButton(0), m_ENVIARButton(0), m_vistaPrevia(0), m_fileChooser(0), m_calendar(0),
-  m_entryHora(0), m_entryMinutos(0), m_entrySegundos(0), m_templateMatching(0),
-  m_featureMatching(0), m_AreasDeVision(0)
+  m_ENVIARButton(0), m_vistaPrevia(0), m_fechaHoy(0), m_fechaUltimaMod(0),
+  m_fileChooser(0), m_calendar(0), m_entryHora(0), m_entryMinutos(0),
+  m_entrySegundos(0), m_templateMatching(0), m_featureMatching(0), m_AreasDeVision(0)
 
 {
 	//CONECTAR BOTONES CON SUS FUNCIONES CONTROLADORAS
-	//BOTON SALIR:
-	//m_refGlade->get_widget("quit_button", m_quitButton);
-	//if(m_quitButton)
-		//m_quitButton->signal_clicked().connect( sigc::mem_fun(*this, &VistaEnviar::on_button_quit) );
-
 	//BOTON ENVIAR
 	m_refGlade->get_widget("buttonEnviar", m_ENVIARButton);
 	if(m_ENVIARButton)
@@ -38,6 +35,16 @@ VistaEnviar::VistaEnviar(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builde
 	m_refGlade->get_widget("buttonVistaPrevia", m_vistaPrevia);
 	if(m_vistaPrevia)
 		m_vistaPrevia->signal_clicked().connect( sigc::mem_fun(*this, &VistaEnviar::on_button_VistaPrevia) );
+
+	//BOTON AUTOCOMPLETAR FECHA DE HOY
+	m_refGlade->get_widget("buttonFechaHoy", m_fechaHoy);
+	if(m_fechaHoy)
+		m_fechaHoy->signal_clicked().connect( sigc::mem_fun(*this, &VistaEnviar::on_button_AutocompletarHoy) );
+
+	//BOTON AUTOCOMPLETAR FECHA DE HOY
+	m_refGlade->get_widget("buttonFechaUltimaMod", m_fechaUltimaMod);
+	if(m_fechaUltimaMod)
+		m_fechaUltimaMod->signal_clicked().connect( sigc::mem_fun(*this, &VistaEnviar::on_button_AutocompletarFechaUltimaModif) );
 
 
 	//COMBO-BOX de AreasDeVision
@@ -74,13 +81,52 @@ void VistaEnviar::update(){
 	agregarAreasAlCombo();
 
 	show_all_children();
-
-
 }
 
 void VistaEnviar::on_button_quit(){
 	this->hide(); //hide() will cause main::run() to end.
 }
+
+void VistaEnviar::on_button_AutocompletarHoy(){
+	std::cerr << "AUTOCOMPLETANDO HOY\n";
+
+	m_refGlade->get_widget("entryHora", m_entryHora);
+	m_refGlade->get_widget("entryMinutos", m_entryMinutos);
+	m_refGlade->get_widget("entrySegundos", m_entrySegundos);
+	m_refGlade->get_widget("calendar1", m_calendar);
+
+	time_t hora;
+	std::tm* timer;
+	time(&hora);
+	timer = localtime (&hora);
+
+	this->setearFechaYHora(timer);
+}
+
+void VistaEnviar::on_button_AutocompletarFechaUltimaModif(){
+	m_refGlade->get_widget("entryHora", m_entryHora);
+	m_refGlade->get_widget("entryMinutos", m_entryMinutos);
+	m_refGlade->get_widget("entrySegundos", m_entrySegundos);
+	m_refGlade->get_widget("calendar1", m_calendar);
+	m_refGlade->get_widget("fileChooserAEnviar", m_fileChooser);
+
+	Glib::ustring rutaArchivo = m_fileChooser->get_filename();
+	if (rutaArchivo.empty()){
+		std::cerr << "POPUP: NO SELECCIONASTE ARCHIVOOO\n";
+		return;
+	}
+
+	std::cerr << "Ruta archivo: " << rutaArchivo << "\n";
+
+	std::tm* clock;
+	struct stat attrib;
+
+	stat(rutaArchivo.c_str(), &attrib);
+	clock = gmtime(&(attrib.st_mtime));	// Get the last modified time and put it into the time structure
+
+	this->setearFechaYHora(clock);
+}
+
 
 void VistaEnviar::on_button_ENVIAR(){
 	//controlador->buttonENVIARClicked(...);
@@ -156,4 +202,32 @@ void VistaEnviar::agregarAreasAlCombo(){
 		fila[columnas.getColumnaTexto()] = (*it)->getUbicacion();
 	}
 
+}
+
+void VistaEnviar::setearFechaYHora(std::tm* timer){
+	std::stringstream ss;
+
+	ss << timer->tm_hour;
+	Glib::ustring hr;
+	ss >> hr;
+	m_entryHora->set_text(hr);
+
+	ss.clear();
+	ss << timer->tm_min;
+	Glib::ustring mn;
+	ss >> mn;
+	m_entryMinutos->set_text(mn);
+
+	ss.clear();
+	ss << timer->tm_sec;
+	Glib::ustring sec;
+	ss >> sec;
+	m_entrySegundos->set_text(sec);
+
+	std::cerr << "Horas: " << timer->tm_hour << " ";
+	std::cerr << "Minutos: " << timer->tm_min << " ";
+	std::cerr << "Segundos: " << timer->tm_sec << "\n";
+
+	m_calendar->select_day(timer->tm_mday);
+	m_calendar->select_month(timer->tm_mon,timer->tm_year);
 }

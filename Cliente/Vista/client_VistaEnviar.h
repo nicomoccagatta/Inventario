@@ -41,12 +41,14 @@ protected:
 	void on_button_quit();
 	void on_button_ENVIAR();
 	void on_button_VistaPrevia();
-	void on_file_set();
+	void on_button_AutocompletarHoy();
+	void on_button_AutocompletarFechaUltimaModif();
 
 	Glib::RefPtr<Gtk::Builder> m_refGlade;
-	Gtk::Button* m_quitButton;
 	Gtk::Button* m_ENVIARButton;
 	Gtk::Button* m_vistaPrevia;
+	Gtk::Button* m_fechaHoy;
+	Gtk::Button* m_fechaUltimaMod;
 	Gtk::FileChooserButton* m_fileChooser;
 	Gtk::Calendar* m_calendar;
 	Gtk::Entry* m_entryHora;
@@ -61,6 +63,7 @@ protected:
 private:
 	void update();
 	void agregarAreasAlCombo();
+	void setearFechaYHora(std::tm* timer);
 
 };
 

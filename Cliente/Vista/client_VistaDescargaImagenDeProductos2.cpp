@@ -197,8 +197,7 @@ void VistaDescargaImagenDeProductos2::update_lista_imagenes(
 
 	//Si nunca se selecciono
 	}else{
-		//Creo un nuevo ScrolledWindow con sus fotos.
-		//imagenes_container = new Gtk::ScrolledWindow();
+		//Lleno su ScrolledWindow con sus fotos.
 		imagenes_container->set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
 		imagenes_container->set_size_request(200,400);
 		m_VBox.pack_start(*imagenes_container, Gtk::PACK_EXPAND_WIDGET);

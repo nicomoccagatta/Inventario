@@ -95,7 +95,7 @@ add_executable(Client
 			Cliente/Control/client_ControladorVistaEnviar.cpp
 			Cliente/Control/client_ControladorVistaDescargaImagenDeProductos.cpp
 			Cliente/Vista/client_VistaDescargaImagenDeProductos2.cpp
-			Cliente/Vista/client_ProductosList.cpp
+			#Cliente/Vista/client_ProductosList.cpp
 			Cliente/Vista/client_VistaPrincipal.cpp
 			#Common/common_Cliente.cpp
 			Common/common_SocketCliente.cpp

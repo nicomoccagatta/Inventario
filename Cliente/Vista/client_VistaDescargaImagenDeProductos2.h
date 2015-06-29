@@ -12,7 +12,6 @@
 #include <glibmm-2.4/glibmm.h>
 #include <iostream>
 
-#include "client_ProductosList.h"
 //#include "../Control/client_ControladorVistaDescargaImagenDeProductos.h"
 
 #include "../Control/client_ControladorVistaDescargaImagenDeProductos.h"

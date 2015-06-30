@@ -14,12 +14,14 @@
 #include "ListaProductos.h"
 #include <list>
 #include "common_Producto.h"
+#include "Graficos/GraficoDeTorta.h"
+#include "Graficos/DatoGrafico.h"
 
 class VistaStockPorAV : public Observer {
 	Modelo_Observable *modelo;
 	Gtk::Viewport *panelDinam;
 	void update_lista_av();
-	void update_lista_productos();
+	void on_av_seleccionado();
 
 	Gtk::VButtonBox m_botoneraComboBox;
 	Gtk::ComboBox m_AreasDeVision;
@@ -32,7 +34,8 @@ class VistaStockPorAV : public Observer {
 
 	Gtk::VBox m_vBoxPrincipal;
 	Gtk::HBox m_HBoxGrillaEImagen;
-	Gtk::DrawingArea m_ImagenItem;
+	GraficoDeTorta m_ImagenItem;
+	std::list<DatoGrafico> m_datosGrafico;
 public:
 	VistaStockPorAV();
 	void update();

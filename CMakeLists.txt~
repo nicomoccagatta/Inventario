@@ -61,6 +61,15 @@ add_executable(Admin
 			Administrador/VistaAdmin/VistaStockGeneral.cpp
 			Administrador/VistaAdmin/VistaEditarProducto.cpp
 			Administrador/VistaAdmin/VistaEditarAreaVision.cpp
+			Administrador/VistaAdmin/VistaStockPorAV.cpp
+			Administrador/VistaAdmin/VistaStockHistorico.cpp
+			Administrador/VistaAdmin/Graficos/Area.cpp
+			Administrador/VistaAdmin/Graficos/Barra.cpp
+			Administrador/VistaAdmin/Graficos/DatoGrafico.cpp
+			Administrador/VistaAdmin/Graficos/Grafico.cpp
+			Administrador/VistaAdmin/Graficos/GraficoDeBarras.cpp
+			Administrador/VistaAdmin/Graficos/Referencia.cpp
+			Administrador/VistaAdmin/Graficos/GraficoDeTorta.cpp
 			Common/common_SocketCliente.cpp
 			Common/common_AreaDeVision.cpp
 			Common/common_Mutex.cpp
@@ -95,7 +104,7 @@ add_executable(Client
 			Cliente/Control/client_ControladorVistaEnviar.cpp
 			Cliente/Control/client_ControladorVistaDescargaImagenDeProductos.cpp
 			Cliente/Vista/client_VistaDescargaImagenDeProductos2.cpp
-			Cliente/Vista/client_ProductosList.cpp
+			#Cliente/Vista/client_ProductosList.cpp
 			Cliente/Vista/client_VistaPrincipal.cpp
 			#Common/common_Cliente.cpp
 			Common/common_SocketCliente.cpp
@@ -109,6 +118,7 @@ add_executable(Client
 			Common/common_CommandParser.cpp
 			Common/common_Imagen.cpp
 			Common/common_Video.cpp
+			Common/common_ListaProductos.h
 		)
 
 FIND_PACKAGE(OpenCV REQUIRED)

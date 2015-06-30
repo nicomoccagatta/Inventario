@@ -336,13 +336,13 @@ void Administrador::actualizarStockGeneral(){
 		std::string respuesta = protocolo.recibirMensaje(this->admin);
 		CommandParser parserProd;
 		parserProd.tokenize(respuesta);
-		for(unsigned int argumImagen = 1; argumImagen < parserProd.getCantParamtros() ; argumImagen+=2)
+		for(unsigned int argum = 1; argum < parserProd.getCantParamtros() ; argum+=2)
 		{
 			unsigned long int idProducto,cantidad;
 			std::stringstream ssIDProducto, ssCantidad;
-			ssIDProducto << parserProd.getParametro(argumImagen);
+			ssIDProducto << parserProd.getParametro(argum);
 			ssIDProducto >> idProducto;
-			ssCantidad << parserProd.getParametro(argumImagen+1);
+			ssCantidad << parserProd.getParametro(argum+1);
 			ssCantidad >> cantidad;
 			stockGeneral[idProducto] = cantidad;
 		}
@@ -351,6 +351,32 @@ void Administrador::actualizarStockGeneral(){
 
 unsigned long int Administrador::consultarStock(unsigned long int idProd){
 	return stockGeneral[idProd];
+}
+
+std::list<common::Stock> Administrador::getStockHisto(unsigned long int idProducto){
+	std::list<common::Stock> stockList;
+	if (this->admin.estaConectado()){
+		std::cerr << "PREGUNTANDO POR STOCK... con id::::" << idProducto << std::endl;
+		std::stringstream ssIdProducto;
+		ssIdProducto << idProducto;
+		std::string mensajeAEnviar = "L|" + ssIdProducto.str() + '|';
+		std::cerr << "PREGUNTA..." << mensajeAEnviar << std::endl;
+		protocolo.enviarMensaje(this->admin,mensajeAEnviar);
+		std::string respuesta = protocolo.recibirMensaje(this->admin);
+		std::cerr << "RESPUESTA..." << respuesta << std::endl;
+		CommandParser parserProd;
+		parserProd.tokenize(respuesta);
+		for(unsigned int argum = 1; argum < parserProd.getCantParamtros() ; argum+=2){
+			std::string fecha = parserProd.getParametro(argum);
+			unsigned long int cantidad;
+			std::stringstream ssCantidad;
+			ssCantidad << parserProd.getParametro(argum+1);
+			ssCantidad >> cantidad;
+			common::Stock stock(cantidad,fecha);
+			stockList.push_back(stock);
+		}
+	}
+	return stockList;
 }
 
 const std::list<AreaDeVision*>* Administrador::getAreasDeVision() const{

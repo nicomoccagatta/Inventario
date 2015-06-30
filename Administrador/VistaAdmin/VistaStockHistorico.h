@@ -14,6 +14,8 @@
 #include "ListaProductos.h"
 #include <list>
 #include "common_Producto.h"
+#include "Graficos/GraficoDeBarras.h"
+#include "Graficos/DatoGrafico.h"
 
 class VistaStockHistorico : public Observer {
 	Modelo_Observable *modelo;
@@ -21,14 +23,19 @@ class VistaStockHistorico : public Observer {
 	void update_lista_productos();
 	void on_check_button_desde();
 	void on_check_button_hasta();
+	void on_producto_seleccionado();
+	void eliminarStockInferior(Glib::Date& fechaDesde, std::list<common::Stock>& stockProducto);
+	void eliminarStockSuperior(Glib::Date& fechaDesde, std::list<common::Stock>& stockProducto);
 
 	Gtk::HBox m_HBoxGrillaEImagen;
-	Gtk::DrawingArea m_ImagenItem;
+	GraficoDeBarras m_ImagenItem;
+	std::list<DatoGrafico> m_datosGrafico;
 
 	Gtk::VBox m_vBoxPrincipalGrilla;
 
 	Glib::RefPtr<Gtk::ListStore> m_refProductosListStore;
 	Gtk::TreeView m_ProductosTreeView;
+	Glib::RefPtr<Gtk::TreeSelection> refTreeSelection;
 	ListaProductos m_ProductosList;
 
 	Gtk::HBox m_horizontalBoxButoneraDesde;

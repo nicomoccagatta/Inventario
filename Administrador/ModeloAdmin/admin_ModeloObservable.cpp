@@ -64,6 +64,10 @@ unsigned long int Modelo_Observable::consultarStock(unsigned long int idProducto
 	return(this->admin.consultarStock(idProducto));
 }
 
+std::list<common::Stock> Modelo_Observable::getStockHisto(unsigned long int idProducto){
+	return (this->admin.getStockHisto(idProducto));
+}
+
 const std::list<AreaDeVision*>* Modelo_Observable::getAreasDeVision() const{
 	return this->admin.getAreasDeVision();
 }

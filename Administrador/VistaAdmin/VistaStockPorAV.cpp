@@ -12,7 +12,7 @@ VistaStockPorAV::VistaStockPorAV() : modelo(0), panelDinam(0) {
 	m_ProductosList.set_size_request(430,530);
 
 	m_AreasDeVision.pack_start(columnas.getColumnaTexto());
-	m_AreasDeVision.signal_changed().connect(sigc::mem_fun(*this, &VistaStockPorAV::update_lista_productos));
+	m_AreasDeVision.signal_changed().connect(sigc::mem_fun(*this, &VistaStockPorAV::on_av_seleccionado));
 	m_AreasDeVision.set_size_request(400,50);
 	m_botoneraComboBox.pack_start(m_AreasDeVision);
 	m_botoneraComboBox.set_layout(Gtk::BUTTONBOX_CENTER);
@@ -23,6 +23,9 @@ VistaStockPorAV::VistaStockPorAV() : modelo(0), panelDinam(0) {
 	m_ProductosTreeView.append_column("Cantidad", m_ProductosList.m_Columns.m_col_cantidad);
 	m_ProductosTreeView.set_search_column(1);
 	m_ProductosList.add(m_ProductosTreeView);
+	m_refProductosListStore = Gtk::ListStore::create(m_ProductosList.m_Columns);
+	m_ProductosTreeView.set_model(m_refProductosListStore);
+
 	m_HBoxGrillaEImagen.pack_start(m_ProductosList);
 
 	m_ImagenItem.set_size_request(770,Gtk::EXPAND);
@@ -37,7 +40,7 @@ VistaStockPorAV::~VistaStockPorAV() {
 void VistaStockPorAV::update(){
 	std::cerr << "UPDATE VISTA STOCK POR AREA DE VISION.." << std::endl;
 	this->update_lista_av();
-	this->update_lista_productos();
+	this->on_av_seleccionado();
 }
 
 void VistaStockPorAV::run(Gtk::Viewport *panelDinamico,Modelo_Observable *modelo){
@@ -45,12 +48,13 @@ void VistaStockPorAV::run(Gtk::Viewport *panelDinamico,Modelo_Observable *modelo
 	this->panelDinam = panelDinamico;
 
 	this->update_lista_av();
-	this->update_lista_productos();
 
 	panelDinam->add(m_vBoxPrincipal);
 }
 
-void VistaStockPorAV::update_lista_productos(){
+void VistaStockPorAV::on_av_seleccionado(){
+	m_datosGrafico.clear();
+
 	m_refProductosListStore = Gtk::ListStore::create(m_ProductosList.m_Columns);
 	m_ProductosTreeView.set_model(m_refProductosListStore);
 
@@ -67,8 +71,12 @@ void VistaStockPorAV::update_lista_productos(){
 			row[m_ProductosList.m_Columns.m_col_nombre] = (*it)->getNombre();
 			row[m_ProductosList.m_Columns.m_col_cantidad] = (*it)->getStock();
 			row[m_ProductosList.m_Columns.m_col_data] = *it;
+			DatoGrafico dato((*it)->getNombre(),(double)(*it)->getStock());
+			m_datosGrafico.push_back(dato);
 		}
+		m_ImagenItem.actualizarDatos(m_datosGrafico);
 	}
+	m_ImagenItem.redibujar();
 }
 
 void VistaStockPorAV::update_lista_av(){

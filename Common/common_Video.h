@@ -22,6 +22,7 @@ public:
 	void mostrarVideo();
 private:
 	cv::VideoCapture capturasVideo;
+	double fps;
 };
 
 } /* namespace common */

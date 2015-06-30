@@ -25,13 +25,16 @@ int crearAPartirDeGlade(Glib::RefPtr<Gtk::Builder>* refBuilder,
 int main(int argc, char* argv[]) {
 
 	//common::Video vid("/home/ale/git/Inventario/Imagenes/Areas/Farmacia/farmacia_%02d.jpg");
-	/*common::Video vid("/home/ale/git/Inventario/Imagenes/20150301_222329.mp4");
+	/*common::Video vid("test.mp4");
 
-	cv::VideoCapture capturasVideo("testLeo.mp4");
+	cv::VideoCapture capturasVideo;
+
+	if (!capturasVideo.open("testLeo.mp4"))
+		std:: cout << "FAAAAAALSE\n";
 
 	if (!capturasVideo.isOpened()){
 		std::cerr << "EL OPENCV ES UNA MIERDA!\n";
-		return 0;
+		//return 0;
 	}
 
 	if (!vid.esValido()){
@@ -44,10 +47,12 @@ int main(int argc, char* argv[]) {
 	std::list<Imagen> frames;
 	std::list<std::string> fechas;
 
-	vid.capturasPeriodicasVideo(frames,fechas,"Sun Jun 14 01:02:03 2015",1);
+	vid.capturasPeriodicasVideo(frames,fechas,"Sun Jun 14 01:02:03 2015",20);
 
 	std::list<Imagen>::iterator itIm;
 	std::list<std::string>::iterator itStr;
+
+	std::cout << "Cantidad de frames extraidos: " << frames.size() << "\n";
 
 	for (itIm=frames.begin(), itStr=fechas.begin();
 			itIm != frames.end(); ++itIm, ++itStr){
@@ -57,7 +62,6 @@ int main(int argc, char* argv[]) {
 	}
 	return 0;
 */
-
 	ModeloObservable modelo;
 
 	modelo.actualizarProductos();

@@ -179,9 +179,9 @@ void VistaStockHistorico::eliminarStockInferior(Glib::Date& fechaDesde, std::lis
 		std::cerr << "fecha a parsear: ---" << sfechaStock << "---" << std::endl;
 		struct tm timeDate;
 		strptime(sfechaStock.c_str(),"%a %b %d %H:%M:%S %Y",&timeDate);
-		std::cerr << "Antes de mktime: Ano: " << timeDate.tm_year <<" mes: " <<timeDate.tm_mon << " dia: " <<timeDate.tm_yday << std::endl;
+		std::cerr << "Antes de mktime: Ano: " << timeDate.tm_year+1900 <<" mes: " <<timeDate.tm_mon+1 << " dia: " <<timeDate.tm_mday << std::endl;
 		mktime(&timeDate);
-		std::cerr << "Despues de mktime: Ano: " << timeDate.tm_year <<" mes: " <<timeDate.tm_mon << " dia: " <<timeDate.tm_yday << std::endl;
+		std::cerr << "Despues de mktime: Ano: " << timeDate.tm_year+1900 <<" mes: " <<timeDate.tm_mon+1 << " dia: " <<timeDate.tm_mday << std::endl;
 		std::string fechaImagen(asctime(&timeDate));
 		fechaImagen.erase(fechaImagen.find('\n'));
 	    std::cout <<"fecha Parseada:: "<< fechaImagen << std::endl;

@@ -41,7 +41,7 @@ void Video::capturasPeriodicasVideo(std::list<Imagen>& listaImagenes,std::list<s
 		/*
 		 * Si el video es menor a el periodoFinalEnSegundos paso la primer imagen.
 		 */
-		if (cantidadImagenesARetornar==0){
+		if (cantidadImagenesARetornar==0)
 			cantidadImagenesARetornar=1;
 
 		float segundosParcialesProcesados=periodoEntreFrames;

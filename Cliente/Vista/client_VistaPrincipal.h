@@ -14,6 +14,7 @@
 #include "../Modelo/client_ModeloObservable.h"
 #include "client_VistaEnviar.h"
 #include "client_VistaDescargaImagenDeProductos2.h"
+#include "VistaCrearVideo.h"
 
 /*
  * A CAMBIAR POR PANELES CON PESTANIAS.
@@ -40,6 +41,7 @@ private:
 
 	VistaEnviar* vistaEnviarPtr;
 	VistaDescargaImagenDeProductos2* vistaDescargar;
+	VistaCrearVideo* vistaCrearVideo;
 
 
 

@@ -106,6 +106,7 @@ add_executable(Client
 			Cliente/Vista/client_VistaDescargaImagenDeProductos2.cpp
 			#Cliente/Vista/client_ProductosList.cpp
 			Cliente/Vista/client_VistaPrincipal.cpp
+			Cliente/Vista/AspectPreservingScalingImage.h
 			#Common/common_Cliente.cpp
 			Common/common_SocketCliente.cpp
 			Common/common_AreaDeVision.cpp

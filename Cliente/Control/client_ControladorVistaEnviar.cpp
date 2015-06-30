@@ -68,9 +68,9 @@ void ControladorVistaEnviar::buttonENVIARClicked(Glib::ustring rutaArchivo,Glib:
 		}
 	}	else if (extencion == "mpg" || extencion == "mpeg" || extencion == "mp4"){
 		std::cerr << "Se ingreso un video!!\n";
-		VistaSeleccioneFPS view;
-		int fps = view.correr();
-		std::cerr << "FPS:\t" << fps << "\n";
+		//VistaSeleccioneFPS view;
+		//int fps = view.correr();
+		//std::cerr << "FPS:\t" << fps << "\n";
 
 		switch(matching){
 		case TEMPLATE_MATCHING:

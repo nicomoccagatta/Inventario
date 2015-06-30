@@ -95,6 +95,9 @@ void VistaDescargaImagenDeProductos2::on_producto_seleccionado(){
 		controlador->on_producto_seleccionado(
 				row[m_ProductosList.m_Columns.m_col_data],
 				row[m_ProductosList.m_Columns.m_col_imagenes]);
+
+		m_refProductosListStore->iter_swap(iter, ++iter);
+		show_all_children();
 	}
 }
 
@@ -122,6 +125,7 @@ void VistaDescargaImagenDeProductos2::update_lista_productos(){
 		row[m_ProductosList.m_Columns.m_col_nombre] = (*it)->getNombre();
 		row[m_ProductosList.m_Columns.m_col_data] = *it;
 		row[m_ProductosList.m_Columns.m_col_imagenes] = new Gtk::ScrolledWindow();
+
 	}
 }
 

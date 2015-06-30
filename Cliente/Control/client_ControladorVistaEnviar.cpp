@@ -11,6 +11,7 @@
 
 #include "client_ControladorVistaEnviar.h"
 #include "common_Imagen.h"
+#include "Vista/VistaSeleccioneFPS.h"
 
 #define FEATURE_MATCHING 1
 #define TEMPLATE_MATCHING 2
@@ -67,9 +68,14 @@ void ControladorVistaEnviar::buttonENVIARClicked(Glib::ustring rutaArchivo,Glib:
 		}
 	}	else if (extencion == "mpg" || extencion == "mpeg" || extencion == "mp4"){
 		std::cerr << "Se ingreso un video!!\n";
+		VistaSeleccioneFPS view;
+		int fps = view.correr();
+		std::cerr << "FPS:\t" << fps << "\n";
+
 		switch(matching){
 		case TEMPLATE_MATCHING:
 			modelo->enviarVideoTemplateMatching(area->getId(), formatoFecha, rutaImagen);
+			std::cerr << "ENVIANDOOO\n";
 			break;
 		case FEATURE_MATCHING:
 			modelo->enviarVideoFeatureMatching(area->getId(), formatoFecha, rutaImagen);
@@ -78,7 +84,6 @@ void ControladorVistaEnviar::buttonENVIARClicked(Glib::ustring rutaArchivo,Glib:
 
 	}else{
 		std::cerr << "NO SOPORTAMOS ESA EXTENCION\n";
-		//vista->popup con esto
 	}
 
 }

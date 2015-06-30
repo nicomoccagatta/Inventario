@@ -15,9 +15,9 @@ namespace common {
 
 class Video {
 public:
+	Video(std::string templateImagenes, double fps);
 	Video(const std::string& rutaArchivo);
 	bool esValido()const;
-	bool setearSecuenciaDeImagenes(std::string templateImagenes, double fps);
 	void capturasPeriodicasVideo(std::list<Imagen>& listaImagenes,std::list<std::string>& listaDeFechas,const std::string& fechaInicial , float periodoEnSegundos=60);
 	void mostrarVideo();
 private:

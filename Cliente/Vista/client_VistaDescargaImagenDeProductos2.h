@@ -53,7 +53,6 @@ private:
 
 protected:
 	//signal handlers:
-	void on_button_atras();
 	void on_button_descargar();
 
 	Glib::RefPtr<Gtk::ListStore> m_refProductosListStore; //The Tree Model.
@@ -67,10 +66,8 @@ protected:
 
 	Gtk::VBox m_VBox; //Arriba imanes, abajo botones
 	Gtk::ScrolledWindow* m_ActiveImagenes; //ScrolledWindow de imagenes activa
+
 	Gtk::HButtonBox m_ButtonBox; //Para los botones atras y descargar
-
-
-	Gtk::Button m_AtrasButton;
 	Gtk::Button m_DescargarButton;
 
 	//const GdkColor color;

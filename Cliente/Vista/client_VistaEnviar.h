@@ -64,6 +64,7 @@ private:
 	void update();
 	void agregarAreasAlCombo();
 	void setearFechaYHora(std::tm* timer);
+	void ventanaError(const char* mensaje, const char* titulo);
 
 };
 

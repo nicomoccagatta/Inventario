@@ -24,7 +24,7 @@ VistaDescargaImagenDeProductos2::VistaDescargaImagenDeProductos2(BaseObjectType*
 
 	/* Create a new scrolled window, with scrollbars only if needed */
 	m_ProductosList.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
-	m_ProductosList.set_size_request(200,400);
+	m_ProductosList.set_size_request(300,400);
 
 	/*Agrego la TreeView a la Scrolled Window de productos*/
 	m_ProductosList.add(m_ProductosTreeView);
@@ -45,21 +45,16 @@ VistaDescargaImagenDeProductos2::VistaDescargaImagenDeProductos2(BaseObjectType*
 
 	/*Seteo los botones para Descargar y Atras*/
 	m_DescargarButton.set_label("Descargar");
-	m_AtrasButton.set_label("Atras");
 
 	m_VBox.pack_end(m_ButtonBox, Gtk::PACK_SHRINK);
 
 	m_ButtonBox.pack_start(m_DescargarButton, Gtk::PACK_SHRINK);
-	m_ButtonBox.pack_start(m_AtrasButton, Gtk::PACK_SHRINK);
 	m_ButtonBox.set_spacing(6);
 	m_ButtonBox.set_layout(Gtk::BUTTONBOX_SPREAD);
 
 	m_hPaned.pack2(m_VBox);
 
 	//SETEO LOS HANDLERS DE LAS SENALES
-	m_AtrasButton.signal_clicked().connect(
-			sigc::mem_fun(*this, &VistaDescargaImagenDeProductos2::on_button_atras) );
-
 	m_DescargarButton.signal_clicked().connect(
 			sigc::mem_fun(*this, &VistaDescargaImagenDeProductos2::on_button_descargar));
 
@@ -76,6 +71,8 @@ VistaDescargaImagenDeProductos2::~VistaDescargaImagenDeProductos2() {
 	Gtk::TreeModel::Children children = m_refProductosListStore->children();
 	Gtk::TreeModel::Children::iterator it;
 
+	/*Libero los ScrolledWindow que aloquee para las imagenes de los
+	 productos*/
 	for(it=children.begin(); it != children.end(); ++it){
 		Gtk::TreeModel::Row row = *it;
 		if (row[m_ProductosList.m_Columns.m_col_imagenes])
@@ -126,13 +123,6 @@ void VistaDescargaImagenDeProductos2::update_lista_productos(){
 		row[m_ProductosList.m_Columns.m_col_data] = *it;
 		row[m_ProductosList.m_Columns.m_col_imagenes] = new Gtk::ScrolledWindow();
 	}
-}
-
-
-
-void VistaDescargaImagenDeProductos2::on_button_atras(){
-	hide();
-	//Gtk::Main::quit();
 }
 
 void VistaDescargaImagenDeProductos2::on_button_descargar(){

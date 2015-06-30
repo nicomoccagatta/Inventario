@@ -65,19 +65,20 @@ void ControladorVistaEnviar::buttonENVIARClicked(Glib::ustring rutaArchivo,Glib:
 			modelo->enviarFotoFeatureMatching(area->getId(), formatoFecha, rutaImagen);
 			break;
 		}
-	}
-
-	if (extencion == "mpg" || extencion == "mpeg" || extencion == "mp4"){
+	}	else if (extencion == "mpg" || extencion == "mpeg" || extencion == "mp4"){
 		std::cerr << "Se ingreso un video!!\n";
 		switch(matching){
 		case TEMPLATE_MATCHING:
-			//modelo->enviarVideoTemplateMatching(area->getId(), formatoFecha, rutaImagen);
+			modelo->enviarVideoTemplateMatching(area->getId(), formatoFecha, rutaImagen);
 			break;
 		case FEATURE_MATCHING:
-			//modelo->enviarVideoFeatureMatching(area->getId(), formatoFecha, rutaImagen);
+			modelo->enviarVideoFeatureMatching(area->getId(), formatoFecha, rutaImagen);
 			break;
 		}
 
+	}else{
+		std::cerr << "NO SOPORTAMOS ESA EXTENCION\n";
+		//vista->popup con esto
 	}
 
 }

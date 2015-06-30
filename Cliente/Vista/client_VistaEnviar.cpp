@@ -113,6 +113,8 @@ void VistaEnviar::on_button_AutocompletarFechaUltimaModif(){
 	Glib::ustring rutaArchivo = m_fileChooser->get_filename();
 	if (rutaArchivo.empty()){
 		std::cerr << "POPUP: NO SELECCIONASTE ARCHIVOOO\n";
+
+		this->ventanaError("Ingrese un archivo valido!", "Error");
 		return;
 	}
 
@@ -143,6 +145,11 @@ void VistaEnviar::on_button_ENVIAR(){
 	Glib::ustring minutos = m_entryMinutos->get_text();
 	Glib::ustring segundos = m_entrySegundos->get_text();
 
+	if (horas.empty() || minutos.empty() || segundos.empty()){
+		this->ventanaError("Ingrese un horario valido!", "Error");
+		return;
+	}
+
 	std::cerr << "Horas: " << horas << " ";
 	std::cerr << "Minutos: " << minutos << " ";
 	std::cerr << "Segundos: " << segundos << "\n";
@@ -156,6 +163,12 @@ void VistaEnviar::on_button_ENVIAR(){
 	std::cerr << "Fecha: " << dia << "/" << mes << "/" << anio << "\n";
 
 	Glib::ustring rutaArchivo = m_fileChooser->get_filename();
+
+	if (rutaArchivo.empty()){
+		this->ventanaError("Ingrese un archivo valido!", "Error");
+		return;
+	}
+
 	std::cerr << "Ruta archivo: " << rutaArchivo << "\n";
 
 	int matching = -1;
@@ -169,6 +182,12 @@ void VistaEnviar::on_button_ENVIAR(){
 	std::cerr << matching;
 
 	Gtk::TreeModel::Row fila = *m_AreasDeVision->get_active();
+
+	if(!fila){
+		this->ventanaError("Seleccione alguna area de vision!", "Error");
+		return;
+	}
+
 	std::cout << "Elemento elegido del Combo: "
 			<< fila[columnas.getColumnaTexto()]
 			<< " \n";//con valor: "
@@ -183,7 +202,7 @@ void VistaEnviar::on_button_VistaPrevia(){
 	Glib::ustring rutaArchivo = m_fileChooser->get_filename();
 	std::cerr << "Ruta archivo: " << rutaArchivo << "\n";
 
-	if (rutaArchivo.length() < 3){
+	if (rutaArchivo.empty()){
 		std::cerr << "POPUP: NO ELEGISTE ARCHIVO";
 		return;
 	}
@@ -229,5 +248,18 @@ void VistaEnviar::setearFechaYHora(std::tm* timer){
 	std::cerr << "Segundos: " << timer->tm_sec << "\n";
 
 	m_calendar->select_day(timer->tm_mday);
-	m_calendar->select_month(timer->tm_mon,timer->tm_year);
+	m_calendar->select_month(timer->tm_mon,timer->tm_year+1900);
+}
+
+
+/*
+ * Salta una ventana con un mensaje.
+ */
+void VistaEnviar::ventanaError(const char* mensaje, const char* titulo){
+	Gtk::Window ventanitaError;
+	Gtk::MessageDialog dialog(ventanitaError,mensaje,false, Gtk::MESSAGE_ERROR);
+	dialog.set_title(titulo);
+	dialog.set_size_request(350,100);
+	dialog.run();
+	return;
 }

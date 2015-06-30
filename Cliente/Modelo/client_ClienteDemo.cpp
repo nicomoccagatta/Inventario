@@ -7,11 +7,16 @@
 
 #include <iostream>
 #include <sstream>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 #include "client_ClienteDemo.h"
 #include "common_CommandParser.h"
 #include "common_Imagen.h"
 #include "common_Video.h"
+
+#define TEMP_CARPETA "TEMP_clienteDemoImagenes"
 
 using common::Imagen;
 using common::Video;
@@ -22,11 +27,16 @@ ClienteDemo::ClienteDemo() : client("localhost","1037"){
 
 	if (!this->identificarse())
 		std::cerr << "NO ME IDENTIFICO BIEN!\n";
+
+	//Creo la carpeta TEMP si no existe...
+	mkdir(TEMP_CARPETA, S_IRWXU);
 }
 
 ClienteDemo::~ClienteDemo() {
 	this->data.eliminarAreasDeVision();
 	this->data.eliminarProductos();
+
+	system( (std::string("rm -rf ")+ std::string(TEMP_CARPETA)).c_str());
 }
 
 bool ClienteDemo::identificarse(){
@@ -48,6 +58,8 @@ void ClienteDemo::actualizarIdImagenesDeProducto(Producto* prod){
 		std::stringstream ss;
 		ss << "C|" << prod->getId() << "|";
 		protocolo.enviarMensaje(this->client,ss.str());
+	}else{
+		return;
 	}
 	std::string respuesta = protocolo.recibirMensaje(this->client);
 
@@ -83,9 +95,10 @@ void ClienteDemo::actualizarIdImagenesDeProducto(Producto* prod){
 }
 
 bool ClienteDemo::actualizarProductos(){
-	if (this->client.estaConectado()){
+	if (this->client.estaConectado())
 		protocolo.enviarMensaje(this->client,"A|");
-	}
+	else
+		return false;
 	std::string respuesta = protocolo.recibirMensaje(this->client);
 
 	if (respuesta == "error|\n"){
@@ -141,16 +154,10 @@ bool ClienteDemo::actualizarProductos(){
 }
 
 bool ClienteDemo::actualizarAreasDeVision(){
-	if (this->client.estaConectado()){
-		/*this->agregarImagenACocaLata("/home/ale/git/Inventario/Imagenes/Coca-cola/lunes.jpg");
-		this->agregarImagenACocaLata("/home/ale/git/Inventario/Imagenes/Coca-cola/martes.png");
-		this->agregarImagenACocaLata("/home/ale/git/Inventario/Imagenes/Coca-cola/miercoles.jpg");
-		this->agregarImagenACocaLata("/home/ale/git/Inventario/Imagenes/Coca-cola/jueves.png");
-		this->agregarImagenACocaLata("/home/ale/git/Inventario/Imagenes/Coca-cola/viernes.jpg");
-		this->agregarImagenACocaLata("/home/ale/git/Inventario/Imagenes/Coca-cola/sabado.jpg");
-*/
+	if (this->client.estaConectado())
 		protocolo.enviarMensaje(this->client,"B|");
-	}
+	else
+		return false;
 	std::string respuesta = protocolo.recibirMensaje(this->client);
 
 	if (respuesta == "error|\n")
@@ -197,7 +204,9 @@ std::string ClienteDemo::getImagenConId(unsigned long int id){
 		std::stringstream ss;
 		ss << "R|" << id << "|";
 		protocolo.enviarMensaje(this->client,ss.str());
-	}
+	}else
+		return "";
+
 	std::string respuestaDatosImagen = protocolo.recibirMensaje(this->client);
 	std::cerr << "RESPUESTA A R|" << id << "|\n";
 	std::cerr << respuestaDatosImagen << "\n";
@@ -274,12 +283,13 @@ void ClienteDemo::enviarVideo(const char* comando, unsigned long int idArea, std
 	std::list<Imagen>::iterator itIm;
 	std::list<std::string>::iterator itStr;
 
+	std::cerr << "Enviando frames del video\n";
+
 	for (itIm=frames.begin(), itStr=fechas.begin();
 			itIm != frames.end(); ++itIm, ++itStr){
+		std::cerr << "Fecha y hora del frame: " << *itStr << "\n";
 		this->enviarFoto(comando,idArea,*itStr,*itIm);
 	}
-
-
 }
 
 void ClienteDemo::enviarVideoTemplateMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeVideo){

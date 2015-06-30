@@ -2,21 +2,30 @@
 
 namespace common {
 
-Video::Video(const std::string& rutaArchivo):capturasVideo(rutaArchivo)  {}
+Video::Video(const std::string& rutaArchivo):capturasVideo(rutaArchivo)  {
+	fps = capturasVideo.get(CV_CAP_PROP_FPS);
+}
 
 bool Video::esValido()const{
 	return capturasVideo.isOpened();
 }
 
 //Completa la lista de imagenes y strings con las imagenes separadas por un periodo en segundos dado por periodoEnSegundos, completando en el mismo orden la lista de string con las fechas de esas imagenes teniendo en cuenta la fechaInicial como la de la primera imagen del video.
-void Video::capturasPeriodicasVideo(std::list<Imagen>& listaImagenes,std::list<std::string>& listaDeFechas,const std::string& fechaInicial, float periodoEnSegundos){
+void Video::capturasPeriodicasVideo(std::list<Imagen>& listaImagenes,std::list<std::string>& listaDeFechas,const std::string& fechaInicial, float periodoFinalEnSegundos){
 	struct tm fechaProcesada;
 	if(esValido()&& strptime(fechaInicial.c_str(),kFormatoFecha,&fechaProcesada)){
+
 		double fps = capturasVideo.get(CV_CAP_PROP_FPS);
+		double fpsFinal = 1/periodoFinalEnSegundos;
 		unsigned long int cantidadDeFrames =  capturasVideo.get(CV_CAP_PROP_FRAME_COUNT);
-		unsigned long int cantidadImagenesARetornar= std::floor(cantidadDeFrames/(fps*60))+1;
+		double cantidadImagenesARetornar= std::floor(fpsFinal*cantidadDeFrames/fps);
 		float periodoEntreFrames = 1/fps;
 		bool cambioDeFrame=true;
+
+		std::cerr << "FPS: " << fps << "\nCANTIDAD TOTAL DE FRAMES: " << cantidadDeFrames
+				<< "\nCANTIDAD ESPERADA DE FRAMES A RETORNAR: " << cantidadImagenesARetornar
+				<< "\nPERIODO ENTRE FRAMES REAL: " << periodoEntreFrames << "\n";
+
 		cv::Mat frame;
 		capturasVideo.set(CV_CAP_PROP_POS_AVI_RATIO,0);
 		capturasVideo >>frame;
@@ -31,12 +40,12 @@ void Video::capturasPeriodicasVideo(std::list<Imagen>& listaImagenes,std::list<s
 				++fechaProcesada.tm_min;
 				cambioDeFrame=false;
 			}
-			while (segundosParcialesProcesados<periodoEnSegundos){
+			while (segundosParcialesProcesados<periodoFinalEnSegundos){
 				capturasVideo >> frame;
 				cambioDeFrame=true;
 				segundosParcialesProcesados+=periodoEntreFrames;
 			}
-			segundosParcialesProcesados-=periodoEnSegundos;
+			segundosParcialesProcesados-=periodoFinalEnSegundos;
 		}
 	}
 }

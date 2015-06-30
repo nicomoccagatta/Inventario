@@ -3,9 +3,6 @@
 
 #include "Grafico.h"
 
-/** @class GraficoDeTorta
- * Consultante que muestra sus resultados como un gráfico de torta.
- */
 class GraficoDeTorta : public Grafico {
     public:
         GraficoDeTorta();

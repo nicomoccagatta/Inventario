@@ -22,10 +22,8 @@ void GraficoDeTorta::actualizarDatos(const std::list< DatoGrafico >& datos) {
     double offset = INIT_OFFSET;
     for ( ; itDatos != datos.end(); ++itDatos, ++i) {
         PorcionCircular* porcion = new PorcionCircular(*itDatos, normalizacion,
-                                                       i, offset,
-                                                       X_0, Y_0, RADIO);
+                                                    i, offset,X_0, Y_0, RADIO);
         offset = porcion->getAvance();
-
         areas.push_back(porcion);
     }
 

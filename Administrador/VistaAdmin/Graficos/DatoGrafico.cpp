@@ -1,10 +1,5 @@
 #include "DatoGrafico.h"
 
-DatoGrafico::DatoGrafico(const DatoGrafico& original) {
-    etiqueta = original.etiqueta;
-    valor = original.valor;
-}
-
 DatoGrafico::DatoGrafico(const Glib::ustring& _etiqueta, double _valor) {
     etiqueta = _etiqueta;
     valor = _valor;

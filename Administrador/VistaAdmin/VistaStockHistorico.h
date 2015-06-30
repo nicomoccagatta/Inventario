@@ -23,9 +23,10 @@ class VistaStockHistorico : public Observer {
 	void update_lista_productos();
 	void on_check_button_desde();
 	void on_check_button_hasta();
-	void on_producto_seleccionado();
+	void on_actualizar_grafico();
 	void eliminarStockInferior(Glib::Date& fechaDesde, std::list<common::Stock>& stockProducto);
 	void eliminarStockSuperior(Glib::Date& fechaDesde, std::list<common::Stock>& stockProducto);
+	unsigned int obtenerNumeroMes(const std::string& Month);
 
 	Gtk::HBox m_HBoxGrillaEImagen;
 	GraficoDeBarras m_ImagenItem;
@@ -43,14 +44,12 @@ class VistaStockHistorico : public Observer {
 	Gtk::Label m_labelDesde;
 	Gtk::CheckButton m_activarCalendarioDesde;
 	Gtk::Calendar *m_calendarioDesde;
-	bool b_calendarioDesdeSeteado;
 
 	Gtk::HBox m_horizontalBoxButoneraHasta;
 	Gtk::HButtonBox m_botoneraFechaHasta;
 	Gtk::Label m_labelHasta;
 	Gtk::CheckButton m_activarCalendarioHasta;
 	Gtk::Calendar *m_calendarioHasta;
-	bool b_calendarioHastaSeteado;
 public:
 	VistaStockHistorico();
 	void update();

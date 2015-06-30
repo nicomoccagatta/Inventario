@@ -11,7 +11,6 @@ Grafico::Grafico(){
     furthest_x = 1.0;
     furthest_y = 1.0;
     min_lado = 0;
-    areaSeleccionada = areas.end();
     should_request_size = true;
 }
 
@@ -32,7 +31,6 @@ void Grafico::regenerarReferencias() {
         Referencia refNueva(**itAreas);
         referencias.push_back(refNueva);
     }
-    areaSeleccionada = areas.end();
 }
 
 bool Grafico::on_expose_event(GdkEventExpose* ev) {

@@ -9,7 +9,6 @@
 #define ADMINISTRADOR_VISTAADMIN_LISTAAV_H_
 
 #include <gtkmm-2.4/gtkmm.h>
-#include <gtkmm-2.4/gtkmm/scrolledwindow.h>
 #include <list>
 
 #include "../ModeloAdmin/admin_ModeloObservable.h"

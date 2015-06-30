@@ -19,7 +19,6 @@ VistaStockHistorico::VistaStockHistorico() {
 	m_labelDesde.set_size_request(100,50);
 	m_botoneraFechaDesde.pack_start(m_labelDesde);
 	m_activarCalendarioDesde.signal_clicked().connect( sigc::mem_fun(*this, &VistaStockHistorico::on_check_button_desde));
-	b_calendarioDesdeSeteado = false;
 	m_activarCalendarioDesde.set_size_request(80,50);
 	m_botoneraFechaDesde.pack_start(m_activarCalendarioDesde);
 	m_botoneraFechaDesde.set_size_request(180,150);
@@ -31,7 +30,6 @@ VistaStockHistorico::VistaStockHistorico() {
 	m_labelHasta.set_size_request(100,50);
 	m_botoneraFechaHasta.pack_start(m_labelHasta);
 	m_activarCalendarioHasta.signal_clicked().connect( sigc::mem_fun(*this, &VistaStockHistorico::on_check_button_hasta));
-	b_calendarioHastaSeteado = false;
 	m_activarCalendarioHasta.set_size_request(80,50);
 	m_botoneraFechaHasta.pack_start(m_activarCalendarioHasta);
 	m_botoneraFechaHasta.set_size_request(180,150);
@@ -41,17 +39,17 @@ VistaStockHistorico::VistaStockHistorico() {
 
 	m_HBoxGrillaEImagen.pack_start(m_vBoxPrincipalGrilla);
 	m_HBoxGrillaEImagen.pack_end(m_ImagenItem);
-	m_ImagenItem.set_size_request(750,Gtk::EXPAND);
+	m_ImagenItem.set_size_request(750,400);
 
 	refTreeSelection = m_ProductosTreeView.get_selection();
 	refTreeSelection->signal_changed().connect(
-	    sigc::mem_fun(*this, &VistaStockHistorico::on_producto_seleccionado) );
+	    sigc::mem_fun(*this, &VistaStockHistorico::on_actualizar_grafico) );
 }
 
 VistaStockHistorico::~VistaStockHistorico() {
-	if (m_activarCalendarioHasta.get_active())
+	if (m_activarCalendarioDesde.get_active())
 		delete m_calendarioDesde;
-	if (b_calendarioHastaSeteado)
+	if (m_activarCalendarioHasta.get_active())
 		delete m_calendarioHasta;
 }
 
@@ -74,11 +72,14 @@ void VistaStockHistorico::run(Gtk::Viewport *panelDinamico,Modelo_Observable *mo
 void VistaStockHistorico::on_check_button_desde() {
 	if (!m_activarCalendarioDesde.get_active()){
 		delete m_calendarioDesde;
+		this->on_actualizar_grafico();
 	}else{
 		m_calendarioDesde = new Gtk::Calendar;
 		m_calendarioDesde->set_property("show_day_names",false);
-		m_calendarioDesde->set_size_request(250,150);
+		m_calendarioDesde->set_size_request(250,140);
+		m_calendarioDesde->signal_day_selected().connect( sigc::mem_fun(*this, &VistaStockHistorico::on_actualizar_grafico));
 		m_horizontalBoxButoneraDesde.pack_end(*m_calendarioDesde);
+		this->on_actualizar_grafico();
 		panelDinam->show_all();
 	}
 }
@@ -86,11 +87,14 @@ void VistaStockHistorico::on_check_button_desde() {
 void VistaStockHistorico::on_check_button_hasta() {
 	if (!m_activarCalendarioHasta.get_active()){
 		delete m_calendarioHasta;
+		this->on_actualizar_grafico();
 	}else{
 		m_calendarioHasta = new Gtk::Calendar;
 		m_calendarioHasta->set_property("show_day_names",false);
-		m_calendarioHasta->set_size_request(250,150);
+		m_calendarioHasta->set_size_request(250,140);
+		m_calendarioHasta->signal_day_selected().connect( sigc::mem_fun(*this, &VistaStockHistorico::on_actualizar_grafico));
 		m_horizontalBoxButoneraHasta.pack_end(*m_calendarioHasta);
+		this->on_actualizar_grafico();
 		panelDinam->show_all();
 	}
 }
@@ -112,7 +116,7 @@ void VistaStockHistorico::update_lista_productos(){
 	}
 }
 
-void VistaStockHistorico::on_producto_seleccionado(){
+void VistaStockHistorico::on_actualizar_grafico(){
 	Glib::Date d_fechaDesde,d_fechaHasta;
 	bool b_fechaDesde = false;
 	bool b_fechaHasta = false;
@@ -155,84 +159,111 @@ void VistaStockHistorico::on_producto_seleccionado(){
 
 void VistaStockHistorico::eliminarStockInferior(Glib::Date& fechaDesde, std::list<common::Stock>& stockProducto){
 	std::stringstream ssFechaDesdeDia;
-	ssFechaDesdeDia << (int)fechaDesde.get_day();
+	ssFechaDesdeDia << (unsigned int)fechaDesde.get_day();
 	unsigned int diaParametro;
 	ssFechaDesdeDia >> diaParametro;
 
-	std::cout << "HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAA::: " << std::endl;
 	std::stringstream ssFechaDesdeMes;
-	ssFechaDesdeMes << (int)fechaDesde.get_month();
+	ssFechaDesdeMes << (unsigned int)fechaDesde.get_month();
 	unsigned int mesParametro;
 	ssFechaDesdeMes >> mesParametro;
 
 	std::stringstream ssFechaDesdeAno;
-	ssFechaDesdeAno << (int)fechaDesde.get_year();
+	ssFechaDesdeAno << (unsigned int)fechaDesde.get_year();
 	unsigned int anoParametro;
 	ssFechaDesdeAno >> anoParametro;
 
-	//std::tm tm_fechaDesde,tm_fechaStock;
-	//fechaDesde.to_struct_tm(tm_fechaDesde);
 	std::list<common::Stock>::iterator it = stockProducto.begin();
-	for (; it != stockProducto.end() ; ++it){
-		std::string sfechaStock((*it).getFecha());
+	while (it != stockProducto.end())
+	{
+		std::stringstream ssfechaStock((*it).getFecha());
+		std::string sMon;
+		unsigned int dia,mes,ano;
+		ssfechaStock.ignore(4);
+		ssfechaStock >> sMon;
+		mes = obtenerNumeroMes(sMon);
+		ssfechaStock.ignore(1);
+		ssfechaStock >> dia;
+		ssfechaStock.ignore(10);
+		ssfechaStock >> ano;
 
-		std::cerr << "fecha a parsear: ---" << sfechaStock << "---" << std::endl;
-		struct tm timeDate;
-		strptime(sfechaStock.c_str(),"%a %b %d %H:%M:%S %Y",&timeDate);
-		std::cerr << "Antes de mktime: Ano: " << timeDate.tm_year+1900 <<" mes: " <<timeDate.tm_mon+1 << " dia: " <<timeDate.tm_mday << std::endl;
-		mktime(&timeDate);
-		std::cerr << "Despues de mktime: Ano: " << timeDate.tm_year+1900 <<" mes: " <<timeDate.tm_mon+1 << " dia: " <<timeDate.tm_mday << std::endl;
-		std::string fechaImagen(asctime(&timeDate));
-		fechaImagen.erase(fechaImagen.find('\n'));
-	    std::cout <<"fecha Parseada:: "<< fechaImagen << std::endl;
-
-		std::cerr << "fecha Calendario: --dia: " << diaParametro << "-- mes: " << mesParametro << "-- ano: " << anoParametro << std::endl;
-	//	std::cerr << "fecha Server: dia " <<  timeDate.tm_mday << " -- mes: " << timeDate.tm_mon << " -- ano: " << timeDate.tm_year << std::endl;;
-	/*	if(ano < anoParametro)
-			stockProducto.erase(it);
-		else
-			if((ano == anoParametro) && (mes < mesParametro))
-				stockProducto.erase(it);
-			else
-				if ((mes == mesParametro) && (dia < diaParametro))
-					stockProducto.erase(it);
-					*/
+		if(ano < anoParametro)
+			stockProducto.erase(it++);
+		else if((ano == anoParametro) && (mes < mesParametro))
+				stockProducto.erase(it++);
+			else if ((mes == mesParametro) && (dia < diaParametro))
+					stockProducto.erase(it++);
+				else
+					++it;
 	}
 }
 
 void VistaStockHistorico::eliminarStockSuperior(Glib::Date& fechaHasta, std::list<common::Stock>& stockProducto){
-	std::stringstream ssFechaHastaDia;
-	ssFechaHastaDia << (int)fechaHasta.get_day();
+	std::stringstream ssFechaDesdeDia;
+	ssFechaDesdeDia << (unsigned int)fechaHasta.get_day();
 	unsigned int diaParametro;
-	ssFechaHastaDia >> diaParametro;
+	ssFechaDesdeDia >> diaParametro;
 
-	std::stringstream ssFechaHastaMes;
-	ssFechaHastaMes << (int)fechaHasta.get_month();
+	std::stringstream ssFechaDesdeMes;
+	ssFechaDesdeMes << (unsigned int)fechaHasta.get_month();
 	unsigned int mesParametro;
-	ssFechaHastaMes >> mesParametro;
+	ssFechaDesdeMes >> mesParametro;
 
-	std::stringstream ssFechaHastaAno;
-	ssFechaHastaAno << (int)fechaHasta.get_year();
+	std::stringstream ssFechaDesdeAno;
+	ssFechaDesdeAno << (unsigned int)fechaHasta.get_year();
 	unsigned int anoParametro;
-	ssFechaHastaAno >> anoParametro;
+	ssFechaDesdeAno >> anoParametro;
 
 	std::list<common::Stock>::iterator it = stockProducto.begin();
-	for (; it != stockProducto.end() ; ++it){
+	while (it != stockProducto.end())
+	{
 		std::stringstream ssfechaStock((*it).getFecha());
+		std::string sMon;
 		unsigned int dia,mes,ano;
+		ssfechaStock.ignore(4);
+		ssfechaStock >> sMon;
+		mes = obtenerNumeroMes(sMon);
+		ssfechaStock.ignore(1);
 		ssfechaStock >> dia;
-		ssfechaStock.ignore(1);
-		ssfechaStock >> mes;
-		ssfechaStock.ignore(1);
+		ssfechaStock.ignore(10);
 		ssfechaStock >> ano;
-		std::cerr << "Stock superior parseado: --dia: " << dia << "-- mes: " << mes << "-- ano: " << ano << std::endl;
+
 		if(ano > anoParametro)
-			stockProducto.erase(it);
-		else
-			if((ano == anoParametro) && (mes > mesParametro))
-				stockProducto.erase(it);
-			else
-				if ((mes == mesParametro) && (dia > diaParametro))
-					stockProducto.erase(it);
+			stockProducto.erase(it++);
+		else if((ano == anoParametro) && (mes > mesParametro))
+				stockProducto.erase(it++);
+			else if ((mes == mesParametro) && (dia > diaParametro))
+					stockProducto.erase(it++);
+				else
+					++it;
 	}
 }
+
+unsigned int VistaStockHistorico::obtenerNumeroMes(const std::string& Month){
+	if (Month == "Jan")
+		return 1;
+	else if (Month == "Feb")
+			return 2;
+		else if (Month == "Mar")
+				return 3;
+			else if (Month == "Apr")
+					return 4;
+				else if (Month == "May")
+						return 5;
+					else if (Month == "Jun")
+							return 6;
+						else if (Month == "Jul")
+								return 7;
+							else if (Month == "Aug")
+									return 8;
+								else if (Month == "Sep")
+										return 9;
+									else if (Month == "Oct")
+											return 10;
+										else if (Month == "Nov")
+												return 11;
+											else if(Month == "Dec")
+													return 12;
+	return 0;
+}
+

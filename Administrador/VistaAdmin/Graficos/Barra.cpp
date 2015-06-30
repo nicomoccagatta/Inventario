@@ -25,20 +25,6 @@ void Barra::dibujar(Cairo::RefPtr< Cairo::Context >& ctx) {
     ctx->restore();
 }
 
-bool Barra::fueClickeada(double x, double y) {
-    if (x0 < x && x < x0 + ancho &&
-        y0 - hasta < y && y < y0)
-        return true;
-    else
-        return false;
-}
-
 double Barra::getAvance() {
     return x0 + ancho + sep;
-}
-
-std::string Barra::getInfo() {
-    std::stringstream ss;
-    ss << dato.getValor();
-    return ss.str();
 }

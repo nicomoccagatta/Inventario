@@ -27,32 +27,8 @@ void PorcionCircular::dibujar(Cairo::RefPtr< Cairo::Context >& ctx) {
     ctx->restore();
 }
 
-bool PorcionCircular::fueClickeada(double x, double y) {
-    x -= x0;
-    y -= y0;
-    double angulo = atan2(y, x);
-    if (y < 0)
-        angulo += 2*M_PI;
-    bool clickeada;
-    if (sqrt(x*x + y*y) < r &&
-        offset < angulo && angulo < offset + valor)
-        clickeada = true;
-    else
-        clickeada = false;
-
-    return clickeada;
-}
-
 double PorcionCircular::getAvance() {
     return offset + valor;
 }
 
-std::string PorcionCircular::getInfo() {
-    std::stringstream ssPorcentaje;
-    std::stringstream ssAclaracion;
-    double val = dato.getValor();
-    ssPorcentaje << std::fixed << std::setprecision(2) << val/max * 100;
-    ssAclaracion << "% (" << val << " de " << max << ")";
-    return ssPorcentaje.str() + ssAclaracion.str();
-}
 

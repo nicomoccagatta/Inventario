@@ -2,16 +2,18 @@
 #include "Barra.h"
 #include <sstream>
 #include <iomanip>
+#include <iostream>
 
-#define INIT_OFFSET     0.2
-#define SEPARACION_BASE 0.20
-#define ANCHO_BASE      0.50
-#define POS_REF         SEPARACION_BASE + ANCHO_BASE
-#define MIN_SIZE        4
-#define EJE_X0          0.04 + INIT_OFFSET/2
-#define EJE_Y0          1.0
-#define CANT_PUNTOS_EJE 10
-#define ANCHO_REF_EJE   0.02
+#define INIT_OFFSET     		0.2
+#define SEPARACION_BASE 		0.20
+#define ANCHO_BASE      		0.50
+#define POS_REF         		SEPARACION_BASE + ANCHO_BASE
+#define MIN_SIZE        		4
+#define EJE_X0          		0.04 + INIT_OFFSET/2
+#define EJE_Y0          		1.0
+#define CANT_PUNTOS_EJE 		10
+#define ANCHO_REF_EJE   		0.02
+#define ALTURA_GRAFICO_NORMA	0.9
 
 GraficoDeBarras::GraficoDeBarras() {
     normalizacion = -DBL_MAX;
@@ -41,18 +43,16 @@ void GraficoDeBarras::actualizarDatos(const std::list< DatoGrafico >& datos) {
         offset = barra->getAvance();
         areas.push_back(barra);
     }
-
     regenerarReferencias();
 }
 
 void GraficoDeBarras::hallarNormalizacion(const std::list< DatoGrafico >& datos) {
-    std::list< DatoGrafico >::const_iterator itDatos = datos.begin();
     normalizacion = -DBL_MAX;
-    double siguiente = itDatos->getValor();
+    std::list< DatoGrafico >::const_iterator itDatos = datos.begin();
     for ( ; itDatos != datos.end(); ++itDatos) {
-        if (siguiente > normalizacion)
-            normalizacion = siguiente;
-        siguiente = itDatos->getValor();
+    double valor = itDatos->getValor();
+        if (valor > normalizacion)
+            normalizacion = valor;
     }
 }
 
@@ -79,9 +79,9 @@ void GraficoDeBarras::dibujarEspecializacion(GdkEventExpose* ev,
         ctx->set_font_size(0.03);
         double punto, altura;
         std::stringstream ss;
-        ss << std::setfill(' ') << std::setw(7) << std::fixed << std::setprecision(2);
-        for (int i = 1; i < CANT_PUNTOS_EJE - 1; ++i) {
-            punto = (double)i/CANT_PUNTOS_EJE;
+        ss << std::setfill(' ') << std::setw(4) << std::fixed << std::setprecision(0);
+        for (int i = 1; i <= CANT_PUNTOS_EJE; ++i) {
+            punto = (double)i/CANT_PUNTOS_EJE * ALTURA_GRAFICO_NORMA;
             altura = 1.0 - punto;
             ctx->move_to(EJE_X0, altura);
             ctx->move_to(EJE_X0 - ANCHO_REF_EJE/2, altura);
@@ -89,8 +89,8 @@ void GraficoDeBarras::dibujarEspecializacion(GdkEventExpose* ev,
             ctx->stroke();
             ctx->save();
                 ctx->set_source_rgb(0.0, 0.0, 0.0);
-                ctx->move_to(0.0, altura);
-                ss << punto*normalizacion;
+                ctx->move_to(0.0, altura+0.01);
+                ss << (double)i*normalizacion/CANT_PUNTOS_EJE;
                 ctx->show_text(ss.str());
                 ss.str("");
             ctx->restore();

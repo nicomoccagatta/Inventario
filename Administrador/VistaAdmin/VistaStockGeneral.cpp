@@ -19,6 +19,7 @@ VistaStockGeneral::VistaStockGeneral() : modelo(0), panelDinam(0) {
 	m_HBoxGrillaEImagen.pack_start(m_ProductosList);
 
 	m_ImagenItem.set_size_request(720,Gtk::EXPAND);
+
 	m_HBoxGrillaEImagen.pack_end(m_ImagenItem);
 }
 
@@ -40,6 +41,8 @@ void VistaStockGeneral::run(Gtk::Viewport *panelDinamico,Modelo_Observable *mode
 }
 
 void VistaStockGeneral::update_lista_productos(){
+	m_datosGrafico.clear();
+
 	m_refProductosListStore = Gtk::ListStore::create(m_ProductosList.m_Columns);
 	m_ProductosTreeView.set_model(m_refProductosListStore);
 
@@ -47,12 +50,16 @@ void VistaStockGeneral::update_lista_productos(){
 	const std::list<Producto*>* prods = modelo->getProductos();
 	std::list<Producto*>::const_iterator it;
 	for (it=prods->begin(); it!=prods->end();++it){
-	Gtk::TreeModel::Row row = *(m_refProductosListStore->append());
-	std::string rutaImagen = modelo->getImagenConID((*it)->getIdIcono());
-	Glib::RefPtr<Gdk::Pixbuf>  pic = Gdk::Pixbuf::create_from_file(rutaImagen,30,30,false);
-	row[m_ProductosList.m_Columns.m_col_imagenIcono] = pic;
-	row[m_ProductosList.m_Columns.m_col_nombre] = (*it)->getNombre();
-	row[m_ProductosList.m_Columns.m_col_cantidad] = modelo->consultarStock((*it)->getId());
-	row[m_ProductosList.m_Columns.m_col_data] = *it;
+		Gtk::TreeModel::Row row = *(m_refProductosListStore->append());
+		std::string rutaImagen = modelo->getImagenConID((*it)->getIdIcono());
+		Glib::RefPtr<Gdk::Pixbuf>  pic = Gdk::Pixbuf::create_from_file(rutaImagen,30,30,false);
+		row[m_ProductosList.m_Columns.m_col_imagenIcono] = pic;
+		row[m_ProductosList.m_Columns.m_col_nombre] = (*it)->getNombre();
+		unsigned long int cantidad = modelo->consultarStock((*it)->getId());
+		row[m_ProductosList.m_Columns.m_col_cantidad] = cantidad;
+		row[m_ProductosList.m_Columns.m_col_data] = *it;
+		DatoGrafico dato((*it)->getNombre(),(double)cantidad);
+		m_datosGrafico.push_back(dato);
 	}
+	m_ImagenItem.actualizarDatos(m_datosGrafico);
 }

@@ -13,6 +13,8 @@
 #include "ListaProductos.h"
 #include <list>
 #include "common_Producto.h"
+#include "Graficos/GraficoDeBarras.h"
+#include "Graficos/DatoGrafico.h"
 
 class VistaStockGeneral : public Observer {
 	Modelo_Observable *modelo;
@@ -24,7 +26,8 @@ class VistaStockGeneral : public Observer {
 	ListaProductos m_ProductosList;
 
 	Gtk::HBox m_HBoxGrillaEImagen;
-	Gtk::DrawingArea m_ImagenItem;
+	GraficoDeBarras m_ImagenItem;
+	std::list<DatoGrafico> m_datosGrafico;
 public:
 	VistaStockGeneral();
 	void update();

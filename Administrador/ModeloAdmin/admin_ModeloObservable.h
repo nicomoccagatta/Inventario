@@ -11,6 +11,7 @@
 #include <list>
 #include <gtkmm-2.4/gtkmm.h>
 #include "common_AreaDeVision.h"
+#include "common_Stock.h"
 #include "Administrador.h"
 #include "admin_Subject.h"
 
@@ -37,6 +38,7 @@ public:
 	void modificarAreaVision(unsigned long int idAV,std::string& ubicacion,std::string& capturador);
 	void actualizarStockGeneral();
 	unsigned long int consultarStock(unsigned long int idProducto);
+	std::list<common::Stock> getStockHisto(unsigned long int idProducto);
 
 	const std::list<AreaDeVision*>* getAreasDeVision() const;
 	const std::list<Producto*>* getProductos() const;

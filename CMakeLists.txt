@@ -63,6 +63,14 @@ add_executable(Admin
 			Administrador/VistaAdmin/VistaEditarAreaVision.cpp
 			Administrador/VistaAdmin/VistaStockPorAV.cpp
 			Administrador/VistaAdmin/VistaStockHistorico.cpp
+			Administrador/VistaAdmin/Graficos/Area.cpp
+			Administrador/VistaAdmin/Graficos/Barra.cpp
+			Administrador/VistaAdmin/Graficos/DatoGrafico.cpp
+			Administrador/VistaAdmin/Graficos/Grafico.cpp
+			Administrador/VistaAdmin/Graficos/GraficoDeBarras.cpp
+			Administrador/VistaAdmin/Graficos/Referencia.cpp
+			Administrador/VistaAdmin/Graficos/GraficoDeTorta.cpp
+			Administrador/VistaAdmin/Graficos/PorcionCircular.cpp
 			Common/common_SocketCliente.cpp
 			Common/common_AreaDeVision.cpp
 			Common/common_Mutex.cpp

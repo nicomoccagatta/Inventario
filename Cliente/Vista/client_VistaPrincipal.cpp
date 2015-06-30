@@ -14,7 +14,7 @@ VistaPrincipal::VistaPrincipal(BaseObjectType* cobject, const Glib::RefPtr<Gtk::
 	std::cerr << "CREANDO VISTA PRINCIPAL\n";
 	m_refGlade->get_widget_derived("viewportEnviar", vistaEnviarPtr);//panelDinamicoEnviar);
 	m_refGlade->get_widget_derived("viewportDescargar", vistaDescargar);
-	m_refGlade->get_widget("viewportCrearVideo", panelDinamicoCrearVideo);
+	m_refGlade->get_widget_derived("viewportCrearVideo", vistaCrearVideo);
 
 	this->signal_delete_event().connect(sigc::mem_fun(*this, &VistaPrincipal::on_exit_clicked) );
 }

@@ -33,6 +33,7 @@ VistaDescargaImagenDeProductos2::VistaDescargaImagenDeProductos2(BaseObjectType*
 	m_refProductosListStore = Gtk::ListStore::create(m_ProductosList.m_Columns);
 
 	m_ProductosTreeView.set_model(m_refProductosListStore);
+	m_ProductosTreeView.set_reorderable();
 
 	/*Agrego los productos desde el ModeloObservable al modelo del TreeView*/
 	//this->update_lista_productos();
@@ -95,9 +96,6 @@ void VistaDescargaImagenDeProductos2::on_producto_seleccionado(){
 		controlador->on_producto_seleccionado(
 				row[m_ProductosList.m_Columns.m_col_data],
 				row[m_ProductosList.m_Columns.m_col_imagenes]);
-
-		m_refProductosListStore->iter_swap(iter, ++iter);
-		show_all_children();
 	}
 }
 

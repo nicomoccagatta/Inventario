@@ -109,6 +109,7 @@ add_executable(Client
 			Cliente/Vista/client_VistaPrincipal.cpp
 			Cliente/Vista/VistaSeleccioneFPS.cpp
 			Cliente/Vista/VistaCrearVideo.cpp
+			Cliente/Vista/ThReproductorVideo.cpp
 			#Common/common_Cliente.cpp
 			Common/common_SocketCliente.cpp
 			Common/common_AreaDeVision.cpp

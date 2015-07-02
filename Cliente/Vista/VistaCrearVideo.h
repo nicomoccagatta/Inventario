@@ -13,6 +13,7 @@
 
 #include "ListaImagenesEnOrden.h"
 #include "AspectPreservingScalingImage.h"
+#include "ThReproductorVideo.h"
 
 class VistaCrearVideo: public Gtk::Viewport {
 public:
@@ -23,13 +24,15 @@ public:
 private:
 	void on_button_Agregar();
 	void on_button_Eliminar();
-	void on_producto_seleccionado();
+	void on_imagen_seleccionada();
 
 	void on_button_Play();
 	void on_button_Pausa();
 	void on_button_Stop();
 
 	void agregarImagenALista(Glib::ustring ruta);
+
+	void ventanaError(const char* mensaje, const char* titulo);
 
 protected:
 	Glib::RefPtr<Gtk::Builder> m_refGlade;
@@ -54,9 +57,12 @@ protected:
 	Gtk::Button m_PausaButton;
 	Gtk::Button m_StopButton;
 
-	Gtk::VBox paraImagenMala;
-	//AspectPreservingScalingImage* activa;
-	Gtk::Image* activa;
+	Gtk::HBox hBoxFPS;
+	Gtk::Label m_FPSLabel;
+	Gtk::Entry m_FPSEntry;
+
+	Gtk::VBox paraReproductor;
+	ThReproductorVideo reproductor;
 };
 
 #endif /* CLIENTE_VISTA_VISTACREARVIDEO_H_ */

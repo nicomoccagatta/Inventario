@@ -2,7 +2,9 @@
 
 Thread::~Thread() {}
 
-void Thread::start() { pthread_create(&this->thread, NULL, starter, this); }
+void Thread::start() {
+	pthread_create(&this->thread, NULL, starter, this);
+}
 
 const void* Thread::join() {
   void* result;

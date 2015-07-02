@@ -25,12 +25,16 @@ private:
 	void on_button_Agregar();
 	void on_button_Eliminar();
 	void on_imagen_seleccionada();
+	void on_my_drag_begin(const Glib::RefPtr<Gdk::DragContext>& context);
+	void on_my_drag_end(const Glib::RefPtr<Gdk::DragContext>& context);
 
 	void on_button_Play();
 	void on_button_Pausa();
 	void on_button_Stop();
 
 	void agregarImagenALista(Glib::ustring ruta);
+
+	void actualizarFramesReproductor();
 
 	void ventanaError(const char* mensaje, const char* titulo);
 
@@ -60,6 +64,8 @@ protected:
 	Gtk::HBox hBoxFPS;
 	Gtk::Label m_FPSLabel;
 	Gtk::Entry m_FPSEntry;
+
+	Gtk::Image* activaAlSeleccionar;
 
 	Gtk::VBox paraReproductor;
 	ThReproductorVideo reproductor;

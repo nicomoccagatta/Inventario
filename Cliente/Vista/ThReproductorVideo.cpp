@@ -16,7 +16,6 @@ ThReproductorVideo::ThReproductorVideo(Gtk::VBox* box){
 	this->fps = 1;
 	this->activo = -1;
 	this->vivo = false;
-	//this->laImagen = laImagen;
 
 }
 
@@ -37,6 +36,14 @@ void ThReproductorVideo::setFPS(double fps){
 void ThReproductorVideo::pausa(){
 	if(this->activo > 0)
 		this->reproduciendo = false;
+}
+
+void ThReproductorVideo::sacarImagenPausada(){
+	if(reproduciendo==false && activo!=-1){
+		std::cerr << "SACO IMAGEN PAUSADA: " << activo << "\n";
+		box->remove(*frames[activo]);
+	}
+	activo=-1;
 }
 
 void ThReproductorVideo::run(){

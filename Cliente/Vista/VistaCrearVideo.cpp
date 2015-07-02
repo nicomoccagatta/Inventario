@@ -14,7 +14,7 @@
 VistaCrearVideo::VistaCrearVideo(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade)
 : Gtk::Viewport(cobject),
   	  m_refGlade(refGlade),
-	  activa(), labelMasVistaPreviaMasPlayStopPausa(false),
+	  activaAlSeleccionar(), labelMasVistaPreviaMasPlayStopPausa(false),
 	  paraReproductor(true), reproductor(&paraReproductor){
 
 	std::cerr << "CREANDO VISTA CREARVIDEO\n";
@@ -50,6 +50,10 @@ VistaCrearVideo::VistaCrearVideo(BaseObjectType* cobject, const Glib::RefPtr<Gtk
 	refTreeSelection = m_ImagenesTreeView.get_selection();
 	refTreeSelection->signal_changed().connect(
 			    sigc::mem_fun(*this, &VistaCrearVideo::on_imagen_seleccionada) );
+	m_ImagenesTreeView.signal_drag_end().connect(
+		    sigc::mem_fun(*this, &VistaCrearVideo::on_my_drag_end) );
+	m_ImagenesTreeView.signal_drag_begin().connect(
+		    sigc::mem_fun(*this, &VistaCrearVideo::on_my_drag_begin) );
 
 	hBoxListados.pack_start(m_ImagenesList);
 	//labelMasVistaPreviaMasPlayStopPausa.set_size_request(400,Gtk::EXPAND);
@@ -58,7 +62,6 @@ VistaCrearVideo::VistaCrearVideo(BaseObjectType* cobject, const Glib::RefPtr<Gtk
 
 	//Agrego el box en el que se va a mostrar la imagen al box que va a tener la
 	//vista y los botones
-	//paraReproductor.pack_start(activa);
 	labelMasVistaPreviaMasPlayStopPausa.pack_start(paraReproductor,true,true);
 
 	//Creo botones y conecto sus senales
@@ -95,7 +98,16 @@ VistaCrearVideo::VistaCrearVideo(BaseObjectType* cobject, const Glib::RefPtr<Gtk
 }
 
 VistaCrearVideo::~VistaCrearVideo() {
-	// TODO Auto-generated destructor stub
+	Gtk::TreeModel::Children children = m_refImagenesListStore->children();
+	Gtk::TreeModel::Children::iterator it;
+
+	/*Libero las imagenes*/
+	for(it=children.begin(); it != children.end(); ++it){
+		Gtk::TreeModel::Row row = *it;
+		if (row[m_ImagenesList.m_Columns.m_col_imgGrande])
+			delete row[m_ImagenesList.m_Columns.m_col_imgGrande];
+
+	}
 }
 
 void VistaCrearVideo::on_button_Agregar(){
@@ -114,16 +126,11 @@ void VistaCrearVideo::on_button_Agregar(){
 	//Handle the response:
 	switch(result){
 	case(Gtk::RESPONSE_OK):{
-		std::cerr << "Select clicked." << std::endl;
-		//std::cerr << "Folder selected: " << dialog.get_filenames()
-		//        				<< std::endl;
-
 		Glib::SListHandle<Glib::ustring> nombres = dialog.get_filenames();
-
 		Glib::SListHandle<Glib::ustring>::iterator it = nombres.begin();
 
 		for(;it!=nombres.end();++it){
-			std::cerr << "File selected: " << *it << std::endl;
+			//std::cerr << "File selected: " << *it << std::endl;
 			//Agrego la imagen al listado
 			this->agregarImagenALista(*it);
 		}
@@ -131,14 +138,19 @@ void VistaCrearVideo::on_button_Agregar(){
 	}
 	case(Gtk::RESPONSE_CANCEL):{
 		std::cerr << "Cancel clicked." << std::endl;
-		break;
+		return;
 	}
 	default:{
-		std::cerr << "Unexpected button clicked." << std::endl;
-		break;
+		std::cerr << "Exit(?) button clicked." << std::endl;
+		return;
 	}
 	}
 	/*Actualizo los frames del reproductor*/
+	this->actualizarFramesReproductor();
+
+}
+
+void VistaCrearVideo::actualizarFramesReproductor(){
 	Gtk::TreeModel::Children children = m_refImagenesListStore->children();
 	Gtk::TreeModel::Children::iterator it;
 
@@ -179,10 +191,23 @@ void VistaCrearVideo::agregarImagenALista(Glib::ustring rutaCompleta){
  * Elimina la imagen del listado
  */
 void VistaCrearVideo::on_button_Eliminar(){
+	/*Seguramente cuando la seleccione se puso como activa*/
+	if (this->activaAlSeleccionar){
+			this->paraReproductor.remove(*activaAlSeleccionar);
+			this->activaAlSeleccionar = 0;
+	}
+
 	Gtk::TreeModel::iterator iter = refTreeSelection->get_selected();
+	Gtk::TreeModel::Row row = *iter;
 	if(iter){ //If anything is selected
+		/*Libero la Imagen*/
+		if (row[m_ImagenesList.m_Columns.m_col_imgGrande])
+			delete row[m_ImagenesList.m_Columns.m_col_imgGrande];
+
 		m_refImagenesListStore->erase(iter);
 	}
+	/*Actualizo los frames (sin la que se elimino)*/
+	this->actualizarFramesReproductor();
 }
 
 /*
@@ -191,22 +216,43 @@ void VistaCrearVideo::on_button_Eliminar(){
  */
 void VistaCrearVideo::on_imagen_seleccionada(){
 	//BOLQUEAR MUTEX
-	/*if (this->activa)
-		this->paraReproductor.remove(*activa);
+	if (reproductor.estaPausado())
+		reproductor.sacarImagenPausada();
+
+	if (this->activaAlSeleccionar)
+		this->paraReproductor.remove(*activaAlSeleccionar);
 
 	Gtk::TreeModel::iterator iter = refTreeSelection->get_selected();
 	if(iter){ //If anything is selected
 		Gtk::TreeModel::Row row = *iter;
 
 		this->paraReproductor.pack_start(
-				row[m_ImagenesList.m_Columns.m_col_imgGrande]);
-		//Glib::RefPtr <Gtk::Image> im = row[m_ImagenesList.m_Columns.m_col_imgGrande];
+				*row[m_ImagenesList.m_Columns.m_col_imgGrande]);
 
-		this->activa = row[m_ImagenesList.m_Columns.m_col_imgGrande];
-		this->activa->show_now();
+		this->activaAlSeleccionar = row[m_ImagenesList.m_Columns.m_col_imgGrande];
+		this->activaAlSeleccionar->show_now();
 	}
 	show_all_children();
-	*/
+
+}
+
+/*
+ * Si se cambia el orden de la visa se tiene que cambiar el orden del video.
+ */
+void VistaCrearVideo::on_my_drag_begin(const Glib::RefPtr<Gdk::DragContext>& context){
+	std::cerr << "ARRANCA EL DRAG\n";
+	/*Seguramente cuando la seleccione se puso como activa*/
+	if (this->activaAlSeleccionar){
+		this->paraReproductor.remove(*activaAlSeleccionar);
+		this->activaAlSeleccionar = 0;
+	}
+}
+/*
+ * Si se cambia el orden de la visa se tiene que cambiar el orden del video.
+ */
+void VistaCrearVideo::on_my_drag_end(const Glib::RefPtr<Gdk::DragContext>& context){
+	std::cerr << "TERMINO EL DRAG\n";
+	this->actualizarFramesReproductor();
 }
 
 /*
@@ -214,6 +260,12 @@ void VistaCrearVideo::on_imagen_seleccionada(){
  * el principio, por ahora.
  */
 void VistaCrearVideo::on_button_Play(){
+	//Si habia una por seleccionar, la saco antes
+	if (this->activaAlSeleccionar){
+		this->paraReproductor.remove(*activaAlSeleccionar);
+		this->activaAlSeleccionar = 0;
+	}
+
 	if(reproductor.estaVivo()){
 		std::cerr << "JOINEO\n";
 		reproductor.join();

@@ -33,6 +33,10 @@ public:
 	bool estaVivo(){
 		return vivo;
 	}
+	bool estaPausado(){
+		return !reproduciendo;
+	}
+	void sacarImagenPausada();
 };
 
 #endif /* CLIENTE_VISTA_THREPRODUCTORVIDEO_H_ */

@@ -19,7 +19,7 @@ VistaListadoProductos::VistaListadoProductos()
 	m_botoneraABM.pack_start(m_EliminarButton);
 	m_botoneraABM.set_layout(Gtk::BUTTONBOX_END);
 
-	m_verticalBox.pack_start(m_botoneraABM,Gtk::PACK_SHRINK,true,0);
+	m_verticalBox.pack_start(m_botoneraABM,false,true,Gtk::PACK_SHRINK);
 
 	m_ProductosTreeView.append_column("Icono", m_ProductosList.m_Columns.m_col_imagenIcono);
 	m_ProductosTreeView.append_column("Nombre", m_ProductosList.m_Columns.m_col_nombre);
@@ -47,7 +47,6 @@ VistaListadoProductos::VistaListadoProductos()
 }
 
 void VistaListadoProductos::update(){
-	std::cerr << "UPDATE VISTA LISTADO PRODUCTOO.." << std::endl;
 	modelo->actualizarProductos();
 	std::list<Gtk::Image*>::iterator it = m_listaPunteroImagenes.begin();
 	for( ; it != m_listaPunteroImagenes.end() ; ++it) {
@@ -127,7 +126,6 @@ void VistaListadoProductos::on_producto_seleccionado(){
 		for ( ; itVectorImagenes != vectorIdsImagenes.end() ; ++itVectorImagenes){
 			Gtk::Image *imagen = new Gtk::Image;
 			std::string rutaImagen = modelo->getImagenConID(*itVectorImagenes);
-			std::cerr << "RUTA DE IMAGEN A SETEAR" << rutaImagen << std::endl;
 			imagen->set(rutaImagen);
 			Glib::RefPtr<Gdk::Pixbuf> scaled1 = imagen->get_pixbuf()->scale_simple(150,150,Gdk::INTERP_BILINEAR);
 			imagen->set(scaled1);

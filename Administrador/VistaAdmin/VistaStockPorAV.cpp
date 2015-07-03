@@ -9,12 +9,13 @@
 
 VistaStockPorAV::VistaStockPorAV() : modelo(0), panelDinam(0) {
 	m_ProductosList.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
-	m_ProductosList.set_size_request(430,530);
+	m_ProductosList.set_size_request(430,400);
 
 	m_AreasDeVision.pack_start(columnas.getColumnaTexto());
 	m_AreasDeVision.signal_changed().connect(sigc::mem_fun(*this, &VistaStockPorAV::on_av_seleccionado));
 	m_AreasDeVision.set_size_request(400,50);
 	m_botoneraComboBox.pack_start(m_AreasDeVision);
+	m_botoneraComboBox.set_size_request(Gtk::EXPAND,50);
 	m_botoneraComboBox.set_layout(Gtk::BUTTONBOX_CENTER);
 	m_vBoxPrincipal.pack_start(m_botoneraComboBox);
 
@@ -26,9 +27,8 @@ VistaStockPorAV::VistaStockPorAV() : modelo(0), panelDinam(0) {
 	m_refProductosListStore = Gtk::ListStore::create(m_ProductosList.m_Columns);
 	m_ProductosTreeView.set_model(m_refProductosListStore);
 
-	m_HBoxGrillaEImagen.pack_start(m_ProductosList);
+	m_HBoxGrillaEImagen.pack_start(m_ProductosList,false,true,Gtk::PACK_SHRINK);
 
-	m_ImagenItem.set_size_request(770,Gtk::EXPAND);
 	m_HBoxGrillaEImagen.pack_end(m_ImagenItem);
 	m_vBoxPrincipal.pack_end(m_HBoxGrillaEImagen);
 }
@@ -38,7 +38,6 @@ VistaStockPorAV::~VistaStockPorAV() {
 }
 
 void VistaStockPorAV::update(){
-	std::cerr << "UPDATE VISTA STOCK POR AREA DE VISION.." << std::endl;
 	this->update_lista_av();
 	this->on_av_seleccionado();
 }

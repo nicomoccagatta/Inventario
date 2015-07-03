@@ -12,7 +12,7 @@ VistaStockHistorico::VistaStockHistorico() {
 	m_ProductosTreeView.append_column("Nombre", m_ProductosList.m_Columns.m_col_nombre);
 	m_ProductosTreeView.set_search_column(1);
 	m_ProductosList.add(m_ProductosTreeView);
-	m_ProductosList.set_size_request(430,250);
+	m_ProductosList.set_size_request(450,250);
 	m_vBoxPrincipalGrilla.pack_start(m_ProductosList);
 
 	m_labelDesde.set_text("\tDesde\t");
@@ -37,9 +37,9 @@ VistaStockHistorico::VistaStockHistorico() {
 	m_horizontalBoxButoneraHasta.pack_start(m_botoneraFechaHasta);
 	m_vBoxPrincipalGrilla.pack_start(m_horizontalBoxButoneraHasta);
 
-	m_HBoxGrillaEImagen.pack_start(m_vBoxPrincipalGrilla);
+	m_HBoxGrillaEImagen.pack_start(m_vBoxPrincipalGrilla,false,true,Gtk::PACK_SHRINK);
+	m_ImagenItem.set_size_request(400,400);
 	m_HBoxGrillaEImagen.pack_end(m_ImagenItem);
-	m_ImagenItem.set_size_request(750,400);
 
 	refTreeSelection = m_ProductosTreeView.get_selection();
 	refTreeSelection->signal_changed().connect(
@@ -54,7 +54,6 @@ VistaStockHistorico::~VistaStockHistorico() {
 }
 
 void VistaStockHistorico::update(){
-	std::cerr << "UPDATE VISTA STOCK HISTORICO.." << std::endl;
 	m_refProductosListStore = Gtk::ListStore::create(m_ProductosList.m_Columns);
 	m_ProductosTreeView.set_model(m_refProductosListStore);
 	this->update_lista_productos();

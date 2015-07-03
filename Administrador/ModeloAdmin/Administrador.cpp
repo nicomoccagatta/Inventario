@@ -286,9 +286,7 @@ std::string Administrador::getImagenConID(unsigned long int id){
 			const unsigned long int tamanioImagen = Protocolo::extraerArgumentoNumericoDeComando(respuestaDatosImagen,4);
 			protocolo.enviarMensaje(this->admin, kMensajeOK);
 
-			std::cerr << "Recibiendo IMAGEN...\n";
 			Imagen img = protocolo.recibirImagen(this->admin,altoImagen,anchoImagen,tamanioImagen);
-			std::cerr << "IMAGEN recibida\n";
 			idsDescargados.push_back(id);
 
 			if (!img.esValida()){
@@ -356,14 +354,11 @@ unsigned long int Administrador::consultarStock(unsigned long int idProd){
 std::list<common::Stock> Administrador::getStockHisto(unsigned long int idProducto){
 	std::list<common::Stock> stockList;
 	if (this->admin.estaConectado()){
-		std::cerr << "PREGUNTANDO POR STOCK... con id::::" << idProducto << std::endl;
 		std::stringstream ssIdProducto;
 		ssIdProducto << idProducto;
 		std::string mensajeAEnviar = "L|" + ssIdProducto.str() + '|';
-		std::cerr << "PREGUNTA..." << mensajeAEnviar << std::endl;
 		protocolo.enviarMensaje(this->admin,mensajeAEnviar);
 		std::string respuesta = protocolo.recibirMensaje(this->admin);
-		std::cerr << "RESPUESTA..." << respuesta << std::endl;
 		CommandParser parserProd;
 		parserProd.tokenize(respuesta);
 		for(unsigned int argum = 1; argum < parserProd.getCantParamtros() ; argum+=2){

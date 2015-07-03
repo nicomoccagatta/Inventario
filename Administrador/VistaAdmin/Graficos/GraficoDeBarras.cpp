@@ -15,7 +15,7 @@
 #define ANCHO_REF_EJE   		0.02
 #define ALTURA_GRAFICO_NORMA	0.9
 
-GraficoDeBarras::GraficoDeBarras() {
+GraficoDeBarras::GraficoDeBarras():ancho(0),datosSize(0),espacio(0),separacion(0){
     normalizacion = -DBL_MAX;
 }
 
@@ -78,9 +78,9 @@ void GraficoDeBarras::dibujarEspecializacion(GdkEventExpose* ev,
         ctx->set_line_cap(Cairo::LINE_CAP_ROUND);
         ctx->set_font_size(0.03);
         double punto, altura;
-        std::stringstream ss;
-        ss << std::setfill(' ') << std::setw(4) << std::fixed << std::setprecision(0);
         for (int i = 1; i <= CANT_PUNTOS_EJE; ++i) {
+            std::stringstream ss;
+            ss << std::setfill(' ') << std::setw(4) << std::fixed << std::setprecision(0);
             punto = (double)i/CANT_PUNTOS_EJE * ALTURA_GRAFICO_NORMA;
             altura = 1.0 - punto;
             ctx->move_to(EJE_X0, altura);
@@ -89,10 +89,11 @@ void GraficoDeBarras::dibujarEspecializacion(GdkEventExpose* ev,
             ctx->stroke();
             ctx->save();
                 ctx->set_source_rgb(0.0, 0.0, 0.0);
-                ctx->move_to(0.0, altura+0.01);
+                ctx->move_to(0.02, altura+0.01);
                 ss << (double)i*normalizacion/CANT_PUNTOS_EJE;
                 ctx->show_text(ss.str());
                 ss.str("");
+                ss.flush();
             ctx->restore();
         }
 

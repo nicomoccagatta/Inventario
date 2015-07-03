@@ -57,7 +57,6 @@ VistaListadoAreasDeVision::VistaListadoAreasDeVision()
 }
 
 void VistaListadoAreasDeVision::update(){
-	std::cerr << "UPDATE VISTA LISTADO Areas de VISION.." << std::endl;
 	m_refAVListStore = Gtk::ListStore::create(m_AVList.m_Columns);
 	m_AVTreeView.set_model(m_refAVListStore);
 

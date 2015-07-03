@@ -18,8 +18,6 @@ VistaStockGeneral::VistaStockGeneral() : modelo(0), panelDinam(0) {
 	m_ProductosList.add(m_ProductosTreeView);
 	m_HBoxGrillaEImagen.pack_start(m_ProductosList);
 
-	m_ImagenItem.set_size_request(720,Gtk::EXPAND);
-
 	m_HBoxGrillaEImagen.pack_end(m_ImagenItem);
 }
 
@@ -27,7 +25,6 @@ VistaStockGeneral::~VistaStockGeneral() {
 }
 
 void VistaStockGeneral::update(){
-	std::cerr << "UPDATE VISTA STOCK GENERAL.." << std::endl;
 	this->update_lista_productos();
 }
 

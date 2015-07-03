@@ -1,12 +1,11 @@
 #include "Grafico.h"
-#include <gtkmm/messagedialog.h>
 #include "Area.h"
 
 #define MIN_LADO 200
 #define COL_RESULTADO 0  // constante que hace que siempre se tome la columna 0 de la respuesta para dar nombre a las áreas del gráfico
 #define SIN_DATOS "No hay datos para mostrar"
 
-Grafico::Grafico(){
+Grafico::Grafico() :ancho_ventana(0),alto_ventana(0),min_lado(0),normalizacion(0){
     set_size_request(MIN_LADO, MIN_LADO);
     furthest_x = 1.0;
     furthest_y = 1.0;
@@ -60,7 +59,7 @@ void Grafico::dibujarAreas(Cairo::RefPtr< Cairo::Context >& ctx) {
     if (areas.empty()) {
         ctx->save();
             ctx->move_to(0.03, 0.1);
-            ctx->set_font_size(0.06);
+            ctx->set_font_size(0.04);
             ctx->set_source_rgb(0.5, 0.5, 0.5);
             ctx->show_text(SIN_DATOS);
         ctx->restore();

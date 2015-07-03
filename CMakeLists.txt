@@ -105,12 +105,11 @@ add_executable(Client
 			Cliente/Control/client_ControladorVistaEnviar.cpp
 			Cliente/Control/client_ControladorVistaDescargaImagenDeProductos.cpp
 			Cliente/Vista/client_VistaDescargaImagenDeProductos2.cpp
-			#Cliente/Vista/client_ProductosList.cpp
 			Cliente/Vista/client_VistaPrincipal.cpp
 			Cliente/Vista/VistaSeleccioneFPS.cpp
 			Cliente/Vista/VistaCrearVideo.cpp
 			Cliente/Vista/ThReproductorVideo.cpp
-			#Common/common_Cliente.cpp
+			Cliente/Vista/VistaPreviaImagen.cpp
 			Common/common_SocketCliente.cpp
 			Common/common_AreaDeVision.cpp
 			Common/common_Mutex.cpp

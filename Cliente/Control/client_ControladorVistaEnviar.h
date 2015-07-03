@@ -13,17 +13,20 @@
 #include "../Modelo/client_ModeloObservable.h"
 #include "common_AreaDeVision.h"
 
+class VistaEnviar;
+
 class ControladorVistaEnviar {
 
 	ModeloObservable* modelo;
+	VistaEnviar* vista;
 
 public:
-	ControladorVistaEnviar(ModeloObservable* modelo) {
+	ControladorVistaEnviar(ModeloObservable* modelo,VistaEnviar* vista) {
 		this->modelo = modelo;
+		this->vista = vista;
 	}
 	virtual ~ControladorVistaEnviar(){}
 
-	//void buttonENVIARClicked(...);
 	void buttonVistaPreviaClicked(Glib::ustring rutaArchivo);
 	void buttonENVIARClicked(Glib::ustring rutaArchivo,Glib::Date* fecha,
 			Glib::ustring horas,Glib::ustring minutos, Glib::ustring segundos,

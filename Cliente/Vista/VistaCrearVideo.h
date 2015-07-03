@@ -12,7 +12,6 @@
 #include <gtkmm/viewport.h>
 
 #include "ListaImagenesEnOrden.h"
-#include "AspectPreservingScalingImage.h"
 #include "ThReproductorVideo.h"
 #include "common_Mutex.h"
 

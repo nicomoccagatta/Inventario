@@ -66,12 +66,8 @@ VistaEnviar::~VistaEnviar() {
 
 void VistaEnviar::asignarModelo(ModeloObservable* modelo){
 	this->modelo=modelo;
-	this->controlador = new ControladorVistaEnviar(modelo);
+	this->controlador = new ControladorVistaEnviar(modelo,this);
 	this->update();
-}
-
-void VistaEnviar::asignarControlador(ControladorVistaEnviar* controlador){
-	this->controlador = controlador;
 }
 
 void VistaEnviar::update(){

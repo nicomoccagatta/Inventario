@@ -74,7 +74,7 @@ void Video::capturasPeriodicasVideo(std::list<Imagen>& listaImagenes,std::list<s
 void Video::mostrarVideo(){
 	using namespace cv;
 	Mat image;
-	namedWindow("Image sequence | press ESC to close", WINDOW_KEEPRATIO);
+	namedWindow("Vista previa video | precione Q para salir", WINDOW_KEEPRATIO | CV_GUI_NORMAL);
 
 	std::cerr << "FPS: " << fps << std::endl;
 
@@ -94,7 +94,7 @@ void Video::mostrarVideo(){
 			//break; //para reproducir una vez y salir
 		}
 
-		imshow("Image sequence | press ESC to close", image);
+		imshow("Vista previa video | precione Q para salir", image);
 
 		char key = (char)waitKey(1000/fps); //delay N millis, usually long enough to display and capture input
 
@@ -110,6 +110,10 @@ void Video::mostrarVideo(){
 				char key = (char)waitKey(0);
 				if(key == ' ')
 					break;
+				if(key == 'q'){
+					destroyAllWindows();
+					return;
+				}
 				if(key == 27){
 					destroyAllWindows();
 					return;

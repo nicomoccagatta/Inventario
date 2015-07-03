@@ -8,7 +8,6 @@
 #ifndef CLIENTE_VISTA_CLIENT_VISTAENVIAR_H_
 #define CLIENTE_VISTA_CLIENT_VISTAENVIAR_H_
 
-//#include <gtkmm-3.0/gtkmm.h>
 #include <gtkmm-2.4/gtkmm.h>
 #include <glibmm-2.4/glibmm.h>
 #include <iostream>
@@ -16,6 +15,8 @@
 #include "../Control/client_ControladorVistaEnviar.h"
 #include "../Modelo/client_ModeloObservable.h"
 #include "client_ModelComboBoxAreasDeVision.h"
+
+class ControladorVistaEnviar;
 
 /*
  * Es la vista que permite seleccionar los datos necesarios para enviar una
@@ -34,7 +35,7 @@ public:
 	virtual ~VistaEnviar();
 
 	void asignarModelo(ModeloObservable* modelo);
-	void asignarControlador(ControladorVistaEnviar* controlador);
+	void ventanaError(const char* mensaje, const char* titulo);
 
 protected:
 	//signal handlers:
@@ -64,7 +65,6 @@ private:
 	void update();
 	void agregarAreasAlCombo();
 	void setearFechaYHora(std::tm* timer);
-	void ventanaError(const char* mensaje, const char* titulo);
 
 };
 

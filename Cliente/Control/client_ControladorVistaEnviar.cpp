@@ -10,24 +10,35 @@
 #include <ctime>
 
 #include "client_ControladorVistaEnviar.h"
+#include "../Vista/client_VistaEnviar.h"
+#include "../Vista/VistaPreviaImagen.h"
 #include "common_Imagen.h"
-#include "Vista/VistaSeleccioneFPS.h"
+#include "common_Video.h"
 
 #define FEATURE_MATCHING 1
 #define TEMPLATE_MATCHING 2
 
 void ControladorVistaEnviar::buttonVistaPreviaClicked(Glib::ustring rutaArchivo){
 
-	//if es una extencion de imagen
+	std::stringstream iss(rutaArchivo);
+	std::string extencion;
 
-	common::Imagen imagen(rutaArchivo);
+	while(std::getline(iss, extencion, '.'));
 
-	imagen.mostrarImagen();
+	if (extencion == "jpg" || extencion == "png"){
+		VistaPreviaImagen vistaPrevia(rutaArchivo);
+		vistaPrevia.correr();
+	}
+	else if (extencion == "mpg" || extencion == "mpeg" || extencion == "mp4"){
+		common::Video vid(rutaArchivo.c_str());
+		vid.mostrarVideo();
+	}
+	else{
+		std::cerr << "NO SOPORTAMOS ESA EXTENCION\n";
+		vista->ventanaError("No soportamos ese tipo de archivos", "Error");
+	}
 
 
-	//if es una extencion de video
-
-	//...
 }
 //Tue Jun 9 16:40:47 2015
 void ControladorVistaEnviar::buttonENVIARClicked(Glib::ustring rutaArchivo,Glib::Date* fecha,
@@ -84,6 +95,7 @@ void ControladorVistaEnviar::buttonENVIARClicked(Glib::ustring rutaArchivo,Glib:
 
 	}else{
 		std::cerr << "NO SOPORTAMOS ESA EXTENCION\n";
+		vista->ventanaError("No soportamos ese tipo de archivos", "Error");
 	}
 
 }

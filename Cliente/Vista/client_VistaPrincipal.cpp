@@ -25,6 +25,8 @@ VistaPrincipal::~VistaPrincipal() {
 		delete vistaEnviarPtr;
 	if(vistaDescargar)
 		delete vistaDescargar;
+	if(vistaCrearVideo)
+		delete vistaCrearVideo;
 	std::cerr << "SE TERMINO DE DESTRUIR\n";
 }
 

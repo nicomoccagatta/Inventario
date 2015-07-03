@@ -16,11 +16,11 @@ ThReproductorVideo::ThReproductorVideo(Gtk::VBox* box){
 	this->fps = 1;
 	this->activo = -1;
 	this->vivo = false;
-
+	this->cond = 0;
 }
 
 ThReproductorVideo::~ThReproductorVideo() {
-	// TODO Auto-generated destructor stub
+
 }
 
 void ThReproductorVideo::setearFrames(std::vector<Gtk::Image*>& frames){
@@ -50,45 +50,55 @@ void ThReproductorVideo::run(){
 	std::cerr << "REPRODUCIENDO\n";
 	this->vivo = true;
 
-	//Si se habia pausado
-	if(reproduciendo==false && activo!=-1){
-		std::cerr << "SIGO REPRODUCIENDO DESDE: " << activo << "\n";
-		box->remove(*frames[activo]);
-	}
-	this->reproduciendo = true;
+	while (this->vivo){
 
-	int it;
+		//Cuando apreto play retoma desde aca
+		mutex.bloquear();
+		pthread_cond_wait(cond, &(mutex.mutex)); //BLOQUEA
 
-	if(activo > 0)
-		it = activo;
-	else
-		it = 0;
+		//Si se habia pausado remuevo el frame que deje puesto
+		if(reproduciendo==false && activo!=-1){
+			std::cerr << "SIGO REPRODUCIENDO DESDE: " << activo << "\n";
+			box->remove(*frames[activo]);
+		}
+		this->reproduciendo = true;
 
-	std::cerr << "ACTIVO ANTES DEL FOR = " << activo << std::endl;
+		int it;
 
-	for (;it<frames.size() && reproduciendo==true;++it){
-		std::cerr << "IT = " << it << std::endl;
-		//std::cerr << "AGREGO\n";
-		box->pack_start(*frames[it]);
+		if(activo > 0)
+			it = activo; //sigue desde el que se habia pausado
+		else
+			it = 0;
 
-		activo=it;
+		std::cerr << "ACTIVO ANTES DEL FOR = " << activo << std::endl;
 
-		frames[it]->show();
+		for (;it<frames.size() && reproduciendo==true && vivo==true;++it){
+			std::cerr << "IT = " << it << std::endl;
+			//std::cerr << "AGREGO\n";
 
-		usleep(1000000/fps); //periodo
+			box->pack_start(*frames[it]);
 
-		//std::cerr << "REMUEVO\n";
+			activo=it;
 
-		box->remove(*frames[it]);
+			frames[it]->show();
 
-	}
-	std::cerr << "ACTIVO DESP DEL FOR = " << activo << std::endl;
-	if (activo == frames.size()-1)
-		activo=-1;
+			usleep(1000000/fps); //periodo
 
-	//Si se pauso, dejo la imagen en la que se habia pausado
-	if(reproduciendo==false && activo!=-1){
-		std::cerr << "SE QUEDA PAUSADO EN: " << activo << "\n";
-		box->pack_start(*frames[activo]);
+			//std::cerr << "REMUEVO\n";
+
+			box->remove(*frames[it]);
+		}
+		std::cerr << "ACTIVO DESP DEL FOR = " << activo << std::endl;
+		//Si se termino, lo dejo en estado inicial
+		if (activo == frames.size()-1)
+			activo=-1;
+
+		//Si se pauso, dejo la imagen en la que se habia pausado
+		if(reproduciendo==false && activo!=-1){
+			std::cerr << "SE QUEDA PAUSADO EN: " << activo << "\n";
+			box->pack_start(*frames[activo]);
+		}
+
+		mutex.desbloquear();
 	}
 }

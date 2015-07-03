@@ -12,6 +12,10 @@
 #include <gtkmm-2.4/gtkmm.h>
 
 #include "common_Thread.h"
+#include "common_Mutex.h"
+
+
+using common::Mutex;
 
 class ThReproductorVideo: public Thread {
 
@@ -21,6 +25,9 @@ class ThReproductorVideo: public Thread {
 	Gtk::VBox* box; //Donde hay que poner la imagen
 	int activo; //El indice en el vector de la imagen que esta en el box
 	bool vivo; //para saber si joinear o no
+
+	Mutex mutex;
+	pthread_cond_t* cond;
 
 public:
 	ThReproductorVideo(Gtk::VBox* box);
@@ -37,6 +44,15 @@ public:
 		return !reproduciendo;
 	}
 	void sacarImagenPausada();
+
+	void setMutex(Mutex& mutex, pthread_cond_t* cond){
+		this->mutex = mutex;
+		this->cond = cond;
+	}
+
+	void matar(){
+		this->vivo = false;
+	}
 };
 
 #endif /* CLIENTE_VISTA_THREPRODUCTORVIDEO_H_ */

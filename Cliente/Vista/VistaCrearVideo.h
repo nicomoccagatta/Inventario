@@ -14,6 +14,7 @@
 #include "ListaImagenesEnOrden.h"
 #include "AspectPreservingScalingImage.h"
 #include "ThReproductorVideo.h"
+#include "common_Mutex.h"
 
 class VistaCrearVideo: public Gtk::Viewport {
 public:
@@ -69,6 +70,9 @@ protected:
 
 	Gtk::VBox paraReproductor;
 	ThReproductorVideo reproductor;
+
+	common::Mutex mutex;
+	pthread_cond_t cond;
 };
 
 #endif /* CLIENTE_VISTA_VISTACREARVIDEO_H_ */

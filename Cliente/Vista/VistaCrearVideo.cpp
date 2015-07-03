@@ -93,11 +93,23 @@ VistaCrearVideo::VistaCrearVideo(BaseObjectType* cobject, const Glib::RefPtr<Gtk
 	add(verticalBox);
 	show_all_children();
 
+	pthread_cond_init(&cond,NULL);
 
+	reproductor.setMutex(this->mutex, &(this->cond));
 
+	reproductor.start();
 }
 
 VistaCrearVideo::~VistaCrearVideo() {
+	reproductor.matar();
+	pthread_cond_broadcast(&cond); //para que salga del bloqueo
+	std::cerr << "JOINEO\n";
+	reproductor.join();
+
+
+	pthread_cond_destroy(&cond);
+
+
 	Gtk::TreeModel::Children children = m_refImagenesListStore->children();
 	Gtk::TreeModel::Children::iterator it;
 
@@ -146,8 +158,9 @@ void VistaCrearVideo::on_button_Agregar(){
 	}
 	}
 	/*Actualizo los frames del reproductor*/
+	mutex.bloquear();
 	this->actualizarFramesReproductor();
-
+	mutex.desbloquear();
 }
 
 void VistaCrearVideo::actualizarFramesReproductor(){
@@ -169,6 +182,8 @@ void VistaCrearVideo::actualizarFramesReproductor(){
  * Agrega la imagen al listado, excalada a 1/8 de su tamano original.
  */
 void VistaCrearVideo::agregarImagenALista(Glib::ustring rutaCompleta){
+	mutex.bloquear();
+
 	std::stringstream iss(rutaCompleta);
 	std::string nombre;
 
@@ -185,12 +200,15 @@ void VistaCrearVideo::agregarImagenALista(Glib::ustring rutaCompleta){
 	row[m_ImagenesList.m_Columns.m_col_nombre] = nombre;
 	row[m_ImagenesList.m_Columns.m_col_ruta] = rutaCompleta;
 	row[m_ImagenesList.m_Columns.m_col_imgGrande] = image;
+
+	mutex.desbloquear();
 }
 
 /*
  * Elimina la imagen del listado
  */
 void VistaCrearVideo::on_button_Eliminar(){
+	mutex.bloquear();
 	/*Seguramente cuando la seleccione se puso como activa*/
 	if (this->activaAlSeleccionar){
 			this->paraReproductor.remove(*activaAlSeleccionar);
@@ -208,6 +226,7 @@ void VistaCrearVideo::on_button_Eliminar(){
 	}
 	/*Actualizo los frames (sin la que se elimino)*/
 	this->actualizarFramesReproductor();
+	mutex.desbloquear();
 }
 
 /*
@@ -216,6 +235,8 @@ void VistaCrearVideo::on_button_Eliminar(){
  */
 void VistaCrearVideo::on_imagen_seleccionada(){
 	//BOLQUEAR MUTEX
+	mutex.bloquear();
+
 	if (reproductor.estaPausado())
 		reproductor.sacarImagenPausada();
 
@@ -232,20 +253,22 @@ void VistaCrearVideo::on_imagen_seleccionada(){
 		this->activaAlSeleccionar = row[m_ImagenesList.m_Columns.m_col_imgGrande];
 		this->activaAlSeleccionar->show_now();
 	}
-	show_all_children();
-
+	mutex.desbloquear();
 }
 
 /*
  * Si se cambia el orden de la visa se tiene que cambiar el orden del video.
  */
 void VistaCrearVideo::on_my_drag_begin(const Glib::RefPtr<Gdk::DragContext>& context){
+	mutex.bloquear();
+
 	std::cerr << "ARRANCA EL DRAG\n";
 	/*Seguramente cuando la seleccione se puso como activa*/
 	if (this->activaAlSeleccionar){
 		this->paraReproductor.remove(*activaAlSeleccionar);
 		this->activaAlSeleccionar = 0;
 	}
+	mutex.desbloquear();
 }
 /*
  * Si se cambia el orden de la visa se tiene que cambiar el orden del video.
@@ -260,17 +283,17 @@ void VistaCrearVideo::on_my_drag_end(const Glib::RefPtr<Gdk::DragContext>& conte
  * el principio, por ahora.
  */
 void VistaCrearVideo::on_button_Play(){
-	//Si habia una por seleccionar, la saco antes
+	//Si habia una imagen por seleccionar, la saco antes
 	if (this->activaAlSeleccionar){
 		this->paraReproductor.remove(*activaAlSeleccionar);
 		this->activaAlSeleccionar = 0;
 	}
-
+/*
 	if(reproductor.estaVivo()){
 		std::cerr << "JOINEO\n";
 		reproductor.join();
 	}
-
+*/
 	std::stringstream ss;
 	ss << m_FPSEntry.get_text();
 	double f=0;
@@ -278,9 +301,14 @@ void VistaCrearVideo::on_button_Play(){
 
 	if (f<=0)
 		return this->ventanaError("Ingresa las FPS!", "Error");
+	if (f>50)
+		return this->ventanaError("Imposible tantos FPS!", "Error");
 
 	reproductor.setFPS(f);
-	reproductor.start();
+
+	mutex.bloquear();
+	pthread_cond_broadcast(&cond);
+	mutex.desbloquear();
 }
 
 void VistaCrearVideo::on_button_Pausa(){
@@ -288,7 +316,8 @@ void VistaCrearVideo::on_button_Pausa(){
 }
 
 void VistaCrearVideo::on_button_Stop(){
-
+	//mutex.desbloquear();
+	//cond = true;
 }
 
 /*

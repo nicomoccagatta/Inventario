@@ -17,7 +17,6 @@
 #include "VistaCrearVideo.h"
 
 /*
- * A CAMBIAR POR PANELES CON PESTANIAS.
  * Es la ventana principal que contiene a las otras tres vistas.
  */
 class VistaPrincipal: public Gtk::Window {
@@ -32,12 +31,7 @@ private:
 	//signal handlers:
 	bool on_exit_clicked(GdkEventAny* event);
 
-	bool crearVistaEnviarAPartirDeGlade();
-
 	Glib::RefPtr<Gtk::Builder> m_refGlade;
-	//Gtk::Viewport *panelDinamicoEnviar;
-	Gtk::Viewport *panelDinamicoDescargar;
-	Gtk::Viewport *panelDinamicoCrearVideo;
 
 	VistaEnviar* vistaEnviarPtr;
 	VistaDescargaImagenDeProductos2* vistaDescargar;

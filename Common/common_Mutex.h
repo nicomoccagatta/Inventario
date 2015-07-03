@@ -12,7 +12,7 @@ class Mutex {
   void bloquear();
   void desbloquear();
 
- private:
+ //private:
   pthread_mutex_t mutex;
 };
 

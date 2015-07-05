@@ -1,7 +1,6 @@
 FROM ubuntu
 RUN apt-get -y update
 RUN apt-get install -y git
-RUN git clone https://github.com/nicomoccagatta/Inventario.git
 RUN apt-get install -y cmake
 RUN apt-get install -y libgtkmm-2.4-dev
 RUN apt-get install -y libtinyxml-dev
@@ -27,8 +26,9 @@ RUN cd /xfeatures2d/opencv_contrib && mkdir build
 RUN cd /xfeatures2d/opencv_contrib/build && cmake -DOPENCV_EXTRA_MODULES_PATH=/xfeatures2d/opencv_contrib/modules /OpenCV/opencv-3.0.0
 RUN cd /xfeatures2d/opencv_contrib/build && make -j5
 RUN cd /xfeatures2d/opencv_contrib/build && make -j5 install
-RUN cd Inventario/build && cmake -G "Unix Makefiles" ..
 RUN apt-get install -qqy x11-apps
 RUN apt-get install -qqy build-essential
 RUN apt-get install -qqy cmake libgtk2.0-dev pkg-config
 ENV DISPLAY :0
+RUN git clone https://github.com/nicomoccagatta/Inventario.git
+RUN cd Inventario/build && cmake -G "Unix Makefiles" ..

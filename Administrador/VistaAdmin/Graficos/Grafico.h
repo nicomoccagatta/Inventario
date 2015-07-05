@@ -33,12 +33,12 @@ protected:
 	void resize();
 
 	std::list< Referencia > referencias;
+	std::list< Area* > areas;
 	int ancho_ventana;
 	int alto_ventana;
 	int min_lado;
 	bool should_request_size;
 	double furthest_x, furthest_y;
-	std::list< Area* > areas;
 	double normalizacion;
 };
 #endif  // GRAFICO_H

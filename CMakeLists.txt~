@@ -41,9 +41,6 @@ include_directories(${GTKMM_INCLUDE_DIRS})
 include_directories(${GTKMM_INCLUDE_DIRS} ${GSTMM_INCLUDE_DIRS})
 add_executable(Admin
 			Administrador/admin_main.cpp
-			Administrador/ControlAdmin/admin_ControladorVistaListadoP.cpp
-			Administrador/ControlAdmin/ControlLP.cpp
-			Administrador/ControlAdmin/ControlLAV.cpp
 			Administrador/ControlAdmin/admin_ControlAP.cpp
 			Administrador/ControlAdmin/ControlEP.cpp
 			Administrador/ModeloAdmin/Administrador.cpp
@@ -70,6 +67,7 @@ add_executable(Admin
 			Administrador/VistaAdmin/Graficos/GraficoDeBarras.cpp
 			Administrador/VistaAdmin/Graficos/Referencia.cpp
 			Administrador/VistaAdmin/Graficos/GraficoDeTorta.cpp
+			Administrador/VistaAdmin/Graficos/PorcionCircular.cpp
 			Common/common_SocketCliente.cpp
 			Common/common_AreaDeVision.cpp
 			Common/common_Mutex.cpp
@@ -104,10 +102,11 @@ add_executable(Client
 			Cliente/Control/client_ControladorVistaEnviar.cpp
 			Cliente/Control/client_ControladorVistaDescargaImagenDeProductos.cpp
 			Cliente/Vista/client_VistaDescargaImagenDeProductos2.cpp
-			#Cliente/Vista/client_ProductosList.cpp
 			Cliente/Vista/client_VistaPrincipal.cpp
-			Cliente/Vista/AspectPreservingScalingImage.h
-			#Common/common_Cliente.cpp
+			Cliente/Vista/VistaSeleccioneFPS.cpp
+			Cliente/Vista/VistaCrearVideo.cpp
+			Cliente/Vista/ThReproductorVideo.cpp
+			Cliente/Vista/VistaPreviaImagen.cpp
 			Common/common_SocketCliente.cpp
 			Common/common_AreaDeVision.cpp
 			Common/common_Mutex.cpp

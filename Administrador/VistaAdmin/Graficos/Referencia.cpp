@@ -9,7 +9,6 @@ Referencia::Referencia(const Area& referente) {
     const double* refColor = referente.getColor();
     for (unsigned i = 0; i < 4; ++i)
         color[i] = refColor[i];
-
     font = Cairo::FONT_WEIGHT_NORMAL;
 }
 

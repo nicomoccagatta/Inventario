@@ -1,10 +1,3 @@
-/*
- * VistaEditarAreaVision.cpp
- *
- *  Created on: 28/6/2015
- *      Author: nicomoccagatta
- */
-
 #include "VistaEditarAreaVision.h"
 
 VistaEditarAreaVision::VistaEditarAreaVision(Modelo_Observable *model,unsigned long int id,std::string& ubicacion,std::string capturador): modelo(model), idAV(id) {

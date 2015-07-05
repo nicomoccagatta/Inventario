@@ -1,10 +1,3 @@
-/*
- * VistaAgregarAreaVision.h
- *
- *  Created on: 23/6/2015
- *      Author: nicomoccagatta
- */
-
 #ifndef ADMINISTRADOR_VISTAADMIN_VISTAAGREGARAREAVISION_H_
 #define ADMINISTRADOR_VISTAADMIN_VISTAAGREGARAREAVISION_H_
 
@@ -36,7 +29,6 @@ class VistaAgregarAreaVision : public Gtk::Window {
 public:
 	VistaAgregarAreaVision(Modelo_Observable *model);
 	virtual ~VistaAgregarAreaVision();
-	void update();
 };
 
 #endif /* ADMINISTRADOR_VISTAADMIN_VISTAAGREGARAREAVISION_H_ */

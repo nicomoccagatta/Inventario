@@ -41,10 +41,7 @@ include_directories(${GTKMM_INCLUDE_DIRS})
 include_directories(${GTKMM_INCLUDE_DIRS} ${GSTMM_INCLUDE_DIRS})
 add_executable(Admin
 			Administrador/admin_main.cpp
-			Administrador/ControlAdmin/admin_ControladorVistaListadoP.cpp
-			Administrador/ControlAdmin/ControlLP.cpp
-			Administrador/ControlAdmin/ControlLAV.cpp
-			Administrador/ControlAdmin/admin_ControlAP.cpp
+			Administrador/ControlAdmin/ControlAP.cpp
 			Administrador/ControlAdmin/ControlEP.cpp
 			Administrador/ModeloAdmin/Administrador.cpp
 			Administrador/ModeloAdmin/admin_Datos.cpp

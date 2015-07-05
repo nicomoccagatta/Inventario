@@ -1,10 +1,3 @@
-/*
- * VistaStockGeneral.cpp
- *
- *  Created on: 23/6/2015
- *      Author: nicomoccagatta
- */
-
 #include "VistaStockGeneral.h"
 
 VistaStockGeneral::VistaStockGeneral() : modelo(0), panelDinam(0) {

@@ -1,10 +1,3 @@
-/*
- * ControlEP.h
- *
- *  Created on: 28/6/2015
- *      Author: nicomoccagatta
- */
-
 #ifndef ADMINISTRADOR_CONTROLADMIN_CONTROLEP_H_
 #define ADMINISTRADOR_CONTROLADMIN_CONTROLEP_H_
 

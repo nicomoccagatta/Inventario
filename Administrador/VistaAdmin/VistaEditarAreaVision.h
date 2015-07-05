@@ -1,10 +1,3 @@
-/*
- * VistaEditarAreaVision.h
- *
- *  Created on: 28/6/2015
- *      Author: nicomoccagatta
- */
-
 #ifndef ADMINISTRADOR_VISTAADMIN_VISTAEDITARAREAVISION_H_
 #define ADMINISTRADOR_VISTAADMIN_VISTAEDITARAREAVISION_H_
 

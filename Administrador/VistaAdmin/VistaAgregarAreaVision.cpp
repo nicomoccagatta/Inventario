@@ -1,10 +1,3 @@
-/*
- * VistaAgregarAreaVision.cpp
- *
- *  Created on: 23/6/2015
- *      Author: nicomoccagatta
- */
-
 #include "VistaAgregarAreaVision.h"
 
 VistaAgregarAreaVision::VistaAgregarAreaVision(Modelo_Observable *model): modelo(model) {
@@ -88,6 +81,4 @@ void VistaAgregarAreaVision::on_button_OK(){
 
 void VistaAgregarAreaVision::on_button_CANCEL(){
 	delete this;
-}
-void VistaAgregarAreaVision::update(){
 }

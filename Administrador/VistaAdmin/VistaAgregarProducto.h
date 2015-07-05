@@ -1,18 +1,12 @@
-/*
- * VistaAgregarProducto.h
- *
- *  Created on: 21/6/2015
- *      Author: nicomoccagatta
- */
-
 #ifndef ADMINISTRADOR_VISTAADMIN_VISTAAGREGARPRODUCTO_H_
 #define ADMINISTRADOR_VISTAADMIN_VISTAAGREGARPRODUCTO_H_
 
 #include <gtkmm-2.4/gtkmm.h>
 #include "ModeloAdmin/admin_ModeloObservable.h"
-#include "ControlAdmin/admin_ControlAP.h"
 #include <cstdio>
 #include <cstdlib>
+
+#include "../ControlAdmin/ControlAP.h"
 using std::sprintf;
 using std::strtol;
 
@@ -23,11 +17,7 @@ class VistaAgregarProducto : public Gtk::Window{
 	void on_button_actualizarIcono();
 	void on_button_agregarImagen();
 	void on_button_agregarProducto();
-public:
-	VistaAgregarProducto(Modelo_Observable *model);
-	void eliminarIconoPertenecienteABoton(Gtk::VBox *vbbox,std::string *sfiledir);
-	virtual ~VistaAgregarProducto();
-protected:
+
 	Gtk::VBox m_vBoxPrincipal;
 
 	Gtk::HBox hBoxNombre;
@@ -61,6 +51,10 @@ protected:
 
 	Gtk::Button m_AgregarProducto;
 	Gtk::HButtonBox m_butoneraAgregarBoton;
+public:
+	VistaAgregarProducto(Modelo_Observable *model);
+	void eliminarIconoPertenecienteABoton(Gtk::VBox *vbbox,std::string *sfiledir);
+	virtual ~VistaAgregarProducto();
 };
 
 #endif /* ADMINISTRADOR_VISTAADMIN_VISTAAGREGARPRODUCTO_H_ */

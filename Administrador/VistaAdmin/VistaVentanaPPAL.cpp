@@ -1,10 +1,3 @@
-/*
- * VistaVentanaPPAL.cpp
- *
- *  Created on: 16/6/2015
- *      Author: nicomoccagatta
- */
-
 #include "VistaVentanaPPAL.h"
 
 VistaVentanaPPAL::VistaVentanaPPAL(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade)

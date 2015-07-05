@@ -1,10 +1,3 @@
-/*
- * VistaStockGeneral.h
- *
- *  Created on: 23/6/2015
- *      Author: nicomoccagatta
- */
-
 #ifndef ADMINISTRADOR_VISTAADMIN_VISTASTOCKGENERAL_H_
 #define ADMINISTRADOR_VISTAADMIN_VISTASTOCKGENERAL_H_
 

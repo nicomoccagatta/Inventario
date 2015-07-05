@@ -2,11 +2,6 @@
 #include <cairomm/context.h>
 #include "PorcionCircular.h"
 
-#define INIT_OFFSET 0.0
-#define X_0     0.4
-#define Y_0     0.5
-#define RADIO   0.3
-
 GraficoDeTorta::GraficoDeTorta(){
 }
 
@@ -19,10 +14,10 @@ void GraficoDeTorta::actualizarDatos(const std::list< DatoGrafico >& datos) {
 
     std::list< DatoGrafico >::const_iterator itDatos = datos.begin();
     unsigned i = 0;
-    double offset = INIT_OFFSET;
+    double offset = 0.0;
     for ( ; itDatos != datos.end(); ++itDatos, ++i) {
         PorcionCircular* porcion = new PorcionCircular(*itDatos, normalizacion,
-                                                    i, offset,X_0, Y_0, RADIO);
+                                                    i, offset,0.4,0.5,0.3);
         offset = porcion->getAvance();
         areas.push_back(porcion);
     }

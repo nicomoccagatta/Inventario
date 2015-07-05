@@ -1,10 +1,3 @@
-/*
- * ControlEP.cpp
- *
- *  Created on: 28/6/2015
- *      Author: nicomoccagatta
- */
-
 #include "ControlEP.h"
 #include "VistaAdmin/VistaEditarProducto.h"
 

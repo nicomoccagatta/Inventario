@@ -1,12 +1,8 @@
 #include "Grafico.h"
 #include "Area.h"
 
-#define MIN_LADO 200
-#define COL_RESULTADO 0  // constante que hace que siempre se tome la columna 0 de la respuesta para dar nombre a las áreas del gráfico
-#define SIN_DATOS "No hay datos para mostrar"
-
 Grafico::Grafico() :ancho_ventana(0),alto_ventana(0),min_lado(0),normalizacion(0){
-    set_size_request(MIN_LADO, MIN_LADO);
+    set_size_request(200, 200);
     furthest_x = 1.0;
     furthest_y = 1.0;
     min_lado = 0;
@@ -61,7 +57,7 @@ void Grafico::dibujarAreas(Cairo::RefPtr< Cairo::Context >& ctx) {
             ctx->move_to(0.03, 0.1);
             ctx->set_font_size(0.04);
             ctx->set_source_rgb(0.5, 0.5, 0.5);
-            ctx->show_text(SIN_DATOS);
+            ctx->show_text("No hay datos para mostrar");
         ctx->restore();
     } else {
         std::list< Area* >::iterator it = areas.begin();

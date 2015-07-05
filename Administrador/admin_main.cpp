@@ -1,10 +1,3 @@
-/*
- * Administrador.cpp
- *
- *  Created on: 11/6/2015
- *      Author: nicomoccagatta
- */
-
 #include <gtkmm-2.4/gtkmm.h>
 #include <glibmm-2.4/glibmm.h>
 #include <iostream>
@@ -16,7 +9,6 @@
 int crearAPartirDeGlade(Glib::RefPtr<Gtk::Builder>* refBuilder);
 
 int main(int argc, char *argv[]) {
-
 	Modelo_Observable modelo;
 	modelo.actualizarProductos();
 	modelo.actualizarAreasDeVision();

@@ -15,7 +15,7 @@
 #define ANCHO_REF_EJE   		0.02
 #define ALTURA_GRAFICO_NORMA	0.9
 
-GraficoDeBarras::GraficoDeBarras():ancho(0),datosSize(0),espacio(0),separacion(0){
+GraficoDeBarras::GraficoDeBarras():separacion(0),ancho(0),espacio(0),datosSize(0){
     normalizacion = -DBL_MAX;
 }
 

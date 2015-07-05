@@ -47,14 +47,14 @@ void ThReproductorVideo::sacarImagenPausada(){
 }
 
 void ThReproductorVideo::run(){
-	std::cerr << "REPRODUCIENDO\n";
+	std::cerr << "INICIANDO REPRODUCTOR\n";
 	this->vivo = true;
 
 	while (this->vivo){
 
 		//Cuando apreto play retoma desde aca
 		mutex.bloquear();
-		pthread_cond_wait(cond, &(mutex.mutex)); //BLOQUEA
+		pthread_cond_wait(cond, &(mutex.mutex)); //BLOQUEA EL HILO
 
 		//Si se habia pausado remuevo el frame que deje puesto
 		if(reproduciendo==false && activo!=-1){

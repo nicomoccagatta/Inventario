@@ -164,11 +164,11 @@ void VistaDescargaImagenDeProductos2::on_button_descargar(){
 	}
 	case(Gtk::RESPONSE_CANCEL):{
 		std::cerr << "Cancel clicked." << std::endl;
-		break;
+		return;
 	}
 	default:{
 		std::cerr << "Unexpected button clicked." << std::endl;
-		break;
+		return;
 	}
 	}
 

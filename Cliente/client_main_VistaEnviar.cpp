@@ -23,16 +23,46 @@ int crearAPartirDeGlade(Glib::RefPtr<Gtk::Builder>* refBuilder,
 		const char* gladeFile);
 
 int main(int argc, char* argv[]) {
-
-	//common::Video vid("/home/ale/git/Inventario/Imagenes/Areas/Farmacia/farmacia_%02d.jpg", 50);
+/*
+	common::Video vid("/home/ale/git/Inventario/Imagenes/Areas/Farmacia/farmacia_%02d.jpg", 2);
 	//vid.mostrarVideo();
 	//return 0;
-	/*common::Video vid("test.mp4");
+	//common::Video vid("test.mp4");
 
+	//vid.mostrarVideo();
+
+	std::string s("GUARDOOO.mp4");
+	vid.guardar(s);
+
+	return 0;
 	cv::VideoCapture capturasVideo;
 
 	if (!capturasVideo.open("testLeo.mp4"))
 		std:: cout << "FAAAAAALSE\n";
+
+	int i =capturasVideo.get(CV_CAP_PROP_FOURCC);
+
+	std::cout << i << std::endl;
+
+	cv::VideoWriter output("SALIDA_VIDEO.mp4",capturasVideo.get(CV_CAP_PROP_FOURCC),
+			capturasVideo.get(CV_CAP_PROP_FPS),
+            cv::Size(800,600));
+
+	// Loop to read from input and write to output
+	cv::Mat frame;
+
+	while (true)
+	{
+	    if (!capturasVideo.read(frame))
+	        break;
+	    cv::resize(frame,frame,cv::Size(800,600));
+	    output.write(frame);
+	}
+
+	capturasVideo.release();
+	output.release();
+
+	return 0;
 
 	if (!capturasVideo.isOpened()){
 		std::cerr << "EL OPENCV ES UNA MIERDA!\n";

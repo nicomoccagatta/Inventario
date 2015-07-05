@@ -9,6 +9,7 @@
 #include <sstream>
 
 #include "VistaCrearVideo.h"
+#include "common_Video.h"
 
 
 VistaCrearVideo::VistaCrearVideo(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade)
@@ -74,13 +75,17 @@ VistaCrearVideo::VistaCrearVideo(BaseObjectType* cobject, const Glib::RefPtr<Gtk
 	m_StopButton.set_label("Stop");
 	m_StopButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaCrearVideo::on_button_Stop) );
 
+	m_DescargarButton.set_label("Descargar");
+	m_DescargarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaCrearVideo::on_button_Descargar) );
+	//m_DescargarButton.set_size_request(30,30);
 
 	m_FPSLabel.set_text("FPS: ");
 	m_FPSEntry.set_max_length(6);
 	m_FPSEntry.set_width_chars(6);
 	hBoxFPS.pack_start(m_FPSLabel,false,false);
 	hBoxFPS.pack_start(m_FPSEntry,false,false,10);
-	labelMasVistaPreviaMasPlayStopPausa.pack_end(hBoxFPS);
+	hBoxFPS.pack_end(m_DescargarButton,false,false,10);
+	labelMasVistaPreviaMasPlayStopPausa.pack_end(hBoxFPS,false,false,10);
 
 	m_ButtonBoxPlayPausaStop.pack_start(m_PlayButton);
 	m_ButtonBoxPlayPausaStop.pack_start(m_PausaButton);
@@ -263,7 +268,7 @@ void VistaCrearVideo::on_my_drag_begin(const Glib::RefPtr<Gdk::DragContext>& con
 	mutex.bloquear();
 
 	std::cerr << "ARRANCA EL DRAG\n";
-	/*Seguramente cuando la seleccione se puso como activa*/
+	/*Cuando la seleccione se puso como imagen activa y genera errores*/
 	if (this->activaAlSeleccionar){
 		this->paraReproductor.remove(*activaAlSeleccionar);
 		this->activaAlSeleccionar = 0;
@@ -274,7 +279,6 @@ void VistaCrearVideo::on_my_drag_begin(const Glib::RefPtr<Gdk::DragContext>& con
  * Si se cambia el orden de la visa se tiene que cambiar el orden del video.
  */
 void VistaCrearVideo::on_my_drag_end(const Glib::RefPtr<Gdk::DragContext>& context){
-	std::cerr << "TERMINO EL DRAG\n";
 	this->actualizarFramesReproductor();
 }
 
@@ -288,12 +292,6 @@ void VistaCrearVideo::on_button_Play(){
 		this->paraReproductor.remove(*activaAlSeleccionar);
 		this->activaAlSeleccionar = 0;
 	}
-/*
-	if(reproductor.estaVivo()){
-		std::cerr << "JOINEO\n";
-		reproductor.join();
-	}
-*/
 	std::stringstream ss;
 	ss << m_FPSEntry.get_text();
 	double f=0;
@@ -316,18 +314,77 @@ void VistaCrearVideo::on_button_Pausa(){
 }
 
 void VistaCrearVideo::on_button_Stop(){
-	//mutex.desbloquear();
-	//cond = true;
+	reproductor.pausa();
+	reproductor.sacarImagenPausada();
+}
+
+void VistaCrearVideo::on_button_Descargar(){
+	std::stringstream ss;
+	ss << m_FPSEntry.get_text().c_str();
+	double f=0.0;
+	ss >> f;
+
+	std::cerr << "FPS: " << f << std::endl;
+	if (f<0.5)
+		return this->ventanaError("Ingresa las FPS!\n\n\n--mayor o igual a 0.5--", "Error");
+	if (f>50)
+		return this->ventanaError("Imposible tantos FPS!", "Error");
+
+	/*Abro el dialogo para elegir nombre de archivo, la extencion sera mp4*/
+	Gtk::FileChooserDialog dialog("Elige donde y con que nombre guardar el video",
+			Gtk::FILE_CHOOSER_ACTION_SAVE);
+
+	//Add response buttons the the dialog:
+	dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
+	dialog.add_button("Select", Gtk::RESPONSE_OK);
+
+	int result = dialog.run();
+	std::string nombre;
+	//Handle the response:
+	switch(result){
+	case(Gtk::RESPONSE_OK):{
+		std::cerr << "Select clicked." << std::endl;
+		std::cerr << "Folder selected: " << dialog.get_filename()
+		        				<< std::endl;
+
+		nombre = (dialog.get_filename().c_str());
+		nombre+=".mp4";
+
+		break;
+	}
+	case(Gtk::RESPONSE_CANCEL):{
+		std::cerr << "Cancel clicked." << std::endl;
+		return;
+	}
+	default:{
+		std::cerr << "Unexpected button clicked." << std::endl;
+		return;
+	}
+	}
+
+	Gtk::TreeModel::Children children = m_refImagenesListStore->children();
+	Gtk::TreeModel::Children::iterator it;
+
+	std::vector<std::string> rutaFrames;
+
+	for(it=children.begin(); it != children.end(); ++it){
+		Gtk::TreeModel::Row row = *it;
+		Glib::ustring s = row[m_ImagenesList.m_Columns.m_col_ruta];
+		std::string strin(s.c_str());
+		rutaFrames.push_back(strin);
+	}
+
+	common::Video::guardarAPartirDeImagenes(nombre,rutaFrames,f);
 }
 
 /*
- * Salta una ventana con un mensaje.
+ * Salta una ventana con un titulo y un mensaje.
  */
 void VistaCrearVideo::ventanaError(const char* mensaje, const char* titulo){
 	Gtk::Window ventanitaError;
 	Gtk::MessageDialog dialog(ventanitaError,mensaje,false, Gtk::MESSAGE_ERROR);
 	dialog.set_title(titulo);
-	dialog.set_size_request(350,100);
+	dialog.set_size_request(500,100);
 	dialog.run();
 	return;
 }

@@ -31,6 +31,7 @@ private:
 	void on_button_Play();
 	void on_button_Pausa();
 	void on_button_Stop();
+	void on_button_Descargar();
 
 	void agregarImagenALista(Glib::ustring ruta);
 
@@ -64,6 +65,7 @@ protected:
 	Gtk::HBox hBoxFPS;
 	Gtk::Label m_FPSLabel;
 	Gtk::Entry m_FPSEntry;
+	Gtk::Button m_DescargarButton;
 
 	Gtk::Image* activaAlSeleccionar;
 

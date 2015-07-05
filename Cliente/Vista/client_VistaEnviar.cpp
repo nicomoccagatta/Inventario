@@ -57,6 +57,7 @@ VistaEnviar::VistaEnviar(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builde
 	//No es necesario agregar la columna valor si sólo queremos mostrar el texto
 	//combo.pack_start(columnas.getColumnaValor());
 	m_AreasDeVision->pack_start(columnas.getColumnaTexto());
+
 }
 
 VistaEnviar::~VistaEnviar() {

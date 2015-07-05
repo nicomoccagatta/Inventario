@@ -278,6 +278,7 @@ void ClienteDemo::enviarVideo(const char* comando, unsigned long int idArea, std
 	std::list<Imagen> frames;
 	std::list<std::string> fechas;
 
+	/*Saco los frames cada un minuto y sus fechas correspondientes*/
 	vid.capturasPeriodicasVideo(frames,fechas,fechaInicio,1);
 
 	std::list<Imagen>::iterator itIm;
@@ -299,6 +300,5 @@ void ClienteDemo::enviarVideoTemplateMatching(unsigned long int idArea, std::str
 
 void ClienteDemo::enviarVideoFeatureMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeVideo){
 	Video vid(rutaDeVideo);
-
 	this->enviarVideo("N|",idArea,fechaInicio,vid);
 }

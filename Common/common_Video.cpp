@@ -15,6 +15,54 @@ bool Video::esValido()const{
 	return capturasVideo.isOpened();
 }
 
+void Video::guardar(std::string& rutaDestino){
+	cv::VideoWriter output(rutaDestino.c_str(),CV_FOURCC('D','I','V','X'),//1983148141,
+			fps,
+			cv::Size(800,600));
+
+	std::cerr << "SE ABREE\n";
+	// Loop to read from input and write to output
+	cv::Mat frame;
+
+	while (true)
+	{
+		if (!capturasVideo.read(frame))
+			break;
+		cv::resize(frame,frame,cv::Size(800,600));
+		output.write(frame);
+	}
+
+	capturasVideo.release();
+	output.release();
+}
+
+void Video::guardarAPartirDeImagenes(const std::string& rutaDestino,
+		const std::vector<std::string>& rutas, const double fps){
+
+	std::vector<cv::Mat> frames;
+
+	for(int i=0;i<rutas.size();++i){
+		frames.push_back(cv::Mat(cv::imread(rutas[i])));
+	}
+
+	cv::VideoWriter output(rutaDestino.c_str(),CV_FOURCC('D','I','V','X'),//1983148141,
+			fps,
+			cv::Size(800,600));
+
+	std::cerr << "SE ABREE\n";
+	// Loop to read from input and write to output
+	cv::Mat frame;
+
+	for(int i=0;i<frames.size();++i){
+		frame = frames[i];
+		cv::resize(frame,frame,cv::Size(800,600));
+		output.write(frame);
+	}
+	output.release();
+}
+
+
+
 //Completa la lista de imagenes y strings con las imagenes separadas por un periodo en segundos dado por periodoEnSegundos,
 //completando en el mismo orden la lista de string con las fechas de esas imagenes teniendo en cuenta la fechaInicial como la de la primera imagen del video.
 void Video::capturasPeriodicasVideo(std::list<Imagen>& listaImagenes,std::list<std::string>& listaDeFechas,
@@ -55,7 +103,7 @@ void Video::capturasPeriodicasVideo(std::list<Imagen>& listaImagenes,std::list<s
 
 				//Le agrego a la fecha la cantidad de segundos que pasaron,
 				//El mktime luego se encarga de arreglar los minutos en caso de que
-				//queden segundos mayores a 60
+				//queden segundos o minutos mayores a 60 u horas mayor a 23, etc
 				fechaProcesada.tm_sec += periodoFinalEnSegundos;
 
 
@@ -120,8 +168,8 @@ void Video::mostrarVideo(){
 				}
 			}
 		}
-
 	}
+	//capturasVideo.release();
 }
 
 

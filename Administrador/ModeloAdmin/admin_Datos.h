@@ -1,10 +1,3 @@
-/*
- * admin_Datos.h
- *
- *  Created on: 16/6/2015
- *      Author: nicomoccagatta
- */
-
 #ifndef ADMINISTRADOR_MODELOADMIN_ADMIN_DATOS_H_
 #define ADMINISTRADOR_MODELOADMIN_ADMIN_DATOS_H_
 
@@ -17,11 +10,8 @@ using common::Producto;
 using common::AreaDeVision;
 
 class Datos {
-
 	std::list<Producto*> productos;
-
 	std::list<AreaDeVision*> areasDeVision;
-
 public:
 	Datos();
 	virtual ~Datos();

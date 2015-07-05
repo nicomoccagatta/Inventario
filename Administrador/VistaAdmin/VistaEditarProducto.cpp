@@ -219,17 +219,6 @@ void VistaEditarProducto::on_button_editarOK(){
 	std::string descProducto = m_ingresarDescripcion.get_text();
 	std::string rutaImagenIcono = m_botonFileChooserImgPPAL.get_filename();
 
-	std::list<std::string*>::iterator it = m_rutaImagenes.begin();
-	std::cerr << "Ruta a agregrar de imagenes"<< std::endl;
-	for (; it!=m_rutaImagenes.end() ; ++it){
-		std::cerr << *(*it)<< std::endl;
-	}
-
-	std::cerr << "Id producto modificar: " << m_idProducto << std::endl;
-	std::cerr << "Nombre: " << nombreProducto << std::endl;
-	std::cerr << "Descripcion: " << descProducto << std::endl;
-	std::cerr << "ruta Imagen Icono: " << rutaImagenIcono << std::endl;
-
 	this->modelo->modificarProducto(m_idProducto,nombreProducto,descProducto,rutaImagenIcono,m_idsImagenes,m_rutaImagenes);
 
 	Gtk::Window *ventanitaOK = new Gtk::Window;

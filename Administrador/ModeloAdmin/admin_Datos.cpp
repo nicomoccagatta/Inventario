@@ -1,10 +1,3 @@
-/*
- * admin_Datos.cpp
- *
- *  Created on: 16/6/2015
- *      Author: nicomoccagatta
- */
-
 #include "admin_Datos.h"
 #include <iostream>
 #include <vector>

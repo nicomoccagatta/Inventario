@@ -3,14 +3,11 @@
 
 #include <cairomm/context.h>
 #include <glibmm/ustring.h>
-
-class Area;
-class Grafico;
+#include "Area.h"
 
 /** Clase que sirve para la referencia para los gráficos.
  *  Son un cuadradito con el color del área que refieren y la etiqueta
- *  del dato que generó dicha área.
- */
+ *  del dato que generó dicha área. */
 class Referencia {
     public:
         Referencia(const Area& referente);

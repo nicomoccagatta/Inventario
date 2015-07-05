@@ -3,8 +3,7 @@
 #include <iomanip>
 
 PorcionCircular::PorcionCircular(const DatoGrafico& dato, double maximo, unsigned i,
-                                 double _offset,
-                                 double _x0, double _y0, double radio)
+                                 double _offset,double _x0, double _y0, double radio)
 : Area(dato, maximo, i, _offset) {
     x0 = _x0;
     y0 = _y0;
@@ -30,5 +29,3 @@ void PorcionCircular::dibujar(Cairo::RefPtr< Cairo::Context >& ctx) {
 double PorcionCircular::getAvance() {
     return offset + valor;
 }
-
-

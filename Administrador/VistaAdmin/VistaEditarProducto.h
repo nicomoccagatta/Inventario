@@ -1,10 +1,3 @@
-/*
- * VistaAgregarProducto.h
- *
- *  Created on: 21/6/2015
- *      Author: nicomoccagatta
- */
-
 #ifndef ADMINISTRADOR_VISTAADMIN_VISTAEDITARPRODUCTO_H_
 #define ADMINISTRADOR_VISTAADMIN_VISTAEDITARPRODUCTO_H_
 
@@ -16,7 +9,6 @@
 using std::sprintf;
 using std::strtol;
 
-
 #define RUTA_CARPETA_IMAGENES "temp_admin/"
 
 class VistaEditarProducto : public Gtk::Window{
@@ -25,13 +17,7 @@ class VistaEditarProducto : public Gtk::Window{
 	void on_button_agregarImagen();
 	void on_button_editarOK();
 	void on_button_editarCANCEL();
-public:
-	VistaEditarProducto(Modelo_Observable *model,unsigned long int idProducto,std::string& nombre,std::string& descripcion,
-							unsigned long int idIcono,std::list<unsigned long int> idsImagenes);
-	void eliminarIconoPertenecienteABotonFileDir(Gtk::VBox *vbbox,std::string *sfiledir);
-	void eliminarIconoPertenecienteABotonID(Gtk::VBox *vbbox,unsigned long int id);
-	virtual ~VistaEditarProducto();
-protected:
+
 	Gtk::VBox m_vBoxPrincipal;
 
 	unsigned long int m_idProducto;
@@ -68,6 +54,12 @@ protected:
 	Gtk::Button m_OKButton;
 	Gtk::Button m_CANCELButton;
 	Gtk::HButtonBox m_botoneraCANCELOK;
+public:
+	VistaEditarProducto(Modelo_Observable *model,unsigned long int idProducto,std::string& nombre,std::string& descripcion,
+							unsigned long int idIcono,std::list<unsigned long int> idsImagenes);
+	void eliminarIconoPertenecienteABotonFileDir(Gtk::VBox *vbbox,std::string *sfiledir);
+	void eliminarIconoPertenecienteABotonID(Gtk::VBox *vbbox,unsigned long int id);
+	virtual ~VistaEditarProducto();
 };
 
 #endif /* ADMINISTRADOR_VISTAADMIN_VISTAEDITARPRODUCTO_H_ */

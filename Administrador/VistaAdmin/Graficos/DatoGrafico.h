@@ -4,15 +4,14 @@
 #include <glibmm/ustring.h>
 
 class DatoGrafico {
-    public:
-		DatoGrafico(const Glib::ustring& etiqueta, double valor);
-        ~DatoGrafico();
+    Glib::ustring etiqueta;
+    double valor;
+public:
+	DatoGrafico(const Glib::ustring& etiqueta, double valor);
+	~DatoGrafico();
 
-        const Glib::ustring& getEtiqueta() const;
-        double getValor() const;
-    private:
-        Glib::ustring etiqueta;
-        double valor;
+	const Glib::ustring& getEtiqueta() const;
+	double getValor() const;
 };
 
 #endif  // DATOGRAFICO_H

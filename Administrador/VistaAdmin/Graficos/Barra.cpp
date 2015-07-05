@@ -1,13 +1,11 @@
 #include "Barra.h"
 
-#define SEP_TECHO 0.1
-
 Barra::Barra(const DatoGrafico& dato, double maximo, unsigned i, double _offset,
              double separacion, double _ancho)
 : Area(dato, maximo, i, _offset) {
     sep = separacion;
     ancho = _ancho;
-    hasta = (dato.getValor() / max) * (1-SEP_TECHO);
+    hasta = (dato.getValor() / max) * (0.9);
     y0 = 1.0;
     x0 = offset;
 }

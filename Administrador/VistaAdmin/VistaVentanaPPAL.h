@@ -1,17 +1,8 @@
-/*
- * VistaVentanaPPAL.h
- *
- *  Created on: 16/6/2015
- *      Author: nicomoccagatta
- */
-
 #ifndef ADMINISTRADOR_VISTAADMIN_VISTAVENTANAPPAL_H_
 #define ADMINISTRADOR_VISTAADMIN_VISTAVENTANAPPAL_H_
 
 #include <gtkmm-2.4/gtkmm.h>
 #include "ModeloAdmin/admin_ModeloObservable.h"
-#include "ControlAdmin/ControlLP.h"
-#include "ControlAdmin/ControlLAV.h"
 #include "VistaListadoProductos.h"
 #include "VistaListadoAreasDeVision.h"
 #include "VistaStockGeneral.h"

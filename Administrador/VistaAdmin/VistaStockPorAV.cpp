@@ -1,10 +1,3 @@
-/*
- * VistaStockPorAV.cpp
- *
- *  Created on: 28/6/2015
- *      Author: nicomoccagatta
- */
-
 #include "VistaStockPorAV.h"
 
 VistaStockPorAV::VistaStockPorAV() : modelo(0), panelDinam(0) {

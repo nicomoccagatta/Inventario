@@ -1,10 +1,3 @@
-/*
- * VistaStockHistorico.cpp
- *
- *  Created on: 28/6/2015
- *      Author: nicomoccagatta
- */
-
 #include "VistaStockHistorico.h"
 
 VistaStockHistorico::VistaStockHistorico() {

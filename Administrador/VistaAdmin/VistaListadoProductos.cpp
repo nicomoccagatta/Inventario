@@ -1,10 +1,3 @@
-/*
- * VistaListadoProductos.cpp
- *
- *  Created on: 17/6/2015
- *      Author: nicomoccagatta
- */
-
 #include "VistaListadoProductos.h"
 
 VistaListadoProductos::VistaListadoProductos()

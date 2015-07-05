@@ -1,10 +1,3 @@
-/*
- * VistaListadoAreasDeVision.h
- *
- *  Created on: 17/6/2015
- *      Author: nicomoccagatta
- */
-
 #ifndef ADMINISTRADOR_VISTAADMIN_VISTALISTADOAREASDEVISION_H_
 #define ADMINISTRADOR_VISTAADMIN_VISTALISTADOAREASDEVISION_H_
 
@@ -26,12 +19,7 @@ class VistaListadoAreasDeVision : public Observer {
 	void on_button_agregar();
 	void on_button_editar();
 	void on_button_eliminar();
-public:
-	VistaListadoAreasDeVision();
-	void update();
-	void run(Gtk::Viewport *panelDinamico,Modelo_Observable *modelo);
-	virtual ~VistaListadoAreasDeVision();
-protected:
+
 	Glib::RefPtr<Gtk::ListStore> m_refProductosListStore;
 	Gtk::TreeView m_ProductosTreeView;
 
@@ -53,6 +41,11 @@ protected:
 
 	VistaAgregarAreaVision *vistaAgregarAreaVision;
 	VistaEditarAreaVision *vistaEditarAreaVision;
+public:
+	VistaListadoAreasDeVision();
+	void update();
+	void run(Gtk::Viewport *panelDinamico,Modelo_Observable *modelo);
+	virtual ~VistaListadoAreasDeVision();
 };
 
 #endif /* ADMINISTRADOR_VISTAADMIN_VISTALISTADOAREASDEVISION_H_ */

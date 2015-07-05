@@ -1,10 +1,3 @@
-/*
- * admin_Subject.cpp
- *
- *  Created on: 16/6/2015
- *      Author: nicomoccagatta
- */
-
 #include "admin_Subject.h"
 
 Subject::Subject() {
@@ -32,7 +25,7 @@ void Subject::unsuscribe(Observer *observador){
 	std::vector<Observer*>::iterator it;
 	for(it = observadores.begin() ; it != observadores.end() ; ++it){
 		if ((*it) == observador)
-			observadores.erase(it);
+			observadores.erase(it++);
 	}
 }
 

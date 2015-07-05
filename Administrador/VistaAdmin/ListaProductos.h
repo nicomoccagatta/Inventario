@@ -1,10 +1,3 @@
-/*
- * ListaProductos.h
- *
- *  Created on: 17/6/2015
- *      Author: nicomoccagatta
- */
-
 #ifndef ADMINISTRADOR_VISTAADMIN_LISTAPRODUCTOS_H_
 #define ADMINISTRADOR_VISTAADMIN_LISTAPRODUCTOS_H_
 

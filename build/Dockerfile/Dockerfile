@@ -1,19 +1,15 @@
 FROM ubuntu
 RUN apt-get -y update
-RUN apt-get install -y valgrind
+RUN apt-get install -y git
+RUN git clone https://github.com/nicomoccagatta/Inventario.git
 RUN apt-get install -y cmake
 RUN apt-get install -y libgtkmm-2.4-dev
 RUN apt-get install -y libtinyxml-dev
-RUN echo "Installing OpenCV"
 RUN mkdir OpenCV
-RUN echo "Removing any pre-installed ffmpeg and x264"
 RUN apt-get -qq remove ffmpeg x264 libx264-dev
-RUN echo "Installing Dependencies"
 RUN apt-get -qq install -y libopencv-dev build-essential checkinstall cmake pkg-config yasm libjpeg-dev libjasper-dev libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev libxine-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libv4l-dev python-dev python-numpy libtbb-dev libqt4-dev libgtk2.0-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev x264 v4l-utils cmake qt5-default checkinstall
-RUN echo "Downloading OpenCV"
 RUN apt-get install -y wget
 RUN cd /OpenCV && wget -O OpenCV-3.0.0.zip http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/3.0.0/opencv-3.0.0.zip/download
-RUN echo "Installing OpenCV" $version
 RUN apt-get install -y unzip
 RUN cd /OpenCV && unzip OpenCV-3.0.0.zip
 RUN mkdir /OpenCV/opencv-3.0.0/build
@@ -22,14 +18,17 @@ RUN cd /OpenCV/opencv-3.0.0/build && make -j2
 RUN cd /OpenCV/opencv-3.0.0/build && checkinstall
 RUN cd /OpenCV/opencv-3.0.0/build && sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
 RUN cd /OpenCV/opencv-3.0.0/build && ldconfig
-RUN echo "OpenCV ready to be used"
 RUN cd /OpenCV/opencv-3.0.0/build && cmake ..
 RUN cd /OpenCV/opencv-3.0.0/build && make install
 RUN cp /usr/local/include/opencv2/opencv.hpp /usr/local/include/opencv/opencv.hpp
 RUN mkdir xfeatures2d
-RUN apt-get install -y git
 RUN cd /xfeatures2d && git clone https://github.com/itseez/opencv_contrib
 RUN cd /xfeatures2d/opencv_contrib && mkdir build
-RUN cd /xfeatures2d/opencv_contrib/build && cmake -DOPENCV_EXTRA_MODULES_PATH=/xfeatures2d/open_contrib/modules /OpenCV/opencv-3.0.0/build
-
-
+RUN cd /xfeatures2d/opencv_contrib/build && cmake -DOPENCV_EXTRA_MODULES_PATH=/xfeatures2d/opencv_contrib/modules /OpenCV/opencv-3.0.0
+RUN cd /xfeatures2d/opencv_contrib/build && make -j5
+RUN cd /xfeatures2d/opencv_contrib/build && make -j5 install
+RUN cd Inventario/build && cmake -G "Unix Makefiles" ..
+RUN apt-get install -qqy x11-apps
+RUN apt-get install -qqy build-essential
+RUN apt-get install -qqy cmake libgtk2.0-dev pkg-config
+ENV DISPLAY :0

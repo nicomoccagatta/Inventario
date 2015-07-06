@@ -42,14 +42,10 @@ const std::string& AreaDeVision::getTipoDeCapturador() const{
 }
 
 void AreaDeVision::setUbicacion(const std::string& ubicacion){
-	mutex.bloquear();
 	this->ubicacion=ubicacion;
-	mutex.desbloquear();
 }
 void AreaDeVision::setTipoDeCapturador(const std::string& tipoDeCapturador){
-	mutex.bloquear();
 	this->tipoDeCapturador=tipoDeCapturador;
-	mutex.desbloquear();
 }
 
 const unsigned long int AreaDeVision::getId() const{
@@ -61,21 +57,16 @@ const std::list<Producto*>* const AreaDeVision::getProductosDetectados() const{
 }
 
 void AreaDeVision::actualizarDeteccion(std::list<Producto*>* productosDetectados) {
-	mutex.bloquear();
 	liberarRecursosProductos();
 	this->productosDetectados=productosDetectados;
-	mutex.desbloquear();
 }
 
 std::list<Producto*>::const_iterator AreaDeVision::eliminarProductoDetectado(const unsigned long int idProductoAEliminar){
-	mutex.bloquear();
 	for (std::list<Producto*>::iterator it= productosDetectados->begin(); it != productosDetectados->end();++it){
 			delete (*it);
 			std::list<Producto*>::iterator iteradorARetornar = productosDetectados->erase(it);
-			mutex.desbloquear();
 			return iteradorARetornar;
 	}
-	mutex.desbloquear();
 	return productosDetectados->end();
 }
 

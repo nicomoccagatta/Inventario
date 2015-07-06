@@ -13,7 +13,7 @@
 #include "server_BaseDeDatos.h"
 
 using common::Imagen;
-
+using common::Mutex;
 
 namespace server {
 

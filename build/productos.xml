@@ -35,6 +35,10 @@
     <Descripcion>El mas rico de tooooodos</Descripcion>
     <StockHistorico>
         <Stock>
+            <Fecha>Fri Jun 19 02:31:08 2015</Fecha>
+            <Cantidad>21</Cantidad>
+        </Stock>
+        <Stock>
             <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
             <Cantidad>24</Cantidad>
         </Stock>
@@ -79,6 +83,14 @@
     <Nombre>Coca</Nombre>
     <Descripcion>lata chiquita y golpeada</Descripcion>
     <StockHistorico>
+        <Stock>
+            <Fecha>Fri Jul 3 19:02:51 2015</Fecha>
+            <Cantidad>2</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 02:31:08 2015</Fecha>
+            <Cantidad>4</Cantidad>
+        </Stock>
         <Stock>
             <Fecha>Tue Jun 16 02:03:04 2015</Fecha>
             <Cantidad>17</Cantidad>
@@ -126,6 +138,10 @@
     <Descripcion>El elixir de la vida</Descripcion>
     <StockHistorico>
         <Stock>
+            <Fecha>Fri Jun 19 02:31:08 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+        <Stock>
             <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
             <Cantidad>10</Cantidad>
         </Stock>
@@ -167,6 +183,14 @@
     <Descripcion>Tableta de 10 comprimidos Ibuprofeno 400mg + Cafeina 65mg</Descripcion>
     <StockHistorico>
         <Stock>
+            <Fecha>Fri Jul 3 19:02:51 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 02:31:08 2015</Fecha>
+            <Cantidad>3</Cantidad>
+        </Stock>
+        <Stock>
             <Fecha>Tue Jun 16 02:03:04 2015</Fecha>
             <Cantidad>9</Cantidad>
         </Stock>
@@ -195,6 +219,18 @@
     <Nombre>IbuApracur 400 VL - Lepetit</Nombre>
     <Descripcion>Analgesico, antiinflamatorio, antifebril. Tableta de 10 comprimidos recubiertos Ibuprofeno 400mg</Descripcion>
     <StockHistorico>
+        <Stock>
+            <Fecha>Fri Jun 19 20:51:57 2015</Fecha>
+            <Cantidad>20</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jul 3 19:02:51 2015</Fecha>
+            <Cantidad>19</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 02:31:08 2015</Fecha>
+            <Cantidad>24</Cantidad>
+        </Stock>
         <Stock>
             <Fecha>Tue Jun 16 02:03:04 2015</Fecha>
             <Cantidad>48</Cantidad>
@@ -239,6 +275,10 @@
     <Descripcion>Galletitas dulces con relleno sabor frambuesa con &quot;nutrileche&quot;</Descripcion>
     <StockHistorico>
         <Stock>
+            <Fecha>Fri Jun 19 02:31:08 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+        <Stock>
             <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
             <Cantidad>2</Cantidad>
         </Stock>
@@ -261,6 +301,14 @@
     <Descripcion>Salsa lista Napolitana con aceitunas y perejil con ingredientes seleccionados</Descripcion>
     <StockHistorico>
         <Stock>
+            <Fecha>Fri Jun 19 20:51:57 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 20:51:32 2015</Fecha>
+            <Cantidad>1</Cantidad>
+        </Stock>
+        <Stock>
             <Fecha>Wed Jun 08 01:24:05 2015</Fecha>
             <Cantidad>0</Cantidad>
         </Stock>
@@ -280,6 +328,14 @@
     <Descripcion>Mermelada de frutilla reducida en calorias libre de gluten</Descripcion>
     <StockHistorico>
         <Stock>
+            <Fecha>Fri Jun 19 20:51:32 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 20:51:32 2015</Fecha>
+            <Cantidad>3</Cantidad>
+        </Stock>
+        <Stock>
             <Fecha>Wed Jun 08 01:24:05 2015</Fecha>
             <Cantidad>0</Cantidad>
         </Stock>
@@ -298,6 +354,18 @@
     <Nombre>Chocolinas 250g - Bagley</Nombre>
     <Descripcion>Galletitas dulces sabor chocolate.</Descripcion>
     <StockHistorico>
+        <Stock>
+            <Fecha>Fri Jun 19 20:51:32 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 20:50:59 2015</Fecha>
+            <Cantidad>1</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 02:31:08 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
         <Stock>
             <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
             <Cantidad>7</Cantidad>
@@ -320,6 +388,14 @@
     <Nombre>sol</Nombre>
     <Descripcion>aver si anda esta vez</Descripcion>
     <StockHistorico>
+        <Stock>
+            <Fecha>Fri Jun 19 20:50:59 2015</Fecha>
+            <Cantidad>6</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 02:31:08 2015</Fecha>
+            <Cantidad>9</Cantidad>
+        </Stock>
         <Stock>
             <Fecha>Wed Aug 19 06:07:08 2015</Fecha>
             <Cantidad>7</Cantidad>

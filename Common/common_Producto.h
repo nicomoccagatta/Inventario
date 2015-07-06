@@ -6,7 +6,6 @@
 #include <string>
 #include <time.h>
 #include "common_Stock.h"
-#include "common_Mutex.h"
 
 namespace common {
 
@@ -28,8 +27,6 @@ public:
 	void actualizarStock(long int cantidad, std::string fecha);
 	static void inicializarCuentaId();
 
-
-
 private:
 	unsigned long int id;
 	std::string nombre;
@@ -37,7 +34,6 @@ private:
 	std::list<Stock*>* stockHistorico;
 	unsigned long int idIcono;
 	std::list<unsigned long int>* idsImagenes;
-	Mutex mutex;
 	static unsigned long int proximoID;
 };
 

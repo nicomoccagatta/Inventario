@@ -23,7 +23,7 @@ class Administrador {
 	std::list<unsigned long int> idsDescargados;
 	std::map<unsigned long int,unsigned long int> stockGeneral;
 public:
-	Administrador();
+	Administrador(const char* ip, const char* puerto);
 	virtual ~Administrador();
 
 	bool actualizarProductos();

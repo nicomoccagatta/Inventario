@@ -15,7 +15,7 @@ using common::AreaDeVision;
 class Modelo_Observable: public Subject {
 	Administrador admin;
 public:
-	Modelo_Observable();
+	Modelo_Observable(const char* ip, const char* puerto);
 
 	bool actualizarProductos();
 	void altaProducto(std::string &nombre,std::string &descripcion,

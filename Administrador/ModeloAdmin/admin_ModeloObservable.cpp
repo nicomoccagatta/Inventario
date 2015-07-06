@@ -1,6 +1,7 @@
 #include "admin_ModeloObservable.h"
 
-Modelo_Observable::Modelo_Observable() {
+Modelo_Observable::Modelo_Observable(const char* ip, const char* puerto) :
+	admin(ip,puerto) {
 }
 
 Modelo_Observable::~Modelo_Observable() {

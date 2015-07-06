@@ -6,7 +6,8 @@
 
 using common::Imagen;
 
-Administrador::Administrador() : admin("localhost","1037"){
+Administrador::Administrador(const char* ip, const char* puerto) :
+				client(ip,puerto){
 	if (!admin.estaConectado())
 		std::cerr << "NO ESTOY CONECTADO\n";
 	protocolo.enviarMensaje(this->admin,"Admin|");

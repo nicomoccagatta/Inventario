@@ -220,6 +220,10 @@
     <Descripcion>Analgesico, antiinflamatorio, antifebril. Tableta de 10 comprimidos recubiertos Ibuprofeno 400mg</Descripcion>
     <StockHistorico>
         <Stock>
+            <Fecha>Mon Jul 6 11:44:19 2015</Fecha>
+            <Cantidad>19</Cantidad>
+        </Stock>
+        <Stock>
             <Fecha>Fri Jun 19 20:51:57 2015</Fecha>
             <Cantidad>20</Cantidad>
         </Stock>

@@ -41,7 +41,7 @@ void Video::guardarAPartirDeImagenes(const std::string& rutaDestino,
 
 	std::vector<cv::Mat> frames;
 
-	for(int i=0;i<rutas.size();++i){
+	for(unsigned int i=0;i<rutas.size();++i){
 		frames.push_back(cv::Mat(cv::imread(rutas[i])));
 	}
 
@@ -53,7 +53,7 @@ void Video::guardarAPartirDeImagenes(const std::string& rutaDestino,
 	// Loop to read from input and write to output
 	cv::Mat frame;
 
-	for(int i=0;i<frames.size();++i){
+	for(unsigned int i=0;i<frames.size();++i){
 		frame = frames[i];
 		cv::resize(frame,frame,cv::Size(800,600));
 		output.write(frame);

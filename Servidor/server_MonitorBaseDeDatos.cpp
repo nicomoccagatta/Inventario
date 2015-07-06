@@ -228,7 +228,6 @@ void MonitorBaseDeDatos::actualizarDeteccionAreaDeVision(const unsigned long int
 	//obtengo todos los producto e itero sobre las iamgenes de cada uno reconociendo la totalidad de sus apariciones.
 	const std::list<Producto*>* catalogoProductos = datos.getProductos();
 	for(std::list<Producto*>::const_iterator it=catalogoProductos->begin(); it!=catalogoProductos->end();++it){
-		std::cerr << "Procesando producto " << (*it)->getNombre() << std::endl;
 		unsigned long int aparicionesDelProducto=0;
 		for (std::list<unsigned long int>::const_iterator id=(*it)->getIdsImagenes()->begin(); id!=(*it)->getIdsImagenes()->end();++id){
 			if (datos.existeImagenConId(*id))

@@ -54,7 +54,8 @@ void ThReproductorVideo::run(){
 
 		//Cuando apreto play retoma desde aca
 		mutex.bloquear();
-		pthread_cond_wait(cond, &(mutex.mutex)); //BLOQUEA EL HILO
+		//pthread_cond_wait(cond, &(mutex.mutex)); //BLOQUEA EL HILO
+		mutex.cond_wait(cond);
 
 		//Si se habia pausado remuevo el frame que deje puesto
 		if(reproduciendo==false && activo!=-1){
@@ -76,7 +77,7 @@ void ThReproductorVideo::run(){
 			std::cerr << "IT = " << it << std::endl;
 			//std::cerr << "AGREGO\n";
 
-			box->pack_start(*frames[it]);
+			box->add(*frames[it]);
 
 			activo=it;
 

@@ -12,7 +12,7 @@ RUN cd /OpenCV && wget -O OpenCV-3.0.0.zip http://sourceforge.net/projects/openc
 RUN apt-get install -y unzip
 RUN cd /OpenCV && unzip OpenCV-3.0.0.zip
 RUN mkdir /OpenCV/opencv-3.0.0/build
-RUN cd /OpenCV/opencv-3.0.0/build && cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_OPENGL=ON ..
+RUN cd /OpenCV/opencv-3.0.0/build && cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=OFF -D INSTALL_PYTHON_EXAMPLES=OFF -D BUILD_EXAMPLES=OFF -D WITH_QT=ON -D WITH_OPENGL=ON ..
 RUN cd /OpenCV/opencv-3.0.0/build && make -j2
 RUN cd /OpenCV/opencv-3.0.0/build && checkinstall
 RUN cd /OpenCV/opencv-3.0.0/build && sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'

@@ -9,8 +9,12 @@
 #define CLIENTE_MODELO_CLIENT_MODELOOBSERVABLE_H_
 
 #include "client_ClienteDemo.h"
+#include "ThEnviadorArchivos.h"
 #include "common_AreaDeVision.h"
 #include "common_Imagen.h"
+
+#define FEATURE_MATCHING 1
+#define TEMPLATE_MATCHING 2
 
 using common::AreaDeVision;
 using common::Imagen;
@@ -24,6 +28,7 @@ using common::Imagen;
 class ModeloObservable {
 
 	ClienteDemo cliente;
+	ThEnviadorArchivos enviador;
 
 public:
 	ModeloObservable();

@@ -12,7 +12,9 @@ class Mutex {
   void bloquear();
   void desbloquear();
 
- //private:
+  void cond_wait(pthread_cond_t* cond);
+
+ private:
   pthread_mutex_t mutex;
 };
 

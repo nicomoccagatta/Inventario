@@ -86,7 +86,7 @@ void ControladorVistaEnviar::buttonENVIARClicked(Glib::ustring rutaArchivo,Glib:
 		switch(matching){
 		case TEMPLATE_MATCHING:
 			modelo->enviarVideoTemplateMatching(area->getId(), formatoFecha, rutaImagen);
-			std::cerr << "ENVIANDOOO\n";
+			//std::cerr << "ENVIANDOOO\n";
 			break;
 		case FEATURE_MATCHING:
 			modelo->enviarVideoFeatureMatching(area->getId(), formatoFecha, rutaImagen);

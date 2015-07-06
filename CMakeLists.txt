@@ -97,6 +97,7 @@ add_executable(Client
 			Cliente/Modelo/client_ClienteDemo.cpp
 			Cliente/Modelo/client_Data.cpp
 			Cliente/Modelo/client_ModeloObservable.cpp
+			Cliente/Modelo/ThEnviadorArchivos.cpp
 			Cliente/Vista/client_VistaEnviar.cpp
 			Cliente/Vista/client_ModelComboBoxAreasDeVision.h
 			Cliente/Control/client_ControladorVistaEnviar.cpp

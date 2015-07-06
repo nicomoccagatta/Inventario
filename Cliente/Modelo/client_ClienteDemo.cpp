@@ -44,8 +44,10 @@ bool ClienteDemo::identificarse(){
 		std::cerr << "Indetificandose...\n";
 		protocolo.enviarMensaje(this->client, "Client|");
 	}
-	if (this->protocolo.recibirMensaje(this->client) == "ok|")
+	std::string r;
+	if ((r = this->protocolo.recibirMensaje(this->client)) == "ok|\n")
 		return true;
+	std::cerr << r;
 	return false;
 }
 
@@ -82,7 +84,7 @@ void ClienteDemo::actualizarIdImagenesDeProducto(Producto* prod){
 				return;
 			ss >> id;
 
-			std::cerr << "agrego " << ss.str() << "\n";
+			//std::cerr << "agrego " << ss.str() << "\n";
 
 			ids->push_back(id);
 			++argum;
@@ -141,7 +143,7 @@ bool ClienteDemo::actualizarProductos(){
 			std::list<unsigned long int>::iterator it;
 
 			for (it=ids->begin(); it!=ids->end();++it){
-				std::cerr << "ID IMAGEN AGREGADA AL MODELO: " << *it << "\n";
+				//std::cerr << "ID IMAGEN AGREGADA AL MODELO: " << *it << "\n";
 			}
 
 			argum+=4;
@@ -278,8 +280,8 @@ void ClienteDemo::enviarVideo(const char* comando, unsigned long int idArea, std
 	std::list<Imagen> frames;
 	std::list<std::string> fechas;
 
-	/*Saco los frames cada un minuto y sus fechas correspondientes*/
-	vid.capturasPeriodicasVideo(frames,fechas,fechaInicio,1);
+	/*Saco los frames cada 60 segundos y sus fechas correspondientes*/
+	vid.capturasPeriodicasVideo(frames,fechas,fechaInicio);
 
 	std::list<Imagen>::iterator itIm;
 	std::list<std::string>::iterator itStr;

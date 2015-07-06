@@ -31,7 +31,7 @@ class ModeloObservable {
 	ThEnviadorArchivos enviador;
 
 public:
-	ModeloObservable();
+	ModeloObservable(const char* ip, const char* puerto);
 	virtual ~ModeloObservable();
 
 	/*

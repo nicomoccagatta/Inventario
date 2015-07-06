@@ -7,7 +7,8 @@
 
 #include "client_ModeloObservable.h"
 
-ModeloObservable::ModeloObservable() : enviador(cliente) {
+ModeloObservable::ModeloObservable(const char* ip, const char* puerto) :
+	cliente(ip,puerto), enviador(cliente) {
 	enviador.start();
 }
 

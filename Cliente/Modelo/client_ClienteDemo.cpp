@@ -21,7 +21,8 @@
 using common::Imagen;
 using common::Video;
 
-ClienteDemo::ClienteDemo() : client("localhost","1037"){
+ClienteDemo::ClienteDemo(const char* ip, const char* puerto) :
+		client(ip,puerto){ //"server_machine","1037"
 	if (!client.estaConectado())
 		std::cerr << "NO ESTOY CONECTADO\n";
 

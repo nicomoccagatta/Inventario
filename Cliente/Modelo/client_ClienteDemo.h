@@ -32,7 +32,7 @@ class ClienteDemo {
 	Data data;
 
 public:
-	ClienteDemo();
+	ClienteDemo(const char* ip, const char* puerto);
 	virtual ~ClienteDemo();
 
 	/*

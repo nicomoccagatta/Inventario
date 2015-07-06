@@ -15,7 +15,7 @@
 VistaCrearVideo::VistaCrearVideo(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade)
 : Gtk::Viewport(cobject),
   	  m_refGlade(refGlade),
-	  activaAlSeleccionar(), labelMasVistaPreviaMasPlayStopPausa(false),
+	  labelMasVistaPreviaMasPlayStopPausa(false), activaAlSeleccionar(0),
 	  paraReproductor(true), reproductor(&paraReproductor){
 
 	std::cerr << "CREANDO VISTA CREARVIDEO\n";

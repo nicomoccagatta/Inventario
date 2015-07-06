@@ -64,7 +64,7 @@ void ThReproductorVideo::run(){
 		}
 		this->reproduciendo = true;
 
-		int it;
+		unsigned int it;
 
 		if(activo > 0)
 			it = activo; //sigue desde el que se habia pausado
@@ -91,7 +91,7 @@ void ThReproductorVideo::run(){
 		}
 		std::cerr << "ACTIVO DESP DEL FOR = " << activo << std::endl;
 		//Si se termino, lo dejo en estado inicial
-		if (activo == frames.size()-1)
+		if (activo == (int) frames.size()-1)
 			activo=-1;
 
 		//Si se pauso, dejo la imagen en la que se habia pausado

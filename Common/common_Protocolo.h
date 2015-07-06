@@ -48,9 +48,6 @@ class Protocolo {
           const std::string& comandoDeOperacion, const size_t numeroArgumento);
   static const unsigned long int extraerArgumentoNumericoDeComando(
 		  const std::string& comandoDeOperacion, const size_t numeroArgumento);
-
-
-
  private:
   std::string finalizadorDeMensaje;
 };

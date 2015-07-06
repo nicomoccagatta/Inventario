@@ -35,7 +35,6 @@ using common::Producto;
 using common::Stock;
 using common::AreaDeVision;
 using common::Imagen;
-using common::Mutex;
 
 namespace server {
 

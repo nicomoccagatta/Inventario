@@ -4,7 +4,6 @@
 #include <list>
 #include <string>
 #include "common_Producto.h"
-#include "common_Mutex.h"
 
 using common::Producto;
 
@@ -30,7 +29,6 @@ private:
 	std::string tipoDeCapturador;
 	std::list<Producto*>* productosDetectados;
 	unsigned long int id;
-	Mutex mutex;
 	void liberarRecursosProductos();
 	static unsigned long int proximoID;
 };

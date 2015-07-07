@@ -39,6 +39,8 @@ VistaAgregarAreaVision::VistaAgregarAreaVision(Modelo_Observable *model): modelo
 	m_botoneraBotonOK.set_layout(Gtk::BUTTONBOX_CENTER);
 	m_VBoxPrincipal.pack_end(m_botoneraBotonOK);
 
+	this->signal_delete_event().connect(sigc::mem_fun(*this, &VistaAgregarAreaVision::on_exit_clicked) );
+
 	this->add(m_VBoxPrincipal);
 	this->show_all();
 }
@@ -81,4 +83,9 @@ void VistaAgregarAreaVision::on_button_OK(){
 
 void VistaAgregarAreaVision::on_button_CANCEL(){
 	delete this;
+}
+
+bool VistaAgregarAreaVision::on_exit_clicked(GdkEventAny* event){
+	delete this;
+	return true;
 }

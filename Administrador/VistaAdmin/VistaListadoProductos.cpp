@@ -67,6 +67,10 @@ void VistaListadoProductos::run(Gtk::Viewport *panelDinamico,Modelo_Observable *
 }
 
 VistaListadoProductos::~VistaListadoProductos() {
+	std::list<Gtk::Image*>::iterator it = m_listaPunteroImagenes.begin();
+	for( ; it != m_listaPunteroImagenes.end() ; ++it) {
+		delete (*it);
+	}
 	delete m_viewportVentanitaBotoneraImagenes;
 }
 
@@ -83,8 +87,10 @@ void VistaListadoProductos::on_button_editar(){
 		unsigned long int idProducto;
 		idProd >> idProducto;
 		std::list<unsigned long int> vectorIdsImagenes = modelo->getIdsImagenes(idProducto);
-		std::string nombre = (row[m_ProductosList.m_Columns.m_col_nombre]);
-		std::string descripcion = (row[m_ProductosList.m_Columns.m_col_descripcion]);
+		Glib::ustring nombreus = row[m_ProductosList.m_Columns.m_col_nombre];
+		Glib::ustring descripcionus = row[m_ProductosList.m_Columns.m_col_descripcion];
+		std::string nombre = nombreus;
+		std::string descripcion = descripcionus;
 		unsigned long int idIcono = (row[m_ProductosList.m_Columns.m_col_idIcono]);
 		vistaEditarProducto = new VistaEditarProducto(modelo,idProducto,nombre,descripcion,idIcono,vectorIdsImagenes);
 	}

@@ -47,7 +47,6 @@ bool Grafico::on_expose_event(GdkEventExpose* ev) {
         dibujarReferencias(ctx);
         dibujarEspecializacion(ev, ctx);
     }
-
     return true;
 }
 
@@ -81,7 +80,6 @@ void Grafico::dibujarReferencias(Cairo::RefPtr< Cairo::Context >& ctx) {
     }
     resize();
 }
-
 
 void Grafico::actualizarTamanioMinimo(double x, double y) {
     furthest_x = x > furthest_x? x : furthest_x;

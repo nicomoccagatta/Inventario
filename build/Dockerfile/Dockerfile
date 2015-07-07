@@ -30,11 +30,6 @@ RUN apt-get install -qqy x11-apps
 RUN apt-get install -qqy build-essential
 RUN apt-get install -qqy cmake libgtk2.0-dev pkg-config
 ENV DISPLAY :0
-RUN apt-get install -qqy vim
-RUN git clone https://github.com/nicomoccagatta/Inventario.git
-RUN cd Inventario/build && cmake -G "Unix Makefiles" ..
-RUN cd Inventario git pull
-RUN cd Inventario/build && make
 RUN mkdir root/.local/
 RUN mkdir root/.local/share/
 RUN touch root/.local/share/recentrly-used.xbel

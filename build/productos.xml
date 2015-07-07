@@ -88,8 +88,8 @@
     <Imagenes />
 </Producto>
 <Producto id="16">
-    <Nombre>Coca</Nombre>
-    <Descripcion>lata chiquita y golpeada</Descripcion>
+    <Nombre>Coca-Cola</Nombre>
+    <Descripcion>Lata 330ml</Descripcion>
     <StockHistorico>
         <Stock>
             <Fecha>Fri Jun 19 02:31:08 2015</Fecha>
@@ -129,13 +129,7 @@
         </Stock>
     </StockHistorico>
     <Icono>38</Icono>
-    <Imagenes>
-        <Imagen>38</Imagen>
-        <Imagen>40</Imagen>
-        <Imagen>42</Imagen>
-        <Imagen>43</Imagen>
-        <Imagen>44</Imagen>
-    </Imagenes>
+    <Imagenes />
 </Producto>
 <Producto id="17">
     <Nombre>Acondicionador - Sedal</Nombre>

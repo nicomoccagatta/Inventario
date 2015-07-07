@@ -6,10 +6,11 @@ VistaVentanaPPAL::VistaVentanaPPAL(BaseObjectType* cobject, const Glib::RefPtr<G
 {
 	m_refGlade->get_widget("PanelDinamicoP", panelDinamicoP);
 	m_refGlade->get_widget("PanelDinamicoAV", panelDinamicoAV);
-
 	m_refGlade->get_widget("PanelDinamicoRSG",panelDinamicoRSG);
 	m_refGlade->get_widget("PanelDinamicoRAV",panelDinamicoRAV);
 	m_refGlade->get_widget("PanelDinamicoRHP",panelDinamicoRHP);
+
+	this->signal_delete_event().connect(sigc::mem_fun(*this, &VistaVentanaPPAL::on_exit_clicked) );
 }
 
 void VistaVentanaPPAL::setearAtributos(const Glib::RefPtr<Gtk::Builder>& refGlade,Modelo_Observable *modelo){
@@ -35,5 +36,15 @@ void VistaVentanaPPAL::setearAtributos(const Glib::RefPtr<Gtk::Builder>& refGlad
 	this->show_all();
 }
 
+bool VistaVentanaPPAL::on_exit_clicked(GdkEventAny* event){
+	Gtk::Main::quit();
+	return true;
+}
+
 VistaVentanaPPAL::~VistaVentanaPPAL() {
+	delete panelDinamicoP;
+	delete panelDinamicoAV;
+	delete panelDinamicoRSG;
+	delete panelDinamicoRAV;
+	delete panelDinamicoRHP;
 }

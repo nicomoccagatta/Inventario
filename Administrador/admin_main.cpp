@@ -5,11 +5,17 @@
 #include "VistaAdmin/VistaVentanaPPAL.h"
 
 #define VISTAPPAL "Administrador.glade"
+#define MSJ_USAGE " ip puerto"
 
 int crearAPartirDeGlade(Glib::RefPtr<Gtk::Builder>* refBuilder);
 
 int main(int argc, char *argv[]) {
-	Modelo_Observable modelo;
+	if (argc != 3){
+		std::cout << "Uso: "<<argv[0]<< MSJ_USAGE << std::endl;
+		return 1;
+	}
+
+	Modelo_Observable modelo(argv[1],argv[2]);
 	modelo.actualizarProductos();
 	modelo.actualizarAreasDeVision();
 

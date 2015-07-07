@@ -44,30 +44,31 @@ VistaEditarAreaVision::VistaEditarAreaVision(Modelo_Observable *model,unsigned l
 	m_botoneraBotonOK.set_layout(Gtk::BUTTONBOX_CENTER);
 	m_VBoxPrincipal.pack_end(m_botoneraBotonOK);
 
+	this->signal_delete_event().connect(sigc::mem_fun(*this, &VistaEditarAreaVision::on_exit_clicked) );
+
 	this->add(m_VBoxPrincipal);
 	this->show_all();
 }
 
 VistaEditarAreaVision::~VistaEditarAreaVision() {
-
 }
 
 void VistaEditarAreaVision::on_button_OK(){
 	if( m_obtenerUbicacion.get_text() == "" ){
-			Gtk::Window *ventanitaError = new Gtk::Window;
-			Gtk::MessageDialog dialog(*ventanitaError,"Ingrese Ubicacion",false, Gtk::MESSAGE_ERROR);
-			dialog.set_title("Error Ubicacion");
-			dialog.set_size_request(350,100);
-			dialog.run();
-			return;
+		Gtk::Window *ventanitaError = new Gtk::Window;
+		Gtk::MessageDialog dialog(*ventanitaError,"Ingrese Ubicacion",false, Gtk::MESSAGE_ERROR);
+		dialog.set_title("Error Ubicacion");
+		dialog.set_size_request(350,100);
+		dialog.run();
+		return;
 	}
 	if( m_TiposCapturador.get_active_row_number() == (-1) ){
-			Gtk::Window *ventanitaError = new Gtk::Window;
-			Gtk::MessageDialog dialog(*ventanitaError,"Seleccione Tipo de Capturador",false, Gtk::MESSAGE_ERROR);
-			dialog.set_title("Error Tipo Capturador");
-			dialog.set_size_request(350,100);
-			dialog.run();
-			return;
+		Gtk::Window *ventanitaError = new Gtk::Window;
+		Gtk::MessageDialog dialog(*ventanitaError,"Seleccione Tipo de Capturador",false, Gtk::MESSAGE_ERROR);
+		dialog.set_title("Error Tipo Capturador");
+		dialog.set_size_request(350,100);
+		dialog.run();
+		return;
 	}
 	Gtk::TreeModel::Row fila = *m_TiposCapturador.get_active();
 	Glib::ustring tCapturador = fila[columnas.getColumnaCapturador()];
@@ -87,4 +88,9 @@ void VistaEditarAreaVision::on_button_OK(){
 
 void VistaEditarAreaVision::on_button_CANCEL(){
 	delete this;
+}
+
+bool VistaEditarAreaVision::on_exit_clicked(GdkEventAny* event){
+	delete this;
+	return true;
 }

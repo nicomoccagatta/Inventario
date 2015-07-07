@@ -3,6 +3,9 @@
 
 #include <glibmm/ustring.h>
 
+/*
+ * Clase que contiene el valor a graficar con su respectiva etiqueta.
+ */
 class DatoGrafico {
     Glib::ustring etiqueta;
     double valor;

@@ -15,6 +15,8 @@ public:
 	void setearAtributos(const Glib::RefPtr<Gtk::Builder>& refGlade,Modelo_Observable *modelo);
 	virtual ~VistaVentanaPPAL();
 private:
+	bool on_exit_clicked(GdkEventAny* event);
+
 	Modelo_Observable *model;
 
 	Glib::RefPtr<Gtk::Builder> m_refGlade;

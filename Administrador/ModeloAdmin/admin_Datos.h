@@ -21,12 +21,17 @@ public:
 	const std::list<Producto*>* getProductos() const {
 		return &productos;
 	}
-	/*PRODUCTO*/
+
+	/*
+	 * Alta y baja de producto/s
+	 */
 	void agregarProducto(std::string nombre, std::string descripcion,unsigned long int id, unsigned long int idIcono);
 	void eliminarProducto(unsigned long int idProd);
 	void eliminarProductos();
 
-	/*AREA DE VISION*/
+	/*
+	 * Alta y baja de av
+	 */
 	void agregarAreaDeVision(std::string ubicacion, std::string tipoDeCapturador,unsigned long int id,std::list<Producto*>* listaProductos);
 	void eliminarAreaVision(unsigned long int idAV);
 	void eliminarAreasDeVision();

@@ -10,6 +10,8 @@ Datos::Datos() {
 }
 
 Datos::~Datos() {
+	this->eliminarProductos();
+	this->eliminarAreasDeVision();
 }
 
 void Datos::agregarProducto(std::string nombre, std::string descripcion,

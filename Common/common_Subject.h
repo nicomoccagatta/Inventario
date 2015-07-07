@@ -2,7 +2,7 @@
 #define ADMINISTRADOR_MODELOADMIN_ADMIN_SUBJECT_H_
 
 #include <vector>
-#include "ModeloAdmin/admin_Observer.h"
+#include "common_Observer.h"
 #include <iostream>
 
 class Subject {

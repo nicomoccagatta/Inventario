@@ -8,6 +8,7 @@
 class VistaEditarAreaVision : public Gtk::Window {
 	void on_button_OK();
 	void on_button_CANCEL();
+	bool on_exit_clicked(GdkEventAny* event);
 
 	Modelo_Observable *modelo;
 

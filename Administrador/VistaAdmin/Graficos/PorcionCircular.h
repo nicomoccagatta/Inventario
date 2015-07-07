@@ -3,7 +3,9 @@
 
 #include "Area.h"
 
-// Clase que representa una porción circular de un gráfico de torta.
+/*
+ *  Clase que representa una porción circular de un gráfico de torta.
+ */
 class PorcionCircular : public Area {
     double x0;
     double y0;
@@ -13,8 +15,15 @@ public:
 	PorcionCircular(const DatoGrafico& dato, double maximo, unsigned i,
                         double offset,double x0, double y0, double radio);
 	~PorcionCircular();
-        //Dibuja la porción circular.
+
+    /*
+     * Dibuja la porción circular.
+     */
 	void dibujar(Cairo::RefPtr< Cairo::Context >& ctx);
+
+	/*
+	 * Devuelve el valor del comienzo de la proxima porcion circular
+	 */
 	double getAvance();
 };
 

@@ -23,13 +23,8 @@ VistaAgregarProducto::VistaAgregarProducto(Modelo_Observable *model) : modelo(mo
 	m_labelIcono.set_text("ICONO");
 	m_vBoxPrincipal.pack_start(m_labelIcono);
 
-	m_ImagenIconoPPAL.set(RUTA_IMAGEN_DEFECTO);
-	Glib::RefPtr<Gdk::Pixbuf> scaled1 = m_ImagenIconoPPAL.get_pixbuf()->scale_simple(200,200,Gdk::INTERP_BILINEAR);
-	m_ImagenIconoPPAL.set(scaled1);
 	m_ImagenSeteada = false;
-
 	m_botoneraImgPPAL.set_size_request(900,200);
-	m_botoneraImgPPAL.pack_start(m_ImagenIconoPPAL);
 	m_botonFileChooserImgPPAL.set_size_request(200,30);
 	m_botoneraFileChooser.set_layout(Gtk::BUTTONBOX_CENTER);
 	m_botoneraFileChooser.pack_end(m_botonFileChooserImgPPAL);
@@ -52,15 +47,20 @@ VistaAgregarProducto::VistaAgregarProducto(Modelo_Observable *model) : modelo(mo
 	m_vBoxPrincipal.pack_start(m_scrolledWImagenes);
 
 	m_AgregarProducto.set_label("Agregar Producto");
-	m_AgregarProducto.set_size_request(880,40);
+	m_AgregarProducto.set_size_request(300,40);
+	m_Cancelar.set_label("Cancelar");
+	m_Cancelar.set_size_request(300,40);
 	m_butoneraAgregarBoton.pack_start(m_AgregarProducto);
+	m_butoneraAgregarBoton.pack_end(m_Cancelar);
 	m_butoneraAgregarBoton.set_layout(Gtk::BUTTONBOX_CENTER);
 	m_vBoxPrincipal.pack_end(m_butoneraAgregarBoton);
 
 	m_botonFileChooserImgPPAL.signal_selection_changed().connect( sigc::mem_fun(*this, &VistaAgregarProducto::on_button_actualizarIcono));
 	m_botonAgregarImagen.signal_clicked().connect( sigc::mem_fun(*this, &VistaAgregarProducto::on_button_agregarImagen));
 	m_AgregarProducto.signal_clicked().connect( sigc::mem_fun(*this, &VistaAgregarProducto::on_button_agregarProducto) );
+	m_Cancelar.signal_clicked().connect( sigc::mem_fun(*this, &VistaAgregarProducto::on_button_Cancelar) );
 
+	this->signal_delete_event().connect(sigc::mem_fun(*this, &VistaAgregarProducto::on_exit_clicked) );
 	this->add(m_vBoxPrincipal);
 
 	this->show_all();
@@ -68,12 +68,12 @@ VistaAgregarProducto::VistaAgregarProducto(Modelo_Observable *model) : modelo(mo
 
 VistaAgregarProducto::~VistaAgregarProducto() {
 	std::list<ControlAP*>::iterator it = controladores.begin();
-	for(; it != controladores.end(); ++it)
+	for(; it != controladores.end(); ++it){
 		delete(*it);
-
-	if(m_viewPortImagenes)
+	}
+	if(m_viewPortImagenes){
 		delete m_viewPortImagenes;
-
+	}
 	std::list<Gtk::Image*>::iterator itIm = m_refImagenesdelete.begin();
 	for(; itIm != m_refImagenesdelete.end(); ++itIm){
 		delete (*itIm);
@@ -82,14 +82,28 @@ VistaAgregarProducto::~VistaAgregarProducto() {
 	for(; itBu != m_refButtondelete.end(); ++itBu){
 		delete (*itBu);
 	}
+	std::list<Gtk::VBox*>::iterator itvBoxIconos = m_listabotonEliminarImagenes.begin();
+	for(; itvBoxIconos != m_listabotonEliminarImagenes.end(); ++itvBoxIconos){
+		delete (*itvBoxIconos);
+	}
+	std::list<std::string*>::iterator itrutaImgIconos = m_rutaImagenesIconos.begin();
+	for(; itrutaImgIconos != m_rutaImagenesIconos.end(); ++itrutaImgIconos){
+		delete (*itrutaImgIconos);
+	}
 }
 
 void VistaAgregarProducto::on_button_actualizarIcono(){
+	if (m_ImagenSeteada)
+		m_botoneraImgPPAL.remove(m_ImagenIconoPPAL);
+	m_botoneraImgPPAL.remove(m_botoneraFileChooser);
 	std::string filename = m_botonFileChooserImgPPAL.get_filename();
 	m_ImagenIconoPPAL.set(filename);
 	Glib::RefPtr<Gdk::Pixbuf> scaled1 = m_ImagenIconoPPAL.get_pixbuf()->scale_simple(200,200,Gdk::INTERP_BILINEAR);
 	m_ImagenIconoPPAL.set(scaled1);
 	m_ImagenSeteada=true;
+	m_botoneraImgPPAL.pack_start(m_ImagenIconoPPAL);
+	m_botoneraImgPPAL.pack_end(m_botoneraFileChooser);
+	this->show_all();
 }
 
 void VistaAgregarProducto::on_button_agregarImagen(){
@@ -190,4 +204,13 @@ void VistaAgregarProducto::on_button_agregarProducto(){
 	dialog.run();
 	modelo->notify();
 	delete this;
+}
+
+void VistaAgregarProducto::on_button_Cancelar(){
+	delete this;
+}
+
+bool VistaAgregarProducto::on_exit_clicked(GdkEventAny* event){
+	delete this;
+	return true;
 }

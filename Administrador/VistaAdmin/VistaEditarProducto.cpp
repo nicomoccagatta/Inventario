@@ -101,6 +101,8 @@ VistaEditarProducto::VistaEditarProducto(Modelo_Observable *model,unsigned long 
 	m_OKButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaEditarProducto::on_button_editarOK) );
 	m_CANCELButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaEditarProducto::on_button_editarCANCEL) );
 
+	this->signal_delete_event().connect(sigc::mem_fun(*this, &VistaEditarProducto::on_exit_clicked) );
+
 	this->add(m_vBoxPrincipal);
 
 	this->show_all();
@@ -121,6 +123,14 @@ VistaEditarProducto::~VistaEditarProducto() {
 	std::list<Gtk::Button*>::iterator itBu = m_refButtondelete.begin();
 	for(; itBu != m_refButtondelete.end(); ++itBu){
 		delete (*itBu);
+	}
+	std::list<Gtk::VBox*>::iterator itvBoxIconos = m_listabotonEliminarImagenes.begin();
+	for(; itvBoxIconos != m_listabotonEliminarImagenes.end(); ++itvBoxIconos){
+		delete (*itvBoxIconos);
+	}
+	std::list<std::string*>::iterator itrutaImgIconos = m_rutaImagenes.begin();
+	for(; itrutaImgIconos != m_rutaImagenes.end(); ++itrutaImgIconos){
+		delete (*itrutaImgIconos);
 	}
 }
 
@@ -232,4 +242,9 @@ void VistaEditarProducto::on_button_editarOK(){
 
 void VistaEditarProducto::on_button_editarCANCEL(){
 	delete this;
+}
+
+bool VistaEditarProducto::on_exit_clicked(GdkEventAny* event){
+	delete this;
+	return true;
 }

@@ -5,7 +5,7 @@ Modelo_Observable::Modelo_Observable(const char* ip, const char* puerto) :
 }
 
 Modelo_Observable::~Modelo_Observable() {
-	this->admin.cerrarConeccion();
+	this->admin.cerrarConexion();
 }
 
 bool Modelo_Observable::actualizarProductos(){

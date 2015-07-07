@@ -6,7 +6,7 @@
 #include "VistaAgregarAreaVision.h"
 #include "VistaEditarAreaVision.h"
 #include "ListaAV.h"
-#include "ListaProductos.h"
+#include "common_ListaProductos.h"
 #include <list>
 #include "common_AreaDeVision.h"
 

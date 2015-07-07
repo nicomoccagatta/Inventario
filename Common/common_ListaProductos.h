@@ -27,6 +27,7 @@ public:
 			add(m_col_descripcion);
 			add(m_col_cantidad);
 			add(m_col_imagenIcono);
+			add(m_col_idIcono);
 			add(m_col_data);
 			add(m_col_imagenes);
 		}
@@ -36,6 +37,7 @@ public:
 		Gtk::TreeModelColumn<Glib::ustring> m_col_descripcion;
 		Gtk::TreeModelColumn<Glib::RefPtr <Gdk::Pixbuf> > m_col_imagenIcono;
 		Gtk::TreeModelColumn<unsigned int> m_col_cantidad;
+		Gtk::TreeModelColumn<unsigned long int> m_col_idIcono;
 		Gtk::TreeModelColumn<Producto*> m_col_data;
 		Gtk::TreeModelColumn<Gtk::ScrolledWindow*> m_col_imagenes;
 	};

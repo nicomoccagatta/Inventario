@@ -46,12 +46,9 @@ add_executable(Admin
 			Administrador/ModeloAdmin/Administrador.cpp
 			Administrador/ModeloAdmin/admin_Datos.cpp
 			Administrador/ModeloAdmin/admin_ModeloObservable.cpp
-			Administrador/ModeloAdmin/admin_Observer.cpp
-			Administrador/ModeloAdmin/admin_Subject.cpp
 			Administrador/VistaAdmin/VistaVentanaPPAL.cpp
 			Administrador/VistaAdmin/VistaListadoProductos.cpp
 			Administrador/VistaAdmin/VistaListadoAreasDeVision.cpp
-			Administrador/VistaAdmin/ListaProductos.cpp
 			Administrador/VistaAdmin/ListaAV.cpp
 			Administrador/VistaAdmin/VistaAgregarProducto.cpp
 			Administrador/VistaAdmin/VistaAgregarAreaVision.cpp
@@ -78,6 +75,8 @@ add_executable(Admin
 			Common/common_Thread.cpp
 			Common/common_CommandParser.cpp
 			Common/common_Imagen.cpp
+			Common/common_Observer.cpp
+			Common/common_Subject.cpp
 		)
 FIND_PACKAGE(OpenCV REQUIRED)
 TARGET_LINK_LIBRARIES(Admin ${OpenCV_LIBS})

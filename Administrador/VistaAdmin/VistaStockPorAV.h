@@ -4,7 +4,7 @@
 #include <gtkmm-2.4/gtkmm.h>
 #include "ModeloAdmin/admin_ModeloObservable.h"
 #include "ModelComboBoxAreasDeVision.h"
-#include "ListaProductos.h"
+#include "common_ListaProductos.h"
 #include <list>
 #include "common_Producto.h"
 #include "Graficos/GraficoDeTorta.h"

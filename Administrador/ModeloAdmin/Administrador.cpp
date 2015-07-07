@@ -4,24 +4,30 @@
 #include "common_CommandParser.h"
 #include "common_Imagen.h"
 
-using common::Imagen;
-
 Administrador::Administrador(const char* ip, const char* puerto) :
 				admin(ip,puerto){
 	if (!admin.estaConectado())
 		std::cerr << "NO ESTOY CONECTADO\n";
-	protocolo.enviarMensaje(this->admin,"Admin|");
-	std::string respuesta = protocolo.recibirMensaje(this->admin);
-	if (respuesta == "ok|\n")
-		std::cerr << "Admin logueado correctamente" << std::endl;
+	else{
+		protocolo.enviarMensaje(this->admin,"Admin|");
+		std::string respuesta = protocolo.recibirMensaje(this->admin);
+		if (respuesta == "ok|\n")
+			std::cerr << "Admin logueado correctamente" << std::endl;
+		else
+			std::cerr << "Admin NO fue logueado correctamente" << std::endl;
+
+		//Creo la carpeta TEMP si no existe...
+		mkdir(RUTA_CARPETA_TEMP, S_IRWXU);
+	}
 }
 
 Administrador::~Administrador() {
 	this->data.eliminarAreasDeVision();
 	this->data.eliminarProductos();
+	system( (std::string("rm -rf ")+ std::string(RUTA_CARPETA_TEMP)).c_str());
 }
 
-void Administrador::cerrarConeccion(){
+void Administrador::cerrarConexion(){
 	this->admin.cerrarConeccion();
 }
 
@@ -38,10 +44,8 @@ bool Administrador::actualizarProductos(){
 
 	CommandParser parser;
 	parser.tokenize(respuesta);
-
-	unsigned int argum = 1;
-	try{
-		while (true){
+	for(unsigned int argum = 1; argum < parser.getCantParamtros() ; argum+=4)
+	{
 			unsigned long int id;
 			std::stringstream ss;
 			ss << parser.getParametro(argum);
@@ -56,9 +60,6 @@ bool Administrador::actualizarProductos(){
 			ss << parser.getParametro(argum+3);
 			ss >> idIcono;
 			this->data.agregarProducto(nombre,descripcion,id, idIcono);
-			argum+=4;
-		}
-	}catch (std::exception& e){
 	}
 	return true;
 }
@@ -137,20 +138,18 @@ void Administrador::modificarProducto(unsigned long int id,std::string &nombre,s
 bool Administrador::actualizarAreasDeVision(){
 	if (this->admin.estaConectado()){
 		protocolo.enviarMensaje(this->admin,"B|");
-	}
-	std::string respuesta = protocolo.recibirMensaje(this->admin);
+		std::string respuesta = protocolo.recibirMensaje(this->admin);
 
-	if (respuesta == "error|\n")
-		return false;
+		if (respuesta == "error|\n")
+			return false;
 
-	this->data.eliminarAreasDeVision();
+		this->data.eliminarAreasDeVision();
 
-	CommandParser parser;
+		CommandParser parser;
 
-	parser.tokenize(respuesta);
-	unsigned int argum = 1;
-	try{
-		while (true){
+		parser.tokenize(respuesta);
+		for(unsigned int argum = 1; argum < parser.getCantParamtros() ; argum+=3)
+		{
 			unsigned long int id;
 			std::stringstream ss;
 			ss << parser.getParametro(argum);
@@ -166,46 +165,38 @@ bool Administrador::actualizarAreasDeVision(){
 			if (respuestaProd != "error|\n"){
 				CommandParser parserProd;
 				parserProd.tokenize(respuestaProd);
-				unsigned int argumProd = 1;
-				try{
-					while(true){
-						std::stringstream obtenerID;
+				for(unsigned int argumProd = 1; argumProd < parserProd.getCantParamtros() ; argumProd+=4)
+				{
+					std::stringstream obtenerID;
 
-						unsigned long int idProd;
-						obtenerID << parserProd.getParametro(argumProd);
-						obtenerID >> idProd;
+					unsigned long int idProd;
+					obtenerID << parserProd.getParametro(argumProd);
+					obtenerID >> idProd;
 
-						std::string nombreProd;
-						nombreProd = parserProd.getParametro(argumProd+1);
+					std::string nombreProd;
+					nombreProd = parserProd.getParametro(argumProd+1);
 
-						unsigned long int idIcono;
-						std::stringstream ssIdIcono;
-						ssIdIcono << parserProd.getParametro(argumProd+2);
-						ssIdIcono >> idIcono;
+					unsigned long int idIcono;
+					std::stringstream ssIdIcono;
+					ssIdIcono << parserProd.getParametro(argumProd+2);
+					ssIdIcono >> idIcono;
 
-						int CantProd;
-						std::stringstream obtenerCant;
-						obtenerCant << parserProd.getParametro(argumProd+3);
-						obtenerCant >> CantProd;
-						std::list<common::Stock*> *stockProd = new std::list<common::Stock*>;
-						common::Stock* stockProducto = new common::Stock(CantProd,"listado");
-						stockProd->push_back(stockProducto);
+					int CantProd;
+					std::stringstream obtenerCant;
+					obtenerCant << parserProd.getParametro(argumProd+3);
+					obtenerCant >> CantProd;
+					std::list<common::Stock*> *stockProd = new std::list<common::Stock*>;
+					common::Stock* stockProducto = new common::Stock(CantProd,"listado");
+					stockProd->push_back(stockProducto);
 
-						argumProd += 4;
-
-						Producto *producto = new Producto(idProd,nombreProd,"",stockProd,idIcono,0);
-						productos->push_back(producto);
-					}
-				}catch (std::exception& e){
+					Producto *producto = new Producto(idProd,nombreProd,"",stockProd,idIcono,0);
+					productos->push_back(producto);
 				}
 			}
 			std::string ubicacion = parser.getParametro(argum+1);
 			std::string tipo = parser.getParametro(argum+2);
 			this->data.agregarAreaDeVision(ubicacion,tipo,id,productos);
-
-			argum+=3;
 		}
-	}catch (std::exception& e){
 	}
 	return true;
 }
@@ -240,7 +231,7 @@ void Administrador::modificarAreaVision(unsigned long int idAV,std::string& ubic
 }
 
 long unsigned int Administrador::altaImagen(std::string &rutaImagen){
-	Imagen imgppal(rutaImagen);
+	common::Imagen imgppal(rutaImagen);
 	protocolo.enviarImagen(this->admin,imgppal);
 	std::string respuesta = protocolo.recibirMensaje(this->admin);
 	CommandParser parser;
@@ -291,19 +282,19 @@ std::string Administrador::getImagenConID(unsigned long int id){
 			std::string respuestaDatosImagen = protocolo.recibirMensaje(this->admin);
 			if (respuestaDatosImagen == "error|\n"){
 				std::cerr << "No encontro imagen del ID: " << id << "\n";
-				return IMAGEN_DEFAULT;
+				return "error";
 			}
 			const unsigned int altoImagen = Protocolo::extraerArgumentoNumericoDeComando(respuestaDatosImagen,2);
 			const unsigned int anchoImagen = Protocolo::extraerArgumentoNumericoDeComando(respuestaDatosImagen,3);
 			const unsigned long int tamanioImagen = Protocolo::extraerArgumentoNumericoDeComando(respuestaDatosImagen,4);
 			protocolo.enviarMensaje(this->admin, kMensajeOK);
 
-			Imagen img = protocolo.recibirImagen(this->admin,altoImagen,anchoImagen,tamanioImagen);
+			common::Imagen img = protocolo.recibirImagen(this->admin,altoImagen,anchoImagen,tamanioImagen);
 			idsDescargados.push_back(id);
 
 			if (!img.esValida()){
 				std::cerr << "No recibio bien\n";
-				return IMAGEN_DEFAULT;
+				return "error";
 			}
 			std::stringstream ss;
 			ss << RUTA_CARPETA_TEMP << id << ".jpg";
@@ -317,7 +308,7 @@ std::string Administrador::getImagenConID(unsigned long int id){
 			return ruta;
 		}
 }
-	return IMAGEN_DEFAULT;
+	return "error";
 }
 
 void Administrador::actualizarStockGeneral(){

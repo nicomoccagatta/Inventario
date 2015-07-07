@@ -17,6 +17,7 @@ class VistaEditarProducto : public Gtk::Window{
 	void on_button_agregarImagen();
 	void on_button_editarOK();
 	void on_button_editarCANCEL();
+	bool on_exit_clicked(GdkEventAny* event);
 
 	Gtk::VBox m_vBoxPrincipal;
 
@@ -57,9 +58,16 @@ class VistaEditarProducto : public Gtk::Window{
 public:
 	VistaEditarProducto(Modelo_Observable *model,unsigned long int idProducto,std::string& nombre,std::string& descripcion,
 							unsigned long int idIcono,std::list<unsigned long int> idsImagenes);
+	virtual ~VistaEditarProducto();
+
+	/*
+	 * Ambos metodos sirven para eliminar un vBOX que contiene la imagen
+	 * y el boton eliminar del producto. Esta imagen a eliminar puede estar
+	 * representada por un id si ya fue ingresada al server previamente, o
+	 * una ruta si se ingreso en esta oportunidad, por eso ambos metodos.
+	 */
 	void eliminarIconoPertenecienteABotonFileDir(Gtk::VBox *vbbox,std::string *sfiledir);
 	void eliminarIconoPertenecienteABotonID(Gtk::VBox *vbbox,unsigned long int id);
-	virtual ~VistaEditarProducto();
 };
 
 #endif /* ADMINISTRADOR_VISTAADMIN_VISTAEDITARPRODUCTO_H_ */

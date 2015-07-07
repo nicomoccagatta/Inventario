@@ -13,8 +13,15 @@ class Referencia {
         Referencia(const Area& referente);
         ~Referencia();
 
+        /*
+         * setea el estado del texto negrita/normal
+         */
         void setNegrita(bool estado);
 
+        /*
+         * Dibuja el cuadradito y la referencia sobre el DrawingArea.
+         * Devuelve la posicion del siguiente cuadradito.
+         */
         double dibujar(Cairo::RefPtr< Cairo::Context >& ctx, double offset);
     private:
         double color[4];

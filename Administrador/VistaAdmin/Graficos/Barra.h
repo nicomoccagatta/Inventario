@@ -3,7 +3,9 @@
 
 #include "Area.h"
 
-//Clase concreta que representa una barra de un gráfico de barras.
+/*
+ * Clase concreta que representa una barra de un gráfico de barras.
+ */
 class Barra : public Area {
     double sep;
     double ancho;
@@ -11,14 +13,24 @@ class Barra : public Area {
     double x0;
     double y0;
 public:
+    /*
+     * Constructor de barra que carga las caracteristicas de la barra
+     * a graficar
+     */
 	Barra(const DatoGrafico& dato, double maximo, unsigned i, double offset,
               double separacion, double ancho);
 	~Barra();
 
-//Dibuja la barra. ctx es el contexto sobre el que se dibuja
+	/*
+	 * Dibuja la barra.
+	 * ctx es el contexto sobre el que se dibuja
+	 */
 	void dibujar(Cairo::RefPtr< Cairo::Context >& ctx);
 
-//Obtener el offset nuevo. Devuelve la posición siguiente a dibujar una barra
+	/*
+	 * Obtener el offset nuevo.
+	 * Devuelve la posición siguiente a dibujar una barra
+	 */
 	double getAvance();
 };
 

@@ -10,13 +10,13 @@
 using std::sprintf;
 using std::strtol;
 
-#define RUTA_IMAGEN_DEFECTO "temp_admin/imagen_vacia.png"
-
 class VistaAgregarProducto : public Gtk::Window{
 	Modelo_Observable *modelo;
 	void on_button_actualizarIcono();
 	void on_button_agregarImagen();
 	void on_button_agregarProducto();
+	void on_button_Cancelar();
+	bool on_exit_clicked(GdkEventAny* event);
 
 	Gtk::VBox m_vBoxPrincipal;
 
@@ -50,11 +50,17 @@ class VistaAgregarProducto : public Gtk::Window{
 	std::list<std::string*> m_rutaImagenesIconos;
 
 	Gtk::Button m_AgregarProducto;
+	Gtk::Button m_Cancelar;
 	Gtk::HButtonBox m_butoneraAgregarBoton;
 public:
 	VistaAgregarProducto(Modelo_Observable *model);
-	void eliminarIconoPertenecienteABoton(Gtk::VBox *vbbox,std::string *sfiledir);
 	virtual ~VistaAgregarProducto();
+
+	/*
+	 * Elimina el vBOX que contiene a la imagen y el boton eliminar.
+	 * Sirve para eliminar una imagen ingresada previamente (arrepentimiento)
+	 */
+	void eliminarIconoPertenecienteABoton(Gtk::VBox *vbbox,std::string *sfiledir);
 };
 
 #endif /* ADMINISTRADOR_VISTAADMIN_VISTAAGREGARPRODUCTO_H_ */

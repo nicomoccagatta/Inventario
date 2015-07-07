@@ -186,6 +186,17 @@ void VistaCrearVideo::actualizarFramesReproductor(){
 void VistaCrearVideo::agregarImagenALista(Glib::ustring rutaCompleta){
 	mutex.bloquear();
 
+	std::stringstream ss(rutaCompleta);
+	std::string extencion;
+	while(std::getline(ss, extencion, '.'));
+	if (extencion != "jpg" && extencion != "png"){
+		this->ventanaError("SOLO jpg y png!", "Error");
+		mutex.desbloquear();
+		return;
+	}
+
+
+
 	std::stringstream iss(rutaCompleta);
 	std::string nombre;
 

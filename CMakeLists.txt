@@ -91,8 +91,7 @@ include_directories("${PROJECT_SOURCE_DIR}/Cliente")
 pkg_check_modules(OpenCV REQUIRED opencv)
 include_directories(${OpenCV_INCLUDE_DIRS}) 
 add_executable(Client
-			Cliente/client_main_VistaEnviar.cpp
-			#Cliente/client_main_VistaDescargar.cpp
+			Cliente/client_main.cpp
 			Cliente/Modelo/client_ClienteDemo.cpp
 			Cliente/Modelo/client_Data.cpp
 			Cliente/Modelo/client_ModeloObservable.cpp

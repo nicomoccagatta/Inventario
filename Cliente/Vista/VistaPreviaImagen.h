@@ -12,11 +12,18 @@
 #include <gtkmm/box.h>
 #include <gtkmm/image.h>
 
+/*
+ * Dialogo para mostrar una imagen.
+ */
 class VistaPreviaImagen: public Gtk::Dialog {
 public:
 	VistaPreviaImagen(Glib::ustring ruta);
 	virtual ~VistaPreviaImagen();
 
+	/*
+	 * Se inicia el dialogo, si se apreta la cruz retorna la senal
+	 * Gtk::RESPONSE_DELETE_EVENT, sino 0.
+	 */
 	int correr();
 
 private:
@@ -25,6 +32,9 @@ private:
 	Gtk::Button ok;
 	Gtk::Image imagen;
 
+	/*
+	 * Sale
+	 */
 	void on_button_OK();
 };
 

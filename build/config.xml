@@ -1,7 +1,7 @@
 <RutaArchivoProductos>productos.xml</RutaArchivoProductos>
 <RutaArchivoAreasDeVision>areasdevision.xml</RutaArchivoAreasDeVision>
 <RutaCarpetaImagenes>./imagenes/</RutaCarpetaImagenes>
-<ValorMinimoDeSimilitudTemplateMatching>0.8</ValorMinimoDeSimilitudTemplateMatching>
-<ValorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud>0.2</ValorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud>
-<ValorMinimoHessianoSURFFeatureMatching>350</ValorMinimoHessianoSURFFeatureMatching>
-<DistanciaMaximaDeSimilitudFeatureMatching>0.18</DistanciaMaximaDeSimilitudFeatureMatching>
+<ValorMinimoDeSimilitudTemplateMatching>0.85</ValorMinimoDeSimilitudTemplateMatching>
+<ValorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud>0.7</ValorMinimoDeSimilitudDeZonaCercanaAUnaSimilitud>
+<ValorMinimoHessianoSURFFeatureMatching>310</ValorMinimoHessianoSURFFeatureMatching>
+<DistanciaMaximaDeSimilitudFeatureMatching>0.1785</DistanciaMaximaDeSimilitudFeatureMatching>

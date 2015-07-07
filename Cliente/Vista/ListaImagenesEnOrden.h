@@ -10,6 +10,10 @@
 
 #include <gtkmm/scrolledwindow.h>
 
+/*
+ * La clase sirve como modelo para un ListStore que contenga en
+ * las filas los datos: imagenIcono, nombre, ruta e imagenGrande
+ */
 class ListaImagenesEnOrden: public Gtk::ScrolledWindow {
 public:
 	ListaImagenesEnOrden(){}

@@ -28,7 +28,7 @@ public:
 	void setModelo(ModeloObservable* modelo);
 
 private:
-	//signal handlers:
+	//signal handler:
 	bool on_exit_clicked(GdkEventAny* event);
 
 	Glib::RefPtr<Gtk::Builder> m_refGlade;

@@ -14,14 +14,6 @@ using common::AreaDeVision;
 using common::Stock;
 using std::vector;
 
-Data::Data() {
-	// TODO Auto-generated destructor stub
-}
-
-Data::~Data() {
-	// TODO Auto-generated destructor stub
-}
-
 Producto* Data::agregarProducto(std::string nombre, std::string descripcion,
 					unsigned long int id, unsigned long int idIcono){
 	Producto* nuevo = new Producto(id, nombre, descripcion, new std::list<Stock*>, idIcono, new std::list<unsigned long int>);

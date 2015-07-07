@@ -27,8 +27,8 @@ class Data {
 	std::list<AreaDeVision*> areasDeVision;
 
 public:
-	Data();
-	virtual ~Data();
+	Data(){}
+	virtual ~Data(){}
 
 	const std::list<AreaDeVision*>* getAreasDeVision() const {
 		return &areasDeVision;

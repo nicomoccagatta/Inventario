@@ -8,14 +8,12 @@
 #include "client_VistaEnviar.h"
 
 #include <glibmm/date.h>
-#include <sys/stat.h> //para sacar el las modified
+#include <sys/stat.h> //para sacar el fecha last modified
 #include <time.h>
 #include <list>
 
 #define FEATURE_MATCHING 1
 #define TEMPLATE_MATCHING 2
-
-using common::AreaDeVision;
 
 VistaEnviar::VistaEnviar(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade)
 : Gtk::Viewport(cobject),
@@ -85,7 +83,7 @@ void VistaEnviar::update(){
 	std::cerr << "UPDATE VISTA ENVIAR\n";
 
 	modeloComboBox->clear();
-	agregarAreasAlCombo();
+	controlador->agregarAreasAlCombo(modeloComboBox,&columnas);
 
 	show_all_children();
 	std::cerr << "FIN DE UPDATE VISTA ENVIAR\n\n";
@@ -174,9 +172,9 @@ void VistaEnviar::on_button_ENVIAR(){
 	std::cout << "Elemento elegido del Combo: "
 			<< fila[columnas.getColumnaTexto()]
 			<< " \n";//con valor: "
-	AreaDeVision* area = fila[columnas.getColumnaValor()];
+	int idArea = fila[columnas.getColumnaValor()];
 
-	controlador->buttonENVIARClicked(rutaArchivo,&fecha,horas,minutos,segundos,matching,area);
+	controlador->buttonENVIARClicked(rutaArchivo,&fecha,horas,minutos,segundos,matching,idArea);
 }
 
 void VistaEnviar::on_button_VistaPrevia(){
@@ -189,18 +187,6 @@ void VistaEnviar::on_button_VistaPrevia(){
 	}
 
 	controlador->buttonVistaPreviaClicked(rutaArchivo);
-
-}
-
-void VistaEnviar::agregarAreasAlCombo(){
-	const std::list<AreaDeVision*>* areas = modelo->getAreasDeVision();
-
-	std::list<AreaDeVision*>::const_iterator it;
-	for (it = areas->begin(); it!= areas->end(); ++it){
-		Gtk::TreeModel::Row fila = *(modeloComboBox->append());
-		fila[columnas.getColumnaValor()] = *it;
-		fila[columnas.getColumnaTexto()] = (*it)->getUbicacion();
-	}
 
 }
 

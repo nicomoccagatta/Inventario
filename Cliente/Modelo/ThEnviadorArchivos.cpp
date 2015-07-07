@@ -12,9 +12,7 @@ ThEnviadorArchivos::ThEnviadorArchivos(ClienteDemo* cliente) : cliente(cliente){
 
 }
 
-ThEnviadorArchivos::~ThEnviadorArchivos() {
-	// TODO Auto-generated destructor stub
-}
+ThEnviadorArchivos::~ThEnviadorArchivos() {}
 
 void ThEnviadorArchivos::agregarImagen(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen, int matching){
 	struct itemEnvio* item = new struct itemEnvio;
@@ -36,9 +34,7 @@ void ThEnviadorArchivos::agregarVideo(unsigned long int idArea, std::string& fec
 	item->matching = matching;
 	item->intervaloSegs = intervaloSegs;
 
-	std::cerr << "VOY A ENCOLAR VIDEO (ANTES DEL MUTEX)\n";
 	mutex.bloquear();
-	std::cerr << "ENCOLO VIDEO (PASADO EL MUTEX)\n";
 	this->colaVideos.push(item);
 	mutex.desbloquear();
 }
@@ -79,7 +75,7 @@ void ThEnviadorArchivos::run(){
 
 			delete item;
 		}
-		//Si no hay mas cosas en ninguna de los dos que se duerma 10 segundos (al inicio del bucle) y vuelva a empezar
+		//Si no hay mas cosas en ninguna de los dos que se duerma 5 segundos (al inicio del bucle) y vuelva a empezar
 	}
 }
 

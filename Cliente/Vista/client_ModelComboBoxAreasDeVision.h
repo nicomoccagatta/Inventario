@@ -8,6 +8,8 @@
 #ifndef CLIENTE_VISTA_CLIENT_MODELCOMBOBOXAREASDEVISION_H_
 #define CLIENTE_VISTA_CLIENT_MODELCOMBOBOXAREASDEVISION_H_
 
+#include <gtkmm-2.4/gtkmm/treemodel.h>
+
 #include "common_AreaDeVision.h"
 
 using common::AreaDeVision;
@@ -17,8 +19,7 @@ using common::AreaDeVision;
  */
 class AreasDeVisionComboBoxModel : public Gtk::TreeModel::ColumnRecord{
 private:
-    Gtk::TreeModelColumn<AreaDeVision*> columnaValor;
-    //Gtk::TreeModelColumn<int> columnaValor;
+    Gtk::TreeModelColumn<int> columnaValor;
     Gtk::TreeModelColumn<Glib::ustring> columnaTexto;
 public:
     AreasDeVisionComboBoxModel(){
@@ -26,8 +27,7 @@ public:
         add(columnaValor);
         add(columnaTexto);
     }
-    Gtk::TreeModelColumn<AreaDeVision*>& getColumnaValor(){
-    //Gtk::TreeModelColumn<int>& getColumnaValor(){
+    Gtk::TreeModelColumn<int>& getColumnaValor(){
         return columnaValor;
     }
     Gtk::TreeModelColumn<Glib::ustring>& getColumnaTexto(){

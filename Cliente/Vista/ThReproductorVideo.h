@@ -17,6 +17,11 @@
 
 using common::Mutex;
 
+/*
+ * Este Thread sirve para que se pueda reproducir la secuencia de frames
+ * sin bloquear al hilo principal y poder seguir usando la interfaz.
+ * Una vez arrancado, duerme hasta que se broadcastea la condicion cond.
+ */
 class ThReproductorVideo: public Thread {
 
 	bool reproduciendo; //false si esta en pausa
@@ -34,22 +39,25 @@ public:
 	virtual ~ThReproductorVideo();
 
 	void run();
+	/*
+	 * Setea el vector de Imagenes a mostrar y pone el valor del
+	 * activo en -1.
+	 */
 	void setearFrames(std::vector<Gtk::Image*>& frames);
 	void setFPS(double fps);
 	void pausa();
+	void sacarImagenPausada();
+
 	bool estaVivo(){
 		return vivo;
 	}
 	bool estaPausado(){
 		return !reproduciendo;
 	}
-	void sacarImagenPausada();
-
 	void setMutex(Mutex& mutex, pthread_cond_t* cond){
 		this->mutex = mutex;
 		this->cond = cond;
 	}
-
 	void matar(){
 		this->vivo = false;
 	}

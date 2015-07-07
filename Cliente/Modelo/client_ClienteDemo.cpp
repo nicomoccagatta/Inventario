@@ -45,7 +45,7 @@ ClienteDemo::~ClienteDemo() {
 bool ClienteDemo::identificarse(){
 	if (this->client.estaConectado()){
 		std::cerr << "Indetificandose...\n";
-		protocolo.enviarMensaje(this->client, kIdentificacionCliente);//"Client|");
+		protocolo.enviarMensaje(this->client, "Client|");
 	}
 	std::string r;
 	if ((r = this->protocolo.recibirMensaje(this->client)) == kRespuestaOK)//"ok|\n")

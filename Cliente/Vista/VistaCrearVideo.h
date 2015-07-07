@@ -15,22 +15,65 @@
 #include "ThReproductorVideo.h"
 #include "common_Mutex.h"
 
+/*
+ * La vista sirve para anadir imagenes a la ListStore y luego reproducirlas
+ * en orden descendiente. Tiene un ThReproductor para reproducir el video.
+ */
 class VistaCrearVideo: public Gtk::Viewport {
+
+	ThReproductorVideo reproductor;
+
+	common::Mutex mutex;
+	pthread_cond_t cond;
+
 public:
 	VistaCrearVideo(BaseObjectType* cobject,
 			const Glib::RefPtr<Gtk::Builder>& refGlade);
 	virtual ~VistaCrearVideo();
 
 private:
+	/*
+	 * Agrega una o varias imagenes al ListStore.
+	 */
 	void on_button_Agregar();
+	/*
+	 * Remueve la imagen seleccionada del ListStore.
+	 */
 	void on_button_Eliminar();
+	/*
+	 * Al seleccionar una imagen, se muestra en el Box.
+	 */
 	void on_imagen_seleccionada();
+	/*
+	 * Al iniciar un drag, se saca la imagen que se selecciono.
+	 */
 	void on_my_drag_begin(const Glib::RefPtr<Gdk::DragContext>& context);
+	/*
+	 * Al finalizar un drag, se actualiza la lista de frames del reproductor
+	 * con el nuevo orden.
+	 */
 	void on_my_drag_end(const Glib::RefPtr<Gdk::DragContext>& context);
 
+	/*
+	 * Broadcastea al reproductor la variable cond para que se levante.
+	 * Antes setea las FPS.
+	 */
 	void on_button_Play();
+
+	/*
+	 * Detiene la reproduccion.
+	 */
 	void on_button_Pausa();
+
+	/*
+	 * Detiene la reproduccion y vuelve al inicio al volver a reproducir.
+	 */
 	void on_button_Stop();
+
+	/*
+	 * Interfaz para descargar el video de acuerdo a las imagenes en orden
+	 * descendiente y las FPS ingresadas.
+	 */
 	void on_button_Descargar();
 
 	void agregarImagenALista(Glib::ustring ruta);
@@ -70,10 +113,6 @@ protected:
 	Gtk::Image* activaAlSeleccionar;
 
 	Gtk::VBox paraReproductor;
-	ThReproductorVideo reproductor;
-
-	common::Mutex mutex;
-	pthread_cond_t cond;
 };
 
 #endif /* CLIENTE_VISTA_VISTACREARVIDEO_H_ */

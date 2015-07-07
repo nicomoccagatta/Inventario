@@ -14,8 +14,7 @@ ThActualizador::ThActualizador() :
 	estoyVivo = false;
 }
 
-ThActualizador::~ThActualizador() {
-}
+ThActualizador::~ThActualizador() {}
 
 void ThActualizador::setParametros(ModeloObservable* modelo, Mutex* mutex){
 	this->modelo = modelo;

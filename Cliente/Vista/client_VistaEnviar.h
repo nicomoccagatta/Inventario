@@ -63,7 +63,11 @@ protected:
 
 private:
 	void update();
-	void agregarAreasAlCombo();
+
+	/*
+	 * Setea el calendario y completa los campos de horario de acuerdo
+	 * a los datos de @arg timer
+	 */
 	void setearFechaYHora(std::tm* timer);
 
 };

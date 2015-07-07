@@ -13,8 +13,12 @@
 
 class ModeloObservable;
 
+/*
+ * La clase es un Thread  que cada cierto intervalo de tiempo, o hasta que
+ * se broadcastee la condicion variable actualiza los Productos y AreasDeVision
+ * mediante el ModeloObservable.
+ */
 class ThActualizador: public Thread {
-
 	bool estoyVivo;
 	ModeloObservable* modelo;
 	Mutex* mutex;
@@ -31,7 +35,6 @@ public:
 	void matar(){
 		pthread_cond_broadcast(&cond);
 		this->estoyVivo=false;
-
 	}
 };
 

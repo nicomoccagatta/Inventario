@@ -15,6 +15,9 @@
 
 class VistaDescargaImagenDeProductos;
 
+/*
+ * Se de manejar las acciones de la vista DescargaImagenDeProductos
+ */
 class ControladorVistaDescargaImagenDeProductos {
 
 	ModeloObservable* modelo;
@@ -27,8 +30,14 @@ public:
 	}
 	virtual ~ControladorVistaDescargaImagenDeProductos(){}
 
+	/*
+	 * Llama a la funcion de la vista que actualiza las imagenes de los productos.
+	 */
 	void on_producto_seleccionado(Producto* prod, Gtk::ScrolledWindow* imagenes_container);
 
+	/*
+	 * Copia el archivo que esta en rutaOrigen a rutaDestino.
+	 */
 	//no pongo referencia para que me copie de glib::ustring a std::string
 	void on_button_descargar(std::string rutaOrigen, std::string rutaDestino);
 

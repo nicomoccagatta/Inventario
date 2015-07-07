@@ -19,6 +19,19 @@
 #define FEATURE_MATCHING 1
 #define TEMPLATE_MATCHING 2
 
+
+void ControladorVistaEnviar::agregarAreasAlCombo(Glib::RefPtr<Gtk::ListStore> modeloComboBox,
+		AreasDeVisionComboBoxModel* columnas){
+	const std::list<AreaDeVision*>* areas = modelo->getAreasDeVision();
+
+	std::list<AreaDeVision*>::const_iterator it;
+	for (it = areas->begin(); it!= areas->end(); ++it){
+		Gtk::TreeModel::Row fila = *(modeloComboBox->append());
+		fila[columnas->getColumnaValor()] = (*it)->getId();
+		fila[columnas->getColumnaTexto()] = (*it)->getUbicacion();
+	}
+}
+
 void ControladorVistaEnviar::buttonVistaPreviaClicked(Glib::ustring rutaArchivo){
 
 	std::stringstream iss(rutaArchivo);
@@ -44,7 +57,7 @@ void ControladorVistaEnviar::buttonVistaPreviaClicked(Glib::ustring rutaArchivo)
 //Tue Jun 9 16:40:47 2015
 void ControladorVistaEnviar::buttonENVIARClicked(Glib::ustring rutaArchivo,Glib::Date* fecha,
 		Glib::ustring horas,Glib::ustring minutos,Glib::ustring segundos,
-		int matching,AreaDeVision* area){
+		int matching,int idArea){
 
 	struct tm time;
 
@@ -72,10 +85,10 @@ void ControladorVistaEnviar::buttonENVIARClicked(Glib::ustring rutaArchivo,Glib:
 	if (extencion == "jpg" || extencion == "png"){
 		switch(matching){
 		case TEMPLATE_MATCHING:
-			modelo->enviarFotoTemplateMatching(area->getId(), formatoFecha, rutaImagen);
+			modelo->enviarFotoTemplateMatching(idArea, formatoFecha, rutaImagen);
 			break;
 		case FEATURE_MATCHING:
-			modelo->enviarFotoFeatureMatching(area->getId(), formatoFecha, rutaImagen);
+			modelo->enviarFotoFeatureMatching(idArea, formatoFecha, rutaImagen);
 			break;
 		}
 	}	else if (extencion == "mpg" || extencion == "mpeg" || extencion == "mp4"){
@@ -86,11 +99,11 @@ void ControladorVistaEnviar::buttonENVIARClicked(Glib::ustring rutaArchivo,Glib:
 
 		switch(matching){
 		case TEMPLATE_MATCHING:
-			modelo->enviarVideoTemplateMatching(area->getId(), formatoFecha, rutaImagen,segs);
+			modelo->enviarVideoTemplateMatching(idArea, formatoFecha, rutaImagen,segs);
 			//std::cerr << "ENVIANDOOO\n";
 			break;
 		case FEATURE_MATCHING:
-			modelo->enviarVideoFeatureMatching(area->getId(), formatoFecha, rutaImagen,segs);
+			modelo->enviarVideoFeatureMatching(idArea, formatoFecha, rutaImagen,segs);
 			break;
 		}
 

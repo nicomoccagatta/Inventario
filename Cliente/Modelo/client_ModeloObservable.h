@@ -26,6 +26,9 @@ using common::Imagen;
  * separar la parte recoleccion de los datos que se necesitan con la
  * interfaz grafica y contiene un metodo por cada dato que la interfaz
  * pudiera llegar a necesitar.
+ * Consiste en un cliente para comunicarse con el Servidor y un EnviadorArchivos
+ * para encolar los distintos items de envio (fotos y videos) e ir enviandolos
+ * en otro hilo para no bloquear el hilo principal.
  */
 class ModeloObservable  : public Subject{
 
@@ -60,15 +63,17 @@ public:
 	std::string getImagenConId(unsigned long int id);
 
 	/*
-	 * Envia la imagen mediante el ClienteDemo.
+	 * Envia la imagen mediante el ThEnviadorArchivos.
 	 */
 	void enviarFotoTemplateMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen);
 	void enviarFotoFeatureMatching(unsigned long int idArea, std::string& fecha, std::string& rutaDeImagen);
 
+
+	/*
+	 * Envia los videos mediante el ThEnviadorArchivos.
+	 */
 	void enviarVideoTemplateMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeVideo, int intervaloSegs);
 	void enviarVideoFeatureMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeVideo, int intervaloSegs);
-
-
 };
 
 #endif /* CLIENTE_MODELO_CLIENT_MODELOOBSERVABLE_H_ */

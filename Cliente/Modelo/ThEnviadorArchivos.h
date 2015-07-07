@@ -16,6 +16,9 @@
 #define FEATURE_MATCHING 1
 #define TEMPLATE_MATCHING 2
 
+/*
+ * Estructura utilizada para completar los datos de envio y ser encolada.
+ */
 struct itemEnvio{
 	unsigned long int idArea;
 	std::string fecha;
@@ -24,8 +27,11 @@ struct itemEnvio{
 	int intervaloSegs;
 };
 
+/*
+ * La clase es un Thread que se ocupa de enviar las imagenes y videos
+ * al Servidor mediente un ClienteDemo.
+ */
 class ThEnviadorArchivos: public Thread {
-
 	bool estoyVivo;
 	common::Mutex mutex;
 	ClienteDemo* cliente;
@@ -37,7 +43,14 @@ public:
 	ThEnviadorArchivos(ClienteDemo* cliente);
 	virtual ~ThEnviadorArchivos();
 
+	/*
+	 * Crea y encola un itemEnvio en la cola de imagenes.
+	 */
 	void agregarImagen(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen, int matching);
+
+	/*
+	 * Crea y encola un itemEnvio en la cola de iseideos.
+	 */
 	void agregarVideo(unsigned long int idArea, std::string& fecha,std::string& rutaDeVideo, int matching,int intervaloSegs);
 
 	void matar(){

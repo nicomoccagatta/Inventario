@@ -54,15 +54,25 @@ VistaEnviar::VistaEnviar(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builde
 
 	//Establecemos el modelo del combo e indicamos las columnas a mostrar
 	m_AreasDeVision->set_model(modeloComboBox);
-	//No es necesario agregar la columna valor si sólo queremos mostrar el texto
-	//combo.pack_start(columnas.getColumnaValor());
 	m_AreasDeVision->pack_start(columnas.getColumnaTexto());
+
+	m_refGlade->get_widget("entryHora", m_entryHora);
+	m_refGlade->get_widget("entryMinutos", m_entryMinutos);
+	m_refGlade->get_widget("entrySegundos", m_entrySegundos);
+	m_refGlade->get_widget("calendar1", m_calendar);
+
+	m_refGlade->get_widget("fileChooserAEnviar", m_fileChooser);
+
+	m_refGlade->get_widget("radiobuttonTemplateMatching", m_templateMatching);
+	m_refGlade->get_widget("radiobuttonFeatureMatching", m_featureMatching);
 
 }
 
 VistaEnviar::~VistaEnviar() {
+	std::cerr << "DESTRUYENDO VISTA ENVIAR\n";
 	if(controlador)
 		delete controlador;
+	std::cerr << "VISTA ENVIAR DESTRUIDA\n";
 }
 
 void VistaEnviar::asignarModelo(ModeloObservable* modelo){
@@ -72,25 +82,17 @@ void VistaEnviar::asignarModelo(ModeloObservable* modelo){
 }
 
 void VistaEnviar::update(){
-	m_refGlade->get_widget("comboboxAreasDeVision", m_AreasDeVision);
+	std::cerr << "UPDATE VISTA ENVIAR\n";
 
-	//m_AreasDeVision->clear();
+	modeloComboBox->clear();
 	agregarAreasAlCombo();
 
 	show_all_children();
-}
-
-void VistaEnviar::on_button_quit(){
-	this->hide(); //hide() will cause main::run() to end.
+	std::cerr << "FIN DE UPDATE VISTA ENVIAR\n\n";
 }
 
 void VistaEnviar::on_button_AutocompletarHoy(){
 	std::cerr << "AUTOCOMPLETANDO HOY\n";
-
-	m_refGlade->get_widget("entryHora", m_entryHora);
-	m_refGlade->get_widget("entryMinutos", m_entryMinutos);
-	m_refGlade->get_widget("entrySegundos", m_entrySegundos);
-	m_refGlade->get_widget("calendar1", m_calendar);
 
 	time_t hora;
 	std::tm* timer;
@@ -101,12 +103,6 @@ void VistaEnviar::on_button_AutocompletarHoy(){
 }
 
 void VistaEnviar::on_button_AutocompletarFechaUltimaModif(){
-	m_refGlade->get_widget("entryHora", m_entryHora);
-	m_refGlade->get_widget("entryMinutos", m_entryMinutos);
-	m_refGlade->get_widget("entrySegundos", m_entrySegundos);
-	m_refGlade->get_widget("calendar1", m_calendar);
-	m_refGlade->get_widget("fileChooserAEnviar", m_fileChooser);
-
 	Glib::ustring rutaArchivo = m_fileChooser->get_filename();
 	if (rutaArchivo.empty()){
 		std::cerr << "POPUP: NO SELECCIONASTE ARCHIVOOO\n";
@@ -128,16 +124,6 @@ void VistaEnviar::on_button_AutocompletarFechaUltimaModif(){
 
 
 void VistaEnviar::on_button_ENVIAR(){
-	//controlador->buttonENVIARClicked(...);
-	m_refGlade->get_widget("entryHora", m_entryHora);
-	m_refGlade->get_widget("entryMinutos", m_entryMinutos);
-	m_refGlade->get_widget("entrySegundos", m_entrySegundos);
-	m_refGlade->get_widget("fileChooserAEnviar", m_fileChooser);
-	m_refGlade->get_widget("radiobuttonTemplateMatching", m_templateMatching);
-	m_refGlade->get_widget("radiobuttonFeatureMatching", m_featureMatching);
-	m_refGlade->get_widget("comboboxAreasDeVision", m_AreasDeVision);
-	m_refGlade->get_widget("calendar1", m_calendar);
-
 	Glib::ustring horas = m_entryHora->get_text();
 	Glib::ustring minutos = m_entryMinutos->get_text();
 	Glib::ustring segundos = m_entrySegundos->get_text();
@@ -194,13 +180,11 @@ void VistaEnviar::on_button_ENVIAR(){
 }
 
 void VistaEnviar::on_button_VistaPrevia(){
-	m_refGlade->get_widget("fileChooserAEnviar", m_fileChooser);
-
 	Glib::ustring rutaArchivo = m_fileChooser->get_filename();
 	std::cerr << "Ruta archivo: " << rutaArchivo << "\n";
 
 	if (rutaArchivo.empty()){
-		std::cerr << "POPUP: NO ELEGISTE ARCHIVO";
+		this->ventanaError("No elegiste archivo!!", "Error");
 		return;
 	}
 

@@ -12,6 +12,7 @@
 #include <glibmm-2.4/glibmm.h>
 #include <iostream>
 
+#include "common_Observer.h"
 #include "../Control/client_ControladorVistaEnviar.h"
 #include "../Modelo/client_ModeloObservable.h"
 #include "client_ModelComboBoxAreasDeVision.h"
@@ -23,7 +24,7 @@ class ControladorVistaEnviar;
  * foto o video al servidor para realizar una demonstracion de un
  * control de inventario.
  */
-class VistaEnviar : public Gtk::Viewport{
+class VistaEnviar : public Gtk::Viewport, public Observer{
 
 	ModeloObservable* modelo;
 	ControladorVistaEnviar* controlador;
@@ -39,7 +40,6 @@ public:
 
 protected:
 	//signal handlers:
-	void on_button_quit();
 	void on_button_ENVIAR();
 	void on_button_VistaPrevia();
 	void on_button_AutocompletarHoy();

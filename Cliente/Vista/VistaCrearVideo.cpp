@@ -57,7 +57,7 @@ VistaCrearVideo::VistaCrearVideo(BaseObjectType* cobject, const Glib::RefPtr<Gtk
 		    sigc::mem_fun(*this, &VistaCrearVideo::on_my_drag_begin) );
 
 	hBoxListados.pack_start(m_ImagenesList);
-	//labelMasVistaPreviaMasPlayStopPausa.set_size_request(400,Gtk::EXPAND);
+
 	hBoxListados.pack_start(m_Vseparator);
 	hBoxListados.pack_end(labelMasVistaPreviaMasPlayStopPausa);
 
@@ -77,7 +77,6 @@ VistaCrearVideo::VistaCrearVideo(BaseObjectType* cobject, const Glib::RefPtr<Gtk
 
 	m_DescargarButton.set_label("Descargar");
 	m_DescargarButton.signal_clicked().connect( sigc::mem_fun(*this, &VistaCrearVideo::on_button_Descargar) );
-	//m_DescargarButton.set_size_request(30,30);
 
 	m_FPSLabel.set_text("FPS: ");
 	m_FPSEntry.set_max_length(6);
@@ -108,9 +107,9 @@ VistaCrearVideo::VistaCrearVideo(BaseObjectType* cobject, const Glib::RefPtr<Gtk
 VistaCrearVideo::~VistaCrearVideo() {
 	reproductor.matar();
 	pthread_cond_broadcast(&cond); //para que salga del bloqueo
-	std::cerr << "JOINEO\n";
+	std::cerr << "JOINEO REPRODUCTOR\n";
 	reproductor.join();
-
+	std::cerr << "REPRODUCTOR JOINEADO\n";
 
 	pthread_cond_destroy(&cond);
 
@@ -129,7 +128,7 @@ VistaCrearVideo::~VistaCrearVideo() {
 
 void VistaCrearVideo::on_button_Agregar(){
 	/*Abro el dialogo para elegir archivo*/
-	Gtk::FileChooserDialog dialog("Elige una imagen",
+	Gtk::FileChooserDialog dialog("Elige una o varias imagen/es",
 			Gtk::FILE_CHOOSER_ACTION_OPEN);
 
 	dialog.set_select_multiple(true);
@@ -173,12 +172,10 @@ void VistaCrearVideo::actualizarFramesReproductor(){
 	Gtk::TreeModel::Children::iterator it;
 
 	std::vector< Gtk::Image* > frames;
-	std::vector<Glib::ustring> rutaFrames;
 
 	for(it=children.begin(); it != children.end(); ++it){
 		Gtk::TreeModel::Row row = *it;
 		frames.push_back((row[m_ImagenesList.m_Columns.m_col_imgGrande]));
-		rutaFrames.push_back((row[m_ImagenesList.m_Columns.m_col_ruta]));
 	}
 	reproductor.setearFrames(frames);
 }
@@ -213,25 +210,36 @@ void VistaCrearVideo::agregarImagenALista(Glib::ustring rutaCompleta){
  * Elimina la imagen del listado
  */
 void VistaCrearVideo::on_button_Eliminar(){
-	mutex.bloquear();
+	/*No puedo poner mutex porque en el m_refImagenesListStore->erase(iter);
+	 * me selecciona el que queda abajo y se me bloquea en la senal
+	 * on_producto_seleccionado.
+	 */
+
+	std::cerr << "ELIMINAR APRETADO\n";
+	std::cerr << "ELIMINAR PASA MUTEX\n";
 	/*Seguramente cuando la seleccione se puso como activa*/
 	if (this->activaAlSeleccionar){
-			this->paraReproductor.remove(*activaAlSeleccionar);
-			this->activaAlSeleccionar = 0;
+		std::cerr << "ELIMINAR SACO IMAGEN ACTIVA\n";
+		this->paraReproductor.remove(*activaAlSeleccionar);
+		this->activaAlSeleccionar = 0;
 	}
 
+	std::cerr << "ELIMINAR OBTENGO SELECCIONADO\n";
 	Gtk::TreeModel::iterator iter = refTreeSelection->get_selected();
 	Gtk::TreeModel::Row row = *iter;
 	if(iter){ //If anything is selected
 		/*Libero la Imagen*/
+		std::cerr << "ELIMINAR LIBERO IMAGEN\n";
 		if (row[m_ImagenesList.m_Columns.m_col_imgGrande])
 			delete row[m_ImagenesList.m_Columns.m_col_imgGrande];
 
+		std::cerr << "ELIMINAR SACO DEL LIST STORE\n";
 		m_refImagenesListStore->erase(iter);
+		std::cerr << "ELIMINAR TERMINO DE SACAR DEL LIST STORE\n";
 	}
+	std::cerr << "ELIMINAR ACTUALIZO FRAMES\n";
 	/*Actualizo los frames (sin la que se elimino)*/
 	this->actualizarFramesReproductor();
-	mutex.desbloquear();
 }
 
 /*

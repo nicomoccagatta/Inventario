@@ -12,8 +12,8 @@
 #include <glibmm-2.4/glibmm.h>
 
 #include "../Modelo/client_ModeloObservable.h"
+#include "client_VistaDescargaImagenDeProductos.h"
 #include "client_VistaEnviar.h"
-#include "client_VistaDescargaImagenDeProductos2.h"
 #include "VistaCrearVideo.h"
 
 /*
@@ -34,7 +34,7 @@ private:
 	Glib::RefPtr<Gtk::Builder> m_refGlade;
 
 	VistaEnviar* vistaEnviarPtr;
-	VistaDescargaImagenDeProductos2* vistaDescargar;
+	VistaDescargaImagenDeProductos* vistaDescargar;
 	VistaCrearVideo* vistaCrearVideo;
 
 

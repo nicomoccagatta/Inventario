@@ -13,15 +13,15 @@
 #include "../Modelo/client_ModeloObservable.h"
 #include "common_Producto.h"
 
-class VistaDescargaImagenDeProductos2;
+class VistaDescargaImagenDeProductos;
 
 class ControladorVistaDescargaImagenDeProductos {
 
 	ModeloObservable* modelo;
-	VistaDescargaImagenDeProductos2* vista;
+	VistaDescargaImagenDeProductos* vista;
 
 public:
-	ControladorVistaDescargaImagenDeProductos(ModeloObservable* modelo,VistaDescargaImagenDeProductos2* vista) {
+	ControladorVistaDescargaImagenDeProductos(ModeloObservable* modelo,VistaDescargaImagenDeProductos* vista) {
 		this->modelo = modelo;
 		this->vista = vista;
 	}

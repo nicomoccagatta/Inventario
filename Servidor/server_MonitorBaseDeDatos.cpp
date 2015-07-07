@@ -246,7 +246,6 @@ void MonitorBaseDeDatos::actualizarDeteccionAreaDeVision(const unsigned long int
 				variacionDeStock = aparicionesDelProducto-(*producto)->getStock();
 		}
 		if (variacionDeStock!=0){
-			std::cerr << "Variacion del stock = " << variacionDeStock << std::endl;
 			(*it)->actualizarStock(variacionDeStock,fechaDeCaptura);
 		}
 	}

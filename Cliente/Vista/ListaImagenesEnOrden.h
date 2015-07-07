@@ -9,9 +9,6 @@
 #define CLIENTE_VISTA_LISTAIMAGENESENORDEN_H_
 
 #include <gtkmm/scrolledwindow.h>
-//#include "AspectPreservingScalingImage.h"
-
-//class AspectPreservingScalingImage;
 
 class ListaImagenesEnOrden: public Gtk::ScrolledWindow {
 public:

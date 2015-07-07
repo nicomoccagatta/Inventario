@@ -14,5 +14,12 @@ void Mutex::cond_wait(pthread_cond_t* cond){
 	pthread_cond_wait(cond, &(this->mutex));
 }
 
+void Mutex::cond_timedwait(pthread_cond_t* cond, int segundos){
+	struct timespec abstime;
+	clock_gettime(CLOCK_REALTIME,&abstime);
+	abstime.tv_sec += 30;
+	pthread_cond_timedwait(cond, &(this->mutex), &abstime);
+}
+
 } /* namespace common */
 

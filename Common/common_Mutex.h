@@ -13,6 +13,7 @@ class Mutex {
   void desbloquear();
 
   void cond_wait(pthread_cond_t* cond);
+  void cond_timedwait(pthread_cond_t* cond, int segundos);
 
  private:
   pthread_mutex_t mutex;

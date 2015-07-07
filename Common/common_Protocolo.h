@@ -4,6 +4,7 @@
 #include <string.h>
 #include "common_Socket.h"
 #include "common_Imagen.h"
+#include "common_Defines.h"
 
 #define kFinalizadorPorDefecto "\n"
 #define kRemplazoFinalizadorPorDefecto "\3"

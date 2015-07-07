@@ -39,6 +39,14 @@
             <Cantidad>21</Cantidad>
         </Stock>
         <Stock>
+            <Fecha>Fri Jun 19 20:51:32 2015</Fecha>
+            <Cantidad>23</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 02:31:08 2015</Fecha>
+            <Cantidad>21</Cantidad>
+        </Stock>
+        <Stock>
             <Fecha>Thu Jun 25 02:02:02 2015</Fecha>
             <Cantidad>24</Cantidad>
         </Stock>
@@ -83,6 +91,14 @@
     <Nombre>Coca</Nombre>
     <Descripcion>lata chiquita y golpeada</Descripcion>
     <StockHistorico>
+        <Stock>
+            <Fecha>Fri Jun 19 02:31:08 2015</Fecha>
+            <Cantidad>2</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 20:51:32 2015</Fecha>
+            <Cantidad>6</Cantidad>
+        </Stock>
         <Stock>
             <Fecha>Fri Jul 3 19:02:51 2015</Fecha>
             <Cantidad>2</Cantidad>
@@ -137,6 +153,14 @@
     <Nombre>Fernet - Branca</Nombre>
     <Descripcion>El elixir de la vida</Descripcion>
     <StockHistorico>
+        <Stock>
+            <Fecha>Fri Jun 19 02:31:08 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 20:51:32 2015</Fecha>
+            <Cantidad>8</Cantidad>
+        </Stock>
         <Stock>
             <Fecha>Fri Jun 19 02:31:08 2015</Fecha>
             <Cantidad>0</Cantidad>
@@ -332,6 +356,22 @@
     <Descripcion>Mermelada de frutilla reducida en calorias libre de gluten</Descripcion>
     <StockHistorico>
         <Stock>
+            <Fecha>Tue Jun 23 22:23:09 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 20:51:32 2015</Fecha>
+            <Cantidad>1</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 20:51:32 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 20:51:32 2015</Fecha>
+            <Cantidad>1</Cantidad>
+        </Stock>
+        <Stock>
             <Fecha>Fri Jun 19 20:51:32 2015</Fecha>
             <Cantidad>0</Cantidad>
         </Stock>
@@ -358,6 +398,22 @@
     <Nombre>Chocolinas 250g - Bagley</Nombre>
     <Descripcion>Galletitas dulces sabor chocolate.</Descripcion>
     <StockHistorico>
+        <Stock>
+            <Fecha>Fri Jun 19 02:31:08 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 20:51:32 2015</Fecha>
+            <Cantidad>1</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 20:51:32 2015</Fecha>
+            <Cantidad>0</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 20:50:59 2015</Fecha>
+            <Cantidad>1</Cantidad>
+        </Stock>
         <Stock>
             <Fecha>Fri Jun 19 20:51:32 2015</Fecha>
             <Cantidad>0</Cantidad>
@@ -392,6 +448,18 @@
     <Nombre>sol</Nombre>
     <Descripcion>aver si anda esta vez</Descripcion>
     <StockHistorico>
+        <Stock>
+            <Fecha>Tue Jun 23 22:23:09 2015</Fecha>
+            <Cantidad>6</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 02:31:08 2015</Fecha>
+            <Cantidad>9</Cantidad>
+        </Stock>
+        <Stock>
+            <Fecha>Fri Jun 19 20:51:32 2015</Fecha>
+            <Cantidad>16</Cantidad>
+        </Stock>
         <Stock>
             <Fecha>Fri Jun 19 20:50:59 2015</Fecha>
             <Cantidad>6</Cantidad>

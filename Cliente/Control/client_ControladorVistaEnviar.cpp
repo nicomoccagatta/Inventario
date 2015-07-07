@@ -12,6 +12,7 @@
 #include "client_ControladorVistaEnviar.h"
 #include "../Vista/client_VistaEnviar.h"
 #include "../Vista/VistaPreviaImagen.h"
+#include "../Vista/VistaSeleccioneIntervaloSegundos.h"
 #include "common_Imagen.h"
 #include "common_Video.h"
 
@@ -79,17 +80,17 @@ void ControladorVistaEnviar::buttonENVIARClicked(Glib::ustring rutaArchivo,Glib:
 		}
 	}	else if (extencion == "mpg" || extencion == "mpeg" || extencion == "mp4"){
 		std::cerr << "Se ingreso un video!!\n";
-		//VistaSeleccioneFPS view;
-		//int fps = view.correr();
-		//std::cerr << "FPS:\t" << fps << "\n";
+		VistaSeleccioneIntervaloSegundos view;
+		int segs = view.correr();
+		std::cerr << "CADA SEGS:\t" << segs << "\n";
 
 		switch(matching){
 		case TEMPLATE_MATCHING:
-			modelo->enviarVideoTemplateMatching(area->getId(), formatoFecha, rutaImagen);
+			modelo->enviarVideoTemplateMatching(area->getId(), formatoFecha, rutaImagen,segs);
 			//std::cerr << "ENVIANDOOO\n";
 			break;
 		case FEATURE_MATCHING:
-			modelo->enviarVideoFeatureMatching(area->getId(), formatoFecha, rutaImagen);
+			modelo->enviarVideoFeatureMatching(area->getId(), formatoFecha, rutaImagen,segs);
 			break;
 		}
 

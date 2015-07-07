@@ -12,8 +12,7 @@
 #include <glibmm-2.4/glibmm.h>
 #include <iostream>
 
-//#include "../Control/client_ControladorVistaDescargaImagenDeProductos.h"
-
+#include "common_Observer.h"
 #include "../Control/client_ControladorVistaDescargaImagenDeProductos.h"
 #include "../Modelo/client_ModeloObservable.h"
 #include "common_ListaProductos.h"
@@ -24,15 +23,15 @@ class ControladorVistaDescargaImagenDeProductos;
  * Es la Vista que permite ver las imagenes de cada producto y
  * descargar la que uno quiera.
  */
-class VistaDescargaImagenDeProductos2: public Gtk::Viewport {
+class VistaDescargaImagenDeProductos: public Gtk::Viewport, public Observer {
 
 	ModeloObservable* modelo;
 	ControladorVistaDescargaImagenDeProductos* controlador;
 
 public:
-	VistaDescargaImagenDeProductos2(BaseObjectType* cobject,
+	VistaDescargaImagenDeProductos(BaseObjectType* cobject,
 			const Glib::RefPtr<Gtk::Builder>& refGlade);
-	virtual ~VistaDescargaImagenDeProductos2();
+	virtual ~VistaDescargaImagenDeProductos();
 
 	void asignarModelo(ModeloObservable* modelo);
 	//void asignarControlador(ControladorVistaDescargaImagenDeProductos* controlador);

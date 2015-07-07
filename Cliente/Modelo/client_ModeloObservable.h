@@ -10,8 +10,10 @@
 
 #include "client_ClienteDemo.h"
 #include "ThEnviadorArchivos.h"
+#include "ThActualizador.h"
 #include "common_AreaDeVision.h"
 #include "common_Imagen.h"
+#include "common_Subject.h"
 
 #define FEATURE_MATCHING 1
 #define TEMPLATE_MATCHING 2
@@ -25,14 +27,22 @@ using common::Imagen;
  * interfaz grafica y contiene un metodo por cada dato que la interfaz
  * pudiera llegar a necesitar.
  */
-class ModeloObservable {
+class ModeloObservable  : public Subject{
 
 	ClienteDemo cliente;
 	ThEnviadorArchivos enviador;
 
+	//ThActualizador actualizador;
+	Mutex mutexData;
+
 public:
 	ModeloObservable(const char* ip, const char* puerto);
 	virtual ~ModeloObservable();
+
+	/*
+	 * Actualiza Productos y Areas de Vision
+	 */
+	bool actualizarDatos();
 
 	/*
 	 *Actualiza los Productos :)
@@ -44,8 +54,8 @@ public:
 	 */
 	bool actualizarAreasDeVision();
 
-	const std::list<AreaDeVision*>* getAreasDeVision() const;
-	const std::list<Producto*>* getProductos() const;
+	const std::list<AreaDeVision*>* getAreasDeVision();
+	const std::list<Producto*>* getProductos();
 
 	std::string getImagenConId(unsigned long int id);
 
@@ -55,8 +65,8 @@ public:
 	void enviarFotoTemplateMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen);
 	void enviarFotoFeatureMatching(unsigned long int idArea, std::string& fecha, std::string& rutaDeImagen);
 
-	void enviarVideoTemplateMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeVideo);
-	void enviarVideoFeatureMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeVideo);
+	void enviarVideoTemplateMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeVideo, int intervaloSegs);
+	void enviarVideoFeatureMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeVideo, int intervaloSegs);
 
 
 };

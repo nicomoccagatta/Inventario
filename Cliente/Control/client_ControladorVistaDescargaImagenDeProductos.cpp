@@ -9,7 +9,8 @@
 #include <fstream>
 
 #include "client_ControladorVistaDescargaImagenDeProductos.h"
-#include "../Vista/client_VistaDescargaImagenDeProductos2.h"
+
+#include "../Vista/client_VistaDescargaImagenDeProductos.h"
 
 void ControladorVistaDescargaImagenDeProductos::on_producto_seleccionado(
 		Producto* prod, Gtk::ScrolledWindow* imagenes_container){

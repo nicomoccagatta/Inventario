@@ -21,23 +21,24 @@ struct itemEnvio{
 	std::string fecha;
 	std::string rutaDeImagen;
 	int matching;
+	int intervaloSegs;
 };
 
 class ThEnviadorArchivos: public Thread {
 
 	bool estoyVivo;
 	common::Mutex mutex;
-	ClienteDemo cliente;
+	ClienteDemo* cliente;
 
 	std::queue<itemEnvio*> colaImagenes;
 	std::queue<itemEnvio*> colaVideos;
 
 public:
-	ThEnviadorArchivos(ClienteDemo& cliente);
+	ThEnviadorArchivos(ClienteDemo* cliente);
 	virtual ~ThEnviadorArchivos();
 
 	void agregarImagen(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen, int matching);
-	void agregarVideo(unsigned long int idArea, std::string& fecha,std::string& rutaDeVideo, int matching);
+	void agregarVideo(unsigned long int idArea, std::string& fecha,std::string& rutaDeVideo, int matching,int intervaloSegs);
 
 	void matar(){
 		this->estoyVivo=false;

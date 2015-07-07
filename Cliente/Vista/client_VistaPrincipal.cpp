@@ -32,7 +32,9 @@ VistaPrincipal::~VistaPrincipal() {
 
 void VistaPrincipal::setModelo(ModeloObservable* modelo){
 	vistaEnviarPtr->asignarModelo(modelo);
+	modelo->suscribe(vistaEnviarPtr);
 	vistaDescargar->asignarModelo(modelo);
+	modelo->suscribe(vistaDescargar);
 
 }
 

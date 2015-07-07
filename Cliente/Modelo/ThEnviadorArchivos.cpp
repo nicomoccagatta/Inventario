@@ -7,7 +7,7 @@
 
 #include "ThEnviadorArchivos.h"
 
-ThEnviadorArchivos::ThEnviadorArchivos(ClienteDemo& cliente) : cliente(cliente){
+ThEnviadorArchivos::ThEnviadorArchivos(ClienteDemo* cliente) : cliente(cliente){
 	this->estoyVivo = false;
 
 }
@@ -28,12 +28,13 @@ void ThEnviadorArchivos::agregarImagen(unsigned long int idArea, std::string& fe
 	mutex.desbloquear();
 }
 
-void ThEnviadorArchivos::agregarVideo(unsigned long int idArea, std::string& fecha,std::string& rutaDeVideo, int matching){
+void ThEnviadorArchivos::agregarVideo(unsigned long int idArea, std::string& fecha,std::string& rutaDeVideo, int matching,int intervaloSegs){
 	struct itemEnvio* item = new struct itemEnvio;
 	item->idArea = idArea;
 	item->fecha = fecha;
 	item->rutaDeImagen = rutaDeVideo;
 	item->matching = matching;
+	item->intervaloSegs = intervaloSegs;
 
 	std::cerr << "VOY A ENCOLAR VIDEO (ANTES DEL MUTEX)\n";
 	mutex.bloquear();
@@ -57,9 +58,9 @@ void ThEnviadorArchivos::run(){
 			colaImagenes.pop();
 			mutex.desbloquear();
 			if (item->matching == TEMPLATE_MATCHING)
-				cliente.enviarFotoTemplateMatching(item->idArea,item->fecha,item->rutaDeImagen);
+				cliente->enviarFotoTemplateMatching(item->idArea,item->fecha,item->rutaDeImagen);
 			else
-				cliente.enviarFotoFeatureMatching(item->idArea,item->fecha,item->rutaDeImagen);
+				cliente->enviarFotoFeatureMatching(item->idArea,item->fecha,item->rutaDeImagen);
 
 			delete item;
 		}
@@ -72,9 +73,9 @@ void ThEnviadorArchivos::run(){
 			colaVideos.pop();
 			mutex.desbloquear();
 			if (item->matching == TEMPLATE_MATCHING)
-				cliente.enviarVideoTemplateMatching(item->idArea,item->fecha,item->rutaDeImagen);
+				cliente->enviarVideoTemplateMatching(item->idArea,item->fecha,item->rutaDeImagen,item->intervaloSegs);
 			else
-				cliente.enviarVideoFeatureMatching(item->idArea,item->fecha,item->rutaDeImagen);
+				cliente->enviarVideoFeatureMatching(item->idArea,item->fecha,item->rutaDeImagen,item->intervaloSegs);
 
 			delete item;
 		}

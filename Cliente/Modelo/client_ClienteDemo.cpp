@@ -16,13 +16,15 @@
 #include "common_Imagen.h"
 #include "common_Video.h"
 
+#define kRespuestaOK "ok|\n"
+#define kRespuestaERROR "error|\n"
 #define TEMP_CARPETA "TEMP_clienteDemoImagenes"
 
 using common::Imagen;
 using common::Video;
 
 ClienteDemo::ClienteDemo(const char* ip, const char* puerto) :
-		client(ip,puerto){ //"server_machine","1037"
+		client(ip,puerto){
 	if (!client.estaConectado())
 		std::cerr << "NO ESTOY CONECTADO\n";
 
@@ -43,10 +45,10 @@ ClienteDemo::~ClienteDemo() {
 bool ClienteDemo::identificarse(){
 	if (this->client.estaConectado()){
 		std::cerr << "Indetificandose...\n";
-		protocolo.enviarMensaje(this->client, "Client|");
+		protocolo.enviarMensaje(this->client, kIdentificacionCliente);//"Client|");
 	}
 	std::string r;
-	if ((r = this->protocolo.recibirMensaje(this->client)) == "ok|\n")
+	if ((r = this->protocolo.recibirMensaje(this->client)) == kRespuestaOK)//"ok|\n")
 		return true;
 	std::cerr << r;
 	return false;
@@ -59,20 +61,22 @@ void ClienteDemo::cerrarConeccion(){
 void ClienteDemo::actualizarIdImagenesDeProducto(Producto* prod){
 	if (this->client.estaConectado()){
 		std::stringstream ss;
-		ss << "C|" << prod->getId() << "|";
+		ss << kIndicadorComandoDetalleProducto << kMensajeDelimitadorCampos
+				<< prod->getId() << kMensajeDelimitadorCampos;
 		protocolo.enviarMensaje(this->client,ss.str());
 	}else{
 		return;
 	}
 	std::string respuesta = protocolo.recibirMensaje(this->client);
 
-	if (respuesta == "error|\n")
+	if (respuesta == kRespuestaERROR || !this->client.estaConectado())//"error|\n")
 		return;
 
 	CommandParser parser;
 
 	parser.tokenize(respuesta);
 
+	//Obtengo la lista de ids vacia
 	std::list<unsigned long int>* ids = prod->getIdsImagenes();
 
 	unsigned int argum = 4;
@@ -98,13 +102,18 @@ void ClienteDemo::actualizarIdImagenesDeProducto(Producto* prod){
 }
 
 bool ClienteDemo::actualizarProductos(){
-	if (this->client.estaConectado())
-		protocolo.enviarMensaje(this->client,"A|");
-	else
+	mutex.bloquear();
+	if (this->client.estaConectado()){
+		std::stringstream ss;
+		ss << kIndicadorComandoListarProductos << kMensajeDelimitadorCampos;
+		protocolo.enviarMensaje(this->client, ss.str());
+	}else{
+		mutex.desbloquear();
 		return false;
+	}
 	std::string respuesta = protocolo.recibirMensaje(this->client);
 
-	if (respuesta == "error|\n"){
+	if (respuesta == kRespuestaERROR || !this->client.estaConectado()){//"error|\n"){
 		std::cerr << "error pidiendo productos\n";
 		return false;
 	}
@@ -139,31 +148,29 @@ bool ClienteDemo::actualizarProductos(){
 
 			this->actualizarIdImagenesDeProducto(nuevo);
 
-			std::list<unsigned long int>* ids = nuevo->getIdsImagenes();
-
-			std::list<unsigned long int>::iterator it;
-
-			for (it=ids->begin(); it!=ids->end();++it){
-				//std::cerr << "ID IMAGEN AGREGADA AL MODELO: " << *it << "\n";
-			}
-
 			argum+=4;
 		}
 	}catch (std::exception& e){
 		//std::cout << "ya se manejar excepciones:)\n";
 		//std::cout << e.what();
 	}
+	mutex.desbloquear();
 	return true;
 }
 
 bool ClienteDemo::actualizarAreasDeVision(){
-	if (this->client.estaConectado())
-		protocolo.enviarMensaje(this->client,"B|");
-	else
+	mutex.bloquear();
+	if (this->client.estaConectado()){
+		std::stringstream ss;
+		ss << kIndicadorComandoListarAreasDeVision << kMensajeDelimitadorCampos;
+		protocolo.enviarMensaje(this->client,ss.str());
+	}else{
+		mutex.desbloquear();
 		return false;
+	}
 	std::string respuesta = protocolo.recibirMensaje(this->client);
 
-	if (respuesta == "error|\n")
+	if (respuesta == kRespuestaERROR || !this->client.estaConectado())//"error|\n")
 		return false;
 
 	this->data.eliminarAreasDeVision();
@@ -191,33 +198,72 @@ bool ClienteDemo::actualizarAreasDeVision(){
 		//std::cout << "ya se manejar excepciones:)\n";
 		//std::cout << e.what();
 	}
+	mutex.desbloquear();
 	return true;
 }
 
-const std::list<AreaDeVision*>* ClienteDemo::getAreasDeVision() const{
-	return data.getAreasDeVision();
+const std::list<AreaDeVision*>* ClienteDemo::getAreasDeVision() {
+	mutex.bloquear();
+	const std::list<AreaDeVision*>* aux = data.getAreasDeVision();
+	mutex.desbloquear();
+	return aux;
 }
 
-const std::list<Producto*>* ClienteDemo::getProductos() const {
-	return data.getProductos();
+const std::list<Producto*>* ClienteDemo::getProductos() {
+	mutex.bloquear();
+	const std::list<Producto*>* aux = data.getProductos();
+	mutex.desbloquear();
+	return aux;
 }
 
 std::string ClienteDemo::getImagenConId(unsigned long int id){
+	std::cerr << "GET IMAGEN MUTEX\n";
+	mutex.bloquear();
 	if (this->client.estaConectado()){
-		std::stringstream ss;
-		ss << "R|" << id << "|";
-		protocolo.enviarMensaje(this->client,ss.str());
-	}else
+		std::stringstream s;
+		s << kIndicadorComandoSolicitudImagen << kMensajeDelimitadorCampos
+				<< id << kMensajeDelimitadorCampos;
+		protocolo.enviarMensaje(this->client,s.str());
+	}else{
+		mutex.desbloquear();
 		return "";
+	}
 
 	std::string respuestaDatosImagen = protocolo.recibirMensaje(this->client);
 	std::cerr << "RESPUESTA A R|" << id << "|\n";
 	std::cerr << respuestaDatosImagen << "\n";
-	if (respuestaDatosImagen == "error|\n")
+	if (respuestaDatosImagen == kRespuestaERROR || !this->client.estaConectado()){//"error|\n")
+		mutex.desbloquear();
 		return "";
-	const unsigned int altoImagen = Protocolo::extraerArgumentoNumericoDeComando(respuestaDatosImagen,2);
-	const unsigned int anchoImagen = Protocolo::extraerArgumentoNumericoDeComando(respuestaDatosImagen,3);
-	const unsigned long int tamanioImagen = Protocolo::extraerArgumentoNumericoDeComando(respuestaDatosImagen,4);
+	}
+
+	CommandParser parser;
+	parser.tokenize(respuestaDatosImagen);
+
+	unsigned int altoImagen;
+	unsigned int anchoImagen;
+	unsigned long int tamanioImagen;
+	std::stringstream ss;
+	try{
+		ss << parser.getParametro(2);
+		ss >> altoImagen;
+		ss.clear();
+		ss.str("");
+
+		ss << parser.getParametro(3);
+		ss >> anchoImagen;
+		ss.clear();
+		ss.str("");
+
+		ss << parser.getParametro(4);
+		ss >> tamanioImagen;
+		ss.clear();
+		ss.str("");
+	}catch (std::exception& e){
+		protocolo.enviarMensaje(this->client, kMensajeError);
+		mutex.desbloquear();
+		return "";
+	}
 	protocolo.enviarMensaje(this->client, kMensajeOK);
 
 	std::cerr << "Recibiendo IMAGEN...\n";
@@ -225,16 +271,19 @@ std::string ClienteDemo::getImagenConId(unsigned long int id){
 	std::cerr << "IMAGEN recibida\n";
 
 	if (!img.esValida()){
-		std::cerr << "No recibio bien\n";
+		std::cerr << "No recibio bien imagen\n";
+		mutex.desbloquear();
 		return "";
 	}
 
-	std::stringstream ss;
-	ss << "TEMP_clienteDemoImagenes/" << id << ".jpg";
-	std::string ruta(ss.str());
+	/*Guardo la imagen en la carpeta temp*/
+	std::stringstream sss;
+	sss << TEMP_CARPETA << "/" << id << ".jpg";
+	std::string ruta(sss.str());
 
 	img.guardarEnArchivo(ruta);
 
+	mutex.desbloquear();
 	return ruta;
 }
 
@@ -247,42 +296,48 @@ void ClienteDemo::enviarFoto(const char* comando, unsigned long int idArea, std:
 
 	this->protocolo.enviarMensaje(this->client,ss.str());
 
-	if (this->protocolo.recibirMensaje(this->client) == kMensajeOK+protocolo.getFinalizadorDeMensaje()){
+	if (this->protocolo.recibirMensaje(this->client) == kRespuestaOK){
 		this->protocolo.enviarImagen(this->client, img);
 	}
 	else{
-		std::cerr << "NO LLEGO SE ENVIARON BIEN LOS DETALLES NADA\n";
+		std::cerr << "ERROR AL ENVIAR LA IMAGEN\n";
+		return;
 	}
-	if (this->protocolo.recibirMensaje(this->client) == kMensajeOK+protocolo.getFinalizadorDeMensaje()){
+	if (this->protocolo.recibirMensaje(this->client) == kRespuestaOK){
 		std::cerr << "TODO PIOLA\n";
 	}else{
 		std::cerr << "NO LLEGO NADA\n";
 	}
-
 }
 
 void ClienteDemo::enviarFotoTemplateMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen){
+	mutex.bloquear();
 	Imagen img(rutaDeImagen);
+	std::stringstream ss;
+	ss << kIndicadorComandoFotoTemplateMatching << kMensajeDelimitadorCampos;
 
-	this->enviarFoto("M|",idArea,fecha,img);
+	this->enviarFoto(ss.str().c_str(),idArea,fecha,img);
+	mutex.desbloquear();
 }
 
 void ClienteDemo::enviarFotoFeatureMatching(unsigned long int idArea, std::string& fecha,std::string& rutaDeImagen){
+	mutex.bloquear();
 	Imagen img(rutaDeImagen);
+	std::stringstream ss;
+	ss << kIndicadorComandoFotoFeatureMatching << kMensajeDelimitadorCampos;
 
-	this->enviarFoto("N|",idArea,fecha,img);
+	this->enviarFoto(ss.str().c_str(),idArea,fecha,img);
+	mutex.desbloquear();
 }
 
-
-
-void ClienteDemo::enviarVideo(const char* comando, unsigned long int idArea, std::string& fechaInicio,Video& vid){
+void ClienteDemo::enviarVideo(const char* comando, unsigned long int idArea, std::string& fechaInicio,int intervaloSegs, Video& vid){
 	std::stringstream ss;
 
 	std::list<Imagen> frames;
 	std::list<std::string> fechas;
 
 	/*Saco los frames cada 60 segundos y sus fechas correspondientes*/
-	vid.capturasPeriodicasVideo(frames,fechas,fechaInicio);
+	vid.capturasPeriodicasVideo(frames,fechas,fechaInicio,intervaloSegs);
 
 	std::list<Imagen>::iterator itIm;
 	std::list<std::string>::iterator itStr;
@@ -296,12 +351,22 @@ void ClienteDemo::enviarVideo(const char* comando, unsigned long int idArea, std
 	}
 }
 
-void ClienteDemo::enviarVideoTemplateMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeVideo){
+void ClienteDemo::enviarVideoTemplateMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeVideo,int intervaloSegs){
+	std::cerr << "ENVIAR VIDEO MUTEX\n";
+	mutex.bloquear();
 	Video vid(rutaDeVideo);
-	this->enviarVideo("M|",idArea,fechaInicio,vid);
+	std::stringstream ss;
+	ss << kIndicadorComandoFotoTemplateMatching << kMensajeDelimitadorCampos;
+	this->enviarVideo(ss.str().c_str(),idArea,fechaInicio,intervaloSegs,vid);
+	mutex.desbloquear();
+	std::cerr << "ENVIAR VIDEO DESBLOQUEO MUTEX\n";
 }
 
-void ClienteDemo::enviarVideoFeatureMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeVideo){
+void ClienteDemo::enviarVideoFeatureMatching(unsigned long int idArea, std::string& fechaInicio,std::string& rutaDeVideo,int intervaloSegs){
+	mutex.bloquear();
 	Video vid(rutaDeVideo);
-	this->enviarVideo("N|",idArea,fechaInicio,vid);
+	std::stringstream ss;
+	ss << kIndicadorComandoFotoFeatureMatching << kMensajeDelimitadorCampos;
+	this->enviarVideo(ss.str().c_str(),idArea,fechaInicio,intervaloSegs,vid);
+	mutex.desbloquear();
 }

@@ -98,13 +98,14 @@ add_executable(Client
 			Cliente/Modelo/client_Data.cpp
 			Cliente/Modelo/client_ModeloObservable.cpp
 			Cliente/Modelo/ThEnviadorArchivos.cpp
+			Cliente/Modelo/ThActualizador.cpp
 			Cliente/Vista/client_VistaEnviar.cpp
 			Cliente/Vista/client_ModelComboBoxAreasDeVision.h
 			Cliente/Control/client_ControladorVistaEnviar.cpp
 			Cliente/Control/client_ControladorVistaDescargaImagenDeProductos.cpp
-			Cliente/Vista/client_VistaDescargaImagenDeProductos2.cpp
+			Cliente/Vista/client_VistaDescargaImagenDeProductos.cpp
 			Cliente/Vista/client_VistaPrincipal.cpp
-			Cliente/Vista/VistaSeleccioneFPS.cpp
+			Cliente/Vista/VistaSeleccioneIntervaloSegundos.cpp
 			Cliente/Vista/VistaCrearVideo.cpp
 			Cliente/Vista/ThReproductorVideo.cpp
 			Cliente/Vista/VistaPreviaImagen.cpp
@@ -120,6 +121,8 @@ add_executable(Client
 			Common/common_Imagen.cpp
 			Common/common_Video.cpp
 			Common/common_ListaProductos.h
+			Common/common_Observer.cpp
+			Common/common_Subject.cpp
 		)
 
 FIND_PACKAGE(OpenCV REQUIRED)

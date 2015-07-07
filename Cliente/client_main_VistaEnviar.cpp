@@ -11,10 +11,10 @@
 #include "Control/client_ControladorVistaDescargaImagenDeProductos.h"
 #include "Modelo/client_ModeloObservable.h"
 #include "Vista/client_VistaEnviar.h"
-#include "Vista/client_VistaDescargaImagenDeProductos2.h"
 #include "Vista/client_VistaPrincipal.h"
 
 #include "common_Video.h"
+#include "Vista/client_VistaDescargaImagenDeProductos.h"
 
 #define VISTA_ENVIAR "Enviar_Imagen_2.4.glade"
 #define VISTA_PPAL "Principal.glade"

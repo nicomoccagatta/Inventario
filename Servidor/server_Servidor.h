@@ -10,6 +10,8 @@
 #include "server_SocketServidor.h"
 #include "server_BaseDeDatos.h"
 #include "server_MonitorBaseDeDatos.h"
+#include "common_Defines.h"
+
 #define kNumeroMaximoDeClientes 20
 #define kPuertoDefault "1037"
 #define kRutaArchivoConfiguracionDefault "config.xml"

@@ -7,7 +7,6 @@
 #include "common_Socket.h"
 #include "common_Protocolo.h"
 #include "server_MonitorBaseDeDatos.h"
-#include "common_Defines.h"
 #define kRespuestaNula ""
 #define kIdentificacionAdministrador "Admin|"
 #define kIdentificacionCliente "Client|"

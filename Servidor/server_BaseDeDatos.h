@@ -9,7 +9,6 @@
 #include "common_AreaDeVision.h"
 #include "common_Stock.h"
 #include "common_Imagen.h"
-#include "common_Defines.h"
 
 #define kTagXMLProducto "Producto"
 #define kTagXMLId "id"
